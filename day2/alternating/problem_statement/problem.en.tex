@@ -1,3 +1,4 @@
+\def\version{jury-draft}
 \problemname{Alternating Current}
 Fredrik is at home, playing with a custom-built model railway which he is very proud of.
 The railway consists of $N$ segments connected in a circle, numbered $1, 2, \dots, N$ in clockwise order.
@@ -22,7 +23,7 @@ segment is passed along by both a clockwise and a counter-clockwise arc.
 
 Can you help Fredrik with this task?
 
-\section*{Input}
+\section*{\inputsection}
 The first line contains two integers $N$ and $M$.
 
 The next $M$ lines each contain two numbers $1 \le a, b \le N$, indicating that
@@ -30,20 +31,20 @@ there is an arc which covers segments $a, a+1, \dots, b$. If $b$ is smaller
 than $a$, it means that the sequence wraps around, i.e. segments
 $a, \dots, N, 1, \dots, b$ are covered.
 
-\section*{Output}
+\section*{\outputsection}
 Print a single line with $M$ \texttt{0}s and \texttt{1}s, which denote whether
 each segment is oriented clockwise (0) or counter-clockwise (1).
 
 If it is impossible to orient the segments, output ``\texttt{IMPOSSIBLE}'' (without quotes).
 
-\section*{Constraints}
+\section*{\constraints}
 Your solution will be tested on a set of test groups.
 To get points for a group you need to solve all test cases in the group.
 
 \noindent
 \begin{tabular}{| l | l | l | l |}
 \hline
-\textbf{Group} & \textbf{Points} & \textbf{Limits} & \textbf{Additional constraints} \\ \hline
+\textbf{\group} & \textbf{\points} & \textbf{\limitsname} & \textbf{\additionalconstraints} \\ \hline
   1     & 20     & $2 \le N, M \le 20$ & \\ \hline
   2     & 20     & $2 \le N, M \le 100$ & \\ \hline
   3     & 20     & $2 \le N, M \le 1000$ & \\ \hline
