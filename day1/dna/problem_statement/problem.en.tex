@@ -1,0 +1,52 @@
+\def\version{jury-draft}
+\problemname{Martian DNA}
+As you are probably aware, human DNA can be represented as a long string over
+an alphabet of size four ({A, C, G, T}), where each symbol represents a
+distinct nucleobase (respectively; adenine, cytosine, guanine, and thymine).
+
+For martians, however, things are a bit different; research conducted on the
+latest martian captured by NASA revealed that martian DNA consists of a
+whopping $K$ distinct nucleobases! Martian DNA may thus be represented as a
+string over an alphabet of size $K$.
+
+Now, a certain research group interested in exploiting martian DNA in
+artificial intelligence applications has requested to get a single consecutive
+piece of a martian DNA string. For $R$ of the nucleobases, they have specified
+a minimum quantity of how many they need of that particular nucleobase to be
+present in their sample.
+
+Your are interested in finding the shortest substring of the DNA which satisfies their requirements.
+
+\section*{\inputsection}
+On the first line, three numbers $N$, $K$, and $R$, respectively denoting the
+total length of the martian DNA, the number of distinct nucleobases, and the
+number of nucleobases for which the researchers have a minimum quantity
+requirement. They obey $1 \le R \le K \le N \le 10^6$.
+
+On the second line follows $N$ space-separated integers, the complete martian
+DNA string. The $i$-th of these integers, $D_i$, indicates what nucleobase is
+in the $i$-th position of the DNA string. Nucleobases are $0$-indexed, i.e. $0
+\leq D_i < K$. Each nucleobase will occur at least once.
+
+Then follows $R$ lines, each containing two integers $B$ and $Q$ representing
+respectively the nucleobase and the quantity required ($0 \le B < K, 0 \le Q \le N$).
+No nucleobase will be listed twice or more.
+
+\section*{\outputsection}
+Output a single integer, the length of the shortest consecutive substring of
+the DNA which satisfies the researchers' requirements. If no such substring
+exists, output ``impossible''.
+
+\section*{\constraints}
+Your solution will be tested on a set of test groups.
+To get points for a group you need to solve all test cases in the group.
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1     & 25     & $1 \le N \le 10^2, R \le 10$ \\ \hline
+2     & 25     & $1 \le N \le 10^3, R \le 10$ \\ \hline
+3     & 25     & $1 \le N \le 10^6, R \le 10$ \\ \hline
+4     & 25     & $1 \le N \le 10^6$ \\ \hline
+\end{tabular}
