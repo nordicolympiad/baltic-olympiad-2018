@@ -1,2 +1,11 @@
-# baltic-olympiad-2018
-Problem set for Baltic Olympiad in Informatics 2018
+Approximate problemset:
+
+Day 1:
+- Martian DNA (Norway)
+- Polygon of Love (Estonia)
+- Peak Finding (Latvia)
+
+Day 2:
+- Paths (Lituania)
+- Genetics (Sweden)
+- Alternating Current (Sweden)

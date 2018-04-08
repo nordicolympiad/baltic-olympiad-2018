@@ -1,0 +1,36 @@
+\problemname{Genetics}
+A common way for villains that mean to take over the world to protect
+themselves is to clone themselves a number of times to avoid getting caught.
+You have managed to catch an evil villain and her $N-1$ clones, and are now
+trying to figure out which one of them is the real villain.
+
+To your aid you have from each person a DNA sequence, simplified to consist of
+$M$ ones and zeroes. You also know that the clones are not perfectly made;
+rather, their sequences differ in exactly $K$ places compared to the real
+villain's. For each clone there is also some other clone whose sequence differs
+from it on either more or fewer than $K$ places.
+
+Can you find the real villain?
+
+\section*{Input}
+The first line contains three integers $N, M, K$ ($2 \le N, M \le 4000, 1 \le K \le M$).
+
+Then follows $N$ lines, representing the DNA sequences.
+Each of these lines consists of $M$ characters, all either \texttt{0} or \texttt{1}.
+
+\section*{Output}
+Output an integer -- the index of the DNA sequence that belongs to the villain.
+The sequences are numbered starting from $1$.
+
+\section*{Constraints}
+Your solution will be tested on a set of test groups.
+To get points for a group you need to solve all test cases in the group.
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+Group & Points & Limits \\ \hline
+1     & 20     & $2 \le N, M \le 100$ \\ \hline
+2     & 30     & $2 \le N, M \le 1500$ \\ \hline
+3     & 50     & $2 \le N, M \le 4000$ \\ \hline
+\end{tabular}
