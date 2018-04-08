@@ -1,0 +1,10 @@
+../../../submissions/accepted/citations < citations.g4.01.in > citations.g4.01.ans
+../../../submissions/accepted/citations < citations.g4.02.in > citations.g4.02.ans
+../../../submissions/accepted/citations < citations.g4.03.in > citations.g4.03.ans
+../../../submissions/accepted/citations < citations.g4.04.in > citations.g4.04.ans
+../../../submissions/accepted/citations < citations.g4.05.in > citations.g4.05.ans
+../../../submissions/accepted/citations < citations.g4.06.in > citations.g4.06.ans
+../../../submissions/accepted/citations < citations.g4.07.in > citations.g4.07.ans
+../../../submissions/accepted/citations < citations.g4.08.in > citations.g4.08.ans
+../../../submissions/accepted/citations < citations.g4.09.in > citations.g4.09.ans
+../../../submissions/accepted/citations < citations.g4.10.in > citations.g4.10.ans

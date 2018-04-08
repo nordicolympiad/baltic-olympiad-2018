@@ -1,0 +1,45 @@
+\problemname{Citations}
+%\illustration{.40}{stockholm}{\href{https://commons.wikimedia.org/wiki/File:Interior_view_of_Stockholm_Public_Library.jpg}{CC BY 2.0, Interior of Stockholm Public Library. Photo by Marcus Hansson via Wikimedia Commons.}}
+\illustration{.40}{oldbooks}{\href{https://pixabay.com/en/books-old-books-antiquariat-read-1215672/}{CC0 Public Domain, congerdesign via Pixabay.}}
+
+Grace is going to read a certain scientific book. However, she is very careful about always reading the sources that books refer to, and also the sources of the sources, and so on. It usually ends up being the case that she reads quite a lot more books than just the one she originally intended to read. The librarians are constantly complaining about Grace's excessive borrowing of books, and so she now wants to find an order in which to read the books that minimizes the total borrow time.
+
+There are $N$ books that she eventually will need to read. The books are numbered from $1$ to $N$, and book $i$ takes $K_i$ minutes to read. Book $i$ additionally has a citation list containing $F_i$ books. First, Grace borrows all $N$ books, and then she reads book $1$.
+
+When Grace reads a book she does the following:
+
+\begin{itemize}
+\item First she opens the book and reads the citation list, which takes a minute,
+\item then she reads all the books that are in the list, in some order of her own choosing,
+\item thereafter she reads the actual book and returns it to the library, which takes $K_i$ minutes.
+\end{itemize}
+
+You now want to compute the minimum total borrow time for all books, given that Grace reads the books in an optimal order. Books may contain empty citation lists, and every book except book $1$ {\em will occur in exactly one citation list}. There will be no cycles of citations.
+
+
+
+\section*{Input}
+The first line contains the integer $N$, $1 \leq N \leq 100\,000$. Then follows $N$ lines, one for each book $1$ to $N$. On each such row there will be a number $1 \leq K_i \leq 1\,000$, the number of minutes the book takes to read. Then follows a number $0 \leq F_i < N$, followed by $F_i$ numbers, the indices of the books that book $i$ refers to.
+
+\subsection*{Constraints}
+\begin{itemize}
+    \item{\textbf{20 points}} $N \leq 10$,
+    \item{\textbf{30 points}} $N \leq 50$, $K_i \leq 10$, $F_i \leq 5$,
+    \item{\textbf{20 points}} $F_i \leq 5$,
+    \item{\textbf{30 points}} No further restrictions.
+\end{itemize}
+
+\section*{Output}
+One positive integer, the minimum sum of borrow times for all books.
+
+\subsection*{Explanation of sample} 
+time 1: open book 1 \\
+time 2: open book 2 \\
+time 3: open book 4 \\
+time 4: close book 4 (borrow time 4 minutes) \\
+time 14: close book 2 (borrow time 14 minutes) \\
+time 15: open book 3 \\
+time 16: open book 5 \\
+time 17: close book 5 (borrow time 17 minutes) \\
+time 37: close book 3 (borrow time 37 minutes) \\
+time 38: close book 1 (borrow time 38 minutes) \\
