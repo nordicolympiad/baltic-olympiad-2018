@@ -1,0 +1,41 @@
+\def\version{jury-draft}
+\problemname{Love polygon}
+As we all know, TV soap operas with many characters can lead to seriously complicated relationships.
+In one TV show, there are $N$ characters. Each character loves exactly one character.
+
+It is possible for a character to initially love themselves. We say that two characters are in a
+relationship if and only if they love each other. By shooting someone with a love arrow, it is
+possible to change whom that person loves.
+
+Of course, this allows for a particularly nasty type of complication called a ``love polygon''.
+We say that 3 or more people are in a ``love polygon'' if the first person loves the second, the
+second loves the third and so on, also the last person loves the first.
+
+Recent polling has shown that viewers have grown tired of this drama and would prefer
+something more romantic. Therefore, it was decided to shoot some characters with love arrows
+so that everyone is in a relationship. At least how many love arrows are needed to accomplish
+that?
+
+\section*{\inputsection}
+The first line of the input contains one integer -- $N$ ($2 \le N \le 10^5$).
+The next $N$ lines all contain two space-separated names $s$ and $t$, meaning that the character
+named $s$ initially loves the character named $t$. Names of the characters are no more than $10$
+characters long and consist of lowercase English letters.
+
+\section*{\outputsection}
+Output one integer -- the minimum number of love arrows needed to get everyone into a
+relationship. If this is not possible, output $-1$.
+
+\section*{\constraints}
+Your solution will be tested on a set of test groups.
+To get points for a group you need to solve all test cases in the group.
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+\group & \points & \limitsname & \additionalconstraints \\ \hline
+1     & 25     & $2 \le N \le 10$ & \\ \hline
+2     & 25     & $2 \le N \le 10^5$ & Each person is loved by someone. \\ \hline
+3     & 25     & $2 \le N \le 10^5$ & There are no ``love polygons''. \\ \hline
+4     & 25     & $2 \le N \le 10^5$ & \\ \hline
+\end{tabular}
