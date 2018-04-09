@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+PPATH=$(realpath ..)
+. ../../../testdata_tools/gen.sh
+
+setup_dirs
+use_solution arithmetic.cpp
+
+compile random_generator.py
+
+samplegroup
+# sample 1
+# sample 2
+# sample 3
+# sample 4
+
+group group1 25
+tc tiny-01 random_generator 1 1 1
+tc tiny-02 random_generator 1 1 10
+tc tiny-03 random_generator 10 10 10
+tc tiny-04 random_generator 10 10 10
+tc tiny-05 random_generator 10 10 10
+
+group group2 25
+include_group group1
+tc small-01 random_generator 1 1 10000
+tc small-02 random_generator 10000 10000 1
+tc small-03 random_generator 10000 10000 7
+tc small-04 random_generator 10000 10000 7
+tc small-05 random_generator 10000 10000 10000
+tc small-06 random_generator 10000 10000 10000
+
+group group3 25
+tc mult-01 random_generator 1 1 1
+tc mult-02 random_generator 1000000000 1000000000 1
+tc mult-03 random_generator 1000000000 1000000000 1
+tc mult-04 random_generator 1000000000 1000000000 1
+tc mult-05 random_generator 1000000000 1000000000 1
+
+group group4 25
+include_group group2
+include_group group3
+tc large-01 random_generator 1000000000 1000000000 -1
+tc large-02 random_generator -1000000000 -1000000000 -3
+tc large-03 random_generator -1000000000 -1000000000 -7
+tc large-04 random_generator 1000000000 1000000000 -7
+tc large-05 random_generator 1000000000 1000000000 1000000000
+tc large-06 random_generator 1000000000 1000000000 1000000000
+tc large-07 random_generator 1000000000 1000000000 1000000000
+tc large-08 random_generator 1000000000 1000000000 1000000000
+
+cleanup_programs

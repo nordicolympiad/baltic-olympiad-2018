@@ -1,0 +1,9 @@
+name: Simple Arithmetic
+author: Simon Lindholm
+source: Baltic Olympiad in Informatics 2018
+rights_owner: Baltic Olympiad in Informatics 2018
+license: cc by-sa
+grading:
+    objective: max
+type: scoring
+validation: custom

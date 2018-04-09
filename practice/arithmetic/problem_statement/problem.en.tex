@@ -1,0 +1,24 @@
+\problemname{Simple Arithmetic}
+
+You are given three integers $1 \le a, b, c \le 10^9$. Compute $a \cdot b / c$, with an \emph{absolute} precision of $10^{-6}$.
+
+\section*{Input}
+The only line of input contains the three integers $a, b, c$.
+
+\section*{Output}
+Output a single floating point number. It must differ from $a \cdot b / c$ by at most $10^{-6}$ in absolute value, i.e., it should obey $|x - a \cdot b / c| \le 10^{-6}$.
+
+\section*{Grading}
+Your solution will be graded on a set of subtasks.
+A subtask will consist of multiple test cases.
+To get the points for a subtask, your solution must pass all test cases that are part of the subtask.
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+Subtask & Score & Constraints \\ \hline
+1 & 25 & $a, b, c \leq 10$ \\ \hline
+2 & 25 & $a, b, c \leq 10^4$ \\ \hline
+3 & 25 & $c = 1$ \\ \hline
+4 & 25 & no additional constraints \\ \hline
+\end{tabular}
