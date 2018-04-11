@@ -1,10 +1,20 @@
+\def\version{jury-1}
 \problemname{Citations}
-%\illustration{.40}{stockholm}{\href{https://commons.wikimedia.org/wiki/File:Interior_view_of_Stockholm_Public_Library.jpg}{CC BY 2.0, Interior of Stockholm Public Library. Photo by Marcus Hansson via Wikimedia Commons.}}
 \illustration{.40}{oldbooks}{\href{https://pixabay.com/en/books-old-books-antiquariat-read-1215672/}{CC0 Public Domain, congerdesign via Pixabay.}}
 
-Grace is going to read a certain scientific book. However, she is very careful about always reading the sources that books refer to, and also the sources of the sources, and so on. It usually ends up being the case that she reads quite a lot more books than just the one she originally intended to read. The librarians are constantly complaining about Grace's excessive borrowing of books, and so she now wants to find an order in which to read the books that minimizes the total borrow time.
+Grace is going to read a certain scientific book.
+However, she is very careful about always reading the sources that books refer
+to, and also the sources of the sources, and so on.
+It usually ends up being the case that she reads quite a lot more books than
+just the one she originally intended to read.
+The librarians are constantly complaining about Grace's excessive borrowing of
+books, and so she now wants to find an order in which to read the books that
+minimizes the total borrow time.
 
-There are $N$ books that she eventually will need to read. The books are numbered from $1$ to $N$, and book $i$ takes $K_i$ minutes to read. Book $i$ additionally has a citation list containing $F_i$ books. First, Grace borrows all $N$ books, and then she reads book $1$.
+There are $N$ books that she eventually will need to read.
+The books are numbered from $1$ to $N$, and book $i$ takes $K_i$ minutes to read.
+Book $i$ additionally has a citation list containing $F_i$ books.
+First, Grace borrows all $N$ books, and then she reads book $1$.
 
 When Grace reads a book she does the following:
 
@@ -14,23 +24,34 @@ When Grace reads a book she does the following:
 \item thereafter she reads the actual book and returns it to the library, which takes $K_i$ minutes.
 \end{itemize}
 
-You now want to compute the minimum total borrow time for all books, given that Grace reads the books in an optimal order. Books may contain empty citation lists, and every book except book $1$ {\em will occur in exactly one citation list}. There will be no cycles of citations.
+You now want to compute the minimum total borrow time for all books, given that Grace reads the books in an optimal order.
+Books may contain empty citation lists, and every book except book $1$ {\em will occur in exactly one citation list}.
+There will be no cycles of citations.
 
-\section*{Input}
-The first line contains the integer $N$, $1 \leq N \leq 100\,000$. Then follows $N$ lines, one for each book $1$ to $N$. On each such row there will be a number $1 \leq K_i \leq 1\,000$, the number of minutes the book takes to read. Then follows a number $0 \leq F_i < N$, followed by $F_i$ numbers, the indices of the books that book $i$ refers to.
+\section*{\inputsection}
+The first line contains the integer $N$ ($1 \le N \le 100\,000$).
+Then follows $N$ lines, one for each book $1$ to $N$.
+On each such row there will be a number $K_i$ ($1 \le K_i \le 1\,000$), the number of minutes the book takes to read.
+Then follows a number $F_i$ ($0 \le F_i < N$), followed by $F_i$ numbers, the indices of the books that book $i$ refers to.
 
-\subsection*{Constraints}
-\begin{itemize}
-    \item{\textbf{20 points}} $N \leq 10$,
-    \item{\textbf{30 points}} $N \leq 50$, $K_i \leq 10$, $F_i \leq 5$,
-    \item{\textbf{20 points}} $F_i \leq 5$,
-    \item{\textbf{30 points}} No further restrictions.
-\end{itemize}
+\section*{\outputsection}
+Output one positive integer, the minimum sum of borrow times for all books.
 
-\section*{Output}
-One positive integer, the minimum sum of borrow times for all books.
+\section*{\constraints}
+Your solution will be tested on a set of test groups.
+To get points for a group you need to solve all test cases in the group.
 
-\subsection*{Explanation of sample} 
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1     & 20     & $N \le 10, K_i \le 1000$ \\ \hline
+2     & 30     & $N \le 50$, $K_i \le 10$, $F_i \le 5$ \\ \hline
+3     & 20     & $N \le 100\,000, K \le 1000, F_i \le 5$ \\ \hline
+4     & 30     & $N \le 100\,000, K \le 1000$ \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanation{1}}
 time 1: open book 1 \\
 time 2: open book 2 \\
 time 3: open book 4 \\
