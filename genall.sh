@@ -1,3 +1,4 @@
+#!/bin/bash
 # TODO: finalize .memlimit and .timelimit files after kattis install
 for day in practice day1 day2
 do
