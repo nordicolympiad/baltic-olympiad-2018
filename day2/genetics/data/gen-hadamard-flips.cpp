@@ -20,7 +20,8 @@ int main(int argc, char** argv) {
 		mat2 = mat;
 		int row = rand() % N;
 		if (late)
-			row = N - rand() % (N / 4);
+			row = N-1 - rand() % (N / 4);
+		assert(0 <= row && row < N);
 		int col1 = rand() % K;
 		int col2 = rand() % K;
 		mat2[row][col1] = mat2[row][col1] ^ 1;

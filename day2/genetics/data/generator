@@ -11,21 +11,59 @@ compile gen-hadamard-oneimportantrow.cpp opt
 compile gen-hadamard-flips.cpp opt
 
 samplegroup
+limits n=20
 sample 1
 
 group group1 20
 limits n=100
-tc small-rand-1 gen-random n=100 m=100 k=2
+# hadamard sizes: 64, 96
+tc small-a gen-hadamard-flips n=96 its=3 late=1
+tc small-b gen-doubled n=99 m=100 type=id
+tc small-c gen-random n=10 m=3 k=1
+tc small-rand-1 gen-random n=100 m=100 k=1
+tc small-rand-2 gen-random n=100 m=100 k=2
+tc small-rand-3 gen-random n=100 m=100 k=60
+tc small-rand-4 gen-random n=100 m=10 k=5
+tc small-rand-5 gen-random n=10 m=100 k=4
+tc small-flips-1 gen-hadamard-flips n=4
+tc small-flips-2 gen-hadamard-flips n=64 late=1
+tc small-flips-3 gen-hadamard-flips n=96 its=3
+tc small-doubled-1 gen-doubled n=95 type=hadamard
+tc small-doubled-2 gen-doubled n=95 m=100 type=hadamard
+tc small-doubled-3 gen-doubled n=47 m=100 type=hadamard adjoin=id
+tc small-one-1 gen-hadamard-oneimportantrow n=96
+tc small-one-2 gen-hadamard-oneimportantrow n=96 late=1
 
 group group2 30
 include_group group1
-limits n=1500
-tc medium-rand-1 gen-random n=1500 m=1500 k=2
+limits n=1600
+# hadamard sizes: 1152, 1536, 1024
+tc medium-a gen-hadamard-flips n=1536 its=3 late=1
+tc medium-b gen-doubled n=1599 m=1600 type=id
+tc medium-rand-1 gen-random n=1600 m=1600 k=1
+tc medium-rand-2 gen-random n=1600 m=1600 k=10
+tc medium-rand-3 gen-random n=1600 m=1600 k=1000
+tc medium-flips-1 gen-hadamard-flips n=1536
+tc medium-flips-2 gen-hadamard-flips n=1536 late=1
+tc medium-flips-3 gen-hadamard-flips n=1536 its=3
+tc medium-flips-4 gen-hadamard-flips n=1536 its=3
+tc medium-flips-5 gen-hadamard-flips n=1536 its=3
+tc medium-flips-6 gen-hadamard-flips n=1536 its=2
+tc medium-flips-7 gen-hadamard-flips n=1536 its=2 late=1
+tc medium-doubled-1 gen-doubled n=1151 type=hadamard
+tc medium-doubled-2 gen-doubled n=1535 m=1600 type=hadamard
+tc medium-doubled-3 gen-doubled n=767 m=1600 type=hadamard adjoin=hadamard
+tc medium-doubled-4 gen-doubled n=767 m=1600 type=hadamard adjoin=id
+tc medium-one-1 gen-hadamard-oneimportantrow n=1024
+tc medium-one-2 gen-hadamard-oneimportantrow n=1536
+tc medium-one-3 gen-hadamard-oneimportantrow n=1536 late=1
 
 group group3 50
 include_group group2
 limits n=4100
 # hadamard sizes: 3456, 2304, 3072, 4096
+tc large-a gen-hadamard-flips n=4096 its=3 late=1
+tc large-b gen-doubled n=4099 m=4100 type=id
 tc large-rand-1 gen-random n=4000 m=4000 k=1
 tc large-rand-2 gen-random n=4000 m=4000 k=10
 tc large-rand-3 gen-random n=4000 m=4000 k=1000
@@ -36,14 +74,12 @@ tc large-flips-4 gen-hadamard-flips n=4096 late=1
 tc large-flips-5 gen-hadamard-flips n=4096 its=3
 tc large-flips-6 gen-hadamard-flips n=4096 its=3
 tc large-flips-7 gen-hadamard-flips n=4096 its=3
-tc large-flips-8 gen-hadamard-flips n=4096 its=3 late=1
-tc large-flips-9 gen-hadamard-flips n=4096 its=2
-tc large-flips-10 gen-hadamard-flips n=4096 its=2 late=1
-tc large-doubled-1 gen-doubled n=4099 m=4100 type=id
-tc large-doubled-2 gen-doubled n=3455 type=hadamard
-tc large-doubled-3 gen-doubled n=4095 m=4100 type=hadamard
-tc large-doubled-4 gen-doubled n=2047 m=4100 type=hadamard adjoin=hadamard
-tc large-doubled-5 gen-doubled n=2047 m=4100 type=hadamard adjoin=id
+tc large-flips-8 gen-hadamard-flips n=4096 its=2
+tc large-flips-9 gen-hadamard-flips n=4096 its=2 late=1
+tc large-doubled-1 gen-doubled n=3455 type=hadamard
+tc large-doubled-2 gen-doubled n=4095 m=4100 type=hadamard
+tc large-doubled-3 gen-doubled n=2047 m=4100 type=hadamard adjoin=hadamard
+tc large-doubled-4 gen-doubled n=2047 m=4100 type=hadamard adjoin=id
 tc large-one-1 gen-hadamard-oneimportantrow n=4096
 tc large-one-2 gen-hadamard-oneimportantrow n=4096
 tc large-one-3 gen-hadamard-oneimportantrow n=4096 late=1

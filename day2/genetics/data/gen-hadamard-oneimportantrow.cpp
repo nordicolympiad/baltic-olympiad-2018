@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
 	vector<bool> nrow(D, 1);
 	nrow.resize(N, 0);
 	random_shuffle(nrow.begin(), nrow.end());
-	int ansrow = late ? N - rand() % (N / 10) : rand() % N;
+	int ansrow = late ? N-1 - rand() % (N / 10) : rand() % N;
 	for (int i = 0; i < K; i++)
 		nrow[i] = nrow[i] ^ mat[ansrow][i];
 
