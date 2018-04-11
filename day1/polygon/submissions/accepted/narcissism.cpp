@@ -81,7 +81,6 @@ int main () {
       dfs(i);
       answer += mls_exclu[i];
     }
-    else answer++; // XXX fixed to allow cycles of length 2
   }
 
   cout << character_count - answer << endl;
