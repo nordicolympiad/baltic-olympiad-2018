@@ -190,6 +190,8 @@
     \\[3mm]
 
     \textbf{\LARGE #1}
+
+
 }
 
 %% Commands related to sample data
