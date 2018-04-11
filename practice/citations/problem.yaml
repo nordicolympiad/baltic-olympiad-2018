@@ -1,9 +1,10 @@
 name: citations
 author: Fredrik Hernqvist
 source: Baltic Olympiad in Informatics 2018
+rights_owner: Baltic Olympiad in Informatics 2018
 license: cc by-sa
 type: scoring
-limits:
-    time_multiplier: 3
 grading:
     objective: max
+limits:
+    time_multiplier: 3

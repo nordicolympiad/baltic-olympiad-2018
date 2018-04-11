@@ -1,9 +1,8 @@
-name: peaks
-author: Mārtiņš Opmanis
+name: paths
+author: Justas Klimavičius
 source: Baltic Olympiad in Informatics 2018
 rights_owner: Baltic Olympiad in Informatics 2018
 license: cc by-sa
 type: scoring
 grading:
     objective: max
-validation: custom interactive
