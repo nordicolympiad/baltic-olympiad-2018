@@ -91,7 +91,7 @@ compile () {
 
 setup_dirs () {
   rm -rf groups cases secret
-  mkdir -p secret
+  mkdir -p sample secret
   echo "on_reject: continue
 range: -1 0
 accept_score: 0
