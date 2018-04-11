@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+PPATH=$(realpath ..)
+. ../../../testdata_tools/gen.sh
+
+setup_dirs
+use_solution bitstrings.cpp opt
+
+compile gen-doubled.cpp opt
+compile gen-random.cpp opt
+compile gen-hadamard-oneimportantrow.cpp opt
+compile gen-hadamard-flips.cpp opt
+
+samplegroup
+sample 1
+
+group group1 20
+limits n=100
+tc small-rand-1 gen-random n=100 m=100 k=2
+
+group group2 30
+include_group group1
+limits n=1500
+tc medium-rand-1 gen-random n=1500 m=1500 k=2
+
+group group3 50
+include_group group2
+limits n=4100
+# hadamard sizes: 3456, 2304, 3072, 4096
+tc large-rand-1 gen-random n=4000 m=4000 k=1
+tc large-rand-2 gen-random n=4000 m=4000 k=10
+tc large-rand-3 gen-random n=4000 m=4000 k=1000
+tc large-flips-1 gen-hadamard-flips n=3456
+tc large-flips-2 gen-hadamard-flips n=4096
+tc large-flips-3 gen-hadamard-flips n=4096
+tc large-flips-4 gen-hadamard-flips n=4096 late=1
+tc large-flips-5 gen-hadamard-flips n=4096 its=3
+tc large-flips-6 gen-hadamard-flips n=4096 its=3
+tc large-flips-7 gen-hadamard-flips n=4096 its=3
+tc large-flips-8 gen-hadamard-flips n=4096 its=3 late=1
+tc large-flips-9 gen-hadamard-flips n=4096 its=2
+tc large-flips-10 gen-hadamard-flips n=4096 its=2 late=1
+tc large-doubled-1 gen-doubled n=4099 m=4100 type=id
+tc large-doubled-2 gen-doubled n=3455 type=hadamard
+tc large-doubled-3 gen-doubled n=4095 m=4100 type=hadamard
+tc large-doubled-4 gen-doubled n=2047 m=4100 type=hadamard adjoin=hadamard
+tc large-doubled-5 gen-doubled n=2047 m=4100 type=hadamard adjoin=id
+tc large-one-1 gen-hadamard-oneimportantrow n=4096
+tc large-one-2 gen-hadamard-oneimportantrow n=4096
+tc large-one-3 gen-hadamard-oneimportantrow n=4096 late=1
+tc large-one-4 gen-hadamard-oneimportantrow n=3456
+
+cleanup_programs

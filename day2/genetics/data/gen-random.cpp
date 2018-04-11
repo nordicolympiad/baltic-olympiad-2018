@@ -3,12 +3,12 @@
 int main(int argc, char** argv) {
 	args.construct(argc, argv);
 	int N = Arg("n");
-	int K = Arg("k");
-	int D = Arg("d");
+	int K = Arg("m");
+	int D = Arg("k");
 	vector<string> strs;
 	string first;
 	for (int i = 0; i < K; ++i)
-		first += randbit();
+		first += randbit() ? '1' : '0';
 	strs.push_back(first);
 	for (int i = 0; i < N - 1; ++i) {
 		string s = first;

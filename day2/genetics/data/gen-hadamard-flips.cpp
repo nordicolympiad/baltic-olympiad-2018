@@ -4,6 +4,7 @@
 int main(int argc, char** argv) {
 	args.construct(argc, argv);
 	int N = Arg("n");
+	int its = Arg("its", 0);
 	bool late = Arg("late", 0);
 
 	vector<vector<bool>> mat = generateMatrix(N), mat2;
@@ -29,6 +30,22 @@ int main(int argc, char** argv) {
 		if (ncand && ncand < cand) {
 			mat.swap(mat2);
 			cand = ncand;
+			if (--its == 0) break;
+		}
+	}
+	if (cand > 1) {
+		while (true) {
+			vector<int> cands;
+			int r = solve((int)mat.size(), K, D, mat, &cands);
+			assert(r > 0);
+			if (r == 1) break;
+			random_shuffle(cands.begin(), cands.end());
+			cands.pop_back();
+			sort(cands.begin(), cands.end());
+			reverse(cands.begin(), cands.end());
+			for (int x : cands) {
+				mat.erase(mat.begin() + x);
+			}
 		}
 	}
 

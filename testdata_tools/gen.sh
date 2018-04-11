@@ -6,6 +6,7 @@ SOLUTION_BASE=$PPATH/submissions/accepted
 
 # Set USE_PARALLEL=0 before including gen.sh to disable parallelism.
 if [[ $USE_PARALLEL != 0 ]]; then
+  USE_PARALLEL=1
   PARALLELISM_ACTIVE=1
 fi
 
@@ -31,6 +32,7 @@ add_program () {
 # Compile a C++ program to run.
 # Arguments: file opts
 compile_cpp () {
+  echo Compiling $1...
   if [[ $2 == *"opt"* ]]; then
     g++ -O2 -Wall -std=gnu++11 -o $(base $1) $1
   else

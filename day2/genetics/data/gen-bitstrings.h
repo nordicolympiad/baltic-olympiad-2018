@@ -3,7 +3,9 @@
 
 static const int Iterations = 50; // a guess of the number of iterations required to solve a test-case
 
-int solve(int N, int K, int D, const vector<vector<bool> >& strings) {
+int solve(int N, int K, int D, const vector<vector<bool> >& strings, vector<int>* out = nullptr) {
+	assert(N == (int)strings.size());
+	assert(K == (int)strings[0].size());
 	vector<bool> iscandidate(N, true);
 	int ncand = N;
 	for (int c = 0; c < Iterations; ++c) {
@@ -33,6 +35,12 @@ int solve(int N, int K, int D, const vector<vector<bool> >& strings) {
 			}
 		}
 	}
+	if (out != nullptr) {
+		out->clear();
+		for (int i = 0; i < N; i++) {
+			if (iscandidate[i]) out->push_back(i);
+		}
+	}
 	return ncand;
 }
 
@@ -58,6 +66,12 @@ matbool tensor(matbool A, matbool B) {
 		C[i1 * B.size() + i2][j1 * B.size() + j2] = A[i1][j1] ^ B[i2][j2];
 	}
 	return C;
+}
+
+vector<vector<bool>> generateI(int N) {
+	vector<vector<bool>> ret(N, vector<bool>(N));
+	for (int i = 0; i < N; i++) ret[i][i] = 1;
+	return ret;
 }
 
 vector<vector<bool>> generateMatrix(int N) {
@@ -133,6 +147,32 @@ void randomize(matbool& mat) {
 		out[i][j] = mat[i][perm[j]] ^ bits[j];
 	}
 	mat = out;
+}
+
+void adjoinMat(matbool& mat, const string& adjoin, int* K) {
+	matbool mat2;
+	if (adjoin == "hadamard") {
+		int size = (int)mat.size();
+		while (size & (size-1)) size++;
+		mat2 = generateMatrix(size);
+		randomize(mat2);
+		mat2.erase(mat2.begin() + mat.size(), mat2.end());
+		*K += size/2;
+	}
+	else if (adjoin == "id") {
+		mat2 = generateI((int)mat.size());
+		*K += 2;
+	}
+	else {
+		assert(adjoin.empty());
+		return;
+	}
+
+	assert(mat2.size() == mat.size());
+	int si = (int)mat.size();
+	for (int i = 0; i < si; i++) {
+		mat[i].insert(mat[i].end(), mat2[i].begin(), mat2[i].end());
+	}
 }
 
 #ifdef HEX

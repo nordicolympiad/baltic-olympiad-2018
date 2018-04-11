@@ -134,6 +134,14 @@ IntType Arg(const string& name, long long _default) {
 	return {(long long)Arg(name)};
 }
 
-char randbit() {
-	return ((rand() >> 15) & 1) ? '1' : '0';
+string Arg(const string& name, const string& _default) {
+	if (!args.has_var(name))
+		return _default;
+	return (string)Arg(name);
+}
+
+// TODO reimplement rand, random_shuffle
+
+int randbit() {
+	return (rand() >> 15) & 1;
 }
