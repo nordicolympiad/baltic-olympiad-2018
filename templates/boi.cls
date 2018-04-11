@@ -175,7 +175,7 @@
 }
 
 \newcommand{\problemheader}[2]{
-    \textbf{\LARGE \@contestname{}} \\[2mm] \textbf{\Large ID: #2} \\[1mm]
+    \textbf{\large \@contestname{}} \\[2mm] \textbf{\large ID: #2} \\[1mm]
     \@date \hfill \textbf{\languagename-\version}
     \\
     \rule{\linewidth}{0.4pt}
@@ -187,9 +187,9 @@
     \openin\ps@memlimitfile=#2/.memlimit
     \read\ps@memlimitfile to\ps@memlimit
     \textbf{\memorylimit:\ps@formatmemory{\ps@memlimit}}
-    \\[4mm]
+    \\[3mm]
 
-    \textbf{\Huge #1} \\[2mm]
+    \textbf{\LARGE #1}
 }
 
 %% Commands related to sample data
