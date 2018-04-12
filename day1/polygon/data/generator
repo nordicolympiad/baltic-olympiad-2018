@@ -15,9 +15,9 @@ limits n=20
 # sample 1
 
 group group1 25
-limits n=10
-tc small-1 gen_random n=10
-tc small-2 gen_random n=10 mode=perm
+limits n=20
+tc small-1 gen_random n=20
+tc small-2 gen_random n=20 mode=perm
 
 group group2 25
 limits n=1e5 special=all_loved
