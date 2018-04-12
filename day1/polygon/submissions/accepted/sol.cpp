@@ -1,130 +1,140 @@
 #include <iostream>
 #include <vector>
 #include <map>
-
+#include <functional>
+#include <stack>
 using namespace std;
 
-const int MAX_PEOPLE = 100005;
+#define rep(i,a,b) for(int i = (a); i < (b); ++i)
+#define trav(x, v) for(auto &x : (v))
 
-vector<int> lovers [MAX_PEOPLE];
-int love_target [MAX_PEOPLE];
+int match00(vector<bool> necklace){ // given 0-1-necklace, how many pairs of adjacent 0's can be formed?
+	int len = (int) necklace.size();
 
-int component [MAX_PEOPLE];
-void explore (int vertex) {
-  if (component[vertex] == -1) { /* we detected a cycle */
-    component[vertex] = vertex;
-  } else if (component[vertex] == 0) {
-    component[vertex] = -1;
-    explore(love_target[vertex]);
-    component[vertex] = component[love_target[vertex]];
-  }
+	bool allzero = true;
+	rep(i,0,len) if(necklace[i]) allzero = false;
+
+	if(allzero) return len / 2;
+
+	int ans = 0;
+
+	rep(i,0,len){
+		int i1 = (i+1) % len;
+		if(necklace[i] && !necklace[i1]){ //start of segment of 0's
+			int curlen = 0;
+			while(!necklace[i1]){
+				++curlen;
+				i1 = (i1 + 1) % len;
+			}
+			ans += curlen / 2;
+		}
+	}
+
+	return ans;
 }
 
-int mls_exclu [MAX_PEOPLE];
-int mls_inclu [MAX_PEOPLE];
+int main() {
+	ios::sync_with_stdio(false);
 
-void calculate_dp (int vertex, int forbidden) {
-  for (int child : lovers[vertex]) {
-    if (child != vertex && child != forbidden) {
-      calculate_dp(child, forbidden);
-    }
-  }
+	int n;
+	cin >> n;
 
-  /* calculate the values of the dynamic programming functions */
-  
-  mls_inclu[vertex] = 1;
-  for (int child : lovers[vertex]) {
-    if (child != vertex && child != forbidden) {
-      mls_inclu[vertex] += mls_exclu[child];
-    }
-  }
+	if(n % 2 == 1){
+		cout << -1 << endl;
+		return 0;
+	}
 
-  mls_exclu[vertex] = 0;
-  for (int child : lovers[vertex]) {
-    if (child != vertex && child != forbidden) {
-      mls_exclu[vertex] = max(mls_exclu[vertex], mls_inclu[child] - mls_exclu[child]);
-    }
-  }
-  mls_exclu[vertex] += mls_inclu[vertex] - 1;
-}
+	map<string,int> rename;
+	int curix = 0;
 
-int process_component (int vertex) {
-  if (love_target[vertex] == vertex) { /* a tree */
-    calculate_dp(vertex, -1);
-    return mls_exclu[vertex];
-  } else if(love_target[ love_target[vertex] ] == vertex){ /* relationship */
-    int partner = love_target[vertex];
-    calculate_dp(vertex, partner);
-    calculate_dp(partner, vertex);
-    return mls_exclu[vertex] + mls_exclu[partner] + 2;
-  } else {
-    /* variant 1: vertex stays with its original target */
-    int variant_1 = 1;
-    for (int lover : lovers[vertex]) {
-      if (lover != love_target[vertex]) {
-        calculate_dp(lover, love_target[vertex]);
-        variant_1 += mls_exclu[lover];
-      }
-    }
+	vector<int> parent(n);
 
-    /* variant 2: it doesn't :'( */
-    calculate_dp(vertex, vertex);
-    int variant_2 = mls_exclu[vertex];
+	rep(_,0,n){
+		string s, t;
+		cin >> s >> t;
+		
+		if(!rename.count(s)) rename[s] = curix++;
+		if(!rename.count(t)) rename[t] = curix++;
 
-    return max(variant_1, variant_2);
-  }
-}
+		parent[ rename[s] ] = rename[t];
+	}
 
-int main () {
-  ios::sync_with_stdio(false);
-  
-  int character_count;
-  cin >> character_count;
+	vector<vector<int>> children(n);
 
-  if (character_count % 2 == 1) {
-    /* N odd; no solution */
-    cout << -1 << endl;
-    return 0;
-  }
+	rep(i,0,n) children[ parent[i] ].push_back(i);
 
-  map<string, int> character_index;
-  /* assign an integer to each character */
-  int cur_index = 1;
-  for (int i = 1; i <= character_count; i++) {
-    string lover, lovee;
-    cin >> lover >> lovee;
+	int totmatch = 0;
+	vector<bool> vis(n, false);
+	vector<int> maxmatch(n, 0); // we don't really need
+	vector<bool> aminmatch(n, false); // to store these
+	vector<bool> oncycle(n, false);
 
-    /* is this the first time we encounter these people? */
-    if (character_index.count(lover) == 0) {
-      character_index[lover] = cur_index;
-      cur_index++;
-    }
+	function<void(int)> calc = [&](int v){ // computes maxmatch[v]: the size of the maximal mathching in the subtree rooted at v, and aminmatch[v], which says if v is in all of these maximal matchings
+		trav(u, children[v]) if(!oncycle[u]){
+			calc(u);
+			maxmatch[v] += maxmatch[u];
 
-    if (character_index.count(lovee) == 0) {
-      character_index[lovee] = cur_index;
-      cur_index++;
-    }
+			if( !aminmatch[u] ) aminmatch[v] = true;
+		}
 
-    int lover_idx = character_index[lover];
-    int lovee_idx = character_index[lovee];
-    
-    lovers[lovee_idx].push_back(lover_idx);
-    love_target[lover_idx] = lovee_idx;
-  }
+		if( aminmatch[v] ) maxmatch[v]++;
+	};
 
-  for (int i = 1; i <= character_count; i++) {
-    /* assign each character to a connected component */
-    if (component[i] == 0) {
-      explore(i);
-    }
-  }
+	rep(i,0,n) if(!vis[i]){
+		
+		int sizeofcomp = 0;
+		stack<int> st;
+		st.push(i);
+		vis[i] = true;
 
-  int answer = 0;
-  for (int i = 1; i <= character_count; i++) {
-    if (component[i] == i) {
-      answer += process_component(i);
-    }
-  }
+		while(!st.empty()){
+			int j = st.top();
+			st.pop();
+			
+			++sizeofcomp;
 
-  cout << character_count - answer << endl;
+			if(!vis[ parent[j] ]){
+				vis[parent[j]] = true;
+				st.push(parent[j]);
+			}
+			trav(k, children[j]) if(!vis[k]){
+				vis[k] = true;
+				st.push(k);
+			}
+		}
+
+		int j = i;
+		rep(_,0,sizeofcomp) j = parent[j];
+		// now j is on the cycle
+
+		vector<int> cycle;
+
+		int j1 = j;
+		do {
+			oncycle[j1] = true;
+			cycle.push_back(j1);
+			j1 = parent[j1];
+		} while(j1 != j);
+
+		int curmatch = 0;
+		vector<bool> necklace;
+
+		trav(v, cycle){
+			calc(v);
+			curmatch += maxmatch[v];
+			necklace.push_back( aminmatch[v] );
+		}
+
+		if(cycle.size() == 2){
+			curmatch -= necklace[0] + necklace[1]; // if we have a relationship, then we shouldn't use those nodes anywhere else
+			curmatch += 2;
+		} else {
+			curmatch += match00(necklace);
+		}
+		
+		totmatch += curmatch;
+
+	}
+
+	cout << n - totmatch << endl;
 }

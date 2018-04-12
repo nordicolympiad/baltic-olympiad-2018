@@ -12,28 +12,52 @@ compile gen_random.py
 
 samplegroup
 limits n=20
-# sample 1
+sample 1
+sample 2
 
 group group1 25
 limits n=20
-tc small-1 gen_random n=20
-tc small-2 gen_random n=20 mode=perm
+tc small-1 gen_random n=5
+for i in {2..10}; do
+    tc small-$i gen_random n=$i
+    done
+for i in {11..15}; do
+    tc small-$i gen_random n=20
+    done
 
 group group2 25
 limits n=1e5 special=all_loved
-tc perm-1 gen_random n=10 mode=perm
-tc perm-2 gen_random n=100000 mode=perm
+for i in {1..5}; do
+    tc perm-$i gen_random n=1$i mode=perm
+    done
+for i in {6..10}; do
+    tc perm-$i gen_random n=100000 mode=perm
+    done
+tc perm-11 gen_random n=100000 mode=loops
 
 group group3 25
 limits n=1e5 special=no_cycles
-tc ego-1 gen_random n=10 mode=ego
-tc ego-2 gen_random n=100000 mode=ego
+tc ego-1     gen_random n=15     m=1 mode=random
+tc ego-2     gen_random n=100000 m=1 mode=random
+tc ego-3     gen_random n=100000 m=1000 mode=random
+tc star-1    gen_random n=100000 m=1 mode=star
+tc star-2    gen_random n=100000 m=1000 mode=star
+tc line-1    gen_random n=100000 m=1 mode=line
+tc line-2    gen_random n=100000 m=1000 mode=line
+tc shallow-1 gen_random n=100000 m=1 mode=shallow
+tc shallow-2 gen_random n=100000 m=1000 mode=shallow
+tc deep-1    gen_random n=100000 m=1 mode=deep
+tc deep-2    gen_random n=100000 m=1000 mode=deep
+tc deeper-1  gen_random n=100000 m=1 mode=deeper
+tc deeper-2  gen_random n=100000 m=1000 mode=deeper
 
 group group4 25
 limits n=1e5
 include_group group1
 include_group group2
 include_group group3
-tc large-1 gen_random n=100000
+for i in {1..5}; do
+    tc large-$i gen_random n=100000
+    done
 
 cleanup_programs
