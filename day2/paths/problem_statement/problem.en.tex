@@ -4,12 +4,19 @@
 We have a graph which consists of $N$ vertices and $M$ edges, and each vertex has one of $K$ colors.
 The task is to find the number of paths in the graph, such that no two vertices in the path have the same color.
 
+A path is defined as an ordered list of nodes of size at least $2$, such that
+there are edges between consecutive nodes in the list.
+
+Note that the list is ordered, so e.g. $(1, 2, 3)$, $(1, 3, 2)$ and $(3, 2, 1)$ are all be treated as different paths.
+
 \section*{\inputsection}
 The first line of input contains three integers $N$, $M$ and $K$ ($1 \le N, M \le 3 \cdot 10^5, 1 \le K \le 5$).
 
 The second line of input contains $N$ integers between $1$ and $K$ -- the color of each vertex.
 
-The following $M$ lines contain two integers each -- the numbers of vertices connected by an edge.
+The following $M$ lines each contain two integers $a, b$ ($1 \le a, b \le N, a \neq b$) -- the numbers of vertices connected by an edge.
+
+There will be at most one edge between any two vertices.
 
 \section*{\outputsection}
 Print one integer -- the number of paths whose vertices all have distinct colors.
@@ -26,3 +33,5 @@ Print one integer -- the number of paths whose vertices all have distinct colors
 3     & 30     & $1 \le N, M \le 3 \cdot 10^5, 1 \le K \le 4$ \\ \hline
 4     & 30     & $1 \le N, M \le 3 \cdot 10^5, 1 \le K \le 5$ \\ \hline
 \end{tabular}
+
+% TODO sample description
