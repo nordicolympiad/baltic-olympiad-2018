@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+PPATH=$(realpath ..)
+. ../../../testdata_tools/gen.sh
+
+ulimit -s unlimited
+
+setup_dirs
+use_solution sl.cpp
+
+# TODO: smarter generator, more cases
+compile gen_random.py
+
+samplegroup
+limits n=20
+# sample 1
+
+group group1 25
+limits n=100 r=10
+tc small-1 gen_random n=10 k=10
+tc small-2 gen_random n=100 k=100 r=10
+tc small-3 gen_random n=100 k=40 r=10
+tc small-4 gen_random n=100 k=10
+
+group group2 25
+limits n=1000 r=10
+include_group group1
+tc medium-1 gen_random n=1000 k=1000 r=10
+tc medium-2 gen_random n=1000 k=400 r=10
+tc medium-3 gen_random n=1000 k=10
+
+group group3 25
+limits n=1000000 r=10
+include_group group2
+tc large-1 gen_random n=1000000 k=1000000 r=10
+tc large-2 gen_random n=1000000 k=40000 r=10
+tc large-3 gen_random n=1000000 k=10
+
+group group4 25
+limits n=1000000
+include_group group3
+tc full-1 gen_random n=1000000 k=1000000
+tc full-2 gen_random n=1000000 k=40000
+
+cleanup_programs
