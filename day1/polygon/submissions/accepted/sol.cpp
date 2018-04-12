@@ -52,6 +52,11 @@ int process_component (int vertex) {
   if (love_target[vertex] == vertex) { /* a tree */
     calculate_dp(vertex, -1);
     return mls_exclu[vertex];
+  } else if(love_target[ love_target[vertex] ] == vertex){ /* relationship */
+    int partner = love_target[vertex];
+    calculate_dp(vertex, partner);
+    calculate_dp(partner, vertex);
+    return mls_exclu[vertex] + mls_exclu[partner] + 2;
   } else {
     /* variant 1: vertex stays with its original target */
     int variant_1 = 1;
