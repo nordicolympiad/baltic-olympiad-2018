@@ -15,7 +15,9 @@ n = int(cmdlinearg('n'))
 m = int(cmdlinearg('m'))
 k = int(cmdlinearg('k'))
 
-colors = [random.randrange(1, k+1) for _ in range(n)]
+colors = list(range(1, k+1)) + [random.randrange(1, k+1) for _ in range(n - k)]
+random.shuffle(colors)
+colors = colors[:n]
 edset = set()
 eds = []
 while len(edset) < m:
