@@ -1,0 +1,49 @@
+#include <iostream>
+#include <map>
+using namespace std;
+typedef pair<int,int> pii;
+typedef pair<int,pii> tri;
+#define fst first
+#define snd second.first
+#define trd second.second
+
+int n, m, k;
+map<tri, int> mem;
+
+int value(int x, int y, int z){
+	if(x <= 0 || x>n ||
+	   y <= 0 || y>m ||
+	   z <= 0 || z>k) return 0;
+	
+	tri t(x, pii(y,z));
+	if(mem.count(t)) return mem[t];
+
+	cout << "? " << x << ' ' << y << ' ' << z << endl;
+	cin >> mem[t];
+	return mem[t];
+}
+
+int dx[] = {1,-1,0,0,0,0};
+int dy[] = {0,0,1,-1,0,0};
+int dz[] = {0,0,0,0,1,-1};
+
+int main(){
+	srand(561);
+	cin >> n >> m >> k;
+
+	while(true){
+		int x = 1 + rand()%n,
+		    y = 1 + rand()%m,
+		    z = 1 + rand()%k;
+
+		int v = value(x, y, z);
+
+		for(int dir = 0; dir < 6; dir++){
+			int u = value(x+dx[dir], y+dy[dir], z+dz[dir]);
+			if(u > v) goto fail;
+		}
+		cout << "! " << x << ' ' << y << ' ' << z << endl;
+
+		fail: ;
+	}
+}
