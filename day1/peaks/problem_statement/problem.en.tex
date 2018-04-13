@@ -1,7 +1,7 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
 \def\version{jury-draft}
 \problemname{Peak Finding}
-% TODO: reword this to have a more interesting story, and also to be more coherent (I'm much too tired right now...)
+% TODO: reword this to have a more interesting story, also proofread
 
 Given is a three-dimensional array $a$ of size $N \times M \times K$, containing integers within the range $1 \dots 10^9$.
 You want to find a local maximum of the array: a value such that $a[i][j][k] \ge \max(a[i+1][j][k], a[i-1][j][k], a[i][j+1][k], a[i][j-1][k], a[i][j][k-1], a[i][j][k+1])$,
@@ -12,43 +12,38 @@ Instead of reading the entire input, you are allowed to interact with the grader
 When you have found a local maximum, prove that by showing it to the grader.
 
 \section*{\interactivity}
-The first line of the input will contain three positive integers: $N$, $M$ and $K$.
-After that, you can print a limited number of lines of either of the two following forms of queries:
-\begin{itemize}
-  \item \texttt{? x y z}: This asks for the value of the array at point $(x, y, z)$.
-    The grader will then reply with a single line containing the integer \texttt{a[x][y][z]}.
-  \item \texttt{! x y z}: This claims that the point $(x, y, z)$ is a local maximum.
-    This type of query must occur exactly once, as the very last line.
-    The grader will not give a response to it.
-\end{itemize}
+The first line of the input will contain three positive integers: $N$, $M$, $K$ and $Q$.
+After that, you can print at most $Q$ lines of the form \texttt{? x y z}.
+This asks for the value of the array at point $(x, y, z)$.
+For each such line, the grader will in response print a single line with the integer \texttt{a[x][y][z]}, which can be read by your program.
 
-All provided values of $x, y, z$ must obey $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
-If they do not, or if the input format of some line is invalid, your program will get the verdict \texttt{Wrong Answer}.
-% TODO: test that it doesn't result in TLE
+After all these lines, you program must print exactly one line of the form \texttt{! x y z}.
+This claims that the point $(x, y, z)$ is a local maximum.
+The grader will provide no response to this output.
 
-After each printed line, you must remember to \textbf{flush standard output} before reading the grader's reply. This is done as follows in the various allowed languages:
-% TODO: test performance, give tips
-\begin{itemize}
-  \item C++: \texttt{std::cout << std::flush;}. \texttt{std::cout << std::endl;} also flushes, in addition to printing a new line.
-  \item Java: TODO % passing true to PrintWriter, or calling flush() on some interface
-  \item Pascal: \texttt{Flush(Output);}
-  \item Python: TODO % print() flushes
-\end{itemize}
-If you fail to do this, it may result in getting a \texttt{Time Limit Exceeded} status.
+All values of $x, y, z$ must obey $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
+If they do not, or some line has an invalid format, or you ask for more than $Q$ values,
+the grader will respond with \texttt{-1} and exit.
+If this happens your program should also exit. If it continues, it may incorrectly get
+a verdict of \emph{Runtime Error} or \emph{Time Limit Exceeded}.
+
+You \emph{must} make sure to flush standard output before reading the grader's response.
+Additionally, this problem requires fast IO, which is non-trivial in Java and Python.
+Thus, we provide helper code for interacting with the grader, which you may copy into your program.
+A link to this code for all supported languages (C++, Pascal, Java, Python) can
+be found in the sidebar of the kattis statement page.
+We \emph{strongly} recommend using this code.
 
 \section*{\constraints}
 \testgroups
 
-% TODO: Make this into just 4 testgroups, with partial scores?
 \noindent
-\begin{tabular}{| l | l | l | l |}
+\begin{tabular}{| l | l | l |}
 \hline
-\group & \points & \limitsname & \additionalconstraints \\ \hline
-1      & 10     & $M = K = 1$, $N = 10^6$ & You can make at most $50\,000$ queries. \\ \hline
-2      & 10     & $M = K = 1$, $N = 10^6$ & You can make at most $40$ queries. \\ \hline
-3      & 10     & $K = 1$, $N = M = 10^3$ & You can make at most $10^5$ queries. \\ \hline
-4      & 10     & $K = 1$, $N = M = 10^3$ & You can make at most $10^4$ queries. \\ \hline
-5      & 10     & $K = 1$, $N = M = 10^3$ & You can make at most $4 \cdot 10^3$ queries. \\ \hline
-6      & 20     & $K = N = M = 10^2$ & You can make at most $10^5$ queries. \\ \hline
-7      & 30     & $K = N = M = 10^3$ & You can make at most $3 \cdot 10^5$ queries. \\ \hline
+\group & \points & \limitsname \\ \hline
+1      & 20     & $M = K = 1$, $N = 10^6$, $Q = 10\,000$      \\ \hline
+2      & 10     & $K = 1$, $N = M = 10^3$, $Q = 10^5$         \\ \hline
+3      & 20     & $K = 1$, $N = M = 10^3$, $Q = 4 \cdot 10^3$ \\ \hline
+4      & 20     & $K = N = M = 10^2$,      $Q = 10^5$         \\ \hline
+5      & 30     & $K = N = M = 800$,       $Q = 3 \cdot 10^5$ \\ \hline
 \end{tabular}
