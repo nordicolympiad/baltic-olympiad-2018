@@ -9,6 +9,7 @@ use_solution sol.cpp
 
 # TODO: smarter generators...
 compile gen_random.py
+compile handmade.py
 
 samplegroup
 limits n=20
@@ -17,11 +18,11 @@ sample 2
 
 group group1 25
 limits n=20
-tc small-1 gen_random n=5
-for i in {2..10}; do
+tc small-1 handmade
+for i in {2..5}; do
     tc small-$i gen_random n=$i
     done
-for i in {11..15}; do
+for i in {6..10}; do
     tc small-$i gen_random n=20
     done
 
@@ -30,10 +31,10 @@ limits n=1e5 special=all_loved
 for i in {1..5}; do
     tc perm-$i gen_random n=1$i mode=perm
     done
-for i in {6..10}; do
+for i in {6..9}; do
     tc perm-$i gen_random n=100000 mode=perm
     done
-tc perm-11 gen_random n=100000 mode=loops
+tc perm-10 gen_random n=100000 mode=loops
 
 group group3 25
 limits n=1e5 special=no_cycles

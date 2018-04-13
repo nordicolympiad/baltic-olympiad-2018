@@ -1,4 +1,4 @@
-// doesn't handle relationships when things branch from them
+// doesn't handle cycles when things branch from them
 #include <iostream>
 #include <vector>
 #include <map>
@@ -55,9 +55,16 @@ int process_component (int vertex) {
     return mls_exclu[vertex];
   } else if(love_target[ love_target[vertex] ] == vertex){ /* relationship */
     int partner = love_target[vertex];
-    calculate_dp(vertex, partner);
-    calculate_dp(partner, vertex);
-    return mls_exclu[vertex] + mls_exclu[partner] + 2;
+    int ans = 2;
+    for (int lover : lovers[vertex]) if(lover != partner){
+    	calculate_dp(lover, -1);
+	ans += mls_exclu[lover];
+    }
+    for (int lover : lovers[partner]) if(lover != vertex){
+    	calculate_dp(lover, -1);
+	ans += mls_exclu[lover];
+    }
+    return ans;
   } else {
     /* variant 1: vertex stays with its original target */
     int variant_1 = 1;
