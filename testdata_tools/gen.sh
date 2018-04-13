@@ -26,8 +26,10 @@ base () {
 # Add a program to the list of programs
 # Arguments: name execution_command
 add_program () {
-  programs[$1]=$2
+  programs[$1]="$2"
 }
+
+add_program cat "bash -c cat<\$0"
 
 # Compile a C++ program to run.
 # Arguments: file opts
@@ -140,7 +142,9 @@ cleanup_programs () {
   wait
   for i in "${!programs[@]}"
   do
-    rm $i
+    if [[ $i != cat ]]; then
+      rm $i
+    fi
   done
   rm -rf __pycache__
   rm -rf *.class
@@ -216,6 +220,11 @@ tc () {
     let PARALLELISM_ACTIVE++
     par_tc "secret/$CURGROUP_NAME/$1" "${programs[$2]}" $SEED "${@:3}" &
   fi
+}
+
+# Arguments: ../custom-data/testcasename.in
+custom () {
+  tc $(base $1) cat $1
 }
 
 # Include all testcases in another group
