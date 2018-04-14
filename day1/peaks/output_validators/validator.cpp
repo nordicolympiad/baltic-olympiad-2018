@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <array>
 #include <signal.h>
 #include <cassert>
 #include <cstring>
@@ -84,34 +85,93 @@ uint64_t Hash(uint64_t val, uint64_t seed) {
 	return (int)(val >> 35);
 }
 
-struct Strat {
-	int N, M, K;
-	Strat(int N, int M, int K) : N(N), M(M), K(K) {
-		assert(N > 0);
-		assert(M > 0);
-		assert(K > 0);
+#define repd(i) for (int i = 0; i < P::DIM; i++)
+struct P {
+	enum { DIM = 3 };
+	array<int, DIM> ar;
+	static P K(int x) {
+		array<int, DIM> ar;
+		repd(i) ar[i] = x;
+		return {ar};
 	}
-	virtual ~Strat() {}
-	virtual int query(int x, int y, int z) = 0;
-	virtual long long maxval() const = 0;
-	int oob_query(int x, int y, int z) {
-		if (oob(x,y,z)) return -1;
-		return query(x, y, z);
+	P idiv(int by) const {
+		P ret = *this;
+		repd(i) ret.ar[i] /= by;
+		return ret;
 	}
-	bool oob(int x, int y, int z) const {
-		return (x < 0 || y < 0 || z < 0 || x >= N || y >= M || z >= K);
+	int count_odd() const {
+		int ret = 0;
+		repd(i) ret += ar[i]&1;
+		return ret;
+	}
+	int sum() const {
+		int sum = 0;
+		repd(i) sum += ar[i];
+		return sum;
+	}
+	int dimension() const {
+		int dim = 0;
+		repd(i) if (ar[i] != 1) dim = i+1;
+		return dim;
+	}
+	uint64_t hash(P dims, uint64_t seed) const {
+		uint64_t r = 0;
+		repd(i) r = r * dims.ar[i] + ar[i];
+		return Hash(r, seed);
 	}
 };
-Strat* readStrat(int N, int M, int K, istream& cin);
+bool operator<=(const P& a, const P& b) {
+	repd(i) if (a.ar[i] > b.ar[i]) return false;
+	return true;
+}
+bool operator==(const P& a, const P& b) {
+	repd(i) if (a.ar[i] != b.ar[i]) return false;
+	return true;
+}
+bool operator<(const P& a, const P& b) {
+	repd(i) if (a.ar[i] >= b.ar[i]) return false;
+	return true;
+}
+P operator+(const P& a, const P& b) {
+	P ret; repd(i) ret.ar[i] = a.ar[i] + b.ar[i]; return ret;
+}
+P operator-(const P& a, const P& b) {
+	P ret; repd(i) ret.ar[i] = a.ar[i] - b.ar[i]; return ret;
+}
+P operator*(const P& a, int by) {
+	P ret; repd(i) ret.ar[i] = a.ar[i] * by; return ret;
+}
+istream& operator>>(istream& is, P& p) {
+	repd(i) is >> p.ar[i];
+	return is;
+}
+
+struct Strat {
+	P dims;
+	Strat(P dims) : dims(dims) {
+		assert(P::K(1) <= dims);
+	}
+	virtual ~Strat() {}
+	virtual int query(P x) = 0;
+	virtual long long maxval() const = 0;
+	int oob_query(P x) {
+		if (oob(x)) return -1;
+		return query(x);
+	}
+	bool oob(P x) const {
+		return !(P::K(0) <= x && x < dims);
+	}
+};
+Strat* readStrat(P dims, istream& cin);
 
 struct AddStrat : Strat {
 	Strat* inner;
 	int base;
-	AddStrat(Strat* other) : Strat(other->N, other->M, other->K), inner(other) {
+	AddStrat(Strat* other) : Strat(other->dims), inner(other) {
 		base = rand() % 1000000 + 1000;
 	}
-	int query(int x, int y, int z) override {
-		return inner->query(x, y, z) + base;
+	int query(P x) override {
+		return inner->query(x) + base;
 	}
 	long long maxval() const override { return inner->maxval() + base; }
 };
@@ -120,26 +180,21 @@ struct AddStrat : Strat {
 // on even indices and removes shortcuts.
 struct SpacedPathStrat : Strat {
 	Strat* inner;
-	SpacedPathStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
-		inner = readStrat((N+1)/2, (M+1)/2, (K+1)/2, cin);
+	SpacedPathStrat(P dims, istream& cin) : Strat(dims) {
+		inner = readStrat((dims+P::K(2)).idiv(2), cin);
 	}
-	int query(int x, int y, int z) override {
-		assert(!oob(x,y,z));
-		int odds = x%2 + y%2 + z%2;
-		if (odds == 3) return 1;
-		if (odds == 2) return 2;
+	int query(P p) override {
+		assert(!oob(p));
+		int odds = p.count_odd();
+		if (odds > 1) return P::DIM+1 - odds;
 		if (odds == 1) {
-			int x1 = x, y1 = y, z1 = z;
-			int x2 = x, y2 = y, z2 = z;
-			if (x%2) --x1, ++x2;
-			if (y%2) --y1, ++y2;
-			if (z%2) --z1, ++z2;
-			int a = inner->oob_query(x1/2, y1/2, z1/2)*2 + 10;
-			int b = inner->oob_query(x2/2, y2/2, z2/2)*2 + 10;
-			if (abs(a - b) > 2) return 3;
+			P A = p.idiv(2), B = (p + P::K(1)).idiv(2);
+			int a = inner->query(A)*2 + 10;
+			int b = inner->query(B)*2 + 10;
+			if (abs(a - b) > 2) return P::DIM+1 - odds;
 			return a + (b - a) / 2;
 		}
-		return inner->query(x/2, y/2, z/2)*2 + 10;
+		return inner->query(p.idiv(2))*2 + 10;
 	}
 	long long maxval() const override { return inner->maxval() * 2 + 10; }
 };
@@ -147,22 +202,17 @@ struct SpacedPathStrat : Strat {
 // This puts very small values at the edges, making only the middle relevant.
 struct PadStrat : Strat {
 	Strat* inner;
-	int x0,x1;
-	int y0,y1;
-	int z0,z1;
-	PadStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
-		cin >> x0 >> x1 >> y0 >> y1 >> z0 >> z1;
-		inner = readStrat(N - x0 - x1, M - y0 - y1, K - z0 - z1, cin);
+	P lo, hi;
+	PadStrat(P dims, istream& cin) : Strat(dims) {
+		cin >> lo >> hi;
+		inner = readStrat(dims - lo - hi, cin);
 	}
-	int query(int x, int y, int z) override {
-		assert(!oob(x,y,z));
-		int dx = ed(x, x0, x1, N);
-		int dy = ed(y, y0, y1, M);
-		int dz = ed(z, z0, z1, K);
-		if (dx || dy || dz) {
-			return 1000000 - (dx + dy + dz);
-		}
-		return inner->query(x - x0, y - y0, z - z0) + 1000000;
+	int query(P x) override {
+		assert(!oob(x));
+		int sum = 0;
+		repd(i) sum += ed(x.ar[i], lo.ar[i], hi.ar[i], dims.ar[i]);
+		if (sum) return 1000000 - sum;
+		return inner->query(x - lo) + 1000000;
 	}
 	int ed(int x, int x0, int x1, int w) { // distance away from the middle
 		if (x < x0) return x0 - x;
@@ -175,60 +225,60 @@ struct PadStrat : Strat {
 // Random function.
 struct RandomStrat : Strat {
 	uint64_t seed;
-	RandomStrat(int N, int M, int K) : Strat(N, M, K) {
+	RandomStrat(P dims) : Strat(dims) {
 		seed = rand64();
 	}
-	int query(int x, int y, int z) override {
-		uint64_t val = x * M * K + y * K + z;
-		return (int)(Hash(val, seed) >> 35);
+	int query(P x) override {
+		return (int)(x.hash(dims, seed) >> 35);
 	}
 	long long maxval() const override { return 1 << 29; }
 };
 
 struct SpaceFillStrat : Strat {
 	uint64_t seed;
-	SpaceFillStrat(int N, int M, int K) : Strat(N, M, K) {
+	SpaceFillStrat(P dims) : Strat(dims) {
 		seed = rand64();
 	}
-	int query(int x, int y, int z) override {
+	int query(P x) override {
 		// TODO
-		return x + y + z;
+		return x.sum();
 	}
-	long long maxval() const override { return N+M+K; }
+	long long maxval() const override { return dims.sum(); }
 };
 
 // Unimodal function, which is piecewise linear and discontinuous at its peak.
 struct OneDimPeakStrat : Strat {
-	int pivot, leftBase, rightBase;
+	int pivot, leftBase, rightBase, N;
 	const int MAX_BASE = 100000000;
 	const int PIVOT_VAL = 200000000;
-	OneDimPeakStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
-		assert(M == 1);
-		assert(K == 1);
+	OneDimPeakStrat(P dims, istream& cin) : Strat(dims) {
+		assert(dims.dimension() == 1);
+		N = dims.ar[0];
 		int same;
 		cin >> same;
 		pivot = rand() % N;
 		leftBase = rand() % MAX_BASE;
 		rightBase = same ? leftBase : rand() % MAX_BASE;
 	}
-	int query(int x, int y, int z) override {
+	int query(P p) override {
+		int x = p.ar[0];
 		if (x == pivot) return PIVOT_VAL;
 		if (x < pivot) return leftBase + x * 100;
 		return rightBase + (N - x) * 100;
 	}
-	long long maxval() const override { return max(PIVOT_VAL, MAX_BASE + 100*N); }
+	long long maxval() const override { return max(PIVOT_VAL, MAX_BASE + 100*dims.sum()); }
 };
 
 // Continuous unimodal function.
 struct OneDimPeakStrat2 : Strat {
-	int pivot;
+	int pivot, N;
 	const int PIVOT_VAL = 200000000, SUB_VAL = 190000000;
 	enum class Type {
 		sqrt, pw
 	} type;
-	OneDimPeakStrat2(int N, int M, int K, istream& cin) : Strat(N, M, K) {
-		assert(M == 1);
-		assert(K == 1);
+	OneDimPeakStrat2(P dims, istream& cin) : Strat(dims) {
+		assert(dims.dimension() == 1);
+		N = dims.ar[0];
 		pivot = rand() % N;
 		string stype;
 		cin >> stype;
@@ -236,7 +286,8 @@ struct OneDimPeakStrat2 : Strat {
 		else if (stype == "pw") type = Type::pw;
 		else assert(0);
 	}
-	int query(int x, int y, int z) override {
+	int query(P p) override {
+		int x = p.ar[0];
 		double v;
 		if (x == pivot) v = 0;
 		else if (x < pivot) v = f(1 - x / (double)pivot);
@@ -258,13 +309,15 @@ struct OneDimPeakStrat2 : Strat {
 // Sawtooth function with 1000 teeth.
 struct OneDimBlocksStrat : Strat {
 	uint64_t seed;
-	OneDimBlocksStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
+	int N;
+	OneDimBlocksStrat(P dims, istream& cin) : Strat(dims) {
+		assert(dims.dimension() == 1);
+		N = dims.ar[0];
 		assert(N == 1000000);
-		assert(M == 1);
-		assert(K == 1);
 		seed = rand64();
 	}
-	int query(int x, int y, int z) override {
+	int query(P p) override {
+		int x = p.ar[0];
 		if (x >= N-2400) return N-x;
 		const int BS = 1000;
 		int block = x / BS, ind = x % BS;
@@ -276,7 +329,7 @@ struct OneDimBlocksStrat : Strat {
 // Constant function!
 struct ConstStrat : Strat {
 	using Strat::Strat;
-	int query(int, int, int) override {
+	int query(P) override {
 		return 4; // chosen by a fair dice roll.
 	}
 	long long maxval() const override { return 4; }
@@ -284,31 +337,35 @@ struct ConstStrat : Strat {
 
 // Increases monotonically towards one corner.
 struct CornerStrat : Strat {
-	char a, b, c;
-	CornerStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
-		cin >> a >> b >> c;
+	string plusminus;
+	CornerStrat(P dims, istream& cin) : Strat(dims) {
+		cin >> plusminus;
+		assert(plusminus.size() == P::DIM);
+		for (char c : plusminus) {
+			assert(c == '-' || c == '+');
+		}
 	}
-	int query(int x, int y, int z) override {
-		if (a == '-') x = N-1 - x;
-		if (b == '-') y = M-1 - y;
-		if (c == '-') z = K-1 - z;
-		return x + y + z;
+	int query(P x) override {
+		repd(i) {
+			if (plusminus[i] == '-') x.ar[i] = dims.ar[i]-1 - x.ar[i];
+		}
+		return x.sum();
 	}
-	long long maxval() const override { return N+M+K; }
+	long long maxval() const override { return dims.sum(); }
 };
 
-Strat* readStrat(int N, int M, int K, istream& cin) {
+Strat* readStrat(P dims, istream& cin) {
 	string str;
 	cin >> str;
-	if (str == "random") return new RandomStrat(N, M, K);
-	if (str == "spacefill") return new SpaceFillStrat(N, M, K);
-	if (str == "spaced") return new SpacedPathStrat(N, M, K, cin);
-	if (str == "pad") return new PadStrat(N, M, K, cin);
-	if (str == "const") return new ConstStrat(N, M, K);
-	if (str == "1d-peak") return new OneDimPeakStrat(N, M, K, cin);
-	if (str == "1d-peak2") return new OneDimPeakStrat2(N, M, K, cin);
-	if (str == "1d-block") return new OneDimBlocksStrat(N, M, K, cin);
-	if (str == "corner") return new CornerStrat(N, M, K, cin);
+	if (str == "random") return new RandomStrat(dims);
+	if (str == "spacefill") return new SpaceFillStrat(dims);
+	if (str == "spaced") return new SpacedPathStrat(dims, cin);
+	if (str == "pad") return new PadStrat(dims, cin);
+	if (str == "const") return new ConstStrat(dims);
+	if (str == "1d-peak") return new OneDimPeakStrat(dims, cin);
+	if (str == "1d-peak2") return new OneDimPeakStrat2(dims, cin);
+	if (str == "1d-block") return new OneDimBlocksStrat(dims, cin);
+	if (str == "corner") return new CornerStrat(dims, cin);
 	assert(0 && "unknown strategy");
 	abort();
 }
@@ -318,32 +375,33 @@ int main(int argc, char** argv) {
 	assert(argc >= 2);
 	if (argc >= 4) out_dir = argv[3];
 	ifstream fin(argv[1]);
-	int N, M, K, Q, seed;
-	fin >> N >> M >> K >> Q >> seed;
+	P dims;
+	int Q, seed;
+	fin >> dims >> Q >> seed;
 	srand(seed);
 
-	Strat* strat = readStrat(N, M, K, fin);
+	Strat* strat = readStrat(dims, fin);
 	strat = new AddStrat(strat);
 	assert(strat->maxval() < 1000000000);
-	assert(strat->N == N);
-	assert(strat->M == M);
-	assert(strat->K == K);
+	assert(strat->dims == dims);
 	assert(fin);
 	string dummy;
 	assert(!(fin >> dummy));
 
-	auto works = [&](int x, int y, int z) {
-		int v = strat->query(x, y, z);
-		return
-			v >= strat->oob_query(x-1,y,z) &&
-			v >= strat->oob_query(x+1,y,z) &&
-			v >= strat->oob_query(x,y-1,z) &&
-			v >= strat->oob_query(x,y+1,z) &&
-			v >= strat->oob_query(x,y,z-1) &&
-			v >= strat->oob_query(x,y,z+1);
+	auto works = [&](P x) {
+		int v = strat->query(x);
+		repd(i) {
+			P y = x, z = x;
+			--y.ar[i];
+			++z.ar[i];
+			if (v < strat->oob_query(y)) return false;
+			if (v < strat->oob_query(z)) return false;
+		}
+		return true;
 	};
 
-	cout << N << ' ' << M << ' ' << K << ' ' << Q << endl;
+	repd(i) cout << dims.ar[i] << ' ';
+	cout << Q << endl;
 	string line;
 	vector<const char*> tokens;
 	for (;;) {
@@ -361,20 +419,21 @@ int main(int argc, char** argv) {
 			ind = ind2 + 1;
 		}
 
-		if (tokens.size() != 4) reject_line("invalid format (must have 4 tokens)", line);
+		if (tokens.size() != 1 + P::DIM) reject_line("invalid format (must have DIMS+1 tokens)", line);
 		const char *type = tokens[0];
 		if (strcmp(type, "?") && strcmp(type, "!")) reject_line("invalid format (invalid query type)", line);
-		int x = readnum(tokens[1], N, line) - 1;
-		int y = readnum(tokens[2], M, line) - 1;
-		int z = readnum(tokens[3], K, line) - 1;
+		P x;
+		repd(i) {
+			x.ar[i] = readnum(tokens[i+1], dims.ar[i], line) - 1;
+		}
 
 		if (type[0] == '!') {
-			if (works(x, y, z)) accept();
+			if (works(x)) accept();
 			else reject_raw("not a local maximum");
 		}
 
 		if (!Q--) reject_line("too many queries", line);
-		int r = strat->query(x, y, z) + 1;
+		int r = strat->query(x) + 1;
 		assert(1 <= r && r <= 1000000000);
 		cout << r << endl;
 	}
