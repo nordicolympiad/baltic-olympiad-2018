@@ -48,6 +48,25 @@ int readnum(const char* str, int max, const string& line) {
 	return cur;
 }
 
+uint64_t rand64() {
+	uint64_t ret = rand();
+	ret <<= 31;
+	ret |= rand();
+	return ret;
+}
+
+uint64_t rot(uint64_t v, int amt) {
+	return (v >> amt) | (v << (64 - amt));
+}
+
+uint64_t Hash(uint64_t val, uint64_t seed) {
+	val += seed;
+	val *= 1236182312312311ULL;
+	val = rot(val, 10) ^ rot(val, 40) ^ rot(val, 27);
+	val *= 981723ULL;
+	return (int)(val >> 35);
+}
+
 struct Strat {
 	int N, M, K;
 	Strat(int N, int M, int K) : N(N), M(M), K(K) {
@@ -136,33 +155,23 @@ struct PadStrat : Strat {
 	long long maxval() const override { return inner->maxval() + 1000000; }
 };
 
+// Random function.
 struct RandomStrat : Strat {
 	uint64_t seed;
 	RandomStrat(int N, int M, int K) : Strat(N, M, K) {
-		seed = rand();
-		seed <<= 30;
-		seed |= rand();
+		seed = rand64();
 	}
 	int query(int x, int y, int z) override {
 		uint64_t val = x * M * K + y * K + z;
-		val += seed;
-		val *= 1236182312312311ULL;
-		val = rot(val, 10) ^ rot(val, 40) ^ rot(val, 27);
-		val *= 981723ULL;
-		return (int)(val >> 35);
+		return (int)(Hash(val, seed) >> 35);
 	}
 	long long maxval() const override { return 1 << 29; }
-	uint64_t rot(uint64_t v, int amt) {
-		return (v >> amt) | (v << (64 - amt));
-	}
 };
 
 struct SpaceFillStrat : Strat {
 	uint64_t seed;
 	SpaceFillStrat(int N, int M, int K) : Strat(N, M, K) {
-		seed = rand();
-		seed <<= 30;
-		seed |= rand();
+		seed = rand64();
 	}
 	int query(int x, int y, int z) override {
 		// TODO
@@ -171,6 +180,7 @@ struct SpaceFillStrat : Strat {
 	long long maxval() const override { return N+M+K; }
 };
 
+// Unimodal function, which is piecewise linear and discontinuous at its peak.
 struct OneDimPeakStrat : Strat {
 	int pivot, leftBase, rightBase;
 	const int MAX_BASE = 100000000;
@@ -192,6 +202,7 @@ struct OneDimPeakStrat : Strat {
 	long long maxval() const override { return max(PIVOT_VAL, MAX_BASE + 100*N); }
 };
 
+// Continuous unimodal function.
 struct OneDimPeakStrat2 : Strat {
 	int pivot;
 	const int PIVOT_VAL = 200000000, SUB_VAL = 190000000;
@@ -227,7 +238,25 @@ struct OneDimPeakStrat2 : Strat {
 	long long maxval() const override { return PIVOT_VAL; }
 };
 
+// Sawtooth function with 1000 teeth.
+struct OneDimBlocksStrat : Strat {
+	uint64_t seed;
+	OneDimBlocksStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
+		assert(N == 1000000);
+		assert(M == 1);
+		assert(K == 1);
+		seed = rand64();
+	}
+	int query(int x, int y, int z) override {
+		if (x >= N-2400) return N-x;
+		const int BS = 1000;
+		int block = x / BS, ind = x % BS;
+		return Hash(block, seed) % 100000000 + 30000 * ind;
+	}
+	long long maxval() const override { return 100000000 + 30000 * 1000; }
+};
 
+// Constant function!
 struct ConstStrat : Strat {
 	using Strat::Strat;
 	int query(int, int, int) override {
@@ -236,6 +265,7 @@ struct ConstStrat : Strat {
 	long long maxval() const override { return 4; }
 };
 
+// Increases monotonically towards one corner.
 struct CornerStrat : Strat {
 	char a, b, c;
 	CornerStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
@@ -260,6 +290,7 @@ Strat* readStrat(int N, int M, int K, istream& cin) {
 	if (str == "const") return new ConstStrat(N, M, K);
 	if (str == "1d-peak") return new OneDimPeakStrat(N, M, K, cin);
 	if (str == "1d-peak2") return new OneDimPeakStrat2(N, M, K, cin);
+	if (str == "1d-block") return new OneDimBlocksStrat(N, M, K, cin);
 	if (str == "corner") return new CornerStrat(N, M, K, cin);
 	assert(0 && "unknown strategy");
 	abort();
