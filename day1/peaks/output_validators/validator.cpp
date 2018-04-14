@@ -6,6 +6,7 @@
 #include <signal.h>
 #include <cassert>
 #include <cstring>
+#include <cmath>
 using namespace std;
 
 const char* out_dir = nullptr;
@@ -172,20 +173,60 @@ struct SpaceFillStrat : Strat {
 
 struct OneDimPeakStrat : Strat {
 	int pivot, leftBase, rightBase;
-	OneDimPeakStrat(int N, int M, int K) : Strat(N, M, K) {
+	const int MAX_BASE = 100000000;
+	const int PIVOT_VAL = 200000000;
+	OneDimPeakStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
+		assert(M == 1);
+		assert(K == 1);
+		int same;
+		cin >> same;
+		pivot = rand() % N;
+		leftBase = rand() % MAX_BASE;
+		rightBase = same ? leftBase : rand() % MAX_BASE;
+	}
+	int query(int x, int y, int z) override {
+		if (x == pivot) return PIVOT_VAL;
+		if (x < pivot) return leftBase + x * 100;
+		return rightBase + (N - x) * 100;
+	}
+	long long maxval() const override { return max(PIVOT_VAL, MAX_BASE + 100*N); }
+};
+
+struct OneDimPeakStrat2 : Strat {
+	int pivot;
+	const int PIVOT_VAL = 200000000, SUB_VAL = 190000000;
+	enum class Type {
+		sqrt, pw
+	} type;
+	OneDimPeakStrat2(int N, int M, int K, istream& cin) : Strat(N, M, K) {
 		assert(M == 1);
 		assert(K == 1);
 		pivot = rand() % N;
-		leftBase = rand() % 100000000;
-		rightBase = rand() % 100000000;
+		string stype;
+		cin >> stype;
+		if (stype == "sqrt") type = Type::sqrt;
+		else if (stype == "pw") type = Type::pw;
+		else assert(0);
 	}
 	int query(int x, int y, int z) override {
-		if (x == pivot) return 200000000;
-		if (x < pivot) return leftBase + x;
-		return rightBase + (N - x);
+		double v;
+		if (x == pivot) v = 0;
+		else if (x < pivot) v = f(1 - x / (double)pivot);
+		else v = f((x - pivot) / (double)(N - pivot));
+		v = min(v, 1.0);
+		v = max(v, 0.0);
+		return PIVOT_VAL - int(SUB_VAL * v) - (x != pivot);
 	}
-	long long maxval() const override { return 200000000; }
+	double f(double x) {
+		assert(0 < x);
+		assert(x <= 1);
+		if (type == Type::sqrt) return sqrt(x);
+		else if (type == Type::pw) return x * sqrt(x);
+		else assert(0);
+	}
+	long long maxval() const override { return PIVOT_VAL; }
 };
+
 
 struct ConstStrat : Strat {
 	using Strat::Strat;
@@ -217,7 +258,8 @@ Strat* readStrat(int N, int M, int K, istream& cin) {
 	if (str == "spaced") return new SpacedPathStrat(N, M, K, cin);
 	if (str == "pad") return new PadStrat(N, M, K, cin);
 	if (str == "const") return new ConstStrat(N, M, K);
-	if (str == "1d-peak") return new OneDimPeakStrat(N, M, K);
+	if (str == "1d-peak") return new OneDimPeakStrat(N, M, K, cin);
+	if (str == "1d-peak2") return new OneDimPeakStrat2(N, M, K, cin);
 	if (str == "corner") return new CornerStrat(N, M, K, cin);
 	assert(0 && "unknown strategy");
 	abort();

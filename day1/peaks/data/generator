@@ -17,7 +17,7 @@ params() {
 
 group group1 10
 params 1000000 1 1 10000
-tc 1d1-peak echo $LIMS 1d-peak
+tc 1d1-peak echo $LIMS 1d-peak 0
 tc 1d1-random echo $LIMS random
 tc 1d1-corner1 echo $LIMS corner +++
 tc 1d1-corner2 echo $LIMS corner ---
@@ -25,7 +25,12 @@ tc 1d1-const echo $LIMS const
 
 group group2 20
 params 1000000 1 1 35
-tc 1d2-peak echo $LIMS 1d-peak
+tc 1d2-peak1 echo $LIMS 1d-peak 0
+tc 1d2-peak2 echo $LIMS 1d-peak 1
+tc 1d2-peak3 echo $LIMS 1d-peak 0
+tc 1d2-peak4 echo $LIMS 1d-peak 1
+tc 1d2-peak5 echo $LIMS 1d-peak2 sqrt
+tc 1d2-peak6 echo $LIMS 1d-peak2 pw
 tc 1d2-random echo $LIMS random
 tc 1d2-corner1 echo $LIMS corner +++
 tc 1d2-corner2 echo $LIMS corner ---
