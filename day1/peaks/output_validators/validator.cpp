@@ -34,6 +34,23 @@ void accept() {
 	exit(42);
 }
 
+[[noreturn]]
+void judge_error2(const char* a, const char* b, const char* c) {
+	string msg = string(a) + b + c;
+	cerr << msg << endl;
+	if (out_dir) {
+		string fname = out_dir + string("/judgeerror.txt");
+		ofstream fout(fname.c_str());
+		fout << msg << endl;
+	}
+	abort();
+}
+
+#undef assert
+#define STR2(x) #x
+#define STR(x) STR2(x)
+#define assert(x) do { if (!(x)) { judge_error2(__FILE__ ":" STR(__LINE__) ": ", __PRETTY_FUNCTION__, ": Assertion `" #x "' failed."); } } while (0)
+
 int readnum(const char* str, int max, const string& line) {
 	if (!str[0]) reject_line("invalid format (empty token)", line);
 	int cur = 0;
