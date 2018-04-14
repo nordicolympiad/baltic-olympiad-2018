@@ -46,7 +46,11 @@ int readnum(const char* str, int max, const string& line) {
 
 struct Strat {
 	int N, M, K;
-	Strat(int N, int M, int K) : N(N), M(M), K(K) {}
+	Strat(int N, int M, int K) : N(N), M(M), K(K) {
+		assert(N > 0);
+		assert(M > 0);
+		assert(K > 0);
+	}
 	virtual ~Strat() {}
 	virtual int query(int x, int y, int z) = 0;
 	virtual long long maxval() const = 0;
@@ -58,6 +62,7 @@ struct Strat {
 		return (x < 0 || y < 0 || z < 0 || x >= N || y >= M || z >= K);
 	}
 };
+Strat* readStrat(int N, int M, int K, istream& cin);
 
 struct AddStrat : Strat {
 	Strat* inner;
@@ -75,7 +80,9 @@ struct AddStrat : Strat {
 // on even indices and removes shortcuts.
 struct SpacedPathStrat : Strat {
 	Strat* inner;
-	SpacedPathStrat(Strat* other, int N, int M, int K) : Strat(N, M, K), inner(other) {}
+	SpacedPathStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
+		inner = readStrat((N+1)/2, (M+1)/2, (K+1)/2, cin);
+	}
 	int query(int x, int y, int z) override {
 		assert(!oob(x,y,z));
 		int odds = x%2 + y%2 + z%2;
@@ -89,13 +96,40 @@ struct SpacedPathStrat : Strat {
 			if (z%2) --z1, ++z2;
 			int a = inner->oob_query(x1/2, y1/2, z1/2)*2 + 10;
 			int b = inner->oob_query(x2/2, y2/2, z2/2)*2 + 10;
-			assert(a != b); // TODO: remove this later. better weak test data than judge error
-			if (abs(a - b) != 2) return 3;
+			if (abs(a - b) > 2) return 3;
 			return a + (b - a) / 2;
 		}
 		return inner->query(x/2, y/2, z/2)*2 + 10;
 	}
 	long long maxval() const override { return inner->maxval() * 2 + 10; }
+};
+
+// This puts very small values at the edges, making only the middle relevant.
+struct PadStrat : Strat {
+	Strat* inner;
+	int x0,x1;
+	int y0,y1;
+	int z0,z1;
+	PadStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
+		cin >> x0 >> x1 >> y0 >> y1 >> z0 >> z1;
+		inner = readStrat(N - x0 - x1, M - y0 - y1, K - z0 - z1, cin);
+	}
+	int query(int x, int y, int z) override {
+		assert(!oob(x,y,z));
+		int dx = ed(x, x0, x1, N);
+		int dy = ed(y, y0, y1, M);
+		int dz = ed(z, z0, z1, K);
+		if (dx || dy || dz) {
+			return 1000000 - (dx + dy + dz);
+		}
+		return inner->query(x - x0, y - y0, z - z0) + 1000000;
+	}
+	int ed(int x, int x0, int x1, int w) { // distance away from the middle
+		if (x < x0) return x0 - x;
+		if (x >= w-x1) return x - (w-x1) + 1;
+		return 0;
+	}
+	long long maxval() const override { return inner->maxval() + 1000000; }
 };
 
 struct RandomStrat : Strat {
@@ -133,17 +167,13 @@ struct SpaceFillStrat : Strat {
 	long long maxval() const override { return N+M+K; }
 };
 
-Strat* readStrat(istream& in, int N, int M, int K) {
+Strat* readStrat(int N, int M, int K, istream& cin) {
 	string str;
-	in >> str;
+	cin >> str;
 	if (str == "random") return new RandomStrat(N, M, K);
 	if (str == "spacefill") return new SpaceFillStrat(N, M, K);
-	if (str == "spaced") {
-		int N2 = (N+1)/2;
-		int M2 = (M+1)/2;
-		int K2 = (K+1)/2;
-		return new SpacedPathStrat(readStrat(in, N2, M2, K2), N, M, K);
-	}
+	if (str == "spaced") return new SpacedPathStrat(N, M, K, cin);
+	if (str == "pad") return new PadStrat(N, M, K, cin);
 	assert(0 && "unknown strategy");
 	abort();
 }
@@ -157,7 +187,7 @@ int main(int argc, char** argv) {
 	fin >> N >> M >> K >> Q >> seed;
 	srand(seed);
 
-	Strat* strat = readStrat(fin, N, M, K);
+	Strat* strat = readStrat(N, M, K, fin);
 	strat = new AddStrat(strat);
 	assert(strat->maxval() < 1000000000);
 
