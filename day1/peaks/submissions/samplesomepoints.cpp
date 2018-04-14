@@ -17,12 +17,13 @@ int value(int x, int y, int z){
 	   z <= 0 || z>k) return 0;
 	
 	tri t(x, pii(y,z));
-	if(mem.count(t)) return mem[t];
+	int& o = mem[t];
+	if (o) return o;
 
 	cout << "? " << x << ' ' << y << ' ' << z << endl;
-	cin >> mem[t];
-	if (mem[t] == -1) exit(0);
-	return mem[t];
+	cin >> o;
+	if (o == -1) exit(0);
+	return o;
 }
 
 int dx[] = {1,-1,0,0,0,0};
