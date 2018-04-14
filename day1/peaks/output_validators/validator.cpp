@@ -1,8 +1,11 @@
 // Usage: ./validator .in-file .ans-file dir <in >out
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <signal.h>
+#include <cassert>
+#include <cstring>
 using namespace std;
 
 const char* out_dir = nullptr;
@@ -167,6 +170,29 @@ struct SpaceFillStrat : Strat {
 	long long maxval() const override { return N+M+K; }
 };
 
+struct OneDimStrat : Strat {
+	OneDimStrat(int N, int M, int K) : Strat(N, M, K) {}
+	int query(int x, int y, int z) override {
+		// TODO pivot around a point
+		return x + y + z;
+	}
+	long long maxval() const override { return N+M+K; }
+};
+
+struct CornerStrat : Strat {
+	char a, b, c;
+	CornerStrat(int N, int M, int K, istream& cin) : Strat(N, M, K) {
+		cin >> a >> b >> c;
+	}
+	int query(int x, int y, int z) override {
+		if (a == '-') x = N-1 - x;
+		if (b == '-') y = M-1 - y;
+		if (c == '-') z = K-1 - z;
+		return x + y + z;
+	}
+	long long maxval() const override { return N+M+K; }
+};
+
 Strat* readStrat(int N, int M, int K, istream& cin) {
 	string str;
 	cin >> str;
@@ -174,6 +200,8 @@ Strat* readStrat(int N, int M, int K, istream& cin) {
 	if (str == "spacefill") return new SpaceFillStrat(N, M, K);
 	if (str == "spaced") return new SpacedPathStrat(N, M, K, cin);
 	if (str == "pad") return new PadStrat(N, M, K, cin);
+	if (str == "onedim") return new OneDimStrat(N, M, K);
+	if (str == "corner") return new CornerStrat(N, M, K, cin);
 	assert(0 && "unknown strategy");
 	abort();
 }
@@ -190,6 +218,12 @@ int main(int argc, char** argv) {
 	Strat* strat = readStrat(N, M, K, fin);
 	strat = new AddStrat(strat);
 	assert(strat->maxval() < 1000000000);
+	assert(strat->N == N);
+	assert(strat->M == M);
+	assert(strat->K == K);
+	assert(fin);
+	string dummy;
+	assert(!(fin >> dummy));
 
 	auto works = [&](int x, int y, int z) {
 		int v = strat->query(x, y, z);
