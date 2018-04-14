@@ -170,13 +170,29 @@ struct SpaceFillStrat : Strat {
 	long long maxval() const override { return N+M+K; }
 };
 
-struct OneDimStrat : Strat {
-	OneDimStrat(int N, int M, int K) : Strat(N, M, K) {}
-	int query(int x, int y, int z) override {
-		// TODO pivot around a point
-		return x + y + z;
+struct OneDimPeakStrat : Strat {
+	int pivot, leftBase, rightBase;
+	OneDimPeakStrat(int N, int M, int K) : Strat(N, M, K) {
+		assert(M == 1);
+		assert(K == 1);
+		pivot = rand() % N;
+		leftBase = rand() % 100000000;
+		rightBase = rand() % 100000000;
 	}
-	long long maxval() const override { return N+M+K; }
+	int query(int x, int y, int z) override {
+		if (x == pivot) return 200000000;
+		if (x < pivot) return leftBase + x;
+		return rightBase + (N - x);
+	}
+	long long maxval() const override { return 200000000; }
+};
+
+struct ConstStrat : Strat {
+	using Strat::Strat;
+	int query(int, int, int) override {
+		return 4; // chosen by a fair dice roll.
+	}
+	long long maxval() const override { return 4; }
 };
 
 struct CornerStrat : Strat {
@@ -200,7 +216,8 @@ Strat* readStrat(int N, int M, int K, istream& cin) {
 	if (str == "spacefill") return new SpaceFillStrat(N, M, K);
 	if (str == "spaced") return new SpacedPathStrat(N, M, K, cin);
 	if (str == "pad") return new PadStrat(N, M, K, cin);
-	if (str == "onedim") return new OneDimStrat(N, M, K);
+	if (str == "const") return new ConstStrat(N, M, K);
+	if (str == "1d-peak") return new OneDimPeakStrat(N, M, K);
 	if (str == "corner") return new CornerStrat(N, M, K, cin);
 	assert(0 && "unknown strategy");
 	abort();

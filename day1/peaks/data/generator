@@ -15,36 +15,48 @@ params() {
 	LIMS="$1 $2 $3 $4"
 }
 
-group group1 20
+group group1 10
 params 1000000 1 1 10000
-tc 1d-onedim1 echo $LIMS onedim
-tc 1d-onedim2 echo $LIMS onedim
-tc 1d-random echo $LIMS random
-tc 1d-corner1 echo $LIMS corner +++
-tc 1d-corner2 echo $LIMS corner ---
+tc 1d1-peak echo $LIMS 1d-peak
+tc 1d1-random echo $LIMS random
+tc 1d1-corner1 echo $LIMS corner +++
+tc 1d1-corner2 echo $LIMS corner ---
+tc 1d1-const echo $LIMS const
 
-group group2 10
-params 1000 1000 1 100000
+group group2 20
+params 1000000 1 1 35
+tc 1d2-peak echo $LIMS 1d-peak
+tc 1d2-random echo $LIMS random
+tc 1d2-corner1 echo $LIMS corner +++
+tc 1d2-corner2 echo $LIMS corner ---
+tc 1d2-const echo $LIMS const
+
+group group3 10
+params 200 200 1 4000
 tc 2d1-random echo $LIMS random
 tc 2d1-corner echo $LIMS corner +++
 tc 2d1-space echo $LIMS spaced spacefill
+tc 2d1-const echo $LIMS const
 
-group group3 20
+group group4 10
 params 1000 1000 1 4000
 tc 2d2-random echo $LIMS random
 tc 2d2-corner echo $LIMS corner +-+
 tc 2d2-space echo $LIMS spaced spacefill
+tc 2d2-const echo $LIMS const
 
-group group4 20
+group group5 20
 params 100 100 100 100000
 tc 3d1-random echo $LIMS random
 tc 3d1-corner echo $LIMS corner ++-
 tc 3d1-space echo $LIMS spaced spacefill
+tc 3d1-const echo $LIMS const
 
-group group5 30
+group group6 30
 params 800 800 800 300000
 tc 3d2-random echo $LIMS random
 tc 3d2-corner echo $LIMS corner -+-
 tc 3d2-space echo $LIMS spaced spacefill
+tc 3d2-const echo $LIMS const
 
 cleanup_programs
