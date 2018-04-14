@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+PPATH=$(realpath ..)
+. ../../../testdata_tools/gen.sh
+
+setup_dirs
+use_solution ../../data/empty.sh # empty .ans files
+
+compile echo.sh
+
+samplegroup
+
+LIMS=''
+params() {
+	limits $1 $2 $3 $4
+	LIMS="$1 $2 $3 $4"
+}
+
+group group1 20
+params 1000000 1 1 10000
+tc 1d-onedim1 echo $LIMS onedim
+tc 1d-onedim2 echo $LIMS onedim
+tc 1d-random echo $LIMS random
+tc 1d-corner1 echo $LIMS corner +++
+tc 1d-corner2 echo $LIMS corner ---
+
+group group2 10
+params 1000 1000 1 100000
+tc 2d1-random echo $LIMS random
+tc 2d1-corner echo $LIMS corner +++
+tc 2d1-space echo $LIMS spaced spacefill
+
+group group3 20
+params 1000 1000 1 4000
+tc 2d2-random echo $LIMS random
+tc 2d2-corner echo $LIMS corner +-+
+tc 2d2-space echo $LIMS spaced spacefill
+
+group group4 20
+params 100 100 100 100000
+tc 3d1-random echo $LIMS random
+tc 3d1-corner echo $LIMS corner ++-
+tc 3d1-space echo $LIMS spaced spacefill
+
+group group5 30
+params 800 800 800 300000
+tc 3d2-random echo $LIMS random
+tc 3d2-corner echo $LIMS corner -+-
+tc 3d2-space echo $LIMS spaced spacefill
+
+cleanup_programs
