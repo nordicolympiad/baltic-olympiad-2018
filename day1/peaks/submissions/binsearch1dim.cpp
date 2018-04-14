@@ -2,8 +2,8 @@
 using namespace std;
 
 int main(){
-	int n, m, k;
-	cin >> n >> m >> k;
+	int n, m, k, maxq;
+	cin >> n >> m >> k >> maxq;
 	// m, k should be 1
 
 	int lo = 1, hi = n+1;

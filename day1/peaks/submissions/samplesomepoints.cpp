@@ -7,7 +7,7 @@ typedef pair<int,pii> tri;
 #define snd second.first
 #define trd second.second
 
-int n, m, k;
+int n, m, k, maxq;
 map<tri, int> mem;
 
 int value(int x, int y, int z){
@@ -29,7 +29,7 @@ int dz[] = {0,0,0,0,1,-1};
 
 int main(){
 	srand(561);
-	cin >> n >> m >> k;
+	cin >> n >> m >> k >> maxq;
 
 	while(true){
 		int x = 1 + rand()%n,

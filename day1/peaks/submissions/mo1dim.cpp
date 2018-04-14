@@ -4,8 +4,8 @@ using namespace std;
 #define rep(i,a,b) for(int i = (a); i < (b); ++i)
 
 int main(){
-	int n, m, k;
-	cin >> n >> m >> k;
+	int n, m, k, maxq;
+	cin >> n >> m >> k >> maxq;
 	// m, k should be 1
 
 	int a = sqrt(n); // not optimised

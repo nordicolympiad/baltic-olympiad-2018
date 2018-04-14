@@ -3,7 +3,7 @@
 #include <math.h>
 using namespace std;
 
-int n, m, k;
+int n, m, k, maxq;
 
 int value(int x, int y, int z){
 	if(x <= 0 || x > n ||
@@ -23,7 +23,7 @@ int dz[] = {0, 0, 0, 0, 1, -1};
 int main(){
 	srand(561);
 
-	cin >> n >> m >> k;
+	cin >> n >> m >> k >> maxq;
 
 	int samples = 1; // I'm feeling lucky 
 
