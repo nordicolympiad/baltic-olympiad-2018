@@ -265,6 +265,8 @@ int main(int argc, char** argv) {
 			if (works(x, y, z)) accept();
 			else reject_raw("not a local maximum");
 		}
+
+		if (!Q--) reject_line("too many queries", line);
 		int r = strat->query(x, y, z) + 1;
 		assert(1 <= r && r <= 1000000000);
 		cout << r << endl;
