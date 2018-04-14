@@ -1,5 +1,6 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
+#include <cstdlib>
 using namespace std;
 #define rep(i,a,b) for(int i = (a); i < (b); ++i)
 
@@ -14,6 +15,7 @@ int main(){
 		cout << "? " << cur << " 1 1" << endl;
 		int res;
 		cin >> res;
+		if (res == -1) exit(0);
 		if(res > mx){
 			mx = res;
 			pos = cur;
@@ -26,10 +28,12 @@ int main(){
 	if(pos >= 2){
 		cout << "? " << pos-1 << " 1 1" << endl;
 		cin >> le;
+		if (le == -1) exit(0);
 	}
 	if(pos+1 <= n){
 		cout << "? " << pos+1 << " 1 1" << endl;
 		cin >> ri;
+		if (ri == -1) exit(0);
 	}
 	if(le > mx){
 		mx = le;

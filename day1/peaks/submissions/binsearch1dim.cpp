@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 int main(){
@@ -14,8 +15,10 @@ int main(){
 		int r1, r2;
 		cout << "? " << mi-1 << " 1 1" << endl;
 		cin >> r1;
+		if (r1 == -1) exit(0);
 		cout << "? " << mi   << " 1 1" << endl;
 		cin >> r2;
+		if (r2 == -1) exit(0);
 
 		if(r1 >= r2) hi = mi;
 		else lo = mi;

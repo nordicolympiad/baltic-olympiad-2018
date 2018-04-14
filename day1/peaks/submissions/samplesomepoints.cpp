@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <cstdlib>
 using namespace std;
 typedef pair<int,int> pii;
 typedef pair<int,pii> tri;
@@ -20,6 +21,7 @@ int value(int x, int y, int z){
 
 	cout << "? " << x << ' ' << y << ' ' << z << endl;
 	cin >> mem[t];
+	if (mem[t] == -1) exit(0);
 	return mem[t];
 }
 

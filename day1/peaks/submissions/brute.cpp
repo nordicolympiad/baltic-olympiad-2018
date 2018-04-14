@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 int main(){
@@ -14,6 +15,7 @@ int main(){
 				int res;
 				cout << "? " << x << ' ' << y << ' ' << z << endl;
 				cin >> res;
+				if (res == -1) exit(0);
 				if(res > record){
 					record = res;
 					ansx = x;

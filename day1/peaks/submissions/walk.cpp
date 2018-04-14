@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <math.h>
+#include <cmath>
+#include <cstdlib>
 using namespace std;
 
 int n, m, k, maxq;
@@ -13,6 +14,7 @@ int value(int x, int y, int z){
 	cout << "? " << x << ' ' << y << ' ' << z << endl;
 	int ans;
 	cin >> ans;
+	if (ans == -1) exit(0);
 	return ans;
 }
 
