@@ -1,4 +1,5 @@
 // Usage: ./validator .in-file .ans-file dir <in >out
+#include <functional>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -73,6 +74,13 @@ uint64_t rand64() {
 	return ret;
 }
 
+bool initialization_done = false;
+int my_rand() {
+	assert(!initialization_done);
+	return rand();
+}
+#define rand my_rand
+
 uint64_t rot(uint64_t v, int amt) {
 	return (v >> amt) | (v << (64 - amt));
 }
@@ -94,9 +102,12 @@ struct P {
 		repd(i) ar[i] = x;
 		return {ar};
 	}
+	static P Z;
+	int operator[](int d) const { return ar[d]; }
+	int& operator[](int d) { return ar[d]; }
 	P idiv(int by) const {
 		P ret = *this;
-		repd(i) ret.ar[i] /= by;
+		repd(i) ret[i] /= by;
 		return ret;
 	}
 	int count_odd() const {
@@ -109,6 +120,11 @@ struct P {
 		repd(i) sum += ar[i];
 		return sum;
 	}
+	int prod() const {
+		int prod = 1;
+		repd(i) prod *= ar[i];
+		return prod;
+	}
 	int dimension() const {
 		int dim = 0;
 		repd(i) if (ar[i] != 1) dim = i+1;
@@ -120,30 +136,36 @@ struct P {
 		return Hash(r, seed);
 	}
 };
-bool operator<=(const P& a, const P& b) {
-	repd(i) if (a.ar[i] > b.ar[i]) return false;
+P P::Z = P::K(0);
+
+inline bool operator<=(const P& a, const P& b) {
+	repd(i) if (a[i] > b[i]) return false;
 	return true;
 }
-bool operator==(const P& a, const P& b) {
-	repd(i) if (a.ar[i] != b.ar[i]) return false;
+inline bool operator==(const P& a, const P& b) {
+	repd(i) if (a[i] != b[i]) return false;
 	return true;
 }
-bool operator<(const P& a, const P& b) {
-	repd(i) if (a.ar[i] >= b.ar[i]) return false;
+inline bool operator<(const P& a, const P& b) {
+	repd(i) if (a[i] >= b[i]) return false;
 	return true;
 }
-P operator+(const P& a, const P& b) {
-	P ret; repd(i) ret.ar[i] = a.ar[i] + b.ar[i]; return ret;
+inline P operator+(const P& a, const P& b) {
+	P ret; repd(i) ret[i] = a[i] + b[i]; return ret;
 }
-P operator-(const P& a, const P& b) {
-	P ret; repd(i) ret.ar[i] = a.ar[i] - b.ar[i]; return ret;
+inline P operator-(const P& a, const P& b) {
+	P ret; repd(i) ret[i] = a[i] - b[i]; return ret;
 }
-P operator*(const P& a, int by) {
-	P ret; repd(i) ret.ar[i] = a.ar[i] * by; return ret;
+inline P operator*(const P& a, int by) {
+	P ret; repd(i) ret[i] = a[i] * by; return ret;
 }
 istream& operator>>(istream& is, P& p) {
-	repd(i) is >> p.ar[i];
+	repd(i) is >> p[i];
 	return is;
+}
+ostream& operator<<(ostream& os, const P& p) {
+	repd(i) os << p[i] << ' ';
+	return os;
 }
 
 struct Strat {
@@ -210,7 +232,7 @@ struct PadStrat : Strat {
 	int query(P x) override {
 		assert(!oob(x));
 		int sum = 0;
-		repd(i) sum += ed(x.ar[i], lo.ar[i], hi.ar[i], dims.ar[i]);
+		repd(i) sum += ed(x[i], lo[i], hi[i], dims[i]);
 		if (sum) return 1000000 - sum;
 		return inner->query(x - lo) + 1000000;
 	}
@@ -234,16 +256,137 @@ struct RandomStrat : Strat {
 	long long maxval() const override { return 1 << 29; }
 };
 
+// Space-filling curve, going from the origin to a random point. Combine with
+// SpacedStrat for best results.
 struct SpaceFillStrat : Strat {
 	uint64_t seed;
+	vector<P> pcands;
 	SpaceFillStrat(P dims) : Strat(dims) {
 		seed = rand64();
 	}
 	int query(P x) override {
-		// TODO
-		return x.sum();
+		int res = 0;
+		bool r = rec(res, x, P::Z, P::Z, P::Z, dims, false);
+		assert(r);
+		return res;
 	}
-	long long maxval() const override { return dims.sum(); }
+	bool rec(int& res, P want, P corner1, P corner2, P top, P bottom, bool hasCorner2) {
+		assert(top <= corner1 && corner1 <= bottom);
+		P dims = bottom - top;
+		if (!(top <= want && want < bottom)) {
+			res += dims.prod();
+			return false;
+		}
+		if (dims == P::K(1)) return true;
+		uint64_t rnd = top.hash(this->dims, bottom.hash(this->dims, seed));
+
+		auto pa = pickPivot(corner1, corner2, dims, top, hasCorner2, 0, rnd);
+		P corner3 = pa.first;
+		int dim = pa.second;
+		assert(corner3[dim] != top[dim]);
+		assert(corner3[dim] != bottom[dim]);
+		P top1 = top, bottom1 = bottom;
+		P top2 = top, bottom2 = bottom;
+		if (corner1[dim] < corner3[dim]) {
+			assert(corner1[dim] == top[dim]);
+			top1[dim] = top[dim];
+			bottom1[dim] = corner3[dim];
+			top2[dim] = corner3[dim];
+			bottom2[dim] = bottom[dim];
+		}
+		else {
+			assert(corner1[dim] == bottom[dim]);
+			top2[dim] = top[dim];
+			bottom2[dim] = corner3[dim];
+			top1[dim] = corner3[dim];
+			bottom1[dim] = bottom[dim];
+		}
+		if (rec(res, want, corner1, corner3, top1, bottom1, true)) return true;
+		if (rec(res, want, corner3, corner2, top2, bottom2, hasCorner2)) return true;
+		assert(false);
+		abort();
+	}
+
+	pair<P, int> pickPivot(P corner1, P corner2, P dims, P base, bool hasCorner2, int avoidDims, uint64_t rnd) {
+		int nonzerodims = 0;
+		repd(i) if (dims[i] != 1) nonzerodims++;
+		assert(nonzerodims > 0);
+
+		int cands = 0;
+		repd(i) if ((!hasCorner2 || corner1[i] != corner2[i]) && !(avoidDims & (1 << i))) {
+			cands += dims[i] - 1;
+		}
+
+		assert(cands > 0);
+		int pos = rnd % cands;
+		rnd >>= 32;
+
+		int dim = -1;
+		repd(i) if ((!hasCorner2 || corner1[i] != corner2[i]) && !(avoidDims & (1 << i))) {
+			if (pos < dims[i] - 1) {
+				dim = i;
+				break;
+			}
+			pos -= dims[i] - 1;
+		}
+		assert(dim != -1);
+		pos++;
+		assert(0 < pos && pos < dims[dim]);
+		assert(pcands.empty());
+
+		for (int it = 0; it < 2; ++it) {
+			P pivot = base;
+			pivot[dim] += (base[dim] == corner1[dim] ? pos : dims[dim] - pos);
+			auto same = [&](P a, P b) -> bool {
+				repd(i) {
+					if (abs(a[i] - b[i]) > 1) return false;
+				}
+				return true;
+			};
+			auto test = [&]() -> bool {
+				if (nonzerodims == 1) return true;
+				if (same(pivot, corner1)) return false;
+				if (hasCorner2 && same(pivot, corner2)) return false;
+				int area = 1;
+				int parity = 0;
+				repd(i) {
+					if (i != dim) area *= dims[i];
+					if (corner1[i] != pivot[i]) {
+						parity ^= corner1[i] ^ pivot[i] ^ 1;
+					}
+				}
+				parity ^= area;
+				return parity & 1;
+			};
+			function<void(int)> rec = [&](int ind) -> void {
+				if (ind == dim) {
+					rec(ind+1);
+				}
+				else if (ind == P::DIM) {
+					if (test()) pcands.push_back(pivot);
+				}
+				else {
+					pivot[ind] = base[ind];
+					rec(ind+1);
+					pivot[ind] = base[ind] + dims[ind];
+					rec(ind+1);
+				}
+			};
+			rec(0);
+
+			if (pcands.empty()) {
+				if (pos > 1) --pos;
+				else if (pos < dims[dim]-1) ++pos;
+				else return pickPivot(corner1, corner2, dims, base, hasCorner2, avoidDims | (1 << dim), rnd);
+			}
+		}
+		assert(!pcands.empty());
+		P pivot = pcands[rnd % (int)pcands.size()];
+		pcands.clear();
+		return {pivot, dim};
+	}
+
+	long long maxval() const override { return dims.prod(); }
 };
 
 // Unimodal function, which is piecewise linear and discontinuous at its peak.
@@ -253,7 +396,7 @@ struct OneDimPeakStrat : Strat {
 	const int PIVOT_VAL = 200000000;
 	OneDimPeakStrat(P dims, istream& cin) : Strat(dims) {
 		assert(dims.dimension() == 1);
-		N = dims.ar[0];
+		N = dims[0];
 		int same;
 		cin >> same;
 		pivot = rand() % N;
@@ -261,7 +404,7 @@ struct OneDimPeakStrat : Strat {
 		rightBase = same ? leftBase : rand() % MAX_BASE;
 	}
 	int query(P p) override {
-		int x = p.ar[0];
+		int x = p[0];
 		if (x == pivot) return PIVOT_VAL;
 		if (x < pivot) return leftBase + x * 100;
 		return rightBase + (N - x) * 100;
@@ -278,7 +421,7 @@ struct OneDimPeakStrat2 : Strat {
 	} type;
 	OneDimPeakStrat2(P dims, istream& cin) : Strat(dims) {
 		assert(dims.dimension() == 1);
-		N = dims.ar[0];
+		N = dims[0];
 		pivot = rand() % N;
 		string stype;
 		cin >> stype;
@@ -287,7 +430,7 @@ struct OneDimPeakStrat2 : Strat {
 		else assert(0);
 	}
 	int query(P p) override {
-		int x = p.ar[0];
+		int x = p[0];
 		double v;
 		if (x == pivot) v = 0;
 		else if (x < pivot) v = f(1 - x / (double)pivot);
@@ -312,12 +455,12 @@ struct OneDimBlocksStrat : Strat {
 	int N;
 	OneDimBlocksStrat(P dims, istream& cin) : Strat(dims) {
 		assert(dims.dimension() == 1);
-		N = dims.ar[0];
+		N = dims[0];
 		assert(N == 1000000);
 		seed = rand64();
 	}
 	int query(P p) override {
-		int x = p.ar[0];
+		int x = p[0];
 		if (x >= N-2400) return N-x;
 		const int BS = 1000;
 		int block = x / BS, ind = x % BS;
@@ -347,7 +490,7 @@ struct CornerStrat : Strat {
 	}
 	int query(P x) override {
 		repd(i) {
-			if (plusminus[i] == '-') x.ar[i] = dims.ar[i]-1 - x.ar[i];
+			if (plusminus[i] == '-') x[i] = dims[i]-1 - x[i];
 		}
 		return x.sum();
 	}
@@ -387,20 +530,21 @@ int main(int argc, char** argv) {
 	assert(fin);
 	string dummy;
 	assert(!(fin >> dummy));
+	initialization_done = true;
 
 	auto works = [&](P x) {
 		int v = strat->query(x);
 		repd(i) {
 			P y = x, z = x;
-			--y.ar[i];
-			++z.ar[i];
+			--y[i];
+			++z[i];
 			if (v < strat->oob_query(y)) return false;
 			if (v < strat->oob_query(z)) return false;
 		}
 		return true;
 	};
 
-	repd(i) cout << dims.ar[i] << ' ';
+	repd(i) cout << dims[i] << ' ';
 	cout << Q << endl;
 	string line;
 	vector<const char*> tokens;
@@ -424,7 +568,7 @@ int main(int argc, char** argv) {
 		if (strcmp(type, "?") && strcmp(type, "!")) reject_line("invalid format (invalid query type)", line);
 		P x;
 		repd(i) {
-			x.ar[i] = readnum(tokens[i+1], dims.ar[i], line) - 1;
+			x[i] = readnum(tokens[i+1], dims[i], line) - 1;
 		}
 
 		if (type[0] == '!') {

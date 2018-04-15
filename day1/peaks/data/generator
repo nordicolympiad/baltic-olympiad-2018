@@ -65,4 +65,8 @@ tc 3d2-corner echo $LIMS corner -+-
 tc 3d2-space echo $LIMS spaced spacefill
 tc 3d2-const echo $LIMS const
 
+# 4d?
+# group 1: dims = 30, q = 100'000
+# group 2: dims = 70, q = 100'000
+
 cleanup_programs
