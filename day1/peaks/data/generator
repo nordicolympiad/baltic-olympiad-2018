@@ -31,7 +31,7 @@ tc 1d2-peak3 echo $LIMS 1d-peak 0
 tc 1d2-peak4 echo $LIMS 1d-peak 1
 tc 1d2-peak5 echo $LIMS 1d-peak2 sqrt
 tc 1d2-peak6 echo $LIMS 1d-peak2 pw
-tc 1d2-blocks echo $LIMS 1d-blocks
+tc 1d2-blocks echo $LIMS 1d-block
 tc 1d2-random echo $LIMS random
 tc 1d2-corner1 echo $LIMS corner +++
 tc 1d2-corner2 echo $LIMS corner ---

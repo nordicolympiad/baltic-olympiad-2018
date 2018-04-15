@@ -9,6 +9,8 @@
 #include <cassert>
 #include <cstring>
 #include <cmath>
+#include <queue>
+#include <algorithm>
 using namespace std;
 
 const char* out_dir = nullptr;
