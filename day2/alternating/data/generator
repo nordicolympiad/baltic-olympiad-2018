@@ -5,39 +5,174 @@ PPATH=$(realpath ..)
 ulimit -s unlimited
 
 setup_dirs
-use_solution dummy.cpp
+use_solution mw100.cpp opt
 
-# TODO: smarter generator, more cases
-compile gen_random.py
+compile gen-random.cpp opt
+compile gen-random-monotone.cpp opt
+compile gen-random-short.cpp opt
+compile gen-feasible.cpp opt
+compile gen-feasible-monotone.cpp opt
+compile gen-all-full.cpp opt
+compile gen-alternating.cpp opt
+compile gen-overlapping.cpp opt
+compile gen-enclosing.cpp opt
+compile gen-need-enclosed.cpp opt
+compile gen-singletons.cpp opt
 
 samplegroup
-limits n=20
-# sample 1
-# sample 2
+limits n=20 m=20
+sample 1
+sample 2
 
 group group1 20
-limits n=20
-tc tiny-1 gen_random n=20 m=20
+limits n=20 m=20
+tc small-rand-1 gen-random n=13 m=6
+tc small-rand-2 gen-random n=20 m=20
+tc small-rand-3 gen-random n=18 m=5
+tc small-rand-4 gen-random n=13 m=8
+tc small-rand-5 gen-random n=20 m=2
+tc small-rand-6 gen-random-monotone n=20 m=20
+tc small-rand-short-1 gen-random-short n=20 m=20 l=3 fixed=1
+tc small-rand-short-2 gen-random-short n=16 m=20 l=4 fixed=0
+tc small-rand-short-3 gen-random-short n=20 m=20 l=6 fixed=0
+tc small-just-feasible-1 gen-feasible n=6 m=3
+tc small-just-feasible-2 gen-feasible n=20 m=20
+tc small-just-feasible-3 gen-feasible n=19 m=2
+tc small-just-feasible-4 gen-feasible n=20 m=20 m1=1
+tc small-just-feasible-monotone-1 gen-feasible-monotone n=19 m=12 m1=4
+tc small-feasible-1 gen-feasible n=20 m=6 maxmargin=1
+tc small-feasible-2 gen-feasible n=15 m=9 m1=3 m2=5 noiselength=1
+tc small-feasible-3 gen-feasible n=20 m=20 m1=14 m2=4 maxmargin=1 noiselength=0
+tc small-feasible-4 gen-feasible n=20 m=12 m1=5 m2=5 maxmargin=1 noiselength=1
+tc small-feasible-5 gen-feasible n=20 m=14 m1=6 m2=7 maxmargin=2 noiselength=0
+tc small-feasible-6 gen-feasible n=20 m=7 m1=2 m2=2 maxmargin=4 noiselength=1
+tc small-feasible-monotone-1 gen-feasible-monotone n=20 m=6 m1=2 m2=3 maxmargin=2 noiselength=1
+tc small-error-1 gen-feasible n=16 m=11 errors=1
+tc small-error-2 gen-feasible n=20 m=7 maxmargin=1 errors=1
+tc small-error-3 gen-feasible n=20 m=11 m1=7 m2=2 maxmargin=1 noiselength=1 errors=3
+tc small-error-monotone-1 gen-feasible-monotone n=20 m=14 m1=6 m2=5 maxmargin=1 noiselength=1 errors=4
+tc small-all-full-1 gen-all-full n=20 m=20
+tc small-all-full-2 gen-all-full n=20 m=2
+tc small-alternating-1 gen-alternating n=20 m=5
+tc small-alternating-2 gen-alternating n=20 m=9
+tc small-alternating-3 gen-alternating n=20 m=7 maxmargin=1
+tc small-alternating-4 gen-alternating n=20 m=8 needed=7 noiselength=0
+tc small-alternating-5 gen-alternating n=19 m=4 needed=3 noiselength=1
+tc small-overlapping-1 gen-overlapping n=20 m=10
+tc small-enclosing-1 gen-enclosing n=20 m=10 feasible=0
+tc small-enclosing-2 gen-enclosing n=20 m=12 feasible=1
+tc small-need-enclosed-1 gen-need-enclosed n=20 m=8 numparents=2
+tc small-need-enclosed-2 gen-need-enclosed n=20 m=12 numparents=3 monotone=1 maxmargin=1
+tc small-need-enclosed-3 gen-need-enclosed n=20 m=6 numparents=1 noiselength=1
+tc small-singletons-1 gen-singletons n=10 m=20
+tc small-singletons-2 gen-singletons n=9 m=17
 
 group group2 20
-limits n=100
-include_group group1
-tc small-1 gen_random n=100 m=100
+#include_group group1
+limits n=100 m=100
+tc medium-rand-1 gen-random n=100 m=100
+tc medium-rand-2 gen-random n=95 m=7
+tc medium-rand-3 gen-random n=2 m=100
+tc medium-rand-short-1 gen-random-short n=100 m=100 l=5 fixed=1
+tc medium-rand-short-2 gen-random-short n=100 m=97 l=12 fixed=0
+tc medium-just-feasible-1 gen-feasible n=100 m=100
+tc medium-just-feasible-2 gen-feasible n=100 m=4
+tc medium-just-feasible-3 gen-feasible n=97 m=13 m1=2
+tc medium-feasible-1 gen-feasible n=100 m=26 m1=5 maxmargin=1
+tc medium-feasible-2 gen-feasible n=100 m=8 m1=2 maxmargin=4
+tc medium-feasible-3 gen-feasible n=100 m=100 m1=22 m2=26 noiselength=0
+tc medium-feasible-4 gen-feasible n=100 m=12 m1=3 m2=3 noiselength=6
+tc medium-error-1 gen-feasible n=100 m=14 m1=4 errors=1
+tc medium-error-2 gen-feasible n=100 m=23 m1=10 maxmargin=2 errors=1
+tc medium-error-3 gen-feasible n=100 m=100 m1=20 m2=17 maxmargin=1 errors=8 noiselength=0
+tc medium-all-full-1 gen-all-full n=100 m=100
+tc medium-alternating-1 gen-alternating n=100 m=11
+tc medium-alternating-2 gen-alternating n=100 m=99
+tc medium-alternating-3 gen-alternating n=100 m=7 maxmargin=6
+tc medium-alternating-4 gen-alternating n=100 m=16 needed=13 maxmargin=1 noiselength=2
+tc medium-alternating-5 gen-alternating n=100 m=100 needed=99 noiselength=1
+tc medium-overlapping-1 gen-overlapping n=100 m=48
+tc medium-enclosing-1 gen-enclosing n=99 m=49 feasible=0
+tc medium-enclosing-2 gen-enclosing n=98 m=51 feasible=1
+tc medium-need-enclosed-1 gen-need-enclosed n=100 m=16 numparents=4 maxmargin=1
+tc medium-need-enclosed-2 gen-need-enclosed n=100 m=21 numparents=5 maxmargin=2 errors=1 noiselength=1
+tc medium-singletons-1 gen-singletons n=50 m=100
 
 group group3 20
-limits n=1000
-include_group group2
-tc medium-1 gen_random n=1000 m=1000
+#include_group group2
+limits n=1000 m=1000
+tc large-rand-1 gen-random n=1000 m=1000
+tc large-rand-2 gen-random n=1000 m=96
+tc large-rand-3 gen-random n=13 m=1000
+tc large-rand-4 gen-random n=1000 m=11
+tc large-rand-5 gen-random n=1000 m=2
+tc large-rand-short-1 gen-random-short n=1000 m=126 l=200 fixed=0
+tc large-rand-short-2 gen-random-short n=1000 m=1000 l=12 fixed=1
+tc large-rand-short-3 gen-random-short n=999 m=1000 l=20 fixed=0
+tc large-just-feasible-1 gen-feasible n=1000 m=1000
+tc large-just-feasible-2 gen-feasible n=1000 m=72
+tc large-just-feasible-3 gen-feasible n=1000 m=7 m1=1
+tc large-feasible-1 gen-feasible n=1000 m=372 maxmargin=4
+tc large-feasible-2 gen-feasible n=1000 m=72 m1=8 maxmargin=27
+tc large-feasible-3 gen-feasible n=1000 m=712 m1=72 m2=275 maxmargin=4 noiselength=2
+tc large-error-1 gen-feasible n=1000 m=128 m1=74 errors=1
+tc large-error-2 gen-feasible n=1000 m=37 m1=3 errors=3 maxmargin=5
+tc large-error-3 gen-feasible n=1000 m=859 m1=400 m2=398 errors=25 maxmargin=7 noiselength=2
+tc large-all-full-1 gen-all-full n=1000 m=1000
+tc large-alternating-1 gen-alternating n=1000 m=957
+tc large-alternating-2 gen-alternating n=998 m=31
+tc large-alternating-3 gen-alternating n=1000 m=82 needed=77 maxmargin=3 noiselength=3
+tc large-alternating-4 gen-alternating n=1000 m=133 needed=131 maxmargin=1
+tc large-overlapping-1 gen-overlapping n=1000 m=500
+tc large-enclosing-1 gen-enclosing n=1000 m=492 feasible=0
+tc large-enclosing-2 gen-enclosing n=1000 m=502 feasible=1
+tc large-need-enclosed-1 gen-need-enclosed n=1000 m=12 numparents=3
+tc large-singletons-1 gen-singletons n=500 m=1000
 
 group group4 20
-limits n=1e5 nowrap=1
-tc nowrap-1 gen_random n=4000 m=100000 nowrap=1
-tc nowrap-2 gen_random n=100000 m=4000 nowrap=1
+limits n=100000 m=100000 nowrap=1
+tc huge-rand-monotone-1 gen-random-monotone n=100000 m=100000
+tc huge-rand-monotone-2 gen-random-monotone n=5784 m=99999
+tc huge-rand-monotone-3 gen-random-monotone n=100000 m=5783
+tc huge-just-feasible-monotone-1 gen-feasible-monotone n=100000 m=100000
+tc huge-just-feasible-monotone-2 gen-feasible-monotone n=100000 m=73821 m1=17823
+tc huge-just-feasible-monotone-3 gen-feasible-monotone n=100000 m=89589 m1=1
+tc huge-feasible-monotone-1 gen-feasible-monotone n=100000 m=89589 m1=10000 m2=78493 noiselength=1
+tc huge-feasible-monotone-2 gen-feasible-monotone n=100000 m=2738 m1=894 m2=1000 maxmargin=35 noiselength=20
+tc huge-feasible-monotone-3 gen-feasible-monotone n=95001 m=895 m1=24 m2=204 maxmargin=101 noiselength=112
+tc huge-error-monotone-1 gen-feasible-monotone n=100000 m=95300 errors=1
+tc huge-error-monotone-2 gen-feasible-monotone n=100000 m=100000 m1=40000 m2=40000 errors=10 maxmargin=5 noiselength=12
+tc huge-all-full-monotone-1 gen-all-full n=100000 m=100000
+tc huge-all-full-monotone-2 gen-all-full n=100000 m=2
+tc huge-overlapping-monotone-1 gen-overlapping n=100000 m=50000
+tc huge-enclosing-monotone-1 gen-enclosing n=100000 m=50000 feasible=0
+tc huge-enclosing-monotone-2 gen-enclosing n=100000 m=50002 feasible=1
+tc huge-need-enclosed-monotone-1 gen-need-enclosed n=100000 m=13 numparents=3 monotone=1 noiselength=1
+tc huge-need-enclosed-monotone-2 gen-need-enclosed n=100000 m=26 numparents=6 maxmargin=12 monotone=1 noiselength=17
+tc huge-need-enclosed-monotone-3 gen-need-enclosed n=100000 m=100000 monotone=1
+tc huge-singletons-monotone-1 gen-singletons n=50000 m=100000
 
 group group5 20
-limits n=1e5
-include_group group3
-include_group group4
-tc large-1 gen_random n=100000 m=100000
+#include_group group3
+#include_group group4
+limits n=100000 m=100000
+tc huge-rand-1 gen-random n=100000 m=100000
+tc huge-rand-2 gen-random n=100000 m=27428
+tc huge-rand-3 gen-random n=100000 m=12
+tc huge-rand-short-1 gen-random-short n=100000 m=57835 l=20 fixed=1
+tc huge-rand-short-2 gen-random-short n=100000 m=78342 l=33 fixed=0
+tc huge-rand-short-3 gen-random-short n=99999 m=1001 l=1985 fixed=0
+tc huge-just-feasible-1 gen-feasible n=100000 m=78324
+tc huge-just-feasible-2 gen-feasible n=100000 m=47395 m1=4780
+tc huge-feasible-1 gen-feasible n=100000 m=27813 maxmargin=2
+tc huge-feasible-2 gen-feasible n=100000 m=183 m1=72 m2=85 maxmargin=278 noiselength=84
+tc huge-feasible-3 gen-feasible n=100000 m=8492 m1=1827 m2=2718 maxmargin=20 noiselength=9
+tc huge-error-1 gen-feasible n=100000 m=5000 errors=1
+tc huge-error-2 gen-feasible n=100000 m=35938 m1=20000 m2=15935 errors=2 maxmargin=2 noiselength=127
+tc huge-alternating-1 gen-alternating n=100000 m=83
+tc huge-alternating-2 gen-alternating n=100000 m=71823
+tc huge-alternating-3 gen-alternating n=100000 m=44825 needed=44819 noiselength=8
+tc huge-need-enclosed-1 gen-need-enclosed n=100000 m=75 numparents=10 maxmargin=104 noiselength=8
+tc huge-need-enclosed-2 gen-need-enclosed n=100000 m=248
 
 cleanup_programs

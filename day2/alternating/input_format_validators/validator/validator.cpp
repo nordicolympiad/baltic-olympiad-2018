@@ -2,9 +2,10 @@
 
 void run() {
 	int nlim = Arg("n");
+	int mlim = Arg("m");
 	int n = Int(2, nlim);
 	Space();
-	int m = Int(2, nlim);
+	int m = Int(2, mlim);
 	Endl();
 
 	int nowrap = Arg("nowrap", 0);
