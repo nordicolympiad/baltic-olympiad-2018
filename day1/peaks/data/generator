@@ -57,6 +57,7 @@ tc 3d1-random echo $LIMS random
 tc 3d1-corner echo $LIMS corner ++-
 tc 3d1-space echo $LIMS spaced spacefill
 tc 3d1-const echo $LIMS const
+tc 3d1-walk echo $LIMS walk
 
 group group6 30
 params 800 800 800 300000

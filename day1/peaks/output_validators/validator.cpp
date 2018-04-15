@@ -168,6 +168,15 @@ ostream& operator<<(ostream& os, const P& p) {
 	return os;
 }
 
+struct Mat {
+	vector<vector<vector<int>>> m;
+	Mat(P dims) : m(dims[0], vector<vector<int>>(dims[1], vector<int>(dims[2]))) {}
+	int operator[](P x) const { return m[x[0]][x[1]][x[2]]; }
+	int& operator[](P x) { return m[x[0]][x[1]][x[2]]; }
+	template<class F>
+	void each(F f) { for (auto& a : m) for (auto& b : a) for (auto& c : b) f(c); }
+};
+
 struct Strat {
 	P dims;
 	Strat(P dims) : dims(dims) {
@@ -181,7 +190,7 @@ struct Strat {
 		return query(x);
 	}
 	bool oob(P x) const {
-		return !(P::K(0) <= x && x < dims);
+		return !(P::Z <= x && x < dims);
 	}
 };
 Strat* readStrat(P dims, istream& cin);
@@ -389,6 +398,103 @@ struct SpaceFillStrat : Strat {
 	long long maxval() const override { return dims.prod(); }
 };
 
+struct RandomWalkStrat : Strat {
+	Mat mat;
+	uint64_t seed;
+	const int MAX_VAL = 400000000;
+	RandomWalkStrat(P dims) : Strat(dims), mat(dims) {
+		seed = rand64();
+		walk();
+	}
+	int query(P x) override {
+		return mat[x];
+	}
+	long long maxval() const override { return MAX_VAL; }
+
+	int adj(P p) const {
+		assert(!mat[p]);
+		int res = 0;
+		repd(i) for (int by = -1; by <= 1; by += 2) {
+			P q = p;
+			q[i] += by;
+			if (!oob(q) && mat[q]) res++;
+		}
+		return res;
+	}
+
+	void walk() {
+		P p = P::Z;
+		repd(i) p[i] = rand() % dims[i];
+		mat[p] = MAX_VAL;
+		// aim: length ~N^(D-1), i.e. ~N^(D-2) segments, each of length ~N
+		const int its = (int)pow(dims[0], P::DIM - 2);
+		const int noise = (int)(dims[0] * 0.3);
+		vector<int> seg;
+		vector<P> history;
+		history.push_back(p);
+		for (int i = 0; i < its; i++) {
+			P q = P::Z;
+			repd(i) q[i] = rand() % dims[i];
+			seg.clear();
+			repd(i) {
+				int dif = q[i] - p[i];
+				for (int j = 0; j < abs(dif); j++) {
+					if (dif > 0) seg.push_back(i);
+					else seg.push_back(~i);
+				}
+				for (int j = 0; j < noise; j++) {
+					seg.push_back(i);
+					seg.push_back(~i);
+				}
+			}
+			random_shuffle(seg.begin(), seg.end(), [](int x) { return rand() % x; });
+			for (int mv : seg) {
+				int by = (mv >= 0 ? 1 : -1);
+				mv = (mv >= 0 ? mv : ~mv);
+				P p2 = p;
+				p2[mv] += by;
+				if (oob(p2) || mat[p2] || adj(p2) > 1) {
+					// Revert one step even further back, so we don't end up
+					// trapped in a simple corner. (We could extend this to
+					// more complex corners by reverting more than one step.
+					// Or by adding connectivity checks, but that's annoying.)
+					if ((int)history.size() > 1) {
+						assert(history.back() == p);
+						mat[p] = 0;
+						history.pop_back();
+						p = history.back();
+					}
+					continue;
+				}
+				p = p2;
+				mat[p] = MAX_VAL - (int)history.size();
+				history.push_back(p);
+			}
+		}
+
+		assert(mat[p]);
+		queue<P> qu;
+		qu.push(p);
+		while (!qu.empty()) {
+			p = qu.front();
+			qu.pop();
+			int di = mat[p];
+			repd(i) for (int by = -1; by <= 1; by += 2) {
+				P q = p;
+				q[i] += by;
+				if (oob(q) || mat[q]) continue;
+				mat[q] = di - 1;
+				qu.push(q);
+			}
+		}
+
+		// Path avoidance should ensure that everything is reachable from the end point.
+		int mi = MAX_VAL;
+		mat.each([&](int x) { mi = min(mi, x); });
+		assert(mi > 0);
+	}
+};
+
 // Unimodal function, which is piecewise linear and discontinuous at its peak.
 struct OneDimPeakStrat : Strat {
 	int pivot, leftBase, rightBase, N;
@@ -505,6 +611,7 @@ Strat* readStrat(P dims, istream& cin) {
 	if (str == "spaced") return new SpacedPathStrat(dims, cin);
 	if (str == "pad") return new PadStrat(dims, cin);
 	if (str == "const") return new ConstStrat(dims);
+	if (str == "walk") return new RandomWalkStrat(dims);
 	if (str == "1d-peak") return new OneDimPeakStrat(dims, cin);
 	if (str == "1d-peak2") return new OneDimPeakStrat2(dims, cin);
 	if (str == "1d-block") return new OneDimBlocksStrat(dims, cin);
