@@ -34,10 +34,10 @@ int main(){
 
 	int V = n*m*k;
 
-	int samples = sqrt( dims * 7.5 * V ); // should use > 2*samples queries with probability <= exp(-7.5) = 1/1800
+	int samples = (int)sqrt( dims * 7.5 * V ); // should use > 2*samples queries with probability <= exp(-7.5) = 1/1800
 
 	int record = 0;
-	int x, y, z;
+	int x=-1, y=-1, z=-1;
 	for(int i=0; i<samples; ++i){
 		
 		int a = 1+rand()%n,
