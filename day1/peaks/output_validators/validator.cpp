@@ -16,14 +16,18 @@ using namespace std;
 
 const char* out_dir = nullptr;
 
-[[noreturn]]
-void reject_raw(const string& msg) {
+void judge_message(const string& msg) {
 	cerr << msg << endl;
 	if (out_dir) {
 		string fname = out_dir + string("/judgemessage.txt");
 		ofstream fout(fname.c_str());
 		fout << msg << endl;
 	}
+}
+
+[[noreturn]]
+void reject_raw(const string& msg) {
+	judge_message(msg);
 	exit(43);
 }
 
@@ -35,7 +39,8 @@ void reject_line(const char* msg, string line) {
 }
 
 [[noreturn]]
-void accept() {
+void accept(const string& msg) {
+	judge_message(msg);
 	exit(42);
 }
 
@@ -665,6 +670,7 @@ int main(int argc, char** argv) {
 	cout << Q << endl;
 	string line;
 	vector<const char*> tokens;
+	int usedq = 0;
 	for (;;) {
 		if (!getline(cin, line)) reject_raw("eof");
 
@@ -689,11 +695,11 @@ int main(int argc, char** argv) {
 		}
 
 		if (type[0] == '!') {
-			if (works(x)) accept();
+			if (works(x)) accept("ok, " + to_string(usedq) + "/" + to_string(Q) + " queries");
 			else reject_raw("not a local maximum");
 		}
 
-		if (!Q--) reject_line("too many queries", line);
+		if (++usedq > Q) reject_line("too many queries", line);
 		int r = strat->query(x) + 1;
 		assert(1 <= r && r <= 1000000000);
 		cout << r << endl;
