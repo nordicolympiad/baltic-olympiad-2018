@@ -199,7 +199,7 @@ struct Mat {
 struct HashMat {
 	unordered_map<int, int> m;
 	P dims;
-	HashMat(P dims) : m(dims.prod() / dims[0] * 5), dims(dims) {
+	HashMat(P dims) : m(dims.prod() / dims[0] * 10), dims(dims) {
 		assert(dims.prod() <= INT_MAX);
 	}
 	int get(P x) const { return m.at(x.irepr(dims)); }
@@ -301,7 +301,7 @@ struct RandomStrat : Strat {
 struct SpaceFillStrat : Strat {
 	uint64_t seed;
 	vector<P> pcands;
-	SpaceFillStrat(P dims) : Strat(dims) {
+	SpaceFillStrat(P dims, istream& cin) : Strat(dims) {
 		seed = rand64();
 	}
 	int query(P x) override {
@@ -429,12 +429,19 @@ struct SpaceFillStrat : Strat {
 	long long maxval() const override { return dims.prod(); }
 };
 
+// Create a random walk towards the end, and everything else leading up to the
+// start of the walk. Params: noiseq (~0.3, controls jitter in walk),
+// its (~N^(D-2), number of segments).
 struct RandomWalkStrat : Strat {
 	HashMat mat;
 	P startPoint;
 	int startPointVal;
 	const int MAX_VAL = 400000000;
-	RandomWalkStrat(P dims) : Strat(dims), mat(dims) {
+	double noiseq;
+	int its;
+	RandomWalkStrat(P dims, istream& cin) : Strat(dims), mat(dims) {
+		assert(dims.dimension() >= 3);
+		cin >> noiseq >> its;
 		walk();
 	}
 	int query(P x) override {
@@ -444,12 +451,11 @@ struct RandomWalkStrat : Strat {
 	long long maxval() const override { return MAX_VAL; }
 
 	int adj(P p) const {
-		assert(!mat.has(p));
 		int res = 0;
 		repd(i) for (int by = -1; by <= 1; by += 2) {
 			P q = p;
 			q[i] += by;
-			if (!oob(q) && mat.has(q)) res++;
+			if (mat.has(q)) res++;
 		}
 		return res;
 	}
@@ -458,9 +464,8 @@ struct RandomWalkStrat : Strat {
 		P p = P::Z;
 		repd(i) p[i] = rand() % dims[i];
 		mat.set(p, MAX_VAL);
-		// aim: length ~N^(D-1), i.e. ~N^(D-2) segments, each of length ~N
-		const int its = (int)pow(dims[0], P::DIM - 2);
-		const int noise = (int)(dims[0] * 0.3);
+		const int noise = (int)(dims[0] * noiseq);
+		int reverts = 0;
 		vector<int> seg;
 		vector<P> history;
 		history.push_back(p);
@@ -496,6 +501,7 @@ struct RandomWalkStrat : Strat {
 						history.pop_back();
 						p = history.back();
 					}
+					reverts++;
 					continue;
 				}
 				p = p2;
@@ -507,6 +513,7 @@ struct RandomWalkStrat : Strat {
 		assert(mat.has(p));
 		startPoint = p;
 		startPointVal = mat.get(p);
+		cerr << "generated path of length " << history.size() << ", " << reverts << " reverts" << endl;
 	}
 };
 
@@ -621,12 +628,12 @@ struct CornerStrat : Strat {
 Strat* readStrat(P dims, istream& cin) {
 	string str;
 	cin >> str;
+	if (str == "const") return new ConstStrat(dims);
 	if (str == "random") return new RandomStrat(dims);
-	if (str == "spacefill") return new SpaceFillStrat(dims);
+	if (str == "spacefill") return new SpaceFillStrat(dims, cin);
 	if (str == "spaced") return new SpacedPathStrat(dims, cin);
 	if (str == "pad") return new PadStrat(dims, cin);
-	if (str == "const") return new ConstStrat(dims);
-	if (str == "walk") return new RandomWalkStrat(dims);
+	if (str == "walk") return new RandomWalkStrat(dims, cin);
 	if (str == "1d-peak") return new OneDimPeakStrat(dims, cin);
 	if (str == "1d-peak2") return new OneDimPeakStrat2(dims, cin);
 	if (str == "1d-block") return new OneDimBlocksStrat(dims, cin);
