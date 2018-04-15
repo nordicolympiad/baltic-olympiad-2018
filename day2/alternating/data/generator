@@ -25,47 +25,47 @@ sample 1
 sample 2
 
 group group1 20
-limits n=20 m=20
+limits n=15 m=15
 tc small-rand-1 gen-random n=13 m=6
-tc small-rand-2 gen-random n=20 m=20
-tc small-rand-3 gen-random n=18 m=5
+tc small-rand-2 gen-random n=15 m=15
+tc small-rand-3 gen-random n=13 m=5
 tc small-rand-4 gen-random n=13 m=8
-tc small-rand-5 gen-random n=20 m=2
-tc small-rand-6 gen-random-monotone n=20 m=20
-tc small-rand-short-1 gen-random-short n=20 m=20 l=3 fixed=1
-tc small-rand-short-2 gen-random-short n=16 m=20 l=4 fixed=0
-tc small-rand-short-3 gen-random-short n=20 m=20 l=6 fixed=0
+tc small-rand-5 gen-random n=15 m=2
+tc small-rand-6 gen-random-monotone n=15 m=15
+tc small-rand-short-1 gen-random-short n=15 m=15 l=3 fixed=1
+tc small-rand-short-2 gen-random-short n=12 m=15 l=4 fixed=0
+tc small-rand-short-3 gen-random-short n=15 m=15 l=6 fixed=0
 tc small-just-feasible-1 gen-feasible n=6 m=3
-tc small-just-feasible-2 gen-feasible n=20 m=20
-tc small-just-feasible-3 gen-feasible n=19 m=2
-tc small-just-feasible-4 gen-feasible n=20 m=20 m1=1
-tc small-just-feasible-monotone-1 gen-feasible-monotone n=19 m=12 m1=4
-tc small-feasible-1 gen-feasible n=20 m=6 maxmargin=1
-tc small-feasible-2 gen-feasible n=15 m=9 m1=3 m2=5 noiselength=1
-tc small-feasible-3 gen-feasible n=20 m=20 m1=14 m2=4 maxmargin=1 noiselength=0
-tc small-feasible-4 gen-feasible n=20 m=12 m1=5 m2=5 maxmargin=1 noiselength=1
-tc small-feasible-5 gen-feasible n=20 m=14 m1=6 m2=7 maxmargin=2 noiselength=0
-tc small-feasible-6 gen-feasible n=20 m=7 m1=2 m2=2 maxmargin=4 noiselength=1
-tc small-feasible-monotone-1 gen-feasible-monotone n=20 m=6 m1=2 m2=3 maxmargin=2 noiselength=1
-tc small-error-1 gen-feasible n=16 m=11 errors=1
-tc small-error-2 gen-feasible n=20 m=7 maxmargin=1 errors=1
-tc small-error-3 gen-feasible n=20 m=11 m1=7 m2=2 maxmargin=1 noiselength=1 errors=3
-tc small-error-monotone-1 gen-feasible-monotone n=20 m=14 m1=6 m2=5 maxmargin=1 noiselength=1 errors=4
-tc small-all-full-1 gen-all-full n=20 m=20
-tc small-all-full-2 gen-all-full n=20 m=2
-tc small-alternating-1 gen-alternating n=20 m=5
-tc small-alternating-2 gen-alternating n=20 m=9
-tc small-alternating-3 gen-alternating n=20 m=7 maxmargin=1
-tc small-alternating-4 gen-alternating n=20 m=8 needed=7 noiselength=0
-tc small-alternating-5 gen-alternating n=19 m=4 needed=3 noiselength=1
-tc small-overlapping-1 gen-overlapping n=20 m=10
-tc small-enclosing-1 gen-enclosing n=20 m=10 feasible=0
-tc small-enclosing-2 gen-enclosing n=20 m=12 feasible=1
-tc small-need-enclosed-1 gen-need-enclosed n=20 m=8 numparents=2
-tc small-need-enclosed-2 gen-need-enclosed n=20 m=12 numparents=3 monotone=1 maxmargin=1
-tc small-need-enclosed-3 gen-need-enclosed n=20 m=6 numparents=1 noiselength=1
-tc small-singletons-1 gen-singletons n=10 m=20
-tc small-singletons-2 gen-singletons n=9 m=17
+tc small-just-feasible-2 gen-feasible n=15 m=15
+tc small-just-feasible-3 gen-feasible n=14 m=2
+tc small-just-feasible-4 gen-feasible n=15 m=15 m1=1
+tc small-just-feasible-monotone-1 gen-feasible-monotone n=14 m=9 m1=3
+tc small-feasible-1 gen-feasible n=15 m=6 maxmargin=1
+tc small-feasible-2 gen-feasible n=11 m=7 m1=2 m2=4 noiselength=1
+tc small-feasible-3 gen-feasible n=15 m=15 m1=11 m2=2 maxmargin=1 noiselength=0
+tc small-feasible-4 gen-feasible n=15 m=10 m1=4 m2=4 maxmargin=1 noiselength=1
+tc small-feasible-5 gen-feasible n=15 m=10 m1=4 m2=5 maxmargin=2 noiselength=0
+tc small-feasible-6 gen-feasible n=15 m=6 m1=2 m2=2 maxmargin=4 noiselength=1
+tc small-feasible-monotone-1 gen-feasible-monotone n=15 m=6 m1=2 m2=3 maxmargin=2 noiselength=1
+tc small-error-1 gen-feasible n=15 m=9 errors=1
+tc small-error-2 gen-feasible n=15 m=7 maxmargin=1 errors=1
+tc small-error-3 gen-feasible n=15 m=10 m1=6 m2=2 maxmargin=1 noiselength=1 errors=3
+tc small-error-monotone-1 gen-feasible-monotone n=15 m=11 m1=5 m2=3 maxmargin=1 noiselength=1 errors=4
+tc small-all-full-1 gen-all-full n=15 m=15
+tc small-all-full-2 gen-all-full n=15 m=2
+tc small-alternating-1 gen-alternating n=15 m=5
+tc small-alternating-2 gen-alternating n=15 m=9
+tc small-alternating-3 gen-alternating n=15 m=7 maxmargin=1
+tc small-alternating-4 gen-alternating n=15 m=8 needed=7 noiselength=0
+tc small-alternating-5 gen-alternating n=14 m=4 needed=3 noiselength=1
+tc small-overlapping-1 gen-overlapping n=14 m=7
+tc small-enclosing-1 gen-enclosing n=14 m=7 feasible=0
+tc small-enclosing-2 gen-enclosing n=15 m=10 feasible=1
+tc small-need-enclosed-1 gen-need-enclosed n=15 m=8 numparents=2
+tc small-need-enclosed-2 gen-need-enclosed n=15 m=12 numparents=3 monotone=1 maxmargin=1
+tc small-need-enclosed-3 gen-need-enclosed n=15 m=6 numparents=1 noiselength=1
+tc small-singletons-1 gen-singletons n=7 m=15
+tc small-singletons-2 gen-singletons n=6 m=12
 
 group group2 20
 #include_group group1
