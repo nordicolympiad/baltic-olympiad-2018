@@ -5,12 +5,13 @@
 #include <string>
 #include <vector>
 #include <array>
-#include <signal.h>
 #include <cassert>
 #include <cstring>
 #include <cmath>
-#include <queue>
 #include <algorithm>
+#include <unordered_map>
+#include <climits>
+#include <signal.h>
 using namespace std;
 
 const char* out_dir = nullptr;
@@ -117,6 +118,11 @@ struct P {
 		repd(i) ret += ar[i]&1;
 		return ret;
 	}
+	int abssum() const {
+		int sum = 0;
+		repd(i) sum += abs(ar[i]);
+		return sum;
+	}
 	int sum() const {
 		int sum = 0;
 		repd(i) sum += ar[i];
@@ -132,10 +138,14 @@ struct P {
 		repd(i) if (ar[i] != 1) dim = i+1;
 		return dim;
 	}
-	uint64_t hash(P dims, uint64_t seed) const {
+	uint64_t repr(P dims) const {
 		uint64_t r = 0;
 		repd(i) r = r * dims.ar[i] + ar[i];
-		return Hash(r, seed);
+		return r;
+	}
+	int irepr(P dims) const { return (int)repr(dims); }
+	uint64_t hash(P dims, uint64_t seed) const {
+		return Hash(repr(dims), seed);
 	}
 };
 P P::Z = P::K(0);
@@ -173,10 +183,24 @@ ostream& operator<<(ostream& os, const P& p) {
 struct Mat {
 	vector<vector<vector<int>>> m;
 	Mat(P dims) : m(dims[0], vector<vector<int>>(dims[1], vector<int>(dims[2]))) {}
-	int operator[](P x) const { return m[x[0]][x[1]][x[2]]; }
-	int& operator[](P x) { return m[x[0]][x[1]][x[2]]; }
+	int get(P x) const { return m[x[0]][x[1]][x[2]]; }
+	void set(P x, int val) { m[x[0]][x[1]][x[2]] = val; }
+	void unset(P x) { set(x, 0); }
+	bool has(P x) const { return get(x) != 0; }
 	template<class F>
 	void each(F f) { for (auto& a : m) for (auto& b : a) for (auto& c : b) f(c); }
+};
+
+struct HashMat {
+	unordered_map<int, int> m;
+	P dims;
+	HashMat(P dims) : m(dims.prod() / dims[0] * 5), dims(dims) {
+		assert(dims.prod() <= INT_MAX);
+	}
+	int get(P x) const { return m.at(x.irepr(dims)); }
+	void set(P x, int val) { m[x.irepr(dims)] = val; }
+	void unset(P x) { m.erase(x.irepr(dims)); }
+	bool has(P x) const { return m.count(x.irepr(dims)); }
 };
 
 struct Strat {
@@ -329,7 +353,7 @@ struct SpaceFillStrat : Strat {
 		}
 
 		assert(cands > 0);
-		int pos = rnd % cands;
+		int pos = (int)(rnd % (unsigned)cands);
 		rnd >>= 32;
 
 		int dim = -1;
@@ -401,25 +425,26 @@ struct SpaceFillStrat : Strat {
 };
 
 struct RandomWalkStrat : Strat {
-	Mat mat;
-	uint64_t seed;
+	HashMat mat;
+	P startPoint;
+	int startPointVal;
 	const int MAX_VAL = 400000000;
 	RandomWalkStrat(P dims) : Strat(dims), mat(dims) {
-		seed = rand64();
 		walk();
 	}
 	int query(P x) override {
-		return mat[x];
+		if (mat.has(x)) return mat.get(x);
+		return startPointVal - (x - startPoint).abssum();
 	}
 	long long maxval() const override { return MAX_VAL; }
 
 	int adj(P p) const {
-		assert(!mat[p]);
+		assert(!mat.has(p));
 		int res = 0;
 		repd(i) for (int by = -1; by <= 1; by += 2) {
 			P q = p;
 			q[i] += by;
-			if (!oob(q) && mat[q]) res++;
+			if (!oob(q) && mat.has(q)) res++;
 		}
 		return res;
 	}
@@ -427,7 +452,7 @@ struct RandomWalkStrat : Strat {
 	void walk() {
 		P p = P::Z;
 		repd(i) p[i] = rand() % dims[i];
-		mat[p] = MAX_VAL;
+		mat.set(p, MAX_VAL);
 		// aim: length ~N^(D-1), i.e. ~N^(D-2) segments, each of length ~N
 		const int its = (int)pow(dims[0], P::DIM - 2);
 		const int noise = (int)(dims[0] * 0.3);
@@ -455,45 +480,28 @@ struct RandomWalkStrat : Strat {
 				mv = (mv >= 0 ? mv : ~mv);
 				P p2 = p;
 				p2[mv] += by;
-				if (oob(p2) || mat[p2] || adj(p2) > 1) {
+				if (oob(p2) || mat.has(p2) || adj(p2) > 1) {
 					// Revert one step even further back, so we don't end up
 					// trapped in a simple corner. (We could extend this to
 					// more complex corners by reverting more than one step.
 					// Or by adding connectivity checks, but that's annoying.)
 					if ((int)history.size() > 1) {
 						assert(history.back() == p);
-						mat[p] = 0;
+						mat.unset(p);
 						history.pop_back();
 						p = history.back();
 					}
 					continue;
 				}
 				p = p2;
-				mat[p] = MAX_VAL - (int)history.size();
+				mat.set(p, MAX_VAL - (int)history.size());
 				history.push_back(p);
 			}
 		}
 
-		assert(mat[p]);
-		queue<P> qu;
-		qu.push(p);
-		while (!qu.empty()) {
-			p = qu.front();
-			qu.pop();
-			int di = mat[p];
-			repd(i) for (int by = -1; by <= 1; by += 2) {
-				P q = p;
-				q[i] += by;
-				if (oob(q) || mat[q]) continue;
-				mat[q] = di - 1;
-				qu.push(q);
-			}
-		}
-
-		// Path avoidance should ensure that everything is reachable from the end point.
-		int mi = MAX_VAL;
-		mat.each([&](int x) { mi = min(mi, x); });
-		assert(mi > 0);
+		assert(mat.has(p));
+		startPoint = p;
+		startPointVal = mat.get(p);
 	}
 };
 
@@ -572,7 +580,7 @@ struct OneDimBlocksStrat : Strat {
 		if (x >= N-2400) return N-x;
 		const int BS = 1000;
 		int block = x / BS, ind = x % BS;
-		return Hash(block, seed) % 100000000 + 30000 * ind;
+		return (int)(Hash(block, seed) % 100000000U) + 30000 * ind;
 	}
 	long long maxval() const override { return 100000000 + 30000 * 1000; }
 };
@@ -664,7 +672,7 @@ int main(int argc, char** argv) {
 		line += ' ';
 		tokens.clear();
 		size_t ind = 0;
-		while (ind != (int)line.size()) {
+		while (ind != line.size()) {
 			size_t ind2 = line.find(' ', ind);
 			assert(ind2 != string::npos);
 			line[ind2] = '\0';
