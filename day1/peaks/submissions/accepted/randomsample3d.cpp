@@ -50,44 +50,49 @@ int main(){
 			x = a, y = b, z = c;
 		}
 	}
+
+	cerr << "sampled " << samples << ", now expecting walk of length ~" << (V / samples) << endl;
 	
+	int walked = 0;
 	vector<bool> tried(6, false);
-	foo:
+	while (true) {
 
-	int left = 0;
-	for(int i=0; i<6; ++i)
-		left += (int)!tried[i];
+		int left = 0;
+		for(int i=0; i<6; ++i)
+			left += (int)!tried[i];
 
-	if(left == 0){
-		cout << "! " << x << ' ' << y << ' ' << z << endl;
-		return 0;
-	}
-	
-	int r = rand() % left;
-
-	for(int i=0; i<6; ++i) if(!tried[i]){
-		if(r == 0){
-			int x1 = x + dx[i],
-			    y1 = y + dy[i],
-			    z1 = z + dz[i];
-
-			int res = value(x1, y1, z1);
-
-			if(res > record){
-				record = res;
-				x = x1;
-				y = y1;
-				z = z1;
-				for(int j=0; j<6; ++j)
-					tried[j] = false;
-				tried[i ^ 1] = true;
-				goto foo;
-			} else {
-				tried[i] = true;
-				goto foo;
-			}
+		if(left == 0){
+			cerr << "walked " << walked << endl;
+			cout << "! " << x << ' ' << y << ' ' << z << endl;
+			return 0;
 		}
-		--r;
-	}
+		
+		int r = rand() % left;
 
+		for(int i=0; i<6; ++i) if(!tried[i]){
+			if(r == 0){
+				int x1 = x + dx[i],
+					y1 = y + dy[i],
+					z1 = z + dz[i];
+
+				int res = value(x1, y1, z1);
+
+				if(res > record){
+					record = res;
+					x = x1;
+					y = y1;
+					z = z1;
+					for(int j=0; j<6; ++j)
+						tried[j] = false;
+					tried[i ^ 1] = true;
+					walked++;
+					break;
+				} else {
+					tried[i] = true;
+					break;
+				}
+			}
+			--r;
+		}
+	}
 }
