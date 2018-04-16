@@ -667,11 +667,37 @@ struct CornerStrat : Strat {
 	long long maxval() const override { return dims.sum(); }
 };
 
+// For debugging.
+struct PrintStrat : Strat {
+	Strat* inner;
+	PrintStrat(P dims, istream& cin) : Strat(dims) {
+		inner = readStrat(dims, cin);
+		static_assert(P::DIM == 3, "");
+		P p;
+		int &x = p[0], &y = p[1], &z = p[2];
+		for (x = 0; x < dims[0]; x++) {
+			for (y = 0; y < dims[1]; y++) {
+				for (z = 0; z < dims[2]; z++) {
+					int v = inner->query(p);
+					cout << v << ' ';
+				}
+				if (dims.dimension() >= 3) cerr << endl;
+			}
+			if (dims.dimension() >= 2) cerr << endl;
+		}
+		cerr << endl;
+		exit(0);
+	}
+	int query(P) override { assert(0); }
+	long long maxval() const override { assert(0); }
+};
+
 Strat* readStrat(P dims, istream& cin) {
 	string str;
 	cin >> str;
 	if (str == "const") return new ConstStrat(dims);
 	if (str == "random") return new RandomStrat(dims);
+	if (str == "print") return new PrintStrat(dims, cin);
 	if (str == "spacefill") return new SpaceFillStrat(dims, cin);
 	if (str == "spaced") return new SpacedStrat(dims, cin);
 	if (str == "pad") return new PadStrat(dims, cin);
