@@ -530,6 +530,35 @@ struct RandomWalkStrat : Strat {
 	}
 };
 
+// Create a spiral, with a maximum somewhere on it. Use together with SpacedStrat.
+struct SpiralStrat : Strat {
+	int pivot;
+	const int MAX_VAL = 400000000;
+	SpiralStrat(P dims, istream& cin) : Strat(dims) {
+		assert(dims.dimension() == 2);
+		assert(dims.prod() < MAX_VAL);
+		assert(dims[0] == dims[1]);
+		pivot = rand() % dims.prod();
+	}
+	int query(P x) override {
+		int N = dims[0];
+		int layer = min({x[0], N-1 - x[0], x[1], N-1 - x[1]});
+		int sqs = N - layer * 2;
+		int outer = N*N - sqs*sqs;
+		--sqs;
+		int ind;
+		if (x[0] == layer) ind = x[1];
+		else if (N-1 - x[1] == layer) ind = x[0] + sqs;
+		else if (N-1 - x[0] == layer) ind = N-1 - x[1] + 2*sqs;
+		else ind = N-1 - x[0] + 3*sqs;
+		ind += outer - layer;
+		assert(0 <= ind);
+		assert(ind < dims.prod());
+		return MAX_VAL - abs(ind - pivot);
+	}
+	long long maxval() const override { return MAX_VAL; }
+};
+
 // Unimodal function, which is piecewise linear and discontinuous at its peak.
 struct OneDimPeakStrat : Strat {
 	int pivot, leftBase, rightBase, N;
@@ -646,6 +675,7 @@ Strat* readStrat(P dims, istream& cin) {
 	if (str == "spacefill") return new SpaceFillStrat(dims, cin);
 	if (str == "spaced") return new SpacedStrat(dims, cin);
 	if (str == "pad") return new PadStrat(dims, cin);
+	if (str == "spiral") return new SpiralStrat(dims, cin);
 	if (str == "walk") return new RandomWalkStrat(dims, cin);
 	if (str == "1d-peak") return new OneDimPeakStrat(dims, cin);
 	if (str == "1d-peak2") return new OneDimPeakStrat2(dims, cin);
