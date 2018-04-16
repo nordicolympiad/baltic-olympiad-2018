@@ -245,6 +245,7 @@ struct AddStrat : Strat {
 struct SpacedStrat : Strat {
 	Strat* inner;
 	SpacedStrat(P dims, istream& cin) : Strat(dims) {
+		assert(dims.count_odd() == P::DIM);
 		inner = readStrat((dims+P::K(2)).idiv(2), cin);
 	}
 	int query(P p) override {
@@ -267,9 +268,18 @@ struct SpacedStrat : Strat {
 struct PadStrat : Strat {
 	Strat* inner;
 	P lo, hi;
+	struct SpacedT{} static Spaced;
 	PadStrat(P dims, istream& cin) : Strat(dims) {
 		cin >> lo >> hi;
 		inner = readStrat(dims - lo - hi, cin);
+	}
+	PadStrat(P dims, istream& cin, SpacedT) : Strat(dims) {
+		hi = P::Z;
+		lo = P::Z;
+		repd(i) if (dims[i] % 2 == 0) {
+			lo[i]++;
+		}
+		inner = new SpacedStrat(dims - lo - hi, cin);
 	}
 	int query(P x) override {
 		assert(!oob(x));
@@ -641,6 +651,7 @@ Strat* readStrat(P dims, istream& cin) {
 	if (str == "1d-peak2") return new OneDimPeakStrat2(dims, cin);
 	if (str == "1d-block") return new OneDimBlocksStrat(dims, cin);
 	if (str == "corner") return new CornerStrat(dims, cin);
+	if (str == "pspaced") return new PadStrat(dims, cin, PadStrat::Spaced);
 	assert(0 && "unknown strategy");
 	abort();
 }
