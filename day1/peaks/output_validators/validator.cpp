@@ -33,6 +33,8 @@ void reject_raw(const string& msg) {
 
 [[noreturn]]
 void reject_line(const char* msg, string line) {
+	for (char& c : line) if (c == '\0') c = ' ';
+	if (line.size() > 0 && line[line.size()-1] == ' ') line = line.substr(0, line.size()-1);
 	if (line.size() > 1000) line = line.substr(0, 1000) + "...";
 	cout << "-1" << endl;
 	reject_raw(msg + string(". input: ") + line);
@@ -240,9 +242,9 @@ struct AddStrat : Strat {
 
 // For paths that increase by 1 in each step, this wrapper puts the path only
 // on even indices and removes shortcuts.
-struct SpacedPathStrat : Strat {
+struct SpacedStrat : Strat {
 	Strat* inner;
-	SpacedPathStrat(P dims, istream& cin) : Strat(dims) {
+	SpacedStrat(P dims, istream& cin) : Strat(dims) {
 		inner = readStrat((dims+P::K(2)).idiv(2), cin);
 	}
 	int query(P p) override {
@@ -441,6 +443,7 @@ struct RandomWalkStrat : Strat {
 	int its;
 	RandomWalkStrat(P dims, istream& cin) : Strat(dims), mat(dims) {
 		assert(dims.dimension() >= 3);
+		assert(MAX_VAL > dims.prod());
 		cin >> noiseq >> its;
 		walk();
 	}
@@ -631,7 +634,7 @@ Strat* readStrat(P dims, istream& cin) {
 	if (str == "const") return new ConstStrat(dims);
 	if (str == "random") return new RandomStrat(dims);
 	if (str == "spacefill") return new SpaceFillStrat(dims, cin);
-	if (str == "spaced") return new SpacedPathStrat(dims, cin);
+	if (str == "spaced") return new SpacedStrat(dims, cin);
 	if (str == "pad") return new PadStrat(dims, cin);
 	if (str == "walk") return new RandomWalkStrat(dims, cin);
 	if (str == "1d-peak") return new OneDimPeakStrat(dims, cin);

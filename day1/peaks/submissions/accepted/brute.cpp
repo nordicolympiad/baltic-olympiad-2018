@@ -7,7 +7,7 @@ int main(){
 	cin >> n >> m >> k >> maxq;
 
 	int record = 0;
-	int ansx, ansy, ansz;
+	int ansx = -1, ansy = -1, ansz = -1;
 
 	for(int x = 1; x <= n; x++){
 		for(int y = 1; y <= m; y++){
