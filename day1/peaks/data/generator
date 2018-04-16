@@ -42,18 +42,19 @@ params 200 200 1 4000
 tc 2d1-const echo $LIMS const
 tc 2d1-corner echo $LIMS corner +++
 tc 2d1-random echo $LIMS random
-tc 2d1-space echo $LIMS pspaced spacefill
-tc 2d1-spiral echo $LIMS pspaced spiral
+tc 2d1-space echo $LIMS pspaced spacefill corner +++
+tc 2d1-spiral echo $LIMS pspaced spiral corner +++
 
 group group4 10
 params 1000 1000 1 3500
 tc 2d2-const echo $LIMS const
 tc 2d2-corner echo $LIMS corner +-+
 tc 2d2-random echo $LIMS random
-tc 2d2-space0 echo $LIMS pad 15 3 0 10 20 0 spaced spacefill
-for A in {1..10}; do # try to kill probabilistic solution
-	tc 2d2-space$A echo $LIMS pspaced spacefill
-	tc 2d2-spiral$A echo $LIMS pspaced spiral
+tc 2d2-space0 echo $LIMS pad 15 3 0 10 20 0 spaced spacefill corner +++
+for A in {1..7}; do # try to kill probabilistic solution
+	tc 2d2-space$A echo $LIMS pspaced spacefill 1d-peak 0
+	tc 2d2-space$A-2 echo $LIMS pspaced spacefill 1d-peak2 sqrt
+	tc 2d2-spiral$A echo $LIMS pspaced spiral 1d-peak 0
 done
 
 group group5 20
@@ -61,7 +62,8 @@ params 100 100 100 100000
 tc 3d1-const echo $LIMS const
 tc 3d1-corner echo $LIMS corner ++-
 tc 3d1-random echo $LIMS random
-tc 3d1-space echo $LIMS pspaced spacefill
+tc 3d1-space1 echo $LIMS pspaced spacefill 1d-peak 1
+tc 3d1-space2 echo $LIMS pspaced spacefill 1d-peak2 sqrt
 tc 3d1-walk echo $LIMS walk 0.3 300
 
 group group6 30
@@ -69,9 +71,10 @@ params 500 500 500 150000
 tc 3d2-const echo $LIMS const
 tc 3d2-corner echo $LIMS corner -+-
 tc 3d2-random echo $LIMS random
-tc 3d2-space1 echo $LIMS pspaced spacefill
-tc 3d2-space2 echo $LIMS pspaced spacefill
-tc 3d2-space3 echo $LIMS pad 29 9 19 10 20 20 spaced spacefill
+tc 3d2-space1 echo $LIMS pspaced spacefill 1d-peak 0
+tc 3d2-space2 echo $LIMS pspaced spacefill 1d-peak 1
+tc 3d2-space3 echo $LIMS pspaced spacefill 1d-peak2 sqrt
+tc 3d2-space4 echo $LIMS pad 29 9 19 10 20 20 spaced spacefill corner +++
 tc 3d2-walk1 echo $LIMS walk 0.3 500 # path len ~ 350'000, 0.3s
 tc 3d2-walk2 echo $LIMS walk 0.03 1000 # path len ~ 480'000, 0.3s
 tc 3d2-walk3 echo $LIMS walk 0.1 1000 # path len ~ 540'000, 0.4s

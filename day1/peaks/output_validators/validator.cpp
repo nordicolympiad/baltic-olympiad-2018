@@ -245,25 +245,36 @@ struct AddStrat : Strat {
 };
 
 // For paths that increase by 1 in each step, this wrapper puts the path only
-// on even indices and removes shortcuts.
+// on even indices and removes shortcuts. It then applies a 1d strategy to the
+// created path.
 struct SpacedStrat : Strat {
-	Strat* inner;
+	Strat *inner, *inner1d;
 	SpacedStrat(P dims, istream& cin) : Strat(dims) {
 		assert(dims.count_odd() == P::DIM);
-		inner = readStrat((dims+P::K(2)).idiv(2), cin);
+		P innerDim = (dims+P::K(2)).idiv(2);
+		inner = readStrat(innerDim, cin);
+		assert(inner->maxval() == innerDim.prod() - 1);
+		P dim2 = P::K(1);
+		dim2[0] = innerDim.prod() * 2 - 1;
+		inner1d = readStrat(dim2, cin);
 	}
 	int do_query(P p) override {
 		assert(!oob(p));
 		int odds = p.count_odd();
-		if (odds > 1) return P::DIM+1 - odds;
+		if (odds > 1) return P::DIM - odds;
 		if (odds == 1) {
 			P A = p.idiv(2), B = (p + P::K(1)).idiv(2);
-			int a = inner->query(A)*2 + 10;
-			int b = inner->query(B)*2 + 10;
-			if (abs(a - b) > 2) return P::DIM+1 - odds;
-			return a + (b - a) / 2;
+			int a = inner->query(A)*2;
+			int b = inner->query(B)*2;
+			if (abs(a - b) > 2) return P::DIM - odds;
+			return tr(a + (b - a) / 2) + P::DIM;
 		}
-		return inner->query(p.idiv(2))*2 + 10;
+		return tr(inner->query(p.idiv(2))*2) + P::DIM;
+	}
+	int tr(int val) {
+		P p = P::Z;
+		p[0] = val;
+		return inner1d->query(p);
 	}
 	long long maxval() const override { return inner->maxval() * 2 + 10; }
 };
@@ -442,7 +453,7 @@ struct SpaceFillStrat : Strat {
 		return {pivot, dim};
 	}
 
-	long long maxval() const override { return dims.prod(); }
+	long long maxval() const override { return dims.prod() - 1; }
 };
 
 // Create a random walk towards the end, and everything else leading up to the
@@ -536,13 +547,9 @@ struct RandomWalkStrat : Strat {
 
 // Create a spiral, with a maximum somewhere on it. Use together with SpacedStrat.
 struct SpiralStrat : Strat {
-	int pivot;
-	const int MAX_VAL = 400000000;
 	SpiralStrat(P dims, istream& cin) : Strat(dims) {
 		assert(dims.dimension() == 2);
-		assert(dims.prod() < MAX_VAL);
 		assert(dims[0] == dims[1]);
-		pivot = rand() % dims.prod();
 	}
 	int do_query(P x) override {
 		int N = dims[0];
@@ -556,16 +563,14 @@ struct SpiralStrat : Strat {
 		else if (N-1 - x[0] == layer) ind = N-1 - x[1] + 2*sqs;
 		else ind = N-1 - x[0] + 3*sqs;
 		ind += outer - layer;
-		assert(0 <= ind);
-		assert(ind < dims.prod());
-		return MAX_VAL - abs(ind - pivot);
+		return ind;
 	}
-	long long maxval() const override { return MAX_VAL; }
+	long long maxval() const override { return dims.prod() - 1; }
 };
 
 // Unimodal function, which is piecewise linear and discontinuous at its peak.
 struct OneDimPeakStrat : Strat {
-	int pivot, leftBase, rightBase, N;
+	int pivot, scale, leftBase, rightBase, N;
 	const int MAX_BASE = 100000000;
 	const int PIVOT_VAL = 200000000;
 	OneDimPeakStrat(P dims, istream& cin) : Strat(dims) {
@@ -574,16 +579,20 @@ struct OneDimPeakStrat : Strat {
 		int same;
 		cin >> same;
 		pivot = rand() % N;
+		scale = MAX_BASE / N;
+		assert(scale > 0);
 		leftBase = rand() % MAX_BASE;
 		rightBase = same ? leftBase : rand() % MAX_BASE;
 	}
 	int do_query(P p) override {
 		int x = p[0];
 		if (x == pivot) return PIVOT_VAL;
-		if (x < pivot) return leftBase + x * 100;
-		return rightBase + (N - x) * 100;
+		if (x < pivot) return leftBase + x * scale;
+		return rightBase + (N - x) * scale;
 	}
-	long long maxval() const override { return max(PIVOT_VAL, MAX_BASE + 100*dims.sum()); }
+	long long maxval() const override {
+		return max((long long)PIVOT_VAL, MAX_BASE + (long long)scale*dims.sum());
+	}
 };
 
 // Continuous unimodal function.
