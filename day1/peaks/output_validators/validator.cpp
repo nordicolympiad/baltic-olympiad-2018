@@ -216,11 +216,15 @@ struct Strat {
 		assert(P::K(1) <= dims);
 	}
 	virtual ~Strat() {}
-	virtual int query(P x) = 0;
+	virtual int do_query(P x) = 0;
 	virtual long long maxval() const = 0;
 	int oob_query(P x) {
 		if (oob(x)) return -1;
-		return query(x);
+		return do_query(x);
+	}
+	int query(P x) {
+		assert(!oob(x));
+		return do_query(x);
 	}
 	bool oob(P x) const {
 		return !(P::Z <= x && x < dims);
@@ -234,7 +238,7 @@ struct AddStrat : Strat {
 	AddStrat(Strat* other) : Strat(other->dims), inner(other) {
 		base = rand() % 1000000 + 1000;
 	}
-	int query(P x) override {
+	int do_query(P x) override {
 		return inner->query(x) + base;
 	}
 	long long maxval() const override { return inner->maxval() + base; }
@@ -248,7 +252,7 @@ struct SpacedStrat : Strat {
 		assert(dims.count_odd() == P::DIM);
 		inner = readStrat((dims+P::K(2)).idiv(2), cin);
 	}
-	int query(P p) override {
+	int do_query(P p) override {
 		assert(!oob(p));
 		int odds = p.count_odd();
 		if (odds > 1) return P::DIM+1 - odds;
@@ -281,7 +285,7 @@ struct PadStrat : Strat {
 		}
 		inner = new SpacedStrat(dims - lo - hi, cin);
 	}
-	int query(P x) override {
+	int do_query(P x) override {
 		assert(!oob(x));
 		int sum = 0;
 		repd(i) sum += ed(x[i], lo[i], hi[i], dims[i]);
@@ -302,7 +306,7 @@ struct RandomStrat : Strat {
 	RandomStrat(P dims) : Strat(dims) {
 		seed = rand64();
 	}
-	int query(P x) override {
+	int do_query(P x) override {
 		return (int)(x.hash(dims, seed) >> 35);
 	}
 	long long maxval() const override { return 1 << 29; }
@@ -316,7 +320,7 @@ struct SpaceFillStrat : Strat {
 	SpaceFillStrat(P dims, istream& cin) : Strat(dims) {
 		seed = rand64();
 	}
-	int query(P x) override {
+	int do_query(P x) override {
 		int res = 0;
 		bool r = rec(res, x, P::Z, P::Z, P::Z, dims, false);
 		assert(r);
@@ -457,7 +461,7 @@ struct RandomWalkStrat : Strat {
 		cin >> noiseq >> its;
 		walk();
 	}
-	int query(P x) override {
+	int do_query(P x) override {
 		if (mat.has(x)) return mat.get(x);
 		return startPointVal - (x - startPoint).abssum();
 	}
@@ -540,7 +544,7 @@ struct SpiralStrat : Strat {
 		assert(dims[0] == dims[1]);
 		pivot = rand() % dims.prod();
 	}
-	int query(P x) override {
+	int do_query(P x) override {
 		int N = dims[0];
 		int layer = min({x[0], N-1 - x[0], x[1], N-1 - x[1]});
 		int sqs = N - layer * 2;
@@ -573,7 +577,7 @@ struct OneDimPeakStrat : Strat {
 		leftBase = rand() % MAX_BASE;
 		rightBase = same ? leftBase : rand() % MAX_BASE;
 	}
-	int query(P p) override {
+	int do_query(P p) override {
 		int x = p[0];
 		if (x == pivot) return PIVOT_VAL;
 		if (x < pivot) return leftBase + x * 100;
@@ -599,7 +603,7 @@ struct OneDimPeakStrat2 : Strat {
 		else if (stype == "pw") type = Type::pw;
 		else assert(0);
 	}
-	int query(P p) override {
+	int do_query(P p) override {
 		int x = p[0];
 		double v;
 		if (x == pivot) v = 0;
@@ -629,7 +633,7 @@ struct OneDimBlocksStrat : Strat {
 		assert(N == 1000000);
 		seed = rand64();
 	}
-	int query(P p) override {
+	int do_query(P p) override {
 		int x = p[0];
 		if (x >= N-2400) return N-x;
 		const int BS = 1000;
@@ -642,7 +646,7 @@ struct OneDimBlocksStrat : Strat {
 // Constant function!
 struct ConstStrat : Strat {
 	using Strat::Strat;
-	int query(P) override {
+	int do_query(P) override {
 		return 4; // chosen by a fair dice roll.
 	}
 	long long maxval() const override { return 4; }
@@ -658,7 +662,7 @@ struct CornerStrat : Strat {
 			assert(c == '-' || c == '+');
 		}
 	}
-	int query(P x) override {
+	int do_query(P x) override {
 		repd(i) {
 			if (plusminus[i] == '-') x[i] = dims[i]-1 - x[i];
 		}
@@ -688,7 +692,7 @@ struct PrintStrat : Strat {
 		cerr << endl;
 		exit(0);
 	}
-	int query(P) override { assert(0); }
+	int do_query(P) override { assert(0); }
 	long long maxval() const override { assert(0); }
 };
 
