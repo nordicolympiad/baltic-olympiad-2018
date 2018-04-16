@@ -1,7 +1,7 @@
 #include "gen.h"
 #include <algorithm>
 
-static const int Iterations = 50; // a guess of the number of iterations required to solve a test-case
+static const int Iterations = 40; // a guess of the number of iterations required to solve a test-case
 
 int solve(int N, int K, int D, const vector<vector<bool> >& strings, vector<int>* out = nullptr) {
 	assert(N == (int)strings.size());
