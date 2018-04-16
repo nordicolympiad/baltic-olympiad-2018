@@ -42,8 +42,10 @@ params 200 200 1 4000
 tc 2d1-const echo $LIMS const
 tc 2d1-corner echo $LIMS corner +++
 tc 2d1-random echo $LIMS random
-tc 2d1-space echo $LIMS pspaced spacefill corner +++
-tc 2d1-spiral echo $LIMS pspaced spiral corner +++
+tc 2d1-space1 echo $LIMS pspaced spacefill corner +++
+tc 2d1-space2 echo $LIMS pspaced spacefill 1d-peak 0
+tc 2d1-spiral1 echo $LIMS pspaced spiral corner +++
+tc 2d1-spiral2 echo $LIMS pspaced spiral 1d-peak 0
 
 group group4 10
 params 1000 1000 1 3500
