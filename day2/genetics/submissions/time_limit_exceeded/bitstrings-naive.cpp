@@ -24,12 +24,12 @@ int main() {
 				count += (strings[i][k] != strings[j][k]);
 			}
 			if (count != D) {
-				clog << j << ", " << flush;
+				// clog << j << ", " << flush;
 				goto fail;
 			}
 		}
 		cout << i + 1 << endl;
-		// return 0;
+		return 0;
 fail:;
 	}
 	return 1;

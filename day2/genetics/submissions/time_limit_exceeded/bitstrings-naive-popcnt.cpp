@@ -26,12 +26,12 @@ int main() {
 				count += bitset<64>(strings[i][k]^strings[j][k]).count();
 			}
 			if (count != (size_t)D) {
-				clog << j << ", " << flush;
+				// clog << j << ", " << flush;
 				goto fail;
 			}
 		}
 		cout << i + 1 << endl;
-		// return 0;
+		return 0;
 fail:;
 	}
 	return 1;
