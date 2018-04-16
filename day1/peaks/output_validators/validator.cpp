@@ -187,6 +187,7 @@ ostream& operator<<(ostream& os, const P& p) {
 	return os;
 }
 
+// Dense matrix
 struct Mat {
 	vector<vector<vector<int>>> m;
 	Mat(P dims) : m(dims[0], vector<vector<int>>(dims[1], vector<int>(dims[2]))) {}
@@ -198,6 +199,7 @@ struct Mat {
 	void each(F f) { for (auto& a : m) for (auto& b : a) for (auto& c : b) f(c); }
 };
 
+// Sparse matrix
 struct HashMat {
 	unordered_map<int, int> m;
 	P dims;
@@ -232,6 +234,7 @@ struct Strat {
 };
 Strat* readStrat(P dims, istream& cin);
 
+// Wraps another strategy, and adds a constant to each cell. Doesn't hurt, I guess?
 struct AddStrat : Strat {
 	Strat* inner;
 	int base;
@@ -730,6 +733,7 @@ int main(int argc, char** argv) {
 	assert(argc >= 2);
 	if (argc >= 4) out_dir = argv[3];
 	ifstream fin(argv[1]);
+	fin.exceptions(ios_base::failbit | ios_base::eofbit | ios_base::badbit);
 	P dims;
 	int Q, seed;
 	fin >> dims >> Q >> seed;
@@ -740,6 +744,7 @@ int main(int argc, char** argv) {
 	assert(strat->maxval() < 1000000000);
 	assert(strat->dims == dims);
 	assert(fin);
+	fin.exceptions(ios_base::goodbit);
 	string dummy;
 	assert(!(fin >> dummy));
 	initialization_done = true;
