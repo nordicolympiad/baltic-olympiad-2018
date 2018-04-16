@@ -34,7 +34,8 @@ int main(){
 
 	int V = n*m*k;
 
-	int samples = (int)sqrt( dims * 7.5 * V ); // should use > 2*samples queries with probability <= exp(-7.5) = 1/1800
+	int samples = maxq / 2;
+	// (int)sqrt( dims * 7.5 * V ); // should use > 2*samples queries with probability <= exp(-7.5) = 1/1800
 
 	int record = 0;
 	int x=-1, y=-1, z=-1;

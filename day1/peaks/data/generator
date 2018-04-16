@@ -46,13 +46,15 @@ tc 2d1-space echo $LIMS pspaced spacefill
 tc 2d1-spiral echo $LIMS pspaced spiral
 
 group group4 10
-params 1000 1000 1 4000
+params 1000 1000 1 3500
 tc 2d2-const echo $LIMS const
 tc 2d2-corner echo $LIMS corner +-+
 tc 2d2-random echo $LIMS random
-tc 2d2-space1 echo $LIMS pspaced spacefill
-tc 2d2-space2 echo $LIMS pad 15 3 0 10 20 0 spaced spacefill
-tc 2d2-spiral echo $LIMS pspaced spiral
+tc 2d2-space0 echo $LIMS pad 15 3 0 10 20 0 spaced spacefill
+for A in {1..10}; do # try to kill probabilistic solution
+	tc 2d2-space$A echo $LIMS pspaced spacefill
+	tc 2d2-spiral$A echo $LIMS pspaced spiral
+done
 
 group group5 20
 params 100 100 100 100000
