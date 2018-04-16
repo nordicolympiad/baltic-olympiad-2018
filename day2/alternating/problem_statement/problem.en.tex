@@ -18,9 +18,11 @@ remaining problem: the switches also need electricity.
 And not just any kind of electricity; they specifically need \emph{alternating current}.\footnote{This makes sense because the railway is a Swedish one -- in Sweden, all train switches (``växlar'') use alternating current (``växelström'').}
 
 The way you get alternating current, Fredrik figures, is by having electricity
-that goes in both directions. Thus he wants connect the electrical
-wires that span the railway, such that every track segment is covered
-by both a clockwise and a counter-clockwise wire.
+that goes in both directions. Each arc only gives electricity in one direction
+(either clockwise or counter-clockwise) but Fredrik is free to decide which.
+Thus, what he wants to do is to make a decision about each arc's direction,
+such that every track segment is covered by both a clockwise and a
+counter-clockwise arc.
 
 Can you help Fredrik with this task?
 
@@ -35,12 +37,12 @@ than $a$, it means that the sequence wraps around, i.e. segments
 $a, \dots, N, 1, \dots, b$ are covered.
 
 \section*{\outputsection}
-Print a single line with $M$ \texttt{0}s and \texttt{1}s, which denote whether
-each segment is oriented clockwise (0) or counter-clockwise (1).
+Print a single line with $M$ \texttt{0}s and \texttt{1}s. The $i$th character of the
+line should be \texttt{0} if the $i$th arc given in the input should be oriented
+clockwise, or \texttt{1} if it should be oriented counter-clockwise.
 If there are multiple solutions you may output any of them.
-% TODO should output order be input order? Maybe change to yes/no?
 
-If it is impossible to orient the segments, output ``\texttt{IMPOSSIBLE}'' (without quotes).
+If it is impossible to orient the arcs, output ``\texttt{impossible}''.
 
 \section*{\constraints}
 \testgroups
@@ -52,6 +54,8 @@ If it is impossible to orient the segments, output ``\texttt{IMPOSSIBLE}'' (with
   1     & 20     & $2 \le N, M \le 15$ & \\ \hline
   2     & 20     & $2 \le N, M \le 100$ & \\ \hline
   3     & 20     & $2 \le N, M \le 1000$ & \\ \hline
-  4     & 20     & $2 \le N, M \le 10^5$ & no segment has $b < a$ \\ \hline
+  4     & 20     & $2 \le N, M \le 10^5$ & no arc has $b < a$ \\ \hline
   5     & 20     & $2 \le N, M \le 10^5$ & \\ \hline
 \end{tabular}
+
+% TODO sample description

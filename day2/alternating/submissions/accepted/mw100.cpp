@@ -172,7 +172,7 @@ int main() {
             printSolution(segments);
         }
         else {
-            cout << "IMPOSSIBLE" << endl;
+            cout << "impossible" << endl;
         }
     }
     else {
@@ -192,11 +192,11 @@ int main() {
                     printSolution(segments);
                 }
                 else {
-                    cout << "IMPOSSIBLE" << endl;
+                    cout << "impossible" << endl;
                 }
                 return 0;
             }
         }
-        cout << "IMPOSSIBLE" << endl;
+        cout << "impossible" << endl;
     }
 }
