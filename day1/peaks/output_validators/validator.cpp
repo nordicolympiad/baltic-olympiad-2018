@@ -77,19 +77,34 @@ int readnum(const char* str, int max, const string& line) {
 	return cur;
 }
 
+// Define our own random number generators, to ensure determinism.
+static uint64_t RND = 12312;
+static bool initialization_done = false;
 uint64_t rand64() {
-	uint64_t ret = rand();
-	ret <<= 31;
-	ret |= rand();
-	return ret;
-}
-
-bool initialization_done = false;
-int my_rand() {
 	assert(!initialization_done);
-	return rand();
+	RND *= 13123861231LL;
+	RND += 132613;
+	return RND;
+}
+void my_srand(int seed) {
+	RND = seed;
+	rand64();
+	rand64();
+}
+int my_rand() {
+	return (int)(rand64() >> 33);
 }
 #define rand my_rand
+#define srand my_srand
+
+template<class It>
+void my_random_shuffle(It first, It last) {
+    size_t n = last - first;
+    for (size_t i = n-1; i > 0; --i) {
+        swap(first[i], first[rand() % (i+1)]);
+    }
+}
+#define random_shuffle my_random_shuffle
 
 uint64_t rot(uint64_t v, int amt) {
 	return (v >> amt) | (v << (64 - amt));
@@ -515,7 +530,7 @@ struct RandomWalkStrat : Strat {
 					seg.push_back(~i);
 				}
 			}
-			random_shuffle(seg.begin(), seg.end(), [](int x) { return rand() % x; });
+			random_shuffle(seg.begin(), seg.end());
 			for (int mv : seg) {
 				int by = (mv >= 0 ? 1 : -1);
 				mv = (mv >= 0 ? mv : ~mv);
