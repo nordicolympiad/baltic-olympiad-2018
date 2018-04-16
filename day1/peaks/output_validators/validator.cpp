@@ -279,7 +279,7 @@ struct SpacedStrat : Strat {
 		p[0] = val;
 		return inner1d->query(p);
 	}
-	long long maxval() const override { return inner->maxval() * 2 + 10; }
+	long long maxval() const override { return inner1d->maxval() + P::DIM; }
 };
 
 // This puts very small values at the edges, making only the middle relevant.
@@ -690,18 +690,28 @@ struct PrintStrat : Strat {
 		inner = readStrat(dims, cin);
 		static_assert(P::DIM == 3, "");
 		P p;
+		long long mv = inner->maxval();
+		bool isSpaced = (dynamic_cast<SpacedStrat*>(inner) != nullptr);
 		int &x = p[0], &y = p[1], &z = p[2];
 		for (x = 0; x < dims[0]; x++) {
 			for (y = 0; y < dims[1]; y++) {
 				for (z = 0; z < dims[2]; z++) {
 					int v = inner->query(p);
-					cout << v << ' ';
+					assert(0 <= v);
+					assert(v <= mv);
+					if (isSpaced) {
+						if (v >= P::DIM) cout << "█";
+						else cout << " ";
+					}
+					else {
+						cout << v << ' ';
+					}
 				}
-				if (dims.dimension() >= 3) cerr << endl;
+				if (dims.dimension() >= 3) cout << endl;
 			}
-			if (dims.dimension() >= 2) cerr << endl;
+			if (dims.dimension() >= 2) cout << endl;
 		}
-		cerr << endl;
+		cout << endl;
 		exit(0);
 	}
 	int do_query(P) override { assert(0); }
