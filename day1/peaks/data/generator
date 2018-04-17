@@ -82,8 +82,4 @@ tc 3d2-walk2 echo $LIMS walk 0.03 1000 # path len ~ 480'000, 0.3s
 tc 3d2-walk3 echo $LIMS walk 0.1 1000 # path len ~ 540'000, 0.4s
 tc 3d2-walk4 echo $LIMS walk 0.6 700 # path len ~ 660'000, 0.7s
 
-# 4d?
-# group 1: dims = 30, q = 100'000
-# group 2: dims = 70, q = 100'000
-
 cleanup_programs
