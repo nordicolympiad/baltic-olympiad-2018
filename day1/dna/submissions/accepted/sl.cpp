@@ -29,6 +29,7 @@ int main() {
 		assert(0 <= sym && sym < k);
 		assert(co > 0);
 		if (counts[sym] < co) {
+			cerr << "impossible" << endl;
 			cout << "impossible" << endl;
 			return 0;
 		}
@@ -53,5 +54,5 @@ int main() {
 	}
 	assert(res != INT_MAX);
 	cout << res << endl;
-	cerr << occ << " places" << endl;
+	cerr << res << ", " << occ << " places" << endl;
 }

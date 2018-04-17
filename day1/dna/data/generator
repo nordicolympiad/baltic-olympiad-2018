@@ -5,41 +5,62 @@ PPATH=$(realpath ..)
 ulimit -s unlimited
 
 setup_dirs
-use_solution sl.cpp
+use_solution sl.cpp opt
 
-# TODO: smarter generator, more cases
 compile gen_random.py
+compile gen_cyclic.py
+compile gen_absurd.py
 
 samplegroup
 limits n=20
 sample 1
 sample 2
+sample 3
 
 group group1 25
 limits n=100 r=10
-tc small-1 gen_random n=10 k=10
-tc small-2 gen_random n=100 k=100 r=10
-tc small-3 gen_random n=100 k=40 r=10
-tc small-4 gen_random n=100 k=10
+tc small-rand1 gen_random n=10 k=10
+tc small-rand2 gen_random n=100 k=100 r=10 exact=1
+tc small-rand3 gen_random n=100 k=40 r=10
+tc small-rand4 gen_random n=100 k=10
+tc small-cyclic1 gen_cyclic n=100 k=2 count=20 r=1 padding=20
+tc small-cyclic2 gen_cyclic n=100 k=40 r=10 padding=10
+tc small-imp1 gen_random n=100 k=100 r=10 imp=1
+tc small-imp2 gen_absurd n=100 k=50 r=10
 
 group group2 25
-limits n=1000 r=10
+limits n=4000 r=10
 include_group group1
-tc medium-1 gen_random n=1000 k=1000 r=10
-tc medium-2 gen_random n=1000 k=400 r=10
-tc medium-3 gen_random n=1000 k=10
+tc medium-rand1 gen_random n=4000 k=4000 r=10
+tc medium-rand2 gen_random n=4000 k=1600 r=10
+tc medium-rand3 gen_random n=4000 k=10 r=10 exact=1
+tc medium-cyclic1 gen_cyclic n=4000 k=2 count=800 r=1 padding=800
+tc medium-cyclic2 gen_cyclic n=4000 k=11 count=220 r=10
+tc medium-cyclic3 gen_cyclic n=4000 k=2500 r=10 padding=400
 
 group group3 25
 limits n=1000000 r=10
 include_group group2
-tc large-1 gen_random n=1000000 k=1000000 r=10
-tc large-2 gen_random n=1000000 k=40000 r=10
-tc large-3 gen_random n=1000000 k=10
+tc large-rand1 gen_random n=1000000 k=1000000 r=10
+tc large-rand2 gen_random n=1000000 k=40000 r=10
+tc large-rand3 gen_random n=1000000 k=10 r=10 exact=1
+tc large-cyclic1 gen_cyclic n=1000000 k=10 count=50000 r=9
+tc large-cyclic2 gen_cyclic n=1000000 k=2 count=200000 r=1 padding=200000
+tc large-cyclic3 gen_cyclic n=1000000 k=11 count=10 r=10 padding=200000
+tc large-cyclic4 gen_cyclic n=1000000 k=11 count=30000 r=10 padding=100000
+tc large-cyclic5 gen_cyclic n=1000000 k=400000 r=10 padding=100000
+tc large-imp gen_random n=1000000 k=100 r=10 imp=1
 
 group group4 25
 limits n=1000000
 include_group group3
-tc full-1 gen_random n=1000000 k=1000000
-tc full-2 gen_random n=1000000 k=40000
+tc full-rand1 gen_random n=1000000 k=900000 exact=1
+tc full-rand2 gen_random n=1000000 k=40000
+tc full-rand3 gen_random n=1000000 k=100000 r=80000
+tc full-cyclic1 gen_cyclic n=1000000 k=400000
+tc full-cyclic2 gen_cyclic n=1000000 k=300000 padding=100000
+tc full-cyclic3 gen_cyclic n=1000000 k=300000 r=100000 padding=100000
+tc full-cyclic4 gen_cyclic n=1000000 k=2 padding=100000
+tc full-imp gen_absurd n=1000000 k=500000 r=400000
 
 cleanup_programs
