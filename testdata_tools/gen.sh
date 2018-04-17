@@ -172,15 +172,27 @@ limits () {
   echo "input_validator_flags: $@" >> $CURGROUP_DIR/testdata.yaml
 }
 
-par_tc () {
+do_tc () {
   name="$1"
   execmd="$2"
   seed="$3"
   echo "Generating case $name..."
-  $($execmd "${@:4}" $seed > "$name.in")
+  $execmd "${@:4}" $seed > "$name.in"
 
   echo "Solving case $name..."
   solve "$name"
+}
+
+handle_err() {
+  echo ERROR generating case $1
+  kill $$
+  exit 1
+}
+
+par_tc () {
+  set -E
+  trap "handle_err $1" ERR
+  do_tc "$@"
 }
 
 # Arguments: testcasename generator arguments...
@@ -210,7 +222,7 @@ tc () {
   cases[$1]=$CURGROUP_NAME
 
   if [[ $USE_PARALLEL != 1 ]]; then
-    par_tc "secret/$CURGROUP_NAME/$1" "${programs[$2]}" $SEED "${@:3}"
+    do_tc "secret/$CURGROUP_NAME/$1" "${programs[$2]}" $SEED "${@:3}"
   else
     if [[ $PARALLELISM_ACTIVE = 5 ]]; then
       # wait after every 4 cases
