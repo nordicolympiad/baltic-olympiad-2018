@@ -21,6 +21,7 @@ int main(){
     int N, M, K;
     cin >> N >> M >> K;
     vector<bs> dna = vector<bs>(N);
+    vector<int> hammingWeight(N);
     set<int> candidates;
     rep(i,0,N) {
         candidates.insert(i);
@@ -30,6 +31,7 @@ int main(){
             if (s[j] == '1')
                 dna[i].set(j);
         }
+        hammingWeight[i] = dna[i].count();
     }
     while (candidates.size() > 1) {
         bs check;
@@ -47,17 +49,14 @@ int main(){
                 }
             }
         }
+        int totWeight = accumulate(all(tot), 0);
         set<int> newCandidates;
         for (int i : candidates) {
-            int totDist = 0;
+            int totalDot = 0;
             rep(j,0,M) {
-                if (dna[i].test(j)) {
-                    totDist += checkCount-tot[j];
-                }
-                else {
-                    totDist += tot[j];
-                }
+                totalDot += tot[j] * dna[i].test(j);
             }
+            int totDist = checkCount * hammingWeight[i] + totWeight - totalDot * 2;
             if (totDist == K * (checkCount - check.test(i))) {
                 newCandidates.insert(i);
             }
