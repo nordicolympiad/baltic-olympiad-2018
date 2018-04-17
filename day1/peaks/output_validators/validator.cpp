@@ -753,6 +753,30 @@ Strat* readStrat(P dims, istream& cin) {
 	abort();
 }
 
+// Checks that no query results in Judge Error. This should take an estimated
+// 30 minutes or so each to run for the 3d2-space* cases...
+// Usage: for A in data/secret/*/*.in; do echo $A; ./a.out $A; done
+// with the validateStrat(strat); call in main uncommented.
+void validateStrat(Strat*& strat) {
+	static_assert(P::DIM == 3, "");
+	P p;
+	long long mv = strat->maxval();
+	assert(mv < 1000000000);
+	int &x = p[0], &y = p[1], &z = p[2];
+	P dims = strat->dims;
+	for (x = 0; x < dims[0]; x++) {
+		for (y = 0; y < dims[1]; y++) {
+			for (z = 0; z < dims[2]; z++) {
+				int v = strat->query(p);
+				assert(0 <= v);
+				assert(v <= mv);
+			}
+		}
+	}
+	cerr << "ok!" << endl;
+	exit(0);
+}
+
 int main(int argc, char** argv) {
 	signal(SIGPIPE, SIG_IGN);
 	assert(argc >= 2);
@@ -773,6 +797,8 @@ int main(int argc, char** argv) {
 	string dummy;
 	assert(!(fin >> dummy));
 	initialization_done = true;
+
+	// validateStrat(strat);
 
 	auto works = [&](P x) {
 		int v = strat->query(x);
