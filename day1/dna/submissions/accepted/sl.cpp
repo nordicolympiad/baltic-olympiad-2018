@@ -36,14 +36,16 @@ int main() {
 		++failed;
 	}
 	int i = 0, j = 0;
-	int res = INT_MAX;
+	int res = INT_MAX, occ = 0;
 	for (;;) {
 		if (failed) {
 			if (j == n) break;
 			if (++have[v[j]] == wanted[v[j]]) failed--;
 			j++;
 		} else {
-			res = min(res, j - i);
+			int dif = j - i;
+			if (dif < res) res = dif, occ = 0;
+			if (dif == res) occ++;
 			assert(i < j);
 			if (have[v[i]]-- == wanted[v[i]]) failed++;
 			i++;
@@ -51,4 +53,5 @@ int main() {
 	}
 	assert(res != INT_MAX);
 	cout << res << endl;
+	cerr << occ << " places" << endl;
 }

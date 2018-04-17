@@ -1,5 +1,5 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
-\def\version{jury-draft}
+\def\version{jury-1}
 \problemname{Martian DNA}
 As you are probably aware, human DNA can be represented as a long string over
 an alphabet of size four ({A, C, G, T}), where each symbol represents a
@@ -30,13 +30,13 @@ in the $i$-th position of the DNA string. Nucleobases are $0$-indexed, i.e. $0
 \leq D_i < K$. Each nucleobase will occur at least once.
 
 Then follows $R$ lines, each containing two integers $B$ and $Q$ representing
-respectively the nucleobase and the quantity required ($0 \le B < K, 1 \le Q \le N$).
+respectively a nucleobase and its mimimum required quantity ($0 \le B < K, 1 \le Q \le N$).
 No nucleobase will be listed twice or more.
 
 \section*{\outputsection}
 Output a single integer, the length of the shortest consecutive substring of
 the DNA which satisfies the researchers' requirements. If no such substring
-exists, output ``impossible''.
+exists, output ``\texttt{impossible}''.
 
 \section*{\constraints}
 \testgroups
@@ -50,3 +50,10 @@ exists, output ``impossible''.
 3     & 25     & $1 \le N \le 10^6, R \le 10$ \\ \hline
 4     & 25     & $1 \le N \le 10^6$ \\ \hline
 \end{tabular}
+
+\section*{\sampleexplanations}
+In the first sample, there are three substrings of length $2$ that contain one
+each of nucleobases 0 and 1 (namely ``\texttt{0 1}'', ``\texttt{1 0}'' and ``\texttt{0 1}''),
+but no substrings of length $1$. Thus the shortest length is $2$.
+
+In the second sample, the (unique) optimal substring is ``\texttt{1 3 2 0 1 2 0}''.

@@ -12,7 +12,8 @@ compile gen_random.py
 
 samplegroup
 limits n=20
-# sample 1
+sample 1
+sample 2
 
 group group1 25
 limits n=100 r=10
