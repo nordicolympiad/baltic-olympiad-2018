@@ -1,8 +1,8 @@
-Approximate problemset:
+Problemset:
 
 Day 1:
 - Martian DNA (Norway)
-- Polygon of Love (Estonia)
+- Love Polygon (Estonia)
 - Peak Finding (Latvia)
 
 Day 2:
