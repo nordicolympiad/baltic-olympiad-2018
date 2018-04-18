@@ -7,7 +7,6 @@ ulimit -s unlimited
 setup_dirs
 use_solution sol.cpp
 
-# TODO: smarter generators...
 compile gen_random.py
 compile handmade.py
 
@@ -18,47 +17,65 @@ sample 2
 
 group group1 25
 limits n=20
-tc small-1 handmade
-for i in {2..5}; do
-    tc small-$i gen_random n=$i
-    done
-for i in {6..10}; do
-    tc small-$i gen_random n=20
-    done
+tc small-handmade handmade
+tc small-tiny1 gen_random n=2
+tc small-tiny2 gen_random n=4
+tc small-tiny3 gen_random n=6
+tc small-tiny4 gen_random n=8
+tc small-rand1 gen_random n=20
+tc small-rand2 gen_random n=20
+tc small-rand3 gen_random n=20
+tc small-rand4 gen_random n=20
+tc small-perm gen_random n=20 mode=perm
+tc small-ego1 gen_random n=20 mode=ego,line,1
+tc small-ego2 gen_random n=20 mode=ego,star,1
+tc small-ego3 gen_random n=20 mode=ego,random,1
+tc small-imp1 gen_random n=3
+tc small-imp2 gen_random n=19
 
 group group2 25
 limits n=1e5 special=all_loved
-for i in {1..5}; do
-    tc perm-$i gen_random n=1$i mode=perm
-    done
-for i in {6..9}; do
-    tc perm-$i gen_random n=100000 mode=perm
-    done
-tc perm-10 gen_random n=100000 mode=loops
+tc perm-1 gen_random n=2 mode=perm
+tc perm-2 gen_random n=4 mode=perm
+tc perm-3 gen_random n=6 mode=perm
+tc perm-4 gen_random n=100000 mode=perm
+tc perm-5 gen_random n=100000 mode=many-cycles
+tc perm-6 gen_random n=100000 mode=one-cycle
+tc perm-imp gen_random n=99999 mode=perm
 
 group group3 25
 limits n=1e5 special=no_cycles
-tc ego-1     gen_random n=15     m=1 mode=random
-tc ego-2     gen_random n=100000 m=1 mode=random
-tc ego-3     gen_random n=100000 m=1000 mode=random
-tc star-1    gen_random n=100000 m=1 mode=star
-tc star-2    gen_random n=100000 m=1000 mode=star
-tc line-1    gen_random n=100000 m=1 mode=line
-tc line-2    gen_random n=100000 m=1000 mode=line
-tc shallow-1 gen_random n=100000 m=1 mode=shallow
-tc shallow-2 gen_random n=100000 m=1000 mode=shallow
-tc deep-1    gen_random n=100000 m=1 mode=deep
-tc deep-2    gen_random n=100000 m=1000 mode=deep
-tc deeper-1  gen_random n=100000 m=1 mode=deeper
-tc deeper-2  gen_random n=100000 m=1000 mode=deeper
+tc ego-ego     gen_random n=100000 mode=ego,random,100000
+tc ego-tiny1   gen_random n=16     mode=ego,random,1
+tc ego-tiny2   gen_random n=10     mode=ego,random,2
+tc ego-tiny3   gen_random n=10     mode=ego,random,3
+tc ego-tiny4   gen_random n=16     mode=ego,random,3
+tc ego-rand1   gen_random n=100000 mode=ego,random,1
+tc ego-rand2   gen_random n=100000 mode=ego,random,1000
+tc ego-rand3   gen_random n=100000 mode=ego,random,50000
+tc ego-star    gen_random n=100000 mode=ego,star,1
+tc ego-line    gen_random n=100000 mode=ego,line,2
+tc ego-shallow gen_random n=100000 mode=ego,shallow,3
+tc ego-deep    gen_random n=100000 mode=ego,deep,1000
+tc ego-deeper  gen_random n=100000 mode=ego,deeper,1
+tc ego-imp     gen_random n=99999  mode=ego,random,511
 
 group group4 25
+# order large cases before the other ones
 limits n=1e5
 include_group group1
 include_group group2
 include_group group3
-for i in {1..5}; do
-    tc large-$i gen_random n=100000
-    done
+tc alarge-deeper  gen_random n=100000 mode=general,deeper,1000,perm
+tc alarge-grand1  gen_random n=100000 mode=general,random,30000,perm
+tc alarge-grand2  gen_random n=100000 mode=general,random,30000,many-cycles
+tc alarge-grand3  gen_random n=100000 mode=general,random,100,perm
+tc alarge-grand4  gen_random n=100000 mode=general,random,100,many-cycles
+tc alarge-rand1   gen_random n=100000
+tc alarge-rand2   gen_random n=100000
+tc alarge-rand3   gen_random n=100000
+tc alarge-rand4   gen_random n=100000
+tc alarge-rand5   gen_random n=100000
+tc alarge-shallow gen_random n=100000 mode=general,shallow,1000,perm
 
 cleanup_programs
