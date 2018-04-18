@@ -1,48 +1,38 @@
 #!/usr/bin/python3
 
-import sys
-import random
-
-def cmdlinearg(name, default=None):
-    for arg in sys.argv:
-        if arg.startswith(name + "="):
-            return arg.split("=")[1]
-    assert default is not None, name
-    return default
+from helper import output, cmdlinearg
 
 #Only works for k=5
 #m <= 1e5 for n <= 75000
 
-random.seed(int(cmdlinearg('seed', sys.argv[-1])))
 n = int(cmdlinearg('n'))
 k = 5
 endsize = n//3
 midsize = n - 2*endsize - 2
+star_a = n-2
+star_b = n-1
 
 colors = []
 eds = []
 
-for i in range(0,endsize):
-    eds.append((i,endsize))
+left = list(range(0, endsize))
+mid = list(range(endsize, endsize + midsize))
+right = list(range(endsize + midsize, endsize*2 + midsize))
+
+for i in left:
+    colors.append(0)
+    eds.append((i, star_a))
+
+for i in mid:
     colors.append(1)
-colors.append(2)
+    eds.append((i, star_a))
+    eds.append((i, star_b))
 
-for i in range(0,midsize):
-    eds.append((endsize,endsize+1+i))
-    colors.append(3)
+for i in right:
+    colors.append(2)
+    eds.append((i, star_b))
 
+colors.append(3)
 colors.append(4)
 
-for i in range(0,midsize):
-    eds.append((endsize+midsize+1,endsize+1+i))
-
-for i in range(0,endsize):
-    eds.append((endsize+midsize+1,endsize+midsize+2+i))
-    colors.append(5)
-
-
-m = len(eds)
-print(n, m, k)
-print(*colors)
-for (a, b) in eds:
-    print(a+1, b+1)
+output(k, colors, eds)
