@@ -7,7 +7,7 @@ The task is to find the number of paths in the graph, such that no two vertices 
 A path is defined as an ordered list of nodes of size at least $2$, such that
 there are edges between consecutive nodes in the list.
 
-Note that the list is ordered, so e.g. $(1, 2, 3)$, $(1, 3, 2)$ and $(3, 2, 1)$ are all be treated as different paths.
+Observe that the list is ordered, so e.g. ``\texttt{1-2-3}'', ``\texttt{1-3-2}'' and ``\texttt{3-2-1}'' are all treated as different paths.
 
 \section*{\inputsection}
 The first line of input contains three integers $N$, $M$ and $K$ ($1 \le N, M \le 3 \cdot 10^5, 1 \le K \le 5$).
@@ -34,4 +34,7 @@ Print one integer -- the number of paths whose vertices all have distinct colors
 4     & 30     & $1 \le N, M \le 10^5, 1 \le K \le 5$ \\ \hline
 \end{tabular}
 
-% TODO sample description
+\section*{\sampleexplanation{1}}
+There are 10 paths whose vertices all have distinct colors: ``\texttt{1-2}'', ``\texttt{2-1}'', ``\texttt{2-3}'', ``\texttt{3-2}'', ``\texttt{2-4}'', ``\texttt{4-2}'', ``\texttt{1-2-4}'', ``\texttt{4-2-1}'', ``\texttt{3-2-4}'' and ``\texttt{4-2-3}''.
+
+Note that ``\texttt{1}'' is not allowed as a path, because it has length $1$, nor is ``\texttt{1-2-3}'', because it contains two nodes of color $1$.
