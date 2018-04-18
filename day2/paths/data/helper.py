@@ -10,8 +10,26 @@ def cmdlinearg(name, default=None):
 
 random.seed(int(cmdlinearg('seed', sys.argv[-1])))
 
+# add 'extra' additional random edges
+def add_extra(eds, extra, n):
+    edset = set(eds)
+    assert len(eds) == len(edset)
+    m = len(eds)
+    while len(edset) < m + extra:
+        a = random.randrange(n)
+        b = random.randrange(n)
+        if a == b:
+            continue
+        if a > b:
+            a,b = b,a
+        edset.add((a,b))
+    return list(edset)
+
 def output(k, colors, eds):
     n = len(colors)
+
+    eds = add_extra(eds, int(cmdlinearg('extra', 0)), n)
+
     m = len(eds)
 
     colnames = list(range(k))

@@ -7,7 +7,6 @@ ulimit -s unlimited
 setup_dirs
 use_solution sl.cpp
 
-# TODO: smarter generator, more cases
 compile gen_random.py
 compile gen_star.py
 compile gen_halfstar.py
@@ -26,38 +25,41 @@ tc small-3 gen_random n=100 m=100 k=4
 tc small-4 gen_random n=50 m=100 k=3
 tc small-5 gen_random n=50 m=100 k=2
 tc small-6 gen_random n=50 m=100 k=1
-tc small-7 gen_star n=100 k=4
-tc small-8 gen_halfstar n=100
+tc small-7 gen_star n=100 k=4 extra=1
+tc small-8 gen_halfstar n=60 extra=40
 
 group group2 25
 limits n=3e5 k=3
-tc k3-2 gen_random n=3000 m=300000 k=3
+tc k3-1 gen_random n=5000 m=300000 k=3
+tc k3-2 gen_random n=800 m=300000 k=3
 tc k3-3 gen_random n=300000 m=300000 k=3
 tc k3-4 gen_random n=30000 m=300000 k=2
 tc k3-5 gen_random n=30000 m=300000 k=1
-tc k3-6 gen_star n=300000 k=3
+tc k3-6 gen_star n=200000 k=3 extra=100000
 
 group group3 25
 limits n=3e5 k=4
 include_group group1
 include_group group2
-tc k4-2 gen_random n=3000 m=300000 k=4
+tc k4-1 gen_random n=800 m=300000 k=4
+tc k4-2 gen_random n=8000 m=300000 k=4
 tc k4-3 gen_random n=300000 m=300000 k=4
-tc k4-4 gen_star n=300000 k=4
-tc k4-5 gen_halfstar n=300000
+tc k4-4 gen_star n=150000 k=4 extra=150000
+tc k4-5 gen_halfstar n=150000 extra=150000
 
 group group4 25
 limits n=1e5 k=5
 include_group group1
 tc k5-1 gen_random n=2 m=1 k=5
-tc k5-2 gen_random n=1000 m=100000 k=5
+tc k5-2 gen_random n=480 m=100000 k=5
 tc k5-3 gen_random n=100000 m=100000 k=5
-tc k5-4 gen_star n=100000 k=5
+tc k5-4 gen_star n=50000 k=5 extra=40000
 tc k5-5 gen_doublestar n=75000
-tc k5-3-1 gen_random n=1000 m=100000 k=3
+tc k5-6 gen_doublestar n=50000 extra=30000
+tc k5-3-1 gen_random n=480 m=100000 k=3
 tc k5-3-2 gen_random n=100000 m=100000 k=3
 tc k5-3-3 gen_star n=100000 k=3
-tc k5-4-1 gen_random n=1000 m=100000 k=4
+tc k5-4-1 gen_random n=480 m=100000 k=4
 tc k5-4-2 gen_random n=100000 m=100000 k=4
 tc k5-4-3 gen_star n=100000 k=4
 tc k5-4-4 gen_halfstar n=100000
