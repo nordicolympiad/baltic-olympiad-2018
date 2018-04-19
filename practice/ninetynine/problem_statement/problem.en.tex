@@ -1,0 +1,42 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Ninety-nine}
+
+You and your friend are playing a game which you call \emph{Ninety-nine}.
+You start, by saying either the number $1$ or $2$.
+You then take turns, starting with your friend, increasing this number by either $1$ or $2$ in each step.
+The first player who gets to say the number $99$ wins!
+
+Write a program which plays this game for you and wins.
+
+\section*{\interactivity}
+This problem is interactive.
+
+Your program should start by printing either the number $1$ or $2$ on a single line.
+The grader will then read this value (call it $x$), and in return print a line with either $x+1$ or $x+2$, which can be read by your program.
+Your program should then print a value which is $1$ or $2$ higher, and so on.
+
+If your program reads $99$, it should exit normally (with status code 0); the test group will then get the verdict Wrong Answer.
+If your program prints $99$, it should also exit.
+If your program does not exit as it should, its verdict may be either Wrong Answer, Runtime Error or Time Limit Exceeded, depending on exact circumstances.
+
+You \emph{must} make sure to flush standard output before reading the grader's response, or else your program
+will get judged as \emph{Time Limit Exceeded}. This works as follows in the supported languages:
+\begin{itemize}
+  \item Java: \texttt{System.out.println()} flushes automatically.
+  \item Python: \texttt{print()} flushes automatically.
+  \item C++: \texttt{cout << endl} flushes, in addition to writing a newline. If using printf, \texttt{fflush(stdout)}.
+  \item Pascal: \texttt{Flush(Output)}
+\end{itemize}
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \constraints \\ \hline
+  1      & 30     & Your friend always increases the number by 1. \\ \hline
+  1      & 30     & Your friend always increases the number by 2 (unless at 98). \\ \hline
+  2      & 40     & Your friend plays randomly, with each option having 50\% probability. \\ \hline
+\end{tabular}
