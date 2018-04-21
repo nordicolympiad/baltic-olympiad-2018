@@ -1,10 +1,10 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
 \def\version{jury-draft}
 \problemname{Paths}
-A {\em graph} is a mathematical structure which consists of a set of {\em vertices}, and a set of {\em edges}, each of which connects two vertices. An example of a graph with $3$ vertices and $4$ edges is shown in the figure below.
+A {\em graph} is a mathematical structure which consists of a set of {\em vertices}, and a set of {\em edges}, each connecting two vertices. An example of a graph with $4$ vertices and $3$ edges is shown in the sample explanation below.
 %For example, a road map could be a graph, if the vertices are towns or other places and the edges are roads that directly connect two places.
 
-In this task, each vertex in the graph has one of $K$ colors. The task is to find the number of paths such that no two vertices in the path have the same color. 
+In this task, each vertex in the graph has one of $K$ colors. The task is to find the number of possible {\em paths} in which no two vertices have the same color. 
 
 A {\em path} is defined as an ordered list of $2$ or more vertices, such that
 there are edges between consecutive vertices in the list. Note that the list is ordered; for example, ``\texttt{1-2-3}'', ``\texttt{1-3-2}'' and ``\texttt{3-2-1}'' are all treated as different paths.
@@ -20,7 +20,7 @@ The second line of input contains $N$ integers between $1$ and $K$ -- the color 
 Each of the following $M$ lines describes an edge and contains two integers $a, b$ ($1 \le a, b \le N, a \neq b$) -- the two vertices connected by the edge. There will be at most one edge between any two vertices.
 
 \section*{\outputsection}
-Print one integer -- the number of paths whose vertices all have distinct colors.
+Output one integer -- the number of paths whose vertices all have distinct colors.
 
 \section*{\constraints}
 \testgroups
