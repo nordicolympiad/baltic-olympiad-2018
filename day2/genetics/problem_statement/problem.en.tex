@@ -1,24 +1,24 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
 \def\version{jury-draft}
 \problemname{Genetics}
-A common way for villains that mean to take over the world to protect
-themselves is to clone themselves a number of times to avoid getting caught.
-You have managed to catch an evil villain and her $N-1$ clones, and are now
+For villains that intend to take over the world, a common way to avoid getting caught
+is to clone themselves. You have managed to catch an evil villain and her $N-1$ clones, and you are now
 trying to figure out which one of them is the real villain.
 
-To your aid you have from each person a DNA sequence, simplified to consist of
-$M$ ones and zeroes. You also know that the clones are not perfectly made;
+To your aid you have each person's DNA sequence, simplified to consist of
+$M$ digits, each being either one or zero. You also know that the clones are not perfectly made;
 rather, their sequences differ in exactly $K$ places compared to the real
-villain's. For each clone there is also some other clone whose sequence differs
-from it on either more or fewer than $K$ places.
+villain's. 
 
 Can you find the real villain?
 
 \section*{\inputsection}
-The first line contains three integers $N, M, K$ ($2 \le N, M \le 4100, 1 \le K \le M$).
+The first line contains the three integers $N, M, K$, where $1 \le K \le M$.
 
-Then follows $N$ lines, representing the DNA sequences.
+Then follows $N$ lines, representing the DNA sequences. 
 Each of these lines consists of $M$ characters, all either \texttt{0} or \texttt{1}.
+
+There is exactly one sequence that differs from all the other sequences on exactly $K$ places. 
 
 \section*{\outputsection}
 Output an integer -- the index of the DNA sequence that belongs to the villain.
