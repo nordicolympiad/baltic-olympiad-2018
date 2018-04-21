@@ -13,11 +13,12 @@ Write a program which plays this game for you and wins.
 This problem is interactive.
 
 Your program should start by printing either the number $1$ or $2$ on a single line.
-The grader will then read this value (call it $x$), and in return print a line with either $x+1$ or $x+2$, which can be read by your program.
-Your program should then print a value which is $1$ or $2$ higher, and so on.
+The grader will then read this number (call it $x$), and in return print a line with either $x+1$ or $x+2$, which can be read by your program.
+Your program should then print a number which is $1$ or $2$ higher, and so on.
 
 If you manage to win the game and print $99$, your program should then exit normally (with status code 0).
 On the other hand, if your program reads $99$, it should also exit normally; the test group will then get the verdict Wrong Answer.
+Printing an invalid value (including numbers larger than $99$) will result also result in Wrong Answer, assuming your program exits afterwards.
 If your program does not exit as it should, its verdict may be either Wrong Answer, Runtime Error or Time Limit Exceeded, depending on exact circumstances.
 
 You \emph{must} make sure to flush standard output before reading the grader's response, or else your program
@@ -38,5 +39,5 @@ will get judged as Time Limit Exceeded. This works as follows in the supported l
 \group & \points & \constraints \\ \hline
   1      & 30     & Your friend always increases the number by 1. \\ \hline
   2      & 30     & Your friend always increases the number by 2 (unless at 98). \\ \hline
-  3      & 40     & Your friend plays randomly, with each option having 50\% probability. \\ \hline
+  3      & 40     & Your friend plays randomly, with each option having 50\% probability (unless at 98). \\ \hline
 \end{tabular}

@@ -6,3 +6,5 @@ license: cc by-sa
 type: scoring
 grading:
     objective: max
+limits:
+    time_multiplier: 3.9
