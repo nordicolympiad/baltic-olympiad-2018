@@ -61,9 +61,48 @@ public class Main {
 }
 
 class One {
+	Grader g;
+	double phi = 0.6180339887498949;
 	void run(Grader g) {
-		// TODO
-		new Two().run(g);
+		this.g = g;
+		int x = (int)(g.N * phi);
+		int fx = g.query(x, 0, 0);
+		int y = rec(0, g.N, x, fx);
+		g.guess(y, 0, 0);
+	}
+
+	// Find a local maximum with value >= fx in [lo, hi), given that f(x) = fx
+	int rec(int lo, int hi, int x, int fx) {
+		if (lo + 1 == hi) {
+			return lo;
+		}
+		if (x < lo) throw new RuntimeException("a");
+		if (x >= hi) throw new RuntimeException("b");
+		int y = hi-1 - (x - lo);
+		if (lo + 2 == hi) {
+			if (x == y) throw new RuntimeException("c");
+			int fy = g.query(y, 0, 0);
+			return fy > fx ? y : x;
+		}
+
+		if (y <= x) {
+			y = lo + (int)((x - lo) * phi);
+		} else {
+			y = hi-1 - (int)((hi-1 - x) * phi);
+		}
+
+		if (y < lo) throw new RuntimeException("d");
+		if (y >= hi) throw new RuntimeException("e");
+		if (x == y) throw new RuntimeException("f");
+
+		int fy = g.query(y, 0, 0);
+		if (fx >= fy) {
+			if (y < x) return rec(y+1, hi, x, fx);
+			else return rec(lo, y, x, fx);
+		} else {
+			if (x < y) return rec(x+1, hi, y, fy);
+			else return rec(lo, x, y, fy);
+		}
 	}
 }
 
