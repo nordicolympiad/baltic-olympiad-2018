@@ -1,25 +1,27 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
 \def\version{jury-draft}
 \problemname{Peak Finding}
-% TODO: reword this to have a more interesting story, also proofread
+% TODO: Is this story reasonable? 
+% TODO: Check the interactivity things.
 % TODO: non-adaptive
 
-Given is a three-dimensional array $a$ of size $N \times M \times K$, containing integers within the range $1 \dots 10^9$.
-You want to find a local maximum of the array: a value which is greater than all (up to six) adjacent values of the array.
-That is, you want to find $(x,y,z)$ such that $a[x][y][z] \ge \max(a[x+1][y][z], a[x-1][y][z], a[x][y+1][z], a[x][y-1][z], a[x][y][z-1], a[x][y][z+1])$,
-where a value is treated as $-\infty$ when it is out-of-bounds.
+You are looking for a place in the soil to put your pet worm, Maximus. You limit your search to a box-shaped region with dimensions $N \times M \times K$ centimetres which you have divided into a three-dimensional grid of cube-centimeter cells, labeled (x,y,z) after their position in the grid ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Each cell has a certain humidity $H[x,y,z]$ which is an integer in the range $1 \dots 10^9$. You can measure the humidity of any cell with a special tool.  
 
-However, the array might be very large!
-Instead of reading the entire input, you are allowed to interact with the grader, and ask for the values at given points.
-When you have found a local maximum, prove that by showing it to the grader.
+Maximus loves humid places, so you need to put him in a cell which is at least as humid as its neighboring cells, otherwise he goes away and you will have trouble finding him. In other words, you need to place Maximus in a local maximum. More precisely, you need to find a cell $(x,y,z)$, such that $H[x,y,z] \ge \max(H[x+1, y, z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z],H[x,y,z+1],H[x,y,z-1] )$, where a value is treated as $0$ when it is outside the box (because Maximus does absolutely not want to go outside the box).
+
+However, the number of cells can be very large, so you do not want to measure the humidity of all the cells.
+
+Therefore, in this task, you are allowed to interact with the grader, and ask for the values at given points.
+When you have found a local maximum, prove that by showing it to the grader. 
 
 \section*{\interactivity}
-The first line of the input will contain four positive integers: $N$, $M$, $K$ and $Q$.
-After that, you can print at most $Q$ lines of the form \texttt{? x y z}.
-This asks for the value of the array at point $(x, y, z)$.
-For each such line, the grader will in response print a single line with the integer \texttt{a[x][y][z]}, which can be read by your program.
+The first line of the input will contain four positive integers: $N$, $M$, $K$ and $Q$, where $N$, $M$ and $K$ are the box dimensions and $Q$ is the maximum number of measurements you may perform.
 
-After all these lines, you program must print exactly one line of the form \texttt{! x y z}.
+After that, you can write at most $Q$ lines of the form \texttt{? x y z} to the standard output.
+This asks for the value of the humidity at point $(x, y, z)$.
+For each such line, the grader will in response write a single line with the integer \texttt{a[x][y][z]}, which can be read from standard input by your program.
+
+After all these lines, your program must write out exactly one line of the form \texttt{! x y z}.
 This claims that the point $(x, y, z)$ is a local maximum.
 The grader will provide no response to this output.
 
