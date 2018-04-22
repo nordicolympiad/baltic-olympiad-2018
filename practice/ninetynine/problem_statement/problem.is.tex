@@ -1,0 +1,43 @@
+\ifx\boi\undefined\input{../templates/words-is.tex}\fi
+\def\version{jury-1}
+\problemname{Níutíu og níu}
+
+Þú ert að spila leik með vini þínum sem kallast \emph{Níutíu og níu}.
+Þú byrjar með því að segja annaðhvort töluna $1$ eða töluna $2$.
+Þið skiptist svo á að gera í umferðum og hækkið töluna um annaðhvort $1$ eða $2$ í hverri umferð.
+Fyrsti leikmaður til að segja töluna $99$ vinnur.
+
+Skrifaðu forrit sem spilar leikinn fyrir þig og vinnur.
+
+\section*{\interactivity}
+Þetta verkefni er gagnvirkt.
+
+Forritið þitt skal byrja á að skrifa út annaðhvort $1$ eða $2$ í einni línu.
+Yfirferðarforritið les síðan þessa tölu (köllum hana $x$), og skrifar á móti eina línu með annaðhvort $x+1$ eða $x+2$, sem forritið þitt getur þá lesið.
+Forritið þitt skal síðan skrifa út tölu sem er $1$ eða $2$ hærri, og svo framvegis.
+
+Ef þér tekst að sigra og skrifa út $99$, skal forritið þitt hætta keyrslu eðlilega (skila út 0).
+Hins vegar ef forritið þitt les $99$ skal það einnig hætta keyrslu eðlilega, en þá fær það niðurstöðuna Wrong Answer.
+Að skrifa út ógild gildi (þar með taldnar tölur stærri en $99$) mun einnig valda niðurstöðunni Wrong Answer, gefið að forritið þitt hætti keyrslu að lokum.
+Ef forritið þitt hættir keyrslu óeðlilega, mun það valda Wrong Answer, Runtime Error eða Time Limit Exceeded eftir því hvað á við.
+
+Þú \emph{þarft} að passa að sturta úttakinu út áður en þú lest svarið frá yfirferðarforritinu,
+annars mun forritið þitt fá niðurstöðuna Time Limit Exceeded. Þetta virkar í studdum málum á eftirfarandi hátt:
+\begin{itemize}
+  \item Java: \texttt{System.out.println()} sturtar sjálfkrafa.
+  \item Python: \texttt{print()} sturtar sjálfkrafa.
+  \item C++: \texttt{cout << endl;} sturtar, og fer einnig í næstu línu. Ef printf er notað, \texttt{fflush(stdout)}.
+  \item Pascal: \texttt{Flush(Output)}.
+\end{itemize}
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \constraints \\ \hline
+  1      & 30     & Vinur þinn hækkar töluna alltaf um $1$. \\ \hline
+  2      & 30     & Vinur þinn hækkar töluna alltaf um $2$ (nema þegar talan er 98). \\ \hline
+  3      & 40     & Vinur þinn spilar handahófskennt, þar sem hvor möguleiki er spilaður með 50\% líkum (nema talan sé 98). \\ \hline
+\end{tabular}

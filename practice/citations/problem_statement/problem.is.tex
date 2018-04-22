@@ -1,0 +1,63 @@
+\ifx\boi\undefined\input{../templates/words-is.tex}\fi
+\def\version{jury-1}
+\problemname{Tilvitnanir}
+\illustration{.40}{oldbooks}{\href{https://pixabay.com/en/books-old-books-antiquariat-read-1215672/}{CC0 Public Domain, congerdesign via Pixabay.}}
+
+Grace ætlar að lesa sérstaka vísindabók.
+Hún passar sig alltaf að lesa heimildirnar sem bækurnar vitna í, og einnig
+heimildir heimildanna og svo framvegis.
+Það endar venjulega þannig að hún les mikið meira en bara bókina sem hún ætlaði upprunalega að lesa.
+Bókasafnsverðirnir eru sífellt að kvarta yfir hversu lengi Grace er með bækur í láni,
+þess vegna vil hún finna hvaða röð hún þarf að lesa bækurnar í til að stytta útlánstímann eins og hún getur.
+
+Það eru $N$ bækur sem hún mun þurfa að lesa.
+Bækurnar eru númeraðar frá $1$ til $N$, og það tekur $K_i$ mínútur að lesa bók $i$.
+Sérhver bók $i$ er með tilvitnanalista með $F_i$ bókum.
+Bókin sem Grace vildi upprunalega lesa er númer $1$.
+Grace hefur þegar tekið allar bækurnar að láni áður en hún byrjar á bók $1$.
+
+Þegar Grace les bók gerir hún eftirfarandi:
+
+\begin{itemize}
+\item Fyrst opnar hún bókina og les tilvitnanalistann, sem tekur mínútu,
+\item svo les hún allar bækurnar á listanum, í einhverri röð sem hún velur,
+\item þar á eftir les hún bókina sjálfa og skilar henni á bókasafnið, sem tekur $K_i$ mínútur.
+\end{itemize}
+
+Núna viltu reikna út minnsta mögulega lánstíma fyrir allar bækur, gefið að Grace lesi þær í bestu röðinni.
+Bækur geta innihaldið tóman tilvitnanalista, og allar bækur nema bók $1$ {\em mun koma fyrir í nákvæmlega einum tilvitnanalista}.
+Það verða engar hringrásir af tilvitnunum.
+
+\section*{\inputsection}
+Fyrsta línan inniheldur heiltöluna $N$ ($1 \le N \le 100\,000$).
+Svo fylgja $N$ línur, ein fyrir hverja bók $1$ til $N$.
+Í hverri línu verður tala $K_i$ ($1 \le K_i \le 1\,000$), fjöldi mínútna sem tekur að lesa bókina,
+svo fylgir tala $F_i$ ($0 \le F_i < N$), og $F_i$ tölur í viðbót, númer bókanna sem bók $i$ vitnar í. 
+
+\section*{\outputsection}
+Skrifaðu út eina jákvæða heiltölu, minnsta samanlagða lánstíma fyrir allar bækur.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1     & 20     & $1 \le N \le 10, 1 \le K_i \le 1000$ \\ \hline
+2     & 30     & $1 \le N \le 50, 1 \le K_i \le 10$, $F_i \le 5$ \\ \hline
+3     & 20     & $1 \le N \le 100\,000, 1 \le K_i \le 1000, F_i \le 5$ \\ \hline
+4     & 30     & $1 \le N \le 100\,000, 1 \le K_i \le 1000$ \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanation{1}}
+tími 1: opna bók 1 \\
+tími 2: opna bók 2 \\
+tími 3: opna bók 4 \\
+tími 4: loka bók 4 (lánstími 4 mínútur) \\
+tími 14: loka bók 2 (lánstími 14 mínútur) \\
+tími 15: opna bók 3 \\
+tími 16: opna bók 5 \\
+tími 17: loka bók 5 (lánstími 17 mínútur) \\
+tími 37: loka bók 3 (lánstími 37 mínútur) \\
+tími 38: loka bók 1 (lánstími 38 mínútur) \\
