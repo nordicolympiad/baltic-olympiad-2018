@@ -1,11 +1,11 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
 \def\version{jury-draft}
-\problemname{Humidity peak}
+\problemname{Worm worries}
 % TODO: Is this story reasonable? 
 % TODO: Check the interactivity things.
 % TODO: non-adaptive
 
-You are looking for a place in the soil to put your pet worm, Maximus. You limit your search to a box-shaped region with dimensions $N \times M \times K$ centimetres which you have divided into a three-dimensional grid of cube-centimeter cells, labeled (x,y,z) after their position in the grid ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Each cell has a certain humidity $H[x,y,z]$ which is an integer in the range $1 \dots 10^9$. You can measure the humidity of any cell with a special tool.  
+You are looking for a place in the soil to put your pet worm, Maximus. You limit your search to a box-shaped region with dimensions $N \times M \times K$ centimeters which you have divided into a three-dimensional grid of cube-centimeter cells, labeled (x,y,z) after their position in the grid ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Each cell has a certain humidity $H[x,y,z]$ which is an integer in the range $1 \dots 10^9$. You can measure the humidity of any cell with a special tool.  
 
 Maximus loves humid places, so you need to put him in a cell which is at least as humid as its neighboring cells, otherwise he goes away and you will have trouble finding him. In other words, you need to place Maximus in a local maximum. More precisely, you need to find a cell $(x,y,z)$, such that $H[x,y,z] \ge \max(H[x+1, y, z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z],H[x,y,z+1],H[x,y,z-1] )$, where a value is treated as $0$ when it is outside the box (because Maximus does absolutely not want to go outside the box).
 
