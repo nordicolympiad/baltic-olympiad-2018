@@ -1,6 +1,6 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
 \def\version{jury-draft}
-\problemname{Peak Finding}
+\problemname{Humidity peak}
 % TODO: Is this story reasonable? 
 % TODO: Check the interactivity things.
 % TODO: non-adaptive
@@ -12,7 +12,7 @@ Maximus loves humid places, so you need to put him in a cell which is at least a
 However, the number of cells can be very large, so you do not want to measure the humidity of all the cells.
 
 Therefore, in this task, you are allowed to interact with the grader, and ask for the humidity at given points.
-When you have found a local maximum, prove that by showing it to the grader. 
+When you have found a suitable location for Maximus, give that location to the grader.
 
 \section*{\interactivity}
 The first line of the input will contain four positive integers: $N$, $M$, $K$ and $Q$, where $N$, $M$ and $K$ are the box dimensions and $Q$ is the maximum number of measurements you may perform.
@@ -22,7 +22,7 @@ This asks for the value of the humidity at point $(x, y, z)$.
 For each such line, the grader will in response write a single line with the integer $H[x,y,z]$, which can be read from standard input by your program.
 
 After all these lines, your program must write out exactly one line of the form \texttt{! x y z}.
-This claims that the point $(x, y, z)$ is a local maximum.
+This claims that the point $(x, y, z)$ is a suitable location for Maximus according to the criterion above.
 The grader will provide no response to this output.
 
 All values of $x, y, z$ must obey $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
