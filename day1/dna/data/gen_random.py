@@ -16,6 +16,7 @@ n = int(cmdlinearg('n'))
 k = int(cmdlinearg('k'))
 r = int(cmdlinearg('r', k))
 exact = int(cmdlinearg('exact', 0))
+full = int(cmdlinearg('full', 0))
 imp = int(cmdlinearg('imp', 0))
 
 s = list(range(k)) + [random.randrange(k) for _ in range(n - k)]
@@ -27,6 +28,10 @@ if end < start:
 if start == end:
     start = max(start-1, 0)
     end = min(end+1, n)
+if full:
+    start = 0
+    end = n
+    exact = 1
 
 co = Counter()
 for i in range(start, end):

@@ -25,6 +25,7 @@ tc small-rand3 gen_random n=100 k=40 r=10
 tc small-rand4 gen_random n=100 k=10
 tc small-cyclic1 gen_cyclic n=100 k=2 count=20 r=1 padding=20
 tc small-cyclic2 gen_cyclic n=100 k=40 r=10 padding=10
+tc small-full gen_random n=100 k=10 full=1
 tc small-imp1 gen_random n=100 k=100 r=10 imp=1
 tc small-imp2 gen_absurd n=100 k=50 r=10
 
@@ -49,6 +50,7 @@ tc large-cyclic2 gen_cyclic n=1000000 k=2 count=200000 r=1 padding=200000
 tc large-cyclic3 gen_cyclic n=1000000 k=11 count=10 r=10 padding=200000
 tc large-cyclic4 gen_cyclic n=1000000 k=11 count=30000 r=10 padding=100000
 tc large-cyclic5 gen_cyclic n=1000000 k=400000 r=10 padding=100000
+tc large-full gen_random n=1000000 k=10 full=1
 tc large-imp gen_random n=1000000 k=100 r=10 imp=1
 
 group group4 25
