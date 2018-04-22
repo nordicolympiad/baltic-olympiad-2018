@@ -22,7 +22,7 @@ Your are interested in finding the shortest substring of the DNA which satisfies
 On the first line, three numbers $N$, $K$, and $R$, respectively denoting the
 total length of the martian DNA, the number of distinct nucleobases, and the
 number of nucleobases for which the researchers have a minimum quantity
-requirement. They obey $1 \le R \le K \le N \le 10^6$.
+requirement. They obey $1 \le R \le K \le N$.
 
 On the second line follows $N$ space-separated integers, the complete martian
 DNA string. The $i$-th of these integers, $D_i$, indicates what nucleobase is
@@ -45,10 +45,10 @@ exists, output ``\texttt{impossible}''.
 \begin{tabular}{| l | l | l |}
 \hline
 \group & \points & \limitsname \\ \hline
-1     & 25     & $1 \le N \le 10^2, R \le 10$ \\ \hline
-2     & 25     & $1 \le N \le 4 \cdot 10^3, R \le 10$ \\ \hline
-3     & 25     & $1 \le N \le 10^6, R \le 10$ \\ \hline
-4     & 25     & $1 \le N \le 10^6$ \\ \hline
+1     & 25     & $1 \le N \le 100, R \le 10$ \\ \hline
+2     & 25     & $1 \le N \le 4\,000, R \le 10$ \\ \hline
+3     & 25     & $1 \le N \le 200\,000, R \le 10$ \\ \hline
+4     & 25     & $1 \le N \le 200\,000$ \\ \hline
 \end{tabular}
 
 \section*{\sampleexplanations}

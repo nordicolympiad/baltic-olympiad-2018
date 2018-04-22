@@ -40,29 +40,29 @@ tc medium-cyclic2 gen_cyclic n=4000 k=11 count=220 r=10
 tc medium-cyclic3 gen_cyclic n=4000 k=2500 r=10 padding=400
 
 group group3 25
-limits n=1000000 r=10
+limits n=200000 r=10
 include_group group2
-tc large-rand1 gen_random n=1000000 k=1000000 r=10
-tc large-rand2 gen_random n=1000000 k=40000 r=10
-tc large-rand3 gen_random n=1000000 k=10 r=10 exact=1
-tc large-cyclic1 gen_cyclic n=1000000 k=10 count=50000 r=9
-tc large-cyclic2 gen_cyclic n=1000000 k=2 count=200000 r=1 padding=200000
-tc large-cyclic3 gen_cyclic n=1000000 k=11 count=10 r=10 padding=200000
-tc large-cyclic4 gen_cyclic n=1000000 k=11 count=30000 r=10 padding=100000
-tc large-cyclic5 gen_cyclic n=1000000 k=400000 r=10 padding=100000
-tc large-full gen_random n=1000000 k=10 full=1
-tc large-imp gen_random n=1000000 k=100 r=10 imp=1
+tc large-rand1 gen_random n=200000 k=200000 r=10
+tc large-rand2 gen_random n=200000 k=8000 r=10
+tc large-rand3 gen_random n=200000 k=10 r=10 exact=1
+tc large-cyclic1 gen_cyclic n=200000 k=10 count=10000 r=9
+tc large-cyclic2 gen_cyclic n=200000 k=2 count=40000 r=1 padding=40000
+tc large-cyclic3 gen_cyclic n=200000 k=11 count=10 r=10 padding=40000
+tc large-cyclic4 gen_cyclic n=200000 k=11 count=6000 r=10 padding=20000
+tc large-cyclic5 gen_cyclic n=200000 k=80000 r=10 padding=20000
+tc large-full gen_random n=200000 k=10 full=1
+tc large-imp gen_random n=200000 k=100 r=10 imp=1
 
 group group4 25
-limits n=1000000
+limits n=200000
 include_group group3
-tc full-rand1 gen_random n=1000000 k=900000 exact=1
-tc full-rand2 gen_random n=1000000 k=40000
-tc full-rand3 gen_random n=1000000 k=100000 r=80000
-tc full-cyclic1 gen_cyclic n=1000000 k=400000
-tc full-cyclic2 gen_cyclic n=1000000 k=300000 padding=100000
-tc full-cyclic3 gen_cyclic n=1000000 k=300000 r=100000 padding=100000
-tc full-cyclic4 gen_cyclic n=1000000 k=2 padding=100000
-tc full-imp gen_absurd n=1000000 k=500000 r=400000
+tc full-rand1 gen_random n=200000 k=180000 exact=1
+tc full-rand2 gen_random n=200000 k=8000
+tc full-rand3 gen_random n=200000 k=20000 r=16000
+tc full-cyclic1 gen_cyclic n=200000 k=80000
+tc full-cyclic2 gen_cyclic n=200000 k=60000 padding=20000
+tc full-cyclic3 gen_cyclic n=200000 k=60000 r=20000 padding=20000
+tc full-cyclic4 gen_cyclic n=200000 k=2 padding=20000
+tc full-imp gen_absurd n=200000 k=100000 r=80000
 
 cleanup_programs
