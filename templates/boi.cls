@@ -31,6 +31,9 @@
 \RequirePackage{amsmath}          % AMS
 \RequirePackage{amssymb}          % AMS
 \RequirePackage[utf8]{inputenc}   % UTF-8 support
+\RequirePackage[T1]{fontenc}      % Font stuff
+\RequirePackage{lmodern}          % More font stuff
+\RequirePackage{microtype}        % Ligature control
 \RequirePackage{fancyhdr}         % Headers
 \RequirePackage{graphicx}         % Graphics
 \RequirePackage{subfigure}        % Subfigures
@@ -38,9 +41,9 @@
 \RequirePackage{import}           % Proper file inclusion
 \RequirePackage{fancyvrb}         % 
 \RequirePackage{lastpage}         % 
-\RequirePackage{babel}         % 
-\RequirePackage[parfill]{parskip}         % 
-\RequirePackage{listingsutf8}         % For samples
+\RequirePackage{babel}            % 
+\RequirePackage[parfill]{parskip} % 
+\RequirePackage{listingsutf8}     % For samples
 \RequirePackage[left=1.2in,right=1.2in,top=1in,bottom=1in]{geometry}
 %\RequirePackage{fullpage}         % Set up margins for full page
 \RequirePackage{url}              % Urls
@@ -49,6 +52,8 @@
 \ifplastex\else
 \RequirePackage{pgffor}
 \fi
+
+\DisableLigatures{encoding = *, family = tt* }
 
 %% Commands used to set name, logo, etc of contest
 \newcommand*{\contestname}[1]{\def\@contestname{#1}}
@@ -63,7 +68,6 @@
 \location{}
 \licenseblurb{}
 \problemlanguage{}
-
 
 % Command to set a header logo
 \newsavebox{\PS@headerbox}
