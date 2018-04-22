@@ -1,15 +1,14 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
-\def\version{jury-draft}
+\def\version{jury-1}
 \problemname{Worm worries}
-% TODO: Is this story reasonable? 
-% TODO: Check the interactivity things.
-% TODO: non-adaptive
 
-You are looking for a place in the soil to put your pet worm, Maximus. You limit your search to a box-shaped region with dimensions $N \times M \times K$ centimeters which you have divided into a three-dimensional grid of cube-centimeter cells, labeled (x,y,z) after their position in the grid ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Each cell has a certain humidity $H[x,y,z]$ which is an integer in the range $1 \dots 10^9$. You can measure the humidity of any cell with a special sensor.  
+You are looking for a place in the soil to put your pet worm, Maximus. You limit your search to a box-shaped region with dimensions $N \times M \times K$ centimeters which you have divided into a three-dimensional grid of cube-centimeter cells, labeled $(x,y,z)$ after their position in the grid ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Each cell has a certain humidity $H[x,y,z]$ which is an integer in the range $1 \dots 10^9$. You can measure the humidity of any cell with a special sensor.
 
-Maximus loves humid places, so you need to put him in a cell which is at least as humid as its neighboring cells, otherwise he goes away and you will have trouble finding him. In other words, you need to place Maximus in a local maximum. More precisely, you need to find a cell $(x,y,z)$, such that 
+Maximus loves humid places, so you need to put him in a cell which is at least as humid as its neighboring cells, otherwise he goes away and you will have trouble finding him.
+In other words, you need to place Maximus in a local maximum.
+More precisely, you need to find a cell $(x,y,z)$, such that
 $$
-H[x,y,z] \ge \max(H[x+1, y, z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z],H[x,y,z+1],H[x,y,z-1] ),
+H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1]),
 $$
 where a value is treated as $0$ when it is outside the box (because Maximus does absolutely not want to go outside the box).
 
@@ -19,11 +18,11 @@ When you have found a suitable location for Maximus, give that location to the g
 \section*{\interactivity}
 The first line of the input will contain four positive integers: $N$, $M$, $K$ and $Q$, where $N$, $M$ and $K$ are the box dimensions and $Q$ is the maximum number of measurements you may perform.
 
-After that, you can write at most $Q$ lines of the form \texttt{? x y z} to the standard output.
+After that, you can write at most $Q$ lines of the form \texttt{?\ x y z} to standard output.
 This asks for the value of the humidity at point $(x, y, z)$.
 For each such line, the grader will in response write a single line with the integer $H[x,y,z]$, which can be read from standard input by your program.
 
-After all these lines, your program must write out exactly one line of the form \texttt{! x y z}.
+After all these lines, your program must write out exactly one line of the form \texttt{!\ x y z}.
 This claims that the point $(x, y, z)$ is a suitable location for Maximus according to the criterion above.
 The grader will provide no response to this output.
 
@@ -31,19 +30,26 @@ All values of $x, y, z$ must obey $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le
 If they do not, or some line has an invalid format, or you ask for more than $Q$ values,
 the grader will respond with \texttt{-1} and exit.
 If this happens your program should also exit. If it continues, it may incorrectly get
-a verdict of \emph{Runtime Error} or \emph{Time Limit Exceeded}.
+a verdict of Runtime Error or Time Limit Exceeded.
 
-You \emph{must} make sure to flush standard output before reading the grader's response.
-Additionally, the two last test groups of this problem require fast IO, which is non-trivial in Java and Python.
-Thus, we provide helper code for interacting with the grader, which you may copy into your program.
+You \emph{must} make sure to flush standard output before reading the grader's response, or else your program
+will get judged as Time Limit Exceeded. This works as follows in the supported languages:
+\begin{itemize}
+  \item Java: \texttt{System.out.println()} flushes automatically.
+  \item Python: \texttt{print()} flushes automatically.
+  \item C++: \texttt{cout << endl;} flushes, in addition to writing a newline. If using printf, \texttt{fflush(stdout)}.
+  \item Pascal: \texttt{Flush(Output)}.
+\end{itemize}
+
+To help deal with this interaction, we provide optional helper code which you may copy into your program.
 A link to this code for all supported languages (C++, Pascal, Java, Python) can
-be found in the sidebar of the kattis statement page.
-We \emph{strongly} recommend using this code.
+be found in the sidebar of the kattis problem page.
+We especially recommend using this code if using Java or Python, whose default
+input/output (IO) routines \emph{may not be fast enough for the last two test groups}.
+The helper code uses optimized IO routines which are sufficiently fast.
 
-% Java: System.out.println(); flushes automatically
-% Python: print() flushes automatically
-% C++: cout << endl, or fflush(stdout) if using printf
-% Pascal: Flush(Output);
+The grader will be \emph{non-adaptive}; that is, each test case will have a fixed set of humidity values
+that do not depend on what measurements are performed by the program.
 
 \section*{\constraints}
 \testgroups
