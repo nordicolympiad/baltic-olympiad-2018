@@ -1,5 +1,5 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
-\def\version{jury-draft}
+\def\version{jury-1}
 \problemname{Alternating Current}
 Fredrik is at home, playing with a custom-built model railway which he is very proud of.
 The railway consists of $N$ segments connected in a circle, numbered $1, 2, \dots, N$ in clockwise order.
@@ -29,7 +29,9 @@ counter-clockwise arc.
 
 Can you help Fredrik with this task?
 
-\includegraphics[width=10cm]{alternatingfig.pdf}\\
+\vspace{2mm}
+\hspace*{2mm}\includegraphics[width=8cm]{alternatingfig.pdf}
+\vspace{1mm} \\
 {\em A possible solution to the first sample. The curved arrows outside the railway represent the arcs that provide electricity. The direction of each arrow represents Fredrik's choice of direction of the electricity (with the blue and red colors emphasizing the different directions). Note that all arrows could have been reversed to get another valid solution: \texttt{11010}.}
 
 \section*{\inputsection}
@@ -41,7 +43,7 @@ than $a$, it means that the sequence wraps around, i.e. segments
 $a, \dots, N, 1, \dots, b$ are covered.
 
 \section*{\outputsection}
-Print a single line with $M$ \texttt{0}s and \texttt{1}s. The $i$th character of the
+Output a single line with $M$ \texttt{0}s and \texttt{1}s. The $i$th character of the
 line should be \texttt{0} if the $i$th arc given in the input should be oriented
 clockwise, or \texttt{1} if it should be oriented counter-clockwise.
 If there are multiple solutions you may output any of them.
@@ -58,8 +60,8 @@ If it is impossible to orient the arcs, output ``\texttt{impossible}''.
   1     & 13     & $2 \le N, M \le 15$ & \\ \hline
   2     & 20     & $2 \le N, M \le 100$ & \\ \hline
   3     & 22     & $2 \le N, M \le 1000$ & \\ \hline
-  4     & 19     & $2 \le N, M \le 10^5$ & no arc has $b < a$ \\ \hline
-  5     & 26     & $2 \le N, M \le 10^5$ & \\ \hline
+  4     & 19     & $2 \le N, M \le 100\,000$ & No arc has $b < a$. \\ \hline
+  5     & 26     & $2 \le N, M \le 100\,000$ & \\ \hline
 \end{tabular}
 
 % TODO sample description
