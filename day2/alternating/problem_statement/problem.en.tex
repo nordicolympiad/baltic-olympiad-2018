@@ -6,16 +6,19 @@ The railway consists of $N$ segments connected in a circle, numbered $1, 2, \dot
 Electricity to the train is provided through $M$ arcs that pass along the
 circle. Each segment has at least one arc that goes along it.
 
-However, Fredrik is becoming bored with his train -- it just moves around in
-circles, and he feels like it could use some more excitement.
-Thus, he comes up with a plan: he will improve things by adding train switches
-to all the segments along the railway. These switches will be hooked up to an
-automatic system that toggles them at random, occasionally causing the train to
-take detours or maybe even go off the rails completely!
-
-Fredrik has already purchased all the switches he needs for this, but there is one
-remaining problem: the switches also need electricity.
+However, Fredrik is becoming bored with his circling train and decides to add a train switch to every segment along the railway which he could use to cause derailing accidents and other exciting scenarios. But the switches also need electricity.
 And not just any kind of electricity; they specifically need \emph{alternating current}.\footnote{This makes sense because the railway is a Swedish one -- in Sweden, all train switches (``växlar'') use alternating current (``växelström'').}
+
+
+%-- it just moves around in
+%circles, and he feels like it could use some more excitement.
+%Thus, he comes up with a plan: he will improve things by adding train switches
+%to all the segments along the railway. These switches will be hooked up to an
+%automatic system that toggles them at random, occasionally causing the train to
+%take detours or maybe even go off the rails completely!
+
+%Fredrik has already purchased all the switches he needs for this, but there is one
+%remaining problem: the switches also need electricity.
 
 The way you get alternating current, Fredrik figures, is by having electricity
 that goes in both directions. Each arc only gives electricity in one direction
@@ -26,7 +29,8 @@ counter-clockwise arc.
 
 Can you help Fredrik with this task?
 
-% TODO add picture
+\includegraphics[width=10cm]{alternatingfig.pdf}\\
+{\em A possible solution to the first sample. The curved arrows outside the railway represent the arcs that provide electricity. The direction of each arrow represents Fredrik's choice of direction of the electricity (with the blue and red colors emphasizing the different directions). Note that all arrows could have been reversed to get another valid solution: \texttt{11010}.}
 
 \section*{\inputsection}
 The first line contains two integers $N$ and $M$.
@@ -59,3 +63,4 @@ If it is impossible to orient the arcs, output ``\texttt{impossible}''.
 \end{tabular}
 
 % TODO sample description
+% Maybe not needed, because the explanation is in the figure caption.
