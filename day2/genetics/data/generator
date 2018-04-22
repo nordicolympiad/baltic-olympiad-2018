@@ -14,7 +14,7 @@ samplegroup
 limits n=20
 sample 1
 
-group group1 20
+group group1 33
 limits n=100
 # hadamard sizes: 64, 96
 tc small-a gen-hadamard-flips n=96 its=3 late=1
@@ -34,7 +34,7 @@ tc small-doubled-3 gen-doubled n=47 m=100 type=hadamard adjoin=id
 tc small-one-1 gen-hadamard-oneimportantrow n=96
 tc small-one-2 gen-hadamard-oneimportantrow n=96 late=1
 
-group group2 30
+group group2 29
 include_group group1
 limits n=1600
 # hadamard sizes: 1152, 1536, 1024
@@ -58,7 +58,7 @@ tc medium-one-1 gen-hadamard-oneimportantrow n=1024
 tc medium-one-2 gen-hadamard-oneimportantrow n=1536
 tc medium-one-3 gen-hadamard-oneimportantrow n=1536 late=1
 
-group group3 50
+group group3 38
 include_group group2
 limits n=4100
 # hadamard sizes: 3456, 2304, 3072, 4096

@@ -17,7 +17,7 @@ sample 1
 sample 2
 sample 3
 
-group group1 25
+group group1 16
 limits n=100 r=10
 tc small-rand1 gen_random n=10 k=10
 tc small-rand2 gen_random n=100 k=100 r=10 exact=1
@@ -29,7 +29,7 @@ tc small-full gen_random n=100 k=10 full=1
 tc small-imp1 gen_random n=100 k=100 r=10 imp=1
 tc small-imp2 gen_absurd n=100 k=50 r=10
 
-group group2 25
+group group2 24
 limits n=4000 r=10
 include_group group1
 tc medium-rand1 gen_random n=4000 k=4000 r=10
@@ -39,7 +39,7 @@ tc medium-cyclic1 gen_cyclic n=4000 k=2 count=800 r=1 padding=800
 tc medium-cyclic2 gen_cyclic n=4000 k=11 count=220 r=10
 tc medium-cyclic3 gen_cyclic n=4000 k=2500 r=10 padding=400
 
-group group3 25
+group group3 28
 limits n=200000 r=10
 include_group group2
 tc large-rand1 gen_random n=200000 k=200000 r=10
@@ -53,7 +53,7 @@ tc large-cyclic5 gen_cyclic n=200000 k=80000 r=10 padding=20000
 tc large-full gen_random n=200000 k=10 full=1
 tc large-imp gen_random n=200000 k=100 r=10 imp=1
 
-group group4 25
+group group4 32
 limits n=200000
 include_group group3
 tc full-rand1 gen_random n=200000 k=180000 exact=1

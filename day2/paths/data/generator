@@ -17,7 +17,7 @@ samplegroup
 limits n=20
 sample 1
 
-group group1 25
+group group1 23
 limits n=100 k=4
 tc tiny-1 gen_random n=2 m=1 k=4
 tc tiny-2 gen_random n=3 m=3 k=3
@@ -30,7 +30,7 @@ tc small-7 gen_star n=100 k=4 extra=1
 tc small-8 gen_halfstar n=60 extra=40
 tc small-9 gen_manycomponents n=100 m=100 k=4 compsize=5
 
-group group2 25
+group group2 20
 limits n=3e5 k=3
 tc k3-1 gen_random n=5000 m=300000 k=3
 tc k3-2 gen_random n=800 m=300000 k=3
@@ -41,7 +41,7 @@ tc k3-6 gen_star n=200000 k=3 extra=100000
 tc k3-7 gen_manycomponents n=300000 m=300000 k=3 compsize=400
 tc k3-8 gen_manycomponents n=300000 m=300000 k=3 compsize=4
 
-group group3 25
+group group3 27
 limits n=3e5 k=4
 include_group group1
 include_group group2
@@ -52,7 +52,7 @@ tc k4-4 gen_star n=150000 k=4 extra=150000
 tc k4-5 gen_halfstar n=150000 extra=150000
 tc k4-6 gen_manycomponents n=300000 m=300000 k=4 compsize=450
 
-group group4 25
+group group4 30
 limits n=1e5 k=5
 include_group group1
 tc k5-1 gen_random n=2 m=1 k=5

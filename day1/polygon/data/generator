@@ -15,7 +15,7 @@ limits n=20
 sample 1
 sample 2
 
-group group1 25
+group group1 21
 limits n=20
 tc small-handmade handmade
 tc small-tiny1 gen_random n=2
@@ -43,7 +43,7 @@ tc perm-5 gen_random n=100000 mode=many-cycles
 tc perm-6 gen_random n=100000 mode=one-cycle
 tc perm-imp gen_random n=99999 mode=perm
 
-group group3 25
+group group3 29
 limits n=1e5 special=no_cycles
 tc ego-ego     gen_random n=100000 mode=ego,random,100000
 tc ego-tiny1   gen_random n=16     mode=ego,random,1

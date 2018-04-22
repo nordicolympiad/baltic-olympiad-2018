@@ -24,7 +24,7 @@ limits n=20 m=20
 sample 1
 sample 2
 
-group group1 20
+group group1 13
 limits n=15 m=15
 tc small-rand-1 gen-random n=13 m=6
 tc small-rand-2 gen-random n=15 m=15
@@ -98,7 +98,7 @@ tc medium-need-enclosed-1 gen-need-enclosed n=100 m=16 numparents=4 maxmargin=1
 tc medium-need-enclosed-2 gen-need-enclosed n=100 m=21 numparents=5 maxmargin=2 errors=1 noiselength=1
 tc medium-singletons-1 gen-singletons n=50 m=100
 
-group group3 20
+group group3 22
 #include_group group2
 limits n=1000 m=1000
 tc large-rand-1 gen-random n=1000 m=1000
@@ -129,7 +129,7 @@ tc large-enclosing-2 gen-enclosing n=1000 m=502 feasible=1
 tc large-need-enclosed-1 gen-need-enclosed n=1000 m=12 numparents=3
 tc large-singletons-1 gen-singletons n=500 m=1000
 
-group group4 20
+group group4 19
 limits n=100000 m=100000 nowrap=1
 tc huge-rand-monotone-1 gen-random-monotone n=100000 m=100000
 tc huge-rand-monotone-2 gen-random-monotone n=5784 m=99999
@@ -152,7 +152,7 @@ tc huge-need-enclosed-monotone-2 gen-need-enclosed n=100000 m=26 numparents=6 ma
 tc huge-need-enclosed-monotone-3 gen-need-enclosed n=100000 m=100000 monotone=1
 tc huge-singletons-monotone-1 gen-singletons n=50000 m=100000
 
-group group5 20
+group group5 26
 #include_group group3
 #include_group group4
 limits n=100000 m=100000
