@@ -20,31 +20,6 @@ int main() {
 	vector<vector<int>> mat(N, vector<int>(K));
 	int ncand = N;
 	string str;
-#ifdef HEX
-	getline(cin, str);
-	assert(K % 4 == 0);
-	for (int i = 0; i < N; ++i) {
-		getline(cin, str);
-		int co = 0;
-		for (int j = 0; j < K / 4; ++j) {
-			int v = ('0' <= str[j] && str[j] <= '9' ? str[j] - '0' : str[j] - 'a' + 10);
-			int v0 = v >> 0 & 1;
-			int v1 = v >> 1 & 1;
-			int v2 = v >> 2 & 1;
-			int v3 = v >> 3 & 1;
-			mat[i][4*j+0] = 1 - 2 * v0;
-			mat[i][4*j+1] = 1 - 2 * v1;
-			mat[i][4*j+2] = 1 - 2 * v2;
-			mat[i][4*j+3] = 1 - 2 * v3;
-			co += v0 + v1 + v2 + v3;
-			strings[4*j+0][i / 64] |= uint64_t(v0) << (i & 63);
-			strings[4*j+1][i / 64] |= uint64_t(v1) << (i & 63);
-			strings[4*j+2][i / 64] |= uint64_t(v2) << (i & 63);
-			strings[4*j+3][i / 64] |= uint64_t(v3) << (i & 63);
-		}
-		rc[i] = co;
-	}
-#else
 	for (int i = 0; i < N; ++i) {
 		cin >> str;
 		int co = 0;
@@ -56,7 +31,6 @@ int main() {
 		}
 		rc[i] = co;
 	}
-#endif
 
 	vector<bool> included(N);
 	vector<uint64_t> bincluded(N2);

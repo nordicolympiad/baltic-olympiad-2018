@@ -175,26 +175,6 @@ void adjoinMat(matbool& mat, const string& adjoin, int* K) {
 	}
 }
 
-#ifdef HEX
-void print(matbool& mat, int K) {
-	int N = (int)mat.size(), M = (int)mat[0].size();
-	int M2 = (M+3)/4 * 4;
-	vector<string> out(N, string(M2/4, 'X'));
-	for (int i = 0; i < N; ++i) {
-		// pad with zeroes; doesn't change anything
-		for (int i = M; i < M2; ++i)
-			mat[i].push_back(false);
-		for (int j = 0; j < M2; j += 4) {
-			int v = (mat[i][j + 3] << 3) | (mat[i][j + 2] << 2) | (mat[i][j + 1] << 1) | mat[i][j];
-			out[i][j / 4] = (char)(v < 10 ? '0' + v : 'a' + v - 10);
-		}
-	}
-	cout << N << ' ' << M2 << ' ' << K << endl;
-	for (int i = 0; i < N; ++i) {
-		cout << out[i] << endl;
-	}
-}
-#else
 void print(matbool& mat, int K) {
 	int N = (int)mat.size(), M = (int)mat[0].size();
 	vector<string> out(N, string(M, 'X'));
@@ -206,4 +186,3 @@ void print(matbool& mat, int K) {
 		cout << out[i] << endl;
 	}
 }
-#endif
