@@ -47,7 +47,7 @@ tc 2d1-space2 echo $LIMS pspaced spacefill 1d-peak 0
 tc 2d1-spiral1 echo $LIMS pspaced spiral corner +++
 tc 2d1-spiral2 echo $LIMS pspaced spiral 1d-peak 0
 
-group group4 21
+group group4 19
 params 1000 1000 1 3500
 tc 2d2-const echo $LIMS const
 tc 2d2-corner echo $LIMS corner +-+
@@ -59,7 +59,7 @@ for A in {1..7}; do # try to kill probabilistic solution
 	tc 2d2-spiral$A echo $LIMS pspaced spiral 1d-peak 0
 done
 
-group group5 15
+group group5 14
 params 100 100 100 100000
 tc 3d1-const echo $LIMS const
 tc 3d1-corner echo $LIMS corner ++-
