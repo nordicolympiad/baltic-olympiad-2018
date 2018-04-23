@@ -44,6 +44,9 @@ int main(int argc, char** argv) {
             newLen = max(1, len-1);
         }
         if (monotone && a+newLen >= N) {
+            if (a == N-1) {
+                a = N-2;
+            }
             newLen = N-a-1;
         }
         b = (a + newLen) % N;

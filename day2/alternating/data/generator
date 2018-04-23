@@ -85,12 +85,14 @@ tc medium-feasible-4 gen-feasible n=100 m=12 m1=3 m2=3 noiselength=6
 tc medium-error-1 gen-feasible n=100 m=14 m1=4 errors=1
 tc medium-error-2 gen-feasible n=100 m=23 m1=10 maxmargin=2 errors=1
 tc medium-error-3 gen-feasible n=100 m=100 m1=20 m2=17 maxmargin=1 errors=8 noiselength=0
+tc medium-error-monotone-1 gen-feasible-monotone n=100 m=84 errors=1
 tc medium-all-full-1 gen-all-full n=100 m=100
 tc medium-alternating-1 gen-alternating n=100 m=11
 tc medium-alternating-2 gen-alternating n=100 m=99
 tc medium-alternating-3 gen-alternating n=100 m=7 maxmargin=6
 tc medium-alternating-4 gen-alternating n=100 m=16 needed=13 maxmargin=1 noiselength=2
 tc medium-alternating-5 gen-alternating n=100 m=100 needed=99 noiselength=1
+tc medium-alternating-6 gen-alternating n=20 m=5
 tc medium-overlapping-1 gen-overlapping n=100 m=48
 tc medium-enclosing-1 gen-enclosing n=99 m=49 feasible=0
 tc medium-enclosing-2 gen-enclosing n=98 m=51 feasible=1
@@ -112,6 +114,7 @@ tc large-rand-short-3 gen-random-short n=999 m=1000 l=20 fixed=0
 tc large-just-feasible-1 gen-feasible n=1000 m=1000
 tc large-just-feasible-2 gen-feasible n=1000 m=72
 tc large-just-feasible-3 gen-feasible n=1000 m=7 m1=1
+tc large-just-feasible-monotone-1 gen-feasible-monotone n=1000 m=785
 tc large-feasible-1 gen-feasible n=1000 m=372 maxmargin=4
 tc large-feasible-2 gen-feasible n=1000 m=72 m1=8 maxmargin=27
 tc large-feasible-3 gen-feasible n=1000 m=712 m1=72 m2=275 maxmargin=4 noiselength=2
@@ -123,6 +126,7 @@ tc large-alternating-1 gen-alternating n=1000 m=957
 tc large-alternating-2 gen-alternating n=998 m=31
 tc large-alternating-3 gen-alternating n=1000 m=82 needed=77 maxmargin=3 noiselength=3
 tc large-alternating-4 gen-alternating n=1000 m=133 needed=131 maxmargin=1
+tc large-alternating-5 gen-alternating n=18 m=6
 tc large-overlapping-1 gen-overlapping n=1000 m=500
 tc large-enclosing-1 gen-enclosing n=1000 m=492 feasible=0
 tc large-enclosing-2 gen-enclosing n=1000 m=502 feasible=1
@@ -162,6 +166,7 @@ tc huge-rand-3 gen-random n=100000 m=12
 tc huge-rand-short-1 gen-random-short n=100000 m=57835 l=20 fixed=1
 tc huge-rand-short-2 gen-random-short n=100000 m=78342 l=33 fixed=0
 tc huge-rand-short-3 gen-random-short n=99999 m=1001 l=1985 fixed=0
+tc huge-just-feasible-monotone-4 gen-feasible-monotone n=100000 m=57253 m1=17825
 tc huge-just-feasible-1 gen-feasible n=100000 m=78324
 tc huge-just-feasible-2 gen-feasible n=100000 m=47395 m1=4780
 tc huge-feasible-1 gen-feasible n=100000 m=27813 maxmargin=2
@@ -172,6 +177,7 @@ tc huge-error-2 gen-feasible n=100000 m=35938 m1=20000 m2=15935 errors=2 maxmarg
 tc huge-alternating-1 gen-alternating n=100000 m=83
 tc huge-alternating-2 gen-alternating n=100000 m=71823
 tc huge-alternating-3 gen-alternating n=100000 m=44825 needed=44819 noiselength=8
+tc huge-alternating-4 gen-alternating n=13 m=4
 tc huge-need-enclosed-1 gen-need-enclosed n=100000 m=75 numparents=10 maxmargin=104 noiselength=8
 tc huge-need-enclosed-2 gen-need-enclosed n=100000 m=248
 
