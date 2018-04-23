@@ -443,27 +443,22 @@ struct SpaceFillStrat : Strat {
 				parity ^= area;
 				return parity & 1;
 			};
-			function<void(int)> rec = [&](int ind) -> void {
-				if (ind == dim) {
-					rec(ind+1);
+			for (int bits = 0; bits < (1 << P::DIM); bits++) {
+				for (int i = 0; i < P::DIM; i++) {
+					if (i == dim) {
+						if (bits & (1 << i)) continue;
+					} else {
+						pivot[i] = (bits & 1 << i ? base[i] + dims[i] : base[i]);
+					}
 				}
-				else if (ind == P::DIM) {
-					if (test()) pcands.push_back(pivot);
-				}
-				else {
-					pivot[ind] = base[ind];
-					rec(ind+1);
-					pivot[ind] = base[ind] + dims[ind];
-					rec(ind+1);
-				}
-			};
-			rec(0);
-
+				if (test()) pcands.push_back(pivot);
+			}
 			if (pcands.empty()) {
 				if (pos > 1) --pos;
 				else if (pos < dims[dim]-1) ++pos;
 				else return pickPivot(corner1, corner2, dims, base, hasCorner2, avoidDims | (1 << dim), rnd);
 			}
+			else break;
 		}
 		assert(!pcands.empty());
 		P pivot = pcands[rnd % (int)pcands.size()];
