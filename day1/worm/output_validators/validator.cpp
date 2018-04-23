@@ -234,6 +234,7 @@ struct Strat {
 	}
 	virtual ~Strat() {}
 	virtual int do_query(P x) = 0;
+	virtual void debug_test() {}
 	virtual long long maxval() const = 0;
 	int oob_query(P x) {
 		if (oob(x)) return -1;
@@ -259,6 +260,7 @@ struct AddStrat : Strat {
 	int do_query(P x) override {
 		return inner->query(x) + base;
 	}
+	void debug_test() override { inner->debug_test(); }
 	long long maxval() const override { return inner->maxval() + base; }
 };
 
@@ -294,6 +296,15 @@ struct SpacedStrat : Strat {
 		p[0] = val;
 		return inner1d->query(p);
 	}
+	void debug_test() override {
+		inner->debug_test();
+		inner1d->debug_test();
+		long long mv = inner1d->maxval();
+		for (int i = 0; i < inner1d->dims[0]; i++) {
+			int x = tr(i);
+			assert(0 <= x && x <= mv);
+		}
+	}
 	long long maxval() const override { return inner1d->maxval() + P::DIM; }
 };
 
@@ -305,6 +316,7 @@ struct PadStrat : Strat {
 	PadStrat(P dims, istream& cin) : Strat(dims) {
 		cin >> lo >> hi;
 		inner = readStrat(dims - lo - hi, cin);
+		assert(dims.sum() < 1000000);
 	}
 	PadStrat(P dims, istream& cin, SpacedT) : Strat(dims) {
 		hi = P::Z;
@@ -313,6 +325,7 @@ struct PadStrat : Strat {
 			lo[i]++;
 		}
 		inner = new SpacedStrat(dims - lo - hi, cin);
+		assert(dims.sum() < 1000000);
 	}
 	int do_query(P x) override {
 		assert(!oob(x));
@@ -326,6 +339,7 @@ struct PadStrat : Strat {
 		if (x >= w-x1) return x - (w-x1) + 1;
 		return 0;
 	}
+	void debug_test() override { inner->debug_test(); }
 	long long maxval() const override { return inner->maxval() + 1000000; }
 };
 
@@ -349,20 +363,38 @@ struct SpaceFillStrat : Strat {
 	SpaceFillStrat(P dims, istream& cin) : Strat(dims) {
 		seed = rand64();
 	}
+
 	int do_query(P x) override {
 		int res = 0;
-		bool r = rec(res, x, P::Z, P::Z, P::Z, dims, false);
+		bool r = rec<false>(res, x, P::Z, P::Z, P::Z, dims, false);
 		assert(r);
 		return res;
 	}
+
+	void debug_test() override {
+		int res = 0;
+		P x = P::K(-1);
+		bool r = rec<true>(res, x, P::Z, P::Z, P::Z, dims, false);
+		assert(!r);
+		assert(res == dims.prod());
+	}
+
+	template<bool debug>
 	bool rec(int& res, P want, P corner1, P corner2, P top, P bottom, bool hasCorner2) {
 		assert(top <= corner1 && corner1 <= bottom);
 		P dims = bottom - top;
-		if (!(top <= want && want < bottom)) {
-			res += dims.prod();
-			return false;
+		if (debug) {
+			if (dims == P::K(1)) {
+				res++;
+				return false;
+			}
+		} else {
+			if (!(top <= want && want < bottom)) {
+				res += dims.prod();
+				return false;
+			}
+			if (dims == P::K(1)) return true;
 		}
-		if (dims == P::K(1)) return true;
 		uint64_t rnd = top.hash(this->dims, bottom.hash(this->dims, seed));
 
 		auto pa = pickPivot(corner1, corner2, dims, top, hasCorner2, 0, rnd);
@@ -386,8 +418,9 @@ struct SpaceFillStrat : Strat {
 			top1[dim] = corner3[dim];
 			bottom1[dim] = bottom[dim];
 		}
-		if (rec(res, want, corner1, corner3, top1, bottom1, true)) return true;
-		if (rec(res, want, corner3, corner2, top2, bottom2, hasCorner2)) return true;
+		if (rec<debug>(res, want, corner1, corner3, top1, bottom1, true) && !debug) return true;
+		if (rec<debug>(res, want, corner3, corner2, top2, bottom2, hasCorner2) && !debug) return true;
+		if (debug) return false;
 		assert(false);
 		abort();
 	}
@@ -750,21 +783,25 @@ Strat* readStrat(P dims, istream& cin) {
 
 // Checks that no query results in Judge Error. This should take an estimated
 // 30 minutes or so each to run for the 3d2-space* cases...
+// (it does pass with fast = true)
 // Usage: for A in data/secret/*/*.in; do echo $A; ./a.out $A; done
 // with the validateStrat(strat); call in main uncommented.
-void validateStrat(Strat*& strat) {
-	static_assert(P::DIM == 3, "");
-	P p;
-	long long mv = strat->maxval();
-	assert(mv < 1000000000);
-	int &x = p[0], &y = p[1], &z = p[2];
-	P dims = strat->dims;
-	for (x = 0; x < dims[0]; x++) {
-		for (y = 0; y < dims[1]; y++) {
-			for (z = 0; z < dims[2]; z++) {
-				int v = strat->query(p);
-				assert(0 <= v);
-				assert(v <= mv);
+void validateStrat(Strat* strat, bool fast = false) {
+	if (fast) strat->debug_test();
+	else {
+		static_assert(P::DIM == 3, "");
+		P p;
+		long long mv = strat->maxval();
+		assert(mv < 1000000000);
+		int &x = p[0], &y = p[1], &z = p[2];
+		P dims = strat->dims;
+		for (x = 0; x < dims[0]; x++) {
+			for (y = 0; y < dims[1]; y++) {
+				for (z = 0; z < dims[2]; z++) {
+					int v = strat->query(p);
+					assert(0 <= v);
+					assert(v <= mv);
+				}
 			}
 		}
 	}
