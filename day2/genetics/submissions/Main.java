@@ -30,14 +30,14 @@ public class Main {
 			for (int i = 0; i < N; i++) {
 				if (!included[i]) continue;
 				for (int j = 0; j < M; j++) {
-					count[j] += (mat[i].charAt(j) == '1' ? 1 : 0);
+					count[j] += (mat[i].charAt(j) == 'A' ? 1 : 0);
 				}
 			}
 			for (int i = 0; i < N; i++) {
 				if (!iscandidate[i]) continue;
 				int sumdif = 0;
 				for (int j = 0; j < M; j++)
-					sumdif += (mat[i].charAt(j) == '1' ? nincluded - count[j] : count[j]);
+					sumdif += (mat[i].charAt(j) == 'A' ? nincluded - count[j] : count[j]);
 				int expectedsumdif = nincluded * K - (included[i] ? K : 0);
 				if (sumdif != expectedsumdif) {
 					iscandidate[i] = false;

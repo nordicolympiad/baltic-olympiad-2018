@@ -11,85 +11,128 @@ compile gen-hadamard-oneimportantrow.cpp opt
 compile gen-hadamard-flips.cpp opt
 
 samplegroup
-limits n=20
+limits n=20 a=4
 sample 1
+sample 2
 
-group group1 33
-limits n=100
-# hadamard sizes: 64, 96
-tc small-a gen-hadamard-flips n=96 its=3 late=1
-tc small-b gen-doubled n=99 m=100 type=id
-tc small-c gen-random n=10 m=3 k=1
-tc small-rand-1 gen-random n=100 m=100 k=1
-tc small-rand-2 gen-random n=100 m=100 k=2
-tc small-rand-3 gen-random n=100 m=100 k=60
-tc small-rand-4 gen-random n=100 m=10 k=5
-tc small-rand-5 gen-random n=10 m=100 k=4
-tc small-flips-1 gen-hadamard-flips n=4
-tc small-flips-2 gen-hadamard-flips n=64 late=1
-tc small-flips-3 gen-hadamard-flips n=96 its=3
-tc small-doubled-1 gen-doubled n=95 type=hadamard
-tc small-doubled-2 gen-doubled n=95 m=100 type=hadamard
-tc small-doubled-3 gen-doubled n=47 m=100 type=hadamard adjoin=id
-tc small-one-1 gen-hadamard-oneimportantrow n=96
-tc small-one-2 gen-hadamard-oneimportantrow n=96 late=1
+group group1 27
+limits n=100 a=4
+# hadamard sizes: 96 (a=2), 81 (a=3), 64 (a=4)
+tc small-a gen-hadamard-flips n=96 its=3 late=1 a=2
+tc small-b gen-doubled n=99 m=100 type=id a=4
+tc small-c gen-random n=10 m=3 k=1 a=2
+tc small-d gen-hadamard-flips n=81 its=2 late=1 a=3
+tc small-rand-1 gen-random n=100 m=100 k=1 a=2
+tc small-rand-2 gen-random n=100 m=100 k=2 a=3
+tc small-rand-3 gen-random n=100 m=100 k=60 a=4
+tc small-rand-4 gen-random n=100 m=10 k=5 a=3
+tc small-rand-5 gen-random n=10 m=100 k=4 a=2
+tc small-flips-1 gen-hadamard-flips n=4 a=2
+tc small-flips-2 gen-hadamard-flips n=64 late=1 a=4
+tc small-flips-3 gen-hadamard-flips n=96 its=3 a=4 gena=2
+tc small-doubled-1 gen-doubled n=95 type=hadamard a=4 gena=2
+tc small-doubled-2 gen-doubled n=95 m=100 type=hadamard a=2
+tc small-doubled-3 gen-doubled n=47 m=100 type=hadamard adjoin=id a=3 gena=2
+tc small-one-1 gen-hadamard-oneimportantrow n=96 a=2
+tc small-one-2 gen-hadamard-oneimportantrow n=96 late=1 a=4 gena=2
 
-group group2 29
-include_group group1
-limits n=1600
-# hadamard sizes: 1152, 1536, 1024
-tc medium-a gen-hadamard-flips n=1536 its=3 late=1
-tc medium-b gen-doubled n=1599 m=1600 type=id
-tc medium-rand-1 gen-random n=1600 m=1600 k=1
-tc medium-rand-2 gen-random n=1600 m=1600 k=10
-tc medium-rand-3 gen-random n=1600 m=1600 k=1000
-tc medium-flips-1 gen-hadamard-flips n=1536
-tc medium-flips-2 gen-hadamard-flips n=1536 late=1
-tc medium-flips-3 gen-hadamard-flips n=1536 its=3
-tc medium-flips-4 gen-hadamard-flips n=1536 its=3
-tc medium-flips-5 gen-hadamard-flips n=1536 its=3
-tc medium-flips-6 gen-hadamard-flips n=1536 its=2
-tc medium-flips-7 gen-hadamard-flips n=1536 its=2 late=1
-tc medium-doubled-1 gen-doubled n=1151 type=hadamard
-tc medium-doubled-2 gen-doubled n=1535 m=1600 type=hadamard
-tc medium-doubled-3 gen-doubled n=767 m=1600 type=hadamard adjoin=hadamard
-tc medium-doubled-4 gen-doubled n=767 m=1600 type=hadamard adjoin=id
-tc medium-one-1 gen-hadamard-oneimportantrow n=1024
-tc medium-one-2 gen-hadamard-oneimportantrow n=1536
-tc medium-one-3 gen-hadamard-oneimportantrow n=1536 late=1
+group group2 19
+limits n=1600 a=2
+# hadamard sizes: 1152, 1536, 1024 (a=2)
+tc small-c
+tc small-rand-1
+tc small-rand-5
+tc medium-a gen-hadamard-flips n=1536 its=3 late=1 a=2
+tc medium-b gen-doubled n=1599 m=1600 type=id a=2
+tc medium-c gen-hadamard-oneimportantrow n=1536 m=1600 late=1 a=2
+tc medium-rand-1 gen-random n=1600 m=1600 k=1 a=2
+tc medium-rand-2 gen-random n=1600 m=1600 k=10 a=2
+tc medium-rand-3 gen-random n=1600 m=1600 k=1000 a=2
+tc medium-flips-1 gen-hadamard-flips n=1536 a=2
+tc medium-flips-2 gen-hadamard-flips n=1536 late=1 a=2
+tc medium-flips-3 gen-hadamard-flips n=1536 its=3 a=2
+tc medium-flips-4 gen-hadamard-flips n=1536 its=3 a=2
+tc medium-flips-5 gen-hadamard-flips n=1536 its=3 a=2
+tc medium-flips-6 gen-hadamard-flips n=1536 its=2 a=2
+tc medium-flips-7 gen-hadamard-flips n=1536 its=2 late=1 a=2
+tc medium-doubled-1 gen-doubled n=1151 type=hadamard a=2
+tc medium-doubled-2 gen-doubled n=1535 m=1600 type=hadamard a=2
+tc medium-doubled-3 gen-doubled n=767 m=1600 type=hadamard adjoin=hadamard a=2
+tc medium-doubled-4 gen-doubled n=767 m=1600 type=hadamard adjoin=id a=2
+tc medium-one-1 gen-hadamard-oneimportantrow n=1024 a=2
+tc medium-one-2 gen-hadamard-oneimportantrow n=1536 m=1598 a=2
+tc medium-one-3 gen-hadamard-oneimportantrow n=1536 m=1600 a=2
+tc medium-one-4 gen-hadamard-oneimportantrow n=1536 m=1600 a=2
+tc medium-one-5 gen-hadamard-oneimportantrow n=1536 m=1600 a=2
 
-group group3 38
-include_group group2
-limits n=4100
-# hadamard sizes: 3456, 2304, 3072, 4096
-tc large-a gen-hadamard-flips n=4096 its=3 late=1
-tc large-b gen-doubled n=4099 m=4100 type=id
-tc large-c gen-hadamard-oneimportantrow n=4096 late=1
-tc large-doubled-1 gen-doubled n=3455 type=hadamard
-tc large-doubled-2 gen-doubled n=4095 m=4100 type=hadamard
-tc large-doubled-3 gen-doubled n=2047 m=4100 type=hadamard adjoin=hadamard
-tc large-doubled-4 gen-doubled n=2047 m=4100 type=hadamard adjoin=id
-tc large-flips-1 gen-hadamard-flips n=3456
-tc large-flips-2 gen-hadamard-flips n=4096
-tc large-flips-3 gen-hadamard-flips n=4096
-tc large-flips-4 gen-hadamard-flips n=4096 late=1
-tc large-flips-5 gen-hadamard-flips n=4096 its=3
-tc large-flips-6 gen-hadamard-flips n=4096 its=3
-tc large-flips-7 gen-hadamard-flips n=4096 its=3
-tc large-flips-8 gen-hadamard-flips n=4096 its=2
-tc large-flips-9 gen-hadamard-flips n=4096 its=2 late=1
-tc large-one-0 gen-hadamard-oneimportantrow n=3456
-tc large-one-1 gen-hadamard-oneimportantrow n=4096
-tc large-one-2 gen-hadamard-oneimportantrow n=4096
-tc large-one-3 gen-hadamard-oneimportantrow n=4096
-tc large-rand-1 gen-random n=4000 m=4000 k=1
-tc large-rand-2 gen-random n=4000 m=4000 k=10
-tc large-rand-3 gen-random n=4000 m=4000 k=1000
-for A in {1..20}; do
-	# Try to kill random-order naive-popcount. (If these pass, the contestant
-	# won't have reason to continue submitting, so luckily this shouldn't
-	# impact the judge very much.)
-	tc large-xone-$A gen-hadamard-oneimportantrow n=4096
+group group3 28
+limits n=4100 a=2
+#include_group group2
+# hadamard sizes: 3456, 2304, 3072, 4096 (a=2)
+tc small-c
+tc small-rand-1
+tc small-rand-5
+tc large-a gen-hadamard-flips n=4096 its=3 late=1 a=2
+tc large-b gen-doubled n=4099 m=4100 type=id a=2
+tc large-c gen-hadamard-oneimportantrow n=4096 late=1 a=2
+tc large-doubled-1 gen-doubled n=3455 type=hadamard a=2
+tc large-doubled-2 gen-doubled n=4095 m=4100 type=hadamard a=2
+tc large-doubled-3 gen-doubled n=2047 m=4100 type=hadamard adjoin=hadamard a=2
+tc large-doubled-4 gen-doubled n=2047 m=4100 type=hadamard adjoin=id a=2
+tc large-flips-1 gen-hadamard-flips n=3456 a=2
+tc large-flips-2 gen-hadamard-flips n=4096 a=2
+tc large-flips-3 gen-hadamard-flips n=4096 a=2
+tc large-flips-4 gen-hadamard-flips n=4096 late=1 a=2
+tc large-flips-5 gen-hadamard-flips n=4096 its=3 a=2
+tc large-flips-6 gen-hadamard-flips n=4096 its=3 a=2
+tc large-flips-7 gen-hadamard-flips n=4096 its=2 a=2
+tc large-flips-8 gen-hadamard-flips n=4096 its=2 late=1 a=2
+tc large-one-0 gen-hadamard-oneimportantrow n=3456 m=4100 a=2
+tc large-one-1 gen-hadamard-oneimportantrow n=4096 a=2
+tc large-one-2 gen-hadamard-oneimportantrow n=4096 a=2
+tc large-rand-1 gen-random n=4000 m=4000 k=1 a=2
+tc large-rand-2 gen-random n=4000 m=4000 k=10 a=2
+tc large-rand-3 gen-random n=4000 m=4000 k=1000 a=2
+for A in {1..17}; do
+	# Try to kill random-order naive-popcount.
+	tc large-xone-$A gen-hadamard-oneimportantrow n=4096 a=2
+done
+
+group group4 26
+limits n=4100 a=4
+#include_group group3
+tc small-c
+tc small-rand-1
+tc small-rand-5
+tc large-a
+tc large-b
+tc large-c
+# hadamard sizes: 4096 (a=4), 2187 (a=3)
+tc alarge-a gen-hadamard-flips n=4096 its=3 late=1 a=4
+tc alarge-b gen-doubled n=4099 m=4100 type=id a=4
+tc alarge-c gen-hadamard-oneimportantrow n=4096 late=1 a=4
+tc alarge-d gen-hadamard-oneimportantrow n=2187 m=4100 late=1 a=4 gena=3
+tc alarge-doubled-1 gen-doubled n=3455 type=hadamard a=3 gena=2
+tc alarge-doubled-2 gen-doubled n=4095 m=4100 type=hadamard a=2
+tc alarge-doubled-3 gen-doubled n=2047 m=4100 type=hadamard adjoin=hadamard a=4 gena=2
+tc alarge-doubled-4 gen-doubled n=2047 m=4100 type=hadamard adjoin=id a=4
+tc alarge-flips-1 gen-hadamard-flips n=3456 a=4 gena=2
+tc alarge-flips-2 gen-hadamard-flips n=4096 a=2
+tc alarge-flips-3 gen-hadamard-flips n=4096 a=4
+tc alarge-flips-4 gen-hadamard-flips n=4096 late=1 a=4
+tc alarge-flips-5 gen-hadamard-flips n=4096 its=3 a=4
+tc alarge-flips-6 gen-hadamard-flips n=4096 its=3 a=2
+tc alarge-flips-7 gen-hadamard-flips n=4096 its=2 a=2
+tc alarge-flips-8 gen-hadamard-flips n=4096 its=2 late=1 a=4
+tc alarge-one-0 gen-hadamard-oneimportantrow n=3456 m=4000 a=4 gena=2
+tc alarge-one-1 gen-hadamard-oneimportantrow n=4096 a=3 gena=2
+tc alarge-one-2 gen-hadamard-oneimportantrow n=4096 a=4
+tc alarge-rand-1 gen-random n=4000 m=4000 k=1 a=4
+tc alarge-rand-2 gen-random n=4000 m=4000 k=10 a=2
+tc alarge-rand-3 gen-random n=4000 m=4000 k=1000 a=4
+for A in {1..5}; do
+	# Try to kill random-order naive-popcount.
+	tc alarge-xone-$A gen-hadamard-oneimportantrow n=4096 a=4
 done
 
 cleanup_programs

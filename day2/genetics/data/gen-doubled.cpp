@@ -5,6 +5,8 @@ int main(int argc, char** argv) {
 	args.construct(argc, argv);
 	int N = Arg("n");
 	int M = Arg("m", -1);
+	int A = Arg("a");
+	int gena = Arg("gena", A);
 	string type = Arg("type");
 	string adjoin = Arg("adjoin", "");
 
@@ -12,24 +14,29 @@ int main(int argc, char** argv) {
 	int N2 = (N+1)/2;
 
 	int K;
-	matbool mat, mat2;
-	if (type == "id") mat = generateI(N2), K = 2;
-	else if (type == "hadamard") mat = generateMatrix(N2), K = N2 / 2;
+	matdig mat, mat2;
+	bool hadamard = (type == "hadamard");
+	if (type == "id") tie(mat, K) = generateI(N2, gena);
+	else if (hadamard) tie(mat, K) = generateMatrix(N2, gena);
 	else assert(0);
 
 	for (int i = 0; i < N2; i++) {
 		mat2.push_back(mat[i]);
+		if (hadamard) {
+			dig d = randdig(A);
+			for (dig& d2 : mat[i]) d2 = add(d2, d, A);
+		}
 		mat2.push_back(mat[i]);
 	}
 	mat2.pop_back();
-	randomize(mat2);
-	adjoinMat(mat2, adjoin, &K);
-	randomize(mat2);
+	randomize(mat2, A);
+	adjoinMat(mat2, adjoin, &K, gena);
+	randomize(mat2, A);
 	if (M != -1) {
 		assert((int)mat2[0].size() <= M);
 		for (auto& v : mat2)
 			v.resize(M);
 	}
-	randomize(mat2);
-	print(mat2, K);
+	randomize(mat2, A);
+	print(mat2, K, A);
 }

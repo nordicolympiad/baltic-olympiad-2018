@@ -18,7 +18,7 @@ int main() {
 				count += (strings[i][k] != strings[j][k]);
 			}
 			if (count != K) {
-				// clog << j << ", " << flush;
+				clog << j << ", " << flush;
 				goto fail;
 			}
 		}

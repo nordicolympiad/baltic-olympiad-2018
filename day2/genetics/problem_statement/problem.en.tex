@@ -5,8 +5,9 @@ For villains that intend to take over the world, a common way to avoid getting c
 is to clone themselves. You have managed to catch an evil villain and her $N-1$ clones,
 and you are now trying to figure out which one of them is the real villain.
 
-To your aid you have each person's DNA sequence, simplified to consist of
-$M$ digits, each being either zero or one. You also know that the clones are not perfectly made;
+To your aid you have each person's DNA sequence, consisting of $M$ characters, each being either
+\texttt{A}, \texttt{C}, \texttt{G} or \texttt{T}.
+You also know that the clones are not perfectly made;
 rather, their sequences differ in exactly $K$ places compared to the real villain's.
 
 Can you identify the real villain?
@@ -14,7 +15,7 @@ Can you identify the real villain?
 \section*{\inputsection}
 The first line contains the three integers $N$, $M$, and $K$, where $1 \le K \le M$.
 The following $N$ lines represent the DNA sequences.
-Each of these lines consists of $M$ characters, each being either \texttt{0} or \texttt{1}.
+Each of these lines consists of $M$ characters, each of which is either \texttt{A}, \texttt{C}, \texttt{G} or \texttt{T}.
 
 There is exactly one sequence that differs from all the other sequences in exactly $K$ places.
 
@@ -26,10 +27,11 @@ The sequences are numbered starting from $1$.
 \testgroups
 
 \noindent
-\begin{tabular}{| l | l | l |}
+\begin{tabular}{| l | l | l | l |}
 \hline
-\group & \points & \limitsname \\ \hline
-1     & 33     & $2 \le N, M \le 100$ \\ \hline
-2     & 29     & $2 \le N, M \le 1600$ \\ \hline
-3     & 38     & $2 \le N, M \le 4100$ \\ \hline
+  \group & \points & \limitsname & \additionalconstraints \\ \hline
+  1      & 27      & $2 \le N, M \le 100$ & \\ \hline
+  2      & 19      & $2 \le N, M \le 1600$ & All characters are either \texttt{A} or \texttt{C}. \\ \hline
+  3      & 28      & $2 \le N, M \le 4100$ & All characters are either \texttt{A} or \texttt{C}. \\ \hline
+  4      & 26      & $2 \le N, M \le 4100$ & \\ \hline
 \end{tabular}

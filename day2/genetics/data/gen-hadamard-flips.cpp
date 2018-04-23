@@ -4,15 +4,18 @@
 int main(int argc, char** argv) {
 	args.construct(argc, argv);
 	int N = Arg("n");
+	int A = Arg("a");
+	int gena = Arg("gena", A);
 	int its = Arg("its", 0);
 	bool late = Arg("late", 0);
 
-	vector<vector<bool>> mat = generateMatrix(N), mat2;
-	randomize(mat);
+	matdig mat, mat2;
+	int K;
+	tie(mat, K) = generateMatrix(N, gena);
+	randomize(mat, A);
 
-	int K = N;
-	int D = N / 2;
-	// assert(solve(N, K, D, mat) == N);
+	int M = (int)mat[0].size();
+	assert(solve(N, M, K, mat) == N);
 	assert(N >= 4);
 
 	int cand = N;
@@ -22,11 +25,12 @@ int main(int argc, char** argv) {
 		if (late)
 			row = N-1 - rand() % (N / 4);
 		assert(0 <= row && row < N);
-		int col1 = rand() % K;
-		int col2 = rand() % K;
-		mat2[row][col1] = mat2[row][col1] ^ 1;
-		mat2[row][col2] = mat2[row][col2] ^ 1;
-		int ncand = solve(N, K, D, mat2);
+		int col1 = rand() % M;
+		int col2 = rand() % M;
+		dig d = randdig_pos(A);
+		mat2[row][col1] = add(mat2[row][col1], d, A);
+		mat2[row][col2] = sub(mat2[row][col2], d, A);
+		int ncand = solve(N, M, K, mat2);
 		clog << ncand << endl;
 		if (ncand && ncand < cand) {
 			mat.swap(mat2);
@@ -37,7 +41,7 @@ int main(int argc, char** argv) {
 	if (cand > 1) {
 		while (true) {
 			vector<int> cands;
-			int r = solve((int)mat.size(), K, D, mat, &cands);
+			int r = solve((int)mat.size(), M, K, mat, &cands);
 			assert(r > 0);
 			if (r == 1) break;
 			random_shuffle(cands.begin(), cands.end());
@@ -50,5 +54,5 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	print(mat, D);
+	print(mat, K, A);
 }
