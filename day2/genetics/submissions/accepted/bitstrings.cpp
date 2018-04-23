@@ -20,25 +20,25 @@ int main() {
 	}
 	while (ncand > 1) {
 cerr << ncand << endl;
-		vector<bool> included(N);
-		unsigned int nincluded = 0;
+		vector<unsigned> weight(N);
+		unsigned int totweight = 0;
 		for (int i = 0; i < N; ++i) {
-			included[i] = (rand() >> 14) & 1;
-			nincluded += included[i] ? 1 : 0;
+			weight[i] = rand();
+			totweight += weight[i];
 		}
-		vector<int> count(K, 0);
+		vector<unsigned> count(K, 0);
 		for (int i = 0; i < N; ++i) {
-			if (!included[i]) continue;
+			unsigned w = weight[i];
 			for (int j = 0; j < K; ++j) {
-				count[j] += strings[i][j];
+				count[j] += (unsigned)strings[i][j] * w;
 			}
 		}
 		for (int i = 0; i < N; ++i) {
 			if (!iscandidate[i]) continue;
-			unsigned int sumdif = 0;
+			unsigned sumdif = 0;
 			for (int j = 0; j < K; ++j)
-				sumdif += (strings[i][j] ? nincluded - count[j] : count[j]);
-			unsigned int expectedsumdif = nincluded * D - (included[i] ? D : 0);
+				sumdif += (strings[i][j] ? totweight - count[j] : count[j]);
+			unsigned expectedsumdif = (totweight - weight[i]) * D;
 			if (sumdif != expectedsumdif) {
 				iscandidate[i] = false;
 				--ncand;
