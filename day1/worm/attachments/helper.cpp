@@ -10,7 +10,7 @@ int query(int x, int y, int z) {
 	return ans;
 }
 
-[[noreturn]]
+__attribute__((noreturn))
 void guess(int x, int y, int z) {
 	printf("! %d %d %d\n", x, y, z);
 	exit(0);
