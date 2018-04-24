@@ -14,6 +14,7 @@ samplegroup
 limits n=20
 sample 1
 sample 2
+sample 3
 
 group group1 21
 limits n=20
