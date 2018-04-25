@@ -10,13 +10,13 @@ More precisely, you need to find a cell $(x,y,z)$, such that
 $$
 H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1]),
 $$
-where a value is treated as $0$ when it is outside the box (because Maximus does absolutely not want to go outside the box).
+where a value is treated as $0$ when it is outside the box (because Maximus absolutely wants to stay in the box).
 
 However, the number of cells can be very large, so you do not want to measure the humidity of all the cells. Therefore, in this task, you are allowed to interact with the grader, and ask for the humidity at given points.
 When you have found a suitable location for Maximus, give that location to the grader.
 
 \section*{\interactivity}
-The first line of the input will contain four positive integers: $N$, $M$, $K$ and $Q$, where $N$, $M$ and $K$ are the box dimensions and $Q$ is the maximum number of measurements you may perform.
+The first line of the input contains four positive integers: $N$, $M$, $K$ and $Q$, where $N$, $M$ and $K$ are the box dimensions and $Q$ is the maximum number of measurements you may perform.
 
 After that, you can write at most $Q$ lines of the form \texttt{?\ x y z} to standard output.
 This asks for the value of the humidity at point $(x, y, z)$.
