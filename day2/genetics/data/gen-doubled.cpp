@@ -23,8 +23,8 @@ int main(int argc, char** argv) {
 	for (int i = 0; i < N2; i++) {
 		mat2.push_back(mat[i]);
 		if (hadamard) {
-			dig d = randdig(A);
-			for (dig& d2 : mat[i]) d2 = add(d2, d, A);
+			dig d = randdig(gena);
+			for (dig& d2 : mat[i]) d2 = add(d2, d, gena);
 		}
 		mat2.push_back(mat[i]);
 	}
