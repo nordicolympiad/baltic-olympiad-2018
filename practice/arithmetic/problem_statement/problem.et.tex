@@ -1,0 +1,24 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Lihtne aritmeetika}
+
+On antud kolm täisarvu $a$, $b$ ja $c$ ($1 \le a, b, c \le 10^9$). Leida avaldise $a \cdot b / c$ väärtus \emph{absoluutse} veaga mitte üle $10^{-6}$.
+
+\section*{\inputsection}
+Sisendi ainsal real on tühikutega eraldatud täisarvud $a$, $b$ ja $c$.
+
+\section*{\outputsection}
+Väljastada täpselt üks reaalarv. See ei tohi avaldise $a \cdot b / c$ täpsest väärtusest erineda rohkem kui $10^{-6}$ võrra, s.t väljastatud arv $x$ peab rahuldama võrratust $|x - a \cdot b / c| \le 10^{-6}$.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1 & 25 & $1 \le a, b, c \le 10$ \\ \hline
+2 & 25 & $1 \le a, b, c \le 10\,000$ \\ \hline
+3 & 25 & $1 \le a, b \le 10^9, c = 1$ \\ \hline
+4 & 25 & $1 \le a, b, c \le 10^9$ \\ \hline
+\end{tabular}

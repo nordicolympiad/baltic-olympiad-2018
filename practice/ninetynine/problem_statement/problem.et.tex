@@ -1,0 +1,42 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Üheksakümmend üheksa}
+
+Sa mängid sõbraga mängu, mille nimi on ``üheksakümmend üheksa''.
+Sina alustad, öeldes kas arvu $1$ või arvu $2$.
+Seejärel ütlete te sõbraga kordamööda arve, kusjuures iga arv peab olema eelmisest kas $1$ või $2$ võrra suurem.
+Võidab see, kes ütleb arvu $99$.
+
+Kirjutada programm, mis seda mängu Sinu eest mängides alati võidab.
+
+\section*{\interactivity}
+Selle ülesande hindamine on interaktiivne.
+
+Sinu programm peab algatuseks väljastama arvu $1$ või $2$ ja selle järele reavahetuse.
+Testimisprogramm loeb selle arvu (tähistame seda $x$) ja vastab kas arvuga $x+1$ või arvuga $x+2$, mille Sinu programm saab sisse lugeda.
+Seejärel peab Sinu programm omakorda väljastama $1$ või $2$ võrra suurema arvu j.n.e kuni mängu lõpuni.
+
+Kui Sinu programm suudab mängu võita ja väljastab $99$, peab ta pärast seda töö normaalselt lõpetama.
+Kui Sinu programm loeb sisendist arvu $99$, peab ta kohe pärast seda töö lõpetama; selle testigrupi tulemuseks näidatakse ``Wrong Answer''.
+Lubamatute väärtuste (ka $99$-st suuremate arvude) väljastamisel on tulemuseks samuti ``Wrong Answer'', kui Su programm seejärel kohe töö lõpetab.
+Kui Su programm ei lõpeta tööd nõuetekohaselt, võib testigrupi tulemuseks olla ``Wrong Answer'', ``Runtime Error'' või ``Time Limit Exceeded'', sõltuvat sellest, kuidas Su programm täpselt käitub.
+
+Sinu programm peab iga oma käigu väljastamise järel ja enne testimisprogrammi käigu lugemist väljundpuhvri tühjendama. Kui Sinu programm seda ei tee, on hindamise tulemuseks ``Time Limit Exceeded''. Väljundpuhvri tühendamine käib järgmiselt:
+\begin{itemize}
+  \item Java: \texttt{System.out.println()} tühjendab puhvri automaatselt.
+  \item Python: \texttt{print()} tühjendab puhvri automaatselt.
+  \item C++: \texttt{cout << endl;} väljastab reavahetuse ja tühjendab seejärel puhvri; \texttt{printf()} kasutamise järel tühjendab puhvri \texttt{fflush(stdout)}.
+  \item Pascal: \texttt{Flush(Output)}.
+\end{itemize}
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \constraints \\ \hline
+  1      & 30     & Vastane suurendab arvu alati 1 võrra. \\ \hline
+  2      & 30     & Vastane suurendab arvu alati 2 võrra (välja arvatud 98 juures). \\ \hline
+  3      & 40     & \vtop{\hbox{Vastane suurendab arvu 1 või 2 võrra juhuslikult 50\% tõenäosusega}\hbox{(välja arvatud 98 juures).}} \\ \hline
+\end{tabular}

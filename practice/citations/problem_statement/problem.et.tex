@@ -1,0 +1,62 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Viited}
+\illustration{.40}{oldbooks}{\href{https://pixabay.com/en/books-old-books-antiquariat-read-1215672/}{CC0, congerdesign via Pixabay.}}
+
+Grace tahab lugeda üht teadusraamatut.
+Tal on harjumus alati hoolikalt lugeda ka kõiki allikaid, millele tema loetavad raamatud viitavad ja nende allikaid j.n.e.
+Tavaliselt on tulemuseks, et ta loeb märksa rohkem raamatuid kui see üks, mida ta algselt lugeda plaanis.
+Raamatukoguhoidjad juba pahandavad tema tohutute laenutusmahtude pärast.
+Selle vähendamiseks tahab ta leida, mis järjekorras ta peaks raamatuid lugema, et summaarne laenutusaeg oleks vähim võimalik.
+
+On teada, et lõpuks loeb ta kokku $N$ raamatut.
+Raamatud on nummerdatud $1 \dots N$ ja raamatu $i$ lugemiseks kulub $K_i$ minutit.
+Raamatus $i$ on viited $F_i$ teisele raamatule.
+Raamat, mida Grace algselt lugeda plaanis, on number $1$.
+Enne lugemise algust on Grace juba laenutanud kõik $N$ raamatut.
+
+Iga raamatu lugemisel käitub Grace järgmiselt:
+\begin{itemize}
+\item Kõigepealt avab ta raamatu ja loeb läbi selle viidete nimekirja, milleks kulub üks minut.
+\item Siis loeb ta mingis tema valitud järjekorras läbi kõik viidatud raamatud.
+\item Lõpuks loeb ta läbi raamatu enda ja tagastab selle raamatukokku, milleks kulub $K_i$ minutit.
+\end{itemize}
+
+Leida minimaalne laenutuste aegade summa, kui Grace loeb raamatuid optimaalses järjekorras.
+Mõne raamatu viidete nimekiri võib olla tühi ja on teada, et iga raamat (peale raamatu $1$) on täpselt ühe teise raamatu viidete nimekiras.
+Lisaks on teada, et viidete hulgas ei ole tsükleid.
+
+\section*{\inputsection}
+Sisendi esimesel real on raamatute arv $N$ ($1 \le N \le 100\,000$).
+Järgmised $N$ rida kirjeldavad raamatuid nende numbrite järjekorras.
+Igal real on kõigepealt raamatu lugemiseks kuluvate minutite arv $K_i$ ($1 \le K_i \le 1\,000$),
+selle järel raamatus olevate viidete arv $F_i$ ($0 \le F_i < N$),
+ja selle järel $F_i$ viidatavate raamatute numbrit.
+
+\section*{\outputsection}
+Väljastada täpselt üks täisarv, vähim võimalik kõigi raamatute laenutusaegade summa.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1     & 20     & $1 \le N \le 10, 1 \le K_i \le 1000$ \\ \hline
+2     & 30     & $1 \le N \le 50, 1 \le K_i \le 10$, $F_i \le 5$ \\ \hline
+3     & 20     & $1 \le N \le 100\,000, 1 \le K_i \le 1000, F_i \le 5$ \\ \hline
+4     & 30     & $1 \le N \le 100\,000, 1 \le K_i \le 1000$ \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanation{1}}
+1. minut: ava raamat 1 \\
+2. minut: ava raamat 2 \\
+3. minut: ava raamat 4 \\
+4. minut: tagasta raamat 4 (laenutuse aeg 4 minutit) \\
+14. minut: tagasta raamat 2 (laenutuse aeg 14 minutit) \\
+15. minut: ava raamat 3 \\
+16. minut: ava raamat 5 \\
+17. minut: tagasta raamat 5 (laenutuse aeg 17 minutit) \\
+37. minut: tagasta raamat 3 (laenutuse aeg 37 minutit) \\
+38. minut: tagasta raamat 1 (laenutuse aeg 38 minutit) \\
