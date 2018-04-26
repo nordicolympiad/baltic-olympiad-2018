@@ -1,0 +1,47 @@
+\ifx\boi\undefined\input{../templates/words-pl.tex}\fi
+\def\version{jury-1}
+\problemname{Dziewięćdziesiąt dziewięć}
+
+Grasz z kolegą w grę, która nazywa sie \emph{Dziewięćdziesiąt dziewięć}.
+Zaczynasz, mówiąc $1$ lub $2$. Później wykonujecie ruchy na zmianę.
+Zaczyna kolega. W każdym ruchu gracz zwiększa liczbę o $1$ lub $2$.
+Wygrywa gracz, który pierwszy powie $99$!
+
+Napisz program, który gra za ciebie i wygrywa.
+
+\section*{\interactivity}
+To zadanie jest interaktywne.
+
+Twój program zaczyna wypisując na standardowe wyjście jedną linię zawierającą $1$ lub $2$.
+Program sprawdzający wczytuje tę liczbę (nazwijmy ją $x$) i wypisuje pojedynczą liczbę
+zawierającą $x+1$ lub $x+2$, którą może wczytać twój program. Wtedy twój program wykonuje ruch
+wypisując liczbę o $1$ lub $2$ większą i tak dalej.
+
+Jeśli twój program wygra wypisując liczbę $99$, powinien zakończyć się z kodem wyjścia 0.
+Jeśli przegra, wczytując $99$, również powinien się zakończyć; wówczas test otrzyma werdykt Wrong Answer.
+Wypisanie niepoprawnej wartości (także liczby większej niż $99$) również zakończy się wynikiem Wrong Answer.
+Sprawdzarka zakłada, że po wypisaniu błędnej wartości program od razu się zakończy. W przeciwnym razie
+może otrzymać wynik Wrong Answer, Runtime Error lub Time Limit Exceeded
+w zależności od swojego zachowania.
+
+Pamiętaj, żeby opróżniać bufor wyjściowy \emph{po każdym ruchu}, przed wczytaniem odpowiedzi
+sprawdzarki, inaczej twój program otrzyma wynik Time Limit Exceeded.
+Komendy opróżniające bufor we wspieranych językach:
+\begin{itemize}
+  \item Java: \texttt{System.out.println()} robi to automatycznie.
+  \item Python: \texttt{print()} również robi to sam.
+  \item C++: \texttt{cout << endl;} opróżnia bufor, dodatkowo wypisując znak nowej linii. Jeżeli używasz printf: \texttt{fflush(stdout)}.
+  \item Pascal: \texttt{Flush(Output)}.
+\end{itemize}
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \constraints \\ \hline
+  1      & 30     & Kolega zawsze zwiększa numer o $1$. \\ \hline
+  2      & 30     & Kolega zawsze zwiększa numer o $2$ (oprócz $98$). \\ \hline
+  3      & 40     & Kolega gra losowo, wybierając każdą opcję z prawdopodobieństwem 50\% (oprócz $98$). \\ \hline
+\end{tabular}

@@ -1,0 +1,66 @@
+\ifx\boi\undefined\input{../templates/words-pl.tex}\fi
+\def\version{jury-1}
+\problemname{Odniesienia}
+\illustration{.40}{oldbooks}{\href{https://pixabay.com/en/books-old-books-antiquariat-read-1215672/}{CC0 Public Domain, congerdesign via Pixabay.}}
+
+Gracjan przymierza się do przeczytania książki naukowej.
+Ponieważ czyta bardzo uważnie, zawsze czyta również pozycje, do których odnosi się
+książka. I pozycje, do których odnoszą się owe pozycje.
+I tak dalej. Zwykle kończy się tak, że Gracjan czyta o wiele więcej książek
+niż zamierzał.
+Ponieważ bibliotekarka zaczyna narzekać na hobby Gracjana
+skutkujące w długie wypożyczenia, zamierza on znaleźć taką kolejność
+czytania książek, aby zminimalizować łączny czas ich wypożyczenia.
+
+Gracjan będzie musiał przeczytać $N$ książek.
+Książki są ponumerowane od $1$ do $N$, przeczytanie książki numer $i$ zajmuje $K_i$ minut.
+Książka $i$ ma bibliografię (listę odniesień) zawierającą $F_i$ pozycji.
+Początkowo Gracjan zamierza przeczytać książkę $1$.
+Przed rozpoczęciem czytania Gracjan wypożyczył wszystkie $N$ książek.
+
+
+Czytając książkę numer $i$ Gracjan:
+\begin{itemize}
+\item Otwiera książkę i czyta bibliografię w ciągu jednej minuty,
+\item potem czyta wszystkie pozycje, do których odnosi się książka
+\item i dopiero czyta książkę $i$, co zajmuje mu $K_i$ minut. Przeczytana książka jest natychmiast zwracana w 0 minut.
+\end{itemize}
+
+Twoim zadaniem jest policzenie minimalnego łącznego czasu wypożyczenia książek przy założeniu, że Gracjan czyta
+je w optymalnej kolejności. Książka może zawierać pustą bibliografię i każda książka za wyjątkiem książki $1$
+{\em jest wymieniona na w dokładnie jednej bibliografii}. Odniesienia nie tworzą cykli.
+
+\section*{\inputsection}
+W pierwszej linii wejścia znajduje się jedna liczba całkowita $N$ ($1 \le N \le 100\,000$).
+Kolejne $N$ wierszy opisuje książki w kolejności od $1$ do $N$.
+Na początku pojedynczego opisu znajdują się liczby całkowite $K_i$ i $F_i$ ($1 \le K_i \le 1\,000$, $0 \le F_i < N$)
+oznaczające odpowiednio liczbę minut, przez które Gracjan czyta $i$-tą oraz liczbę pozycji w bibliografii.
+Kolejne $F_i$ liczb zawiera numery książek, do których odnosi się $i$-ta książka.
+
+\section*{\outputsection}
+Na wyjście wypisz pojedynczą liczbę całkowitą -- minimalny łączny czas wypożyczenia wszystkich książek.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1   & 20   & $1 \le N \le 10, 1 \le K_i \le 1000$ \\ \hline
+2   & 30   & $1 \le N \le 50, 1 \le K_i \le 10$, $F_i \le 5$ \\ \hline
+3   & 20   & $1 \le N \le 100\,000, 1 \le K_i \le 1000, F_i \le 5$ \\ \hline
+4   & 30   & $1 \le N \le 100\,000, 1 \le K_i \le 1000$ \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanation{1}}
+min 1: otwarcie książki 1 \\
+min 2: otwarcie książki 2 \\
+min 3: otwarcie książki 4 \\
+min 4: zamknięcie i zwrot książki 4 (czas wypożyczenia 4 minuty) \\
+min 14: zamknięcie i zwrot książki 2 (czas wypożyczenia 14 minut) \\
+min 15: otwarcie książki 3 \\
+min 16: otwarcie książki 5 \\
+min 17: zamknięcie i zwrot książki 5 (czas wypożyczenia 17 minut) \\
+min 37: zamknięcie i zwrot książki 3 (czas wypożyczenia 37 minut) \\
+min 38: zamknięcie i zwrot książki 1 (czas wypożyczenia 38 minut) \\
