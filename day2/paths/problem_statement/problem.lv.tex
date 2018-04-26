@@ -1,0 +1,45 @@
+\ifx\boi\undefined\input{../templates/words-lv.tex}\fi
+\def\version{jury-1}
+\problemname{Ceļi}
+{\em Grafs} ir matemātisks objekts, kas sastāv no {\em virsotnēm} un {\em šķautnēm}, kas katra savieno divas virsotnes. Piemērs grafam ar $4$~virsotnēm un $3$~šķautnēm ir parādīts zemāk.
+
+Šajā uzdevumā katra grafa virsotne ir vienā no $K$~krāsām. Uzdevums ir atrast {\em ceļu} skaitu, kas nesatur virsotnes vienādās krāsās.
+
+{\em Ceļš} tiek definēts kā secīga virkne no~$2$ vai vairāk virsotnēm, tāda, ka
+starp blakus virsotnēm virknē pastāv šķautne. Ievērojiet, ka secība ir svarīga;
+piemēram, ``\texttt{1-2-3}'', ``\texttt{1-3-2}'' un ``\texttt{3-2-1}'' tiek
+uzskatīti par dažādiem ceļiem.
+
+\section*{\inputsection}
+Pirmā ievada rinda satur trīs veselus skaitļus: $N$ (virsotņu skaits), $M$ (šķautņu skaits) un $K$(dažādu krāsu skaits).
+
+%($1 \le N, M \le 3 \cdot 10^5, 1 \le K \le 5$).
+
+Otrā ievada rinda satur $N$~skaitļus starp~$1$ un~$K$~--- katras virsotnes krāsu (sākot ar virsotni~$1$ un beidzot ar virsotni~$N$).
+
+Katra no sekojošajām $M$~rindām apraksta šķautni un satur divus veselus skaitļus $a, b$ ($1 \le a, b \le N, a \neq b$)%
+~--- divas virsotnes, kuras savieno šķautne. Starp katrām divām virsotnēm būs ne vairāk kā viena šķautne.
+
+\section*{\outputsection}
+Izvadiet vienu veselu skaitli~--- ceļu skaitu, kuros visas virsotnes ir dažādās krāsās.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1      & 23      & $1 \le N, M \le 100, 1 \le K \le 4$ \\ \hline
+2      & 20      & $1 \le N, M \le 300\,000, 1 \le K \le 3$ \\ \hline
+3      & 27      & $1 \le N, M \le 300\,000, 1 \le K \le 4$ \\ \hline
+4      & 30      & $1 \le N, M \le 100\,000, 1 \le K \le 5$ \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanation{1}}
+
+\includegraphics[width=5cm]{pathsfig.pdf}
+
+Attēlā parādīts 1.~piemēra grafs, kur katra virsotne ir iezīmēta balta (krāsa~1), pelēka (krāsa~2) vai melna (krāsa~3). Pastāv 10~ceļi, kuros visas virsotnes ir dažādās krāsās: ``\texttt{1-2}'', ``\texttt{2-1}'', ``\texttt{2-3}'', ``\texttt{3-2}'', ``\texttt{2-4}'', ``\texttt{4-2}'', ``\texttt{1-2-4}'', ``\texttt{4-2-1}'', ``\texttt{3-2-4}'' un ``\texttt{4-2-3}''.
+
+Ievērojiet, ka ``\texttt{1}'' neskaitās kā ceļš, jo tā ir viena virsotne, kā arī neskaitās ``\texttt{1-2-3}'', jo tas satur divas virsotnes krāsā~1.
