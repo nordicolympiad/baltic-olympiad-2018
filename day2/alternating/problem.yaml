@@ -6,3 +6,5 @@ type: scoring
 grading:
     objective: max
 validation: custom
+limits:
+    time_multiplier: 15
