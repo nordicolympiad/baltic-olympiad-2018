@@ -14,7 +14,7 @@ compile gen_doublestar.py
 compile gen_manycomponents.py
 
 samplegroup
-limits n=20
+limits n=20 k=5
 sample 1
 
 group group1 23
