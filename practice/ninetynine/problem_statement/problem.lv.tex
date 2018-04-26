@@ -1,0 +1,45 @@
+\ifx\boi\undefined\input{../templates/words-lv.tex}\fi
+\def\version{jury-1}
+\problemname{Deviņdesmit deviņi}
+
+Jūs kopā ar draugu spēlējat spēli \emph{Deviņdesmit deviņi}.
+Jūs uzsākat spēli, pasakot skaitli $1$ vai $2$.
+Tad pārmaiņus jūs abi veicat gājienus, sākot ar jūsu draugu, katrā gājienā šo skaitli palielinot par $1$ vai $2$.
+Uzvar tas spēlētājs, kas pirmais pasaka $99$!
+
+Uzrakstiet programmu, kas spēlē šo spēli jūsu vietā un uzvar.
+
+\section*{\interactivity}
+Uzdevumā tiek lietots interaktīvs ievads/izvads.
+
+Jūsu programmai jāuzsāk darbība, izvadot vienu rindu ar skaitli $1$ vai $2$.
+Vērtēšanas programma tad nolasīs šo skaitli (sauksim to par $x$) un atbildē izvadīs rindu ar $x+1$ vai $x+2$, ko jūsu programma var nolasīt.
+Jūsu programmai tad jāizvada skaitlis, kas ir par $1$ vai $2$ lielāks nekā nolasītais skaitlis, un tā tālāk.
+
+Ja jums izdodas uzvarēt un izvadīt~$99$, jūsu programmai jābeidz darbība normāli (ar atgriešanās kodu~0).
+Ja uzvar jūsu draugs un jūsu programma nolasa~$99$, tad darbība arī jābeidz normāli; par testa grupu tad saņemsiet vērtējumu \emph{Wrong Answer}.
+Izvadot nekorektas vērtības (tai skaitā vērtības, lielākas par~$99$), arī iegūsiet vērtējumu \emph{Wrong Answer}, pieņemot, ka jūsu programma pēc tam pabeidz darbību.
+Ja jūsu programma beidz darbu nekorekti, tā saņems vienu no \emph{Wrong Answer}, \emph{Runtime Error} vai \emph{Time Limit Exceeded} vērtējumiem atkarībā no situācijas.
+
+Jums \emph{jānodrošina}, ka programma sinhronizē (\emph{flush}) izvada datu plūsmu pirms tā nolasa vērtēšanas programmas atbildi, citādi
+saņemsiet vērtējumu \emph{Time Limit Exceeded}. Atbalstītajās valodās to var izdarīt sekojošā veidā:
+\begin{itemize}
+  \item Java: \texttt{System.out.println()} sinhronizē automātiski.
+  \item Python: \texttt{print()} sinhronizē automātiski.
+  \item C++: \texttt{cout << endl;} sinhronizē, papildus izvada jaunas rindas simbolu. Ja lietojat \texttt{printf}, \texttt{fflush(stdout)}.
+  \item Pascal: \texttt{Flush(Output)}.
+\end{itemize}
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \constraints \\ \hline
+  1      & 30     & Jūsu draugs vienmēr skaitli palielina par 1. \\ \hline
+  2      & 30     & Jūsu draugs vienmēr skaitli palielina par 2 (izņemot pie skaitļa 98). \\ \hline
+  3      & 40     & Jūsu draugs spēlē nejauši, katrai izvēlei 50\% varbūtība (izņemot pie skaitļa 98). \\ \hline
+\end{tabular}
+
+\vspace{-1ex}

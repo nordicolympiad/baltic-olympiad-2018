@@ -1,0 +1,56 @@
+\ifx\boi\undefined\input{../templates/words-lv.tex}\fi
+\def\version{jury-1}
+\problemname{Mīlas daudzstūris}
+Kā mēs visi zinām, TV ziepju operas ar daudziem tēliem var novest pie ļoti sarežģītām attiecībām.
+Vienā TV šovā ir $N$ tēli. Katrs tēls mīl tieši vienu tēlu.
+
+Ir iespējams, ka tēls sākotnēji mīl pats sevi. Mēs uzskatam, ka starp diviem tēliem ir attiecības,
+tad un tikai tad, ja tie mīl viens otru. Sašaujot kādu ar mīlas bultu ir
+iespējams mainīt, ko tā persona mīl.
+
+Protams, šis pieļauj sevišķi nepatīkamus sarežģījumus, sauktus par ``mīlas daudzstūriem``.
+Mēs sakam, ka 3 vai vairāk personas ir ``mīlas daudzstūrī``, ja pirmā persona mīl otro,
+otrā mīl trešo un tā tālāk, un pēdējā persona mīl pirmo personu.
+
+Nesenie aptauju rezultāti rāda, ka skatītāji ir noguruši no drāmas un dotu priekšroku
+kaut kam romantiskam. Tāpēc tika nolemts sašaut tēlus ar mīlas bultām tā,
+lai visi tēli būtu attiecībās. Kāds ir vismazākais nepieciešamais mīlas bultu skaits, lai
+to paveiktu?
+
+\section*{\inputsection}
+Pirmā ievaddatu rinda satur veselu skaitli $N$ -- iesaistīto tēlu skaits.
+Nākamās $N$ rindas katra satur ar tukšumzīmi atdalītus divus vārdus $s$ un $t$, kas nozīmē, ka
+tēls $s$ sākotnēji mīl tēlu $t$. Tēlu vārdi ir ne vairāk kā $10$
+burtu gari un tie sastāv no mazajiem angļu valodas alfabēta burtiem.
+
+\section*{\outputsection}
+Izvadiet vienu veselu skaitli -- vismazāko mīlas bultu skaitu, kas nepieciešams, lai visi
+tēli būtu attiecībās. Ja tas nav iespējams, izvadiet $-1$.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+\group & \points & \limitsname & \additionalconstraints \\ \hline
+1     & 21     & $2 \le N \le 20$ & \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Katru personu kāds mīl. \\ \hline
+3     & 29     & $2 \le N \le 100\,000$ & Sākotnēji nav nekādu attiecību vai ``mīlas daudzstūru''. \\ \hline
+4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanations}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{polygonfig.pdf}
+\end{center}
+
+Pirmais paraugs ir ilustrēts augstāk redzamajā attēlā. Attēla augšējā daļa parāda sākotnējo mīlas situāciju,
+kur bulta no $s$ uz $t$ nozīmē, ka $s$ sākotnēji mīl $t$, un rozā krāsa izceļ trīs tēlus,
+kas jāsašauj ar mīlas bultām, lai iegūtu unikālo optimālo risinājumu. Attēla apakšējā daļa parāda situāciju pēc mīlas bultu izšaušanas.
+
+Otrajā paraugā, kas apmierina trešās grupas ierobežojumus, ir vairāki optimāli risinājumi.
+Viens no tiem ir sašaut \texttt{a}, \texttt{b} un \texttt{d} ar mīlas bultām un likt tiem attiecīgi iemīlēties \texttt{b}, \texttt{a} un \texttt{c}.
+
+Trešajā paraugā ir mīlas trīsstūris, kur neatkarīgi no izšauto mīlas bultu skaita, kāds vienmēr nebūs attiecībās.

@@ -1,0 +1,24 @@
+\ifx\boi\undefined\input{../templates/words-lv.tex}\fi
+\def\version{jury-1}
+\problemname{Vienkāršā aritmētika}
+
+Jums tiek doti trīs veseli skaitļi $a, b, c$ ($1 \le a, b, c \le 10^9$). Aprēķiniet $a \cdot b / c$ ar \emph{absolūto} kļūdu ne lielāku par~$10^{-6}$.
+
+\section*{\inputsection}
+Pirmā un vienīgā ievaddatu rinda satur trīs veselus skaitļus $a, b, c$, kas atdalīti ar tukšumzīmi.
+
+\section*{\outputsection}
+Izvadiet vienu peldošā punkta skaitli. Tas var atšķirties no $a \cdot b / c$ ne vairāk par $10^{-6}$ pēc absolūtās vērtības, t.\,i., jāizpildās $|x - a \cdot b / c| \le 10^{-6}$.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1 & 25 & $1 \le a, b, c \le 10$ \\ \hline
+2 & 25 & $1 \le a, b, c \le 10\,000$ \\ \hline
+3 & 25 & $1 \le a, b \le 10^9, c = 1$ \\ \hline
+4 & 25 & $1 \le a, b, c \le 10^9$ \\ \hline
+\end{tabular}

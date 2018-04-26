@@ -1,0 +1,61 @@
+\ifx\boi\undefined\input{../templates/words-lv.tex}\fi
+\def\version{jury-1}
+\problemname{Marsiešu DNS}
+Cilvēku DNS var reprezentēt kā simbolu virkni,
+izmantojot četrus alfabēta burtus ({A, C, G, T}), kur katrs simbols reprezentē
+atšķirīgus nukleotīdus (attiecīgi -- adenīns, citozīns, guanīns, timīns).
+
+Marsiešiem, savukārt, DNS uzbūve ir citāda. Pētījums, kas tika veikts
+uz marsiešiem, kurus nesen noķēra NASA, atklāja, ka marsiešu DNS sastāv no
+$K$ atšķirīgiem nukleotīdiem! Tādējādi marsiešu DNS var reprezentēt kā
+simbolu virkni, ko veido izmantojot $K$ burtu alfabētu.
+
+Pašlaik pētnieku grupa ir ieinteresēta pielietot marsiešu DNS
+mākslīgā intelekta izveidē. Pētnieki ir pieprasījuši pēc kārtas sekojošu simbolu
+apakšvirkni no marsiešu DNS simbolu virknes. Pētnieki $R$ nukleotīdiem ir norādījuši
+minimālo daudzumu -- cik reižu vismaz attiecīgajam nukleotīdam ir jāparādās
+pieprasītajā paraugā.
+
+Jūs esat ieinteresēts atrast īsāko pēc kārtas sekojošo simbolu apakšvirkni no DNS, kas apmierina pētnieku prasības.
+
+\section*{\inputsection}
+Pirmā rinda satur trīs veselus skaitļus $N$, $K$ un $R$ --
+kopējais marsieša DNS garums, alfabēta izmērs un
+nukleotīdu skaits, kam pētnieki ir norādījuši minimālā daudzuma
+prasību -- $1 \le R \le K \le N$.
+
+Otrā rinda satur $N$ veselus skaitļus, kas atdalīti ar tukšumzīmi -- marsiešu
+DNS simbolu virkne. Virknes $i$-tais skaitlis, $D_i$, norāda, kurš nukleotīds
+ir $i$-tajā pozīcijā DNS simbolu virknē. Nukleotīdi ir numurēti sākot ar $0$, t.i.
+$0 \leq D_i < K$. Katrs nukleotīds DNS parādīsies vismaz vienu reizi.
+
+Sekojošās $R$ rindas katra satur divus veselus skaitļus $B$ un $Q$ --
+nukleotīds un tā pieprasītais minimālais daudzums. Attiecīgi ($0 \le B < K, 1 \le Q \le N$).
+Neviens nukleotīds nebūs minēts vairāk kā vienu reizi.
+
+\section*{\outputsection}
+Izvadiet vienu veselu skaitli -- garumu īsākajai pēc kārtas sekojošu simbolu apakšvirknei
+no DNS, kas apmierina pētnieku prasības. Ja šāda apakšvirkne
+neeksistē, izvadiet ``\texttt{impossible}''.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1     & 16     & $1 \le N \le 100, R \le 10$ \\ \hline
+2     & 24     & $1 \le N \le 4\,000, R \le 10$ \\ \hline
+3     & 28     & $1 \le N \le 200\,000, R \le 10$ \\ \hline
+4     & 32     & $1 \le N \le 200\,000$ \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanations}
+Pirmajā paraugā ir trīs pēc kārtas sekojošu simbolu apakšvirknes ar garumu $2$, kas satur
+pa vienam 0 un 1 nukleotīdam (tās ir ``\texttt{0 1}'', ``\texttt{1 0}'' un ``\texttt{0 1}''),
+bet nav nevienas apakšvirknes ar garumu $1$. Tādēļ īsākais garums ir $2$.
+
+Otrajā paraugā (unikāla) optimālā pēc kārtas sekojošu simbolu apakšvirkne ir ``\texttt{1 3 2 0 1 2 0}''.
+
+Trešajā paraugā nav pietiekams skaits ar 0 tipa nukleotīdiem.

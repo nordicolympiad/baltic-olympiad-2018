@@ -1,0 +1,67 @@
+\ifx\boi\undefined\input{../templates/words-lv.tex}\fi
+\def\version{jury-1}
+\problemname{Citāti}
+\illustration{.40}{oldbooks}{\href{https://pixabay.com/en/books-old-books-antiquariat-read-1215672/}{CC0 Public Domain, congerdesign via Pixabay.}}
+
+Greisa vēlas izlasīt noteiktu zinātnisku grāmatu.
+Tajā pašā laikā viņa ļoti nopietni attiecas pret grāmatā pieminētu avotu lasīšanu,
+kā arī pret šo avotu avotu lasīšanu utt.
+Parasti tas beidzas ar to, ka viņa izlasa daudz vairāk grāmatu par to vienu, ko
+viņa sākumā bija iecerējusi izlasīt.
+Bibliotekāres visu laiku kurn par Greisas pārlieku lielo grāmatu aizņemšanos,
+un tāpēc tagad viņa vēlas atrast tādu grāmatu lasīšanas secību, kas minimizētu
+kopējo aizņemšanās laiku.
+
+Pavisam ir $N$~grāmatas, kuras Greisai beigu beigās vajadzēs izlasīt.
+Grāmatas ir sanumurētas no~$1$ līdz~$N$, un $i$-tā grāmata prasa $K_i$~minūtes, lai
+to izlasītu.
+Katra grāmata~$i$ satur citātu sarakstu, kas iekļauj $F_i$~grāmatas.
+Grāmatai, kuru Greisa vēlējās izlasīt pašā sākumā, ir numurs~$1$. % TODO: Improve this?
+Pirms 1.~grāmatas lasīšanas iesākšanas Greisa jau ir aizņēmusies visas $N$~grāmatas.
+
+Kad Greisa lasa grāmatu, viņa dara sekojošo:
+\begin{itemize}
+\item sākumā viņa atver grāmatu un izlasa citātu sarakstu, kas aizņem vienu minūti;
+\item pēc tam viņa izlasa visas grāmatas no šī saraksta, kaut kādā viņas pašas izvēlētā secībā;
+\item visbeidzot, viņa izlasa pašu grāmatu un atgriež to bibliotēkā, kas aizņem $K_i$~minūtes.
+\end{itemize}
+
+Jums ir jāaprēķina minimālais kopējais visu grāmatu aizņemšanās laiks, ņemot vērā, ka Greisa
+lasa grāmatas optimālā secībā.
+Grāmatas var saturēt tukšus citātu sarakstus, un katra grāmata, izņemot 1.~grāmatu, {\em
+parādīsies tieši vienā citātu sarakstā}.
+Ievaddatos neparādīsies citātu cikli.
+
+\section*{\inputsection}
+Pirmā rinda satur veselu skaitli~$N$ ($1 \le N \le 100\,000$).
+Pēc tam seko $N$~rindas, pa vienai uz katru grāmatu no~$1$ līdz~$N$.
+Katra tāda rinda satur skaitli~$K_i$ ($1 \le K_i \le 1\,000$)~--- minūšu skaitu šīs grāmatas izlasīšanai.
+Pēc tam seko skaitlis~$F_i$ ($0 \le F_i < N$), pēc kura seko $F_i$~skaitļi~--- grāmatu numuri, uz kuriem atsaucas $i$-tā grāmata.
+
+\section*{\outputsection}
+Izvadiet vienu veselu pozitīvu skaitli~--- minimālo kopējo grāmatu aizņemšanās laiku.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1     & 20     & $1 \le N \le 10, 1 \le K_i \le 1000$ \\ \hline
+2     & 30     & $1 \le N \le 50, 1 \le K_i \le 10$, $F_i \le 5$ \\ \hline
+3     & 20     & $1 \le N \le 100\,000, 1 \le K_i \le 1000, F_i \le 5$ \\ \hline
+4     & 30     & $1 \le N \le 100\,000, 1 \le K_i \le 1000$ \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanation{1}}
+laiks 1: atver grāmatu 1 \\
+laiks 2: atver grāmatu 2 \\
+laiks 3: atver grāmatu 4 \\
+laiks 4: aizver grāmatu 4 (aizņemšanās laiks 4 minūtes) \\
+laiks 14: aizver grāmatu 2 (aizņemšanās laiks 14 minūtes) \\
+laiks 15: atver grāmatu 3 \\
+laiks 16: atver grāmatu 5 \\
+laiks 17: aizver grāmatu 5 (aizņemšanās laiks 17 minūtes) \\
+laiks 37: aizver grāmatu 3 (aizņemšanās laiks 37 minūtes) \\
+laiks 38: aizver grāmatu 1 (aizņemšanās laiks 38 minūtes) \\
