@@ -1,21 +1,19 @@
 \ifx\boi\undefined\input{../templates/words-lv.tex}\fi
 \def\version{jury-1}
 \problemname{Mīlas daudzstūris}
-Kā mēs visi zinām, TV ziepju operas ar daudziem tēliem var novest pie ļoti sarežģītām attiecībām.
-Vienā TV šovā ir $N$ tēli. Katrs tēls mīl tieši vienu tēlu.
+Kā mēs visi zinām, TV ziepju operas ar daudziem tēliem var novest pie ļoti sarežģītām mīlas drāmām.
+Vienā TV šovā ir $N$ tēli. Katrs tēls mīl tieši vienu tēlu, kas var būt viņš pats.
+Mēs sakam, ka divi tēli ir attiecībās, tad un tikai tad, ja tie mīl viens otru.
 
-Ir iespējams, ka tēls sākotnēji mīl pats sevi. Mēs uzskatam, ka starp diviem tēliem ir attiecības,
-tad un tikai tad, ja tie mīl viens otru. Sašaujot kādu ar mīlas bultu ir
-iespējams mainīt, ko tā persona mīl.
-
-Protams, šis pieļauj sevišķi nepatīkamus sarežģījumus, sauktus par ``mīlas daudzstūriem``.
-Mēs sakam, ka 3 vai vairāk personas ir ``mīlas daudzstūrī``, ja pirmā persona mīl otro,
-otrā mīl trešo un tā tālāk, un pēdējā persona mīl pirmo personu.
+Viens īpašs sarežģītu attiecību veids ir ``mīlas daudzstūris``.
+Mēs sakam, ka 3 vai vairāk tēli ir ``mīlas daudzstūrī``, ja pirmais tēls mīl otro,
+otrais mīl trešo un tā tālāk, un pēdējais tēls mīl pirmo tēlu.
 
 Nesenie aptauju rezultāti rāda, ka skatītāji ir noguruši no drāmas un dotu priekšroku
-kaut kam romantiskam. Tāpēc tika nolemts sašaut tēlus ar mīlas bultām tā,
-lai visi tēli būtu attiecībās. Kāds ir vismazākais nepieciešamais mīlas bultu skaits, lai
-to paveiktu?
+kaut kam romantiskākam. Tāpēc tika nolemts sašaut tēlus ar mīlas bultām tā, lai visi tēli būtu attiecībās.
+Sašaujot kādu ar mīlas bultu ir iespējams mainīt, ko tas tēls mīl (uz jebkuru tēlu pēc jūsu izvēles).
+
+Kāds ir vismazākais nepieciešamais mīlas bultu skaits, lai to paveiktu?
 
 \section*{\inputsection}
 Pirmā ievaddatu rinda satur veselu skaitli $N$ -- iesaistīto tēlu skaits.
@@ -25,7 +23,7 @@ burtu gari un tie sastāv no mazajiem angļu valodas alfabēta burtiem.
 
 \section*{\outputsection}
 Izvadiet vienu veselu skaitli -- vismazāko mīlas bultu skaitu, kas nepieciešams, lai visi
-tēli būtu attiecībās. Ja tas nav iespējams, izvadiet $-1$.
+tēli būtu attiecībās. Ja tas nav iespējams, izvadiet \texttt{-1}.
 
 \section*{\constraints}
 \testgroups
@@ -35,7 +33,7 @@ tēli būtu attiecībās. Ja tas nav iespējams, izvadiet $-1$.
 \hline
 \group & \points & \limitsname & \additionalconstraints \\ \hline
 1     & 21     & $2 \le N \le 20$ & \\ \hline
-2     & 25     & $2 \le N \le 100\,000$ & Katru personu kāds mīl. \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Katru tēlu kāds mīl (iespējams viņš pats). \\ \hline
 3     & 29     & $2 \le N \le 100\,000$ & Sākotnēji nav nekādu attiecību vai ``mīlas daudzstūru''. \\ \hline
 4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
 \end{tabular}
