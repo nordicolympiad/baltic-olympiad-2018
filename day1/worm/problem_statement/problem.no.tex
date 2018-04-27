@@ -1,6 +1,6 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
 \def\version{jury-1}
-\problemname{Worm worries}
+\problemname{Worm Worries}
 Du leter etter en posisjon i jorden hvor du kan plassere kjæle-marken din, Maximus. Du avgrenser søket ditt til en boks-formet region med dimensioner $N \times M \times K$ centimeter som du har delt opp i ett tre-dimensionalt koordinatsystem av kubikk-centimeter store blokker, hvor vi skriver koordinatene til en slik celle $(x,y,z)$ ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Hver celle $(x,y,z)$ har en viss fuktighet $H[x,y,z]$ som er et heltall i intervallet $1 \dots 10^9$. Du kan måle fuktigheten til celler ved hjelp av en spesiell sensor.
 
 Maximus elsker fuktige områder, så du må plassere ham i en celle som er minst like fuktig som alle nabo-cellene, ellers vil han gå vekk og du vil neppe finne ham igjen. Med andre ord må du plassere Maximus i et lokalt maximum. Mer presist trenger du å finne en celle $(x,y,z)$ hvor
@@ -11,7 +11,7 @@ $$
 
 Her tolker vi en verdi til å være 0 om punktet man spør om fuktigheten til ligger utenfor boksen (fordi Maximus absolutt vil holde seg inni boksen).
 
-Antallet celler kan være veldig stort, så du ønsker ikke å måle fuktigheten i alle cellene. Derfor kan du i denne oppgaven interagere med graderen (English: "the grader") og spørre om fuktigheten i ett gitt punkt.
+Antallet celler kan være veldig stort, så du ønsker ikke å måle fuktigheten i alle cellene. Derfor kan du i denne oppgaven interagere med graderen (English: ``the grader'') og spørre om fuktigheten i ett gitt punkt.
 Når du har funnet en passende posisjon for Maximus, gi den posisjonen til graderen.
 
 \section*{\interactivity}
@@ -22,9 +22,9 @@ Etter dette kan du skrive maks $Q$ linjer på formen ``\texttt{?\ x y z}'' til s
 Etter alle disse linjene må programmet ditt skrive ut nøyaktig en linje på formen ``\texttt{!\ x y z}'' og terminere. Med dette påstås det at punktet $(x,y,z)$ er en passende posisjon for Maximus. Dommeren gir ingen respons til dette.
 
 Alle verdier av $x,y,z$ må oppfylle ulikhetene $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$. Om ikke, eller om en linje har et ugyldig format eller om du spør om mer enn $Q$ verdier vil graderen svare med \texttt{-1} og avslutte.
-Hvis dette skjer skal ditt program også avslutte. Om det fortsette, kan det få en tilbakemelding på formen "Runtime Error" eller "Time Limit Exceeded".
+Hvis dette skjer skal ditt program også avslutte. Om det fortsette, kan det få en tilbakemelding på formen ``Runtime Error'' eller ``Time Limit Exceeded''.
 
-Du \emph{må} forsikre deg om å flushe (engelsk: flush) standard output før du leser graderens respons. Ellers vil ditt program få tilbakemeldingen "Time Limit Exceeded". Dette virker som følger i språkene som støttes:
+Du \emph{må} forsikre deg om å flushe (engelsk: flush) standard output før du leser graderens respons. Ellers vil ditt program få tilbakemeldingen ``Time Limit Exceeded''. Dette virker som følger i språkene som støttes:
 
 \begin{itemize}
 	\item Java: \texttt{System.out.println()} flusher automatisk.
@@ -56,9 +56,9 @@ Graderen vil være \emph{ikke-adaptiv} i den forstand at hver test-case har en f
 I Kattis finnes det ett eksempel test case.
 I dette eksempelet har boksen dimensjoner $3\times 1\times 1$ og fuktigheten i de tre cellene er \{10, 14, 13\}
 
-Under er en eksempel-dialog, hvor linjene som starter med "JUDGE" er output av Kattis (altså i praksis input til ditt program), og linjene som starter med YOU er ditt program sitt output.
+Under er en eksempel-dialog, hvor linjene som starter med ``JUDGE'' er output av Kattis (altså i praksis input til ditt program), og linjene som starter med YOU er ditt program sitt output.
 
-Siden $14$ jo er større eller lik naboenes verdier ($10$ og $13$) er posisjonen $(2,1,1)$ en passelig posisjon for Maximus og siden du brukte tre forespørspørsler som faktisk er det maksimale antallet tillatt i dette eksempelet ($Q = 3$) vil denne dialogen gi "Accepted" på eksempel test caset.
+Siden $14$ jo er større eller lik naboenes verdier ($10$ og $13$) er posisjonen $(2,1,1)$ en passelig posisjon for Maximus og siden du brukte tre forespørspørsler som faktisk er det maksimale antallet tillatt i dette eksempelet ($Q = 3$) vil denne dialogen gi ``Accepted'' på eksempel test caset.
 
 \begin{verbatim}
 JUDGE:   3 1 1 3
