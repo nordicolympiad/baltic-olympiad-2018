@@ -2,18 +2,18 @@
 \def\version{jury-1}
 \problemname{Mīlas daudzstūris}
 Kā mēs visi zinām, TV ziepju operas ar daudziem tēliem var novest pie ļoti sarežģītām mīlas drāmām.
-Vienā TV šovā ir $N$ tēli. Katrs tēls mīl tieši vienu tēlu, kas var būt viņš pats.
-Mēs sakam, ka divi tēli ir attiecībās, tad un tikai tad, ja tie mīl viens otru.
+Vienā TV šovā ir $N$ tēli. Katrs tēls mīl tieši vienu tēlu, kas var būt arī viņš pats.
+Mēs sakam, ka divi tēli ir attiecībās tad un tikai tad, ja tie mīl viens otru.
 
 Viens īpašs sarežģītu attiecību veids ir ``mīlas daudzstūris``.
 Mēs sakam, ka 3 vai vairāk tēli ir ``mīlas daudzstūrī``, ja pirmais tēls mīl otro,
-otrais mīl trešo un tā tālāk, un pēdējais tēls mīl pirmo tēlu.
+otrais mīl trešo un tā tālāk, kā arī pēdējais tēls mīl pirmo tēlu.
 
 Nesenie aptauju rezultāti rāda, ka skatītāji ir noguruši no drāmas un dotu priekšroku
-kaut kam romantiskākam. Tāpēc tika nolemts sašaut tēlus ar mīlas bultām tā, lai visi tēli būtu attiecībās.
-Sašaujot kādu ar mīlas bultu ir iespējams mainīt, ko tas tēls mīl (uz jebkuru tēlu pēc jūsu izvēles).
+kaut kam vairāk romantiskam. Tāpēc tika nolemts sašaut tēlus ar mīlas bultām tā, lai visi tēli būtu attiecībās.
+Sašaujot kādu ar mīlas bultu, ir iespējams mainīt, ko tas tēls mīl (uz jebkuru tēlu pēc jūsu izvēles).
 
-Kāds ir vismazākais nepieciešamais mīlas bultu skaits, lai to paveiktu?
+Kāds ir vismazākais nepieciešamais mīlas bultu skaits, lai visi tēli būtu attiecībās?
 
 \section*{\inputsection}
 Pirmā ievaddatu rinda satur veselu skaitli $N$ -- iesaistīto tēlu skaits.
@@ -33,7 +33,7 @@ tēli būtu attiecībās. Ja tas nav iespējams, izvadiet \texttt{-1}.
 \hline
 \group & \points & \limitsname & \additionalconstraints \\ \hline
 1     & 21     & $2 \le N \le 20$ & \\ \hline
-2     & 25     & $2 \le N \le 100\,000$ & Katru tēlu kāds mīl (iespējams viņš pats). \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Katru tēlu kāds mīl (iespējams, viņš pats). \\ \hline
 3     & 29     & $2 \le N \le 100\,000$ & Sākotnēji nav nekādu attiecību vai ``mīlas daudzstūru''. \\ \hline
 4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
 \end{tabular}
