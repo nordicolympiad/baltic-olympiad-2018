@@ -21,19 +21,20 @@ Pierwszy wiersz zawiera trzy liczby całkowite $N$, $K$ i $R$, oznaczające
 odpowiednio długość marsjańskiego DNA, rozmiar alfabetu oraz liczbę zasad nukleotydów,
 dla których badacze określili minimalne zapotrzebowanie. Zachodzi $1 \le R \le K \le N$.
 
-Drugi wiersz zawiera $N$ liczb całkowitych oddzielonych spacjami, cały łańcuch DNA.
+Drugi wiersz zawiera opis łańcucha DNA w postaci $N$ liczb całkowitych oddzielonych
+pojedynczymi odstępami
 Liczba na $i$-tym miejscu, $D_i$, oznacza numer zasady nukleotydu na $i$-tej pozycji w łańcuchu DNA.
 Numery zasad są indeksowane od $0$, tj. $0 \leq D_i < K$. Każda z zasad wystąpi
 co najmniej raz.
 
 Każdy z kolejnych $R$ wierszy zawiera po dwie liczby całkowite $B$ i $Q$, oznaczające odpowiednio
-numer zasady oraz jej minimalne zapotrzebowanie ($0 \le B < K, 1 \le Q \le N$).
+numer oraz minimalne zapotrzebowanie na daną zasadę ($0 \le B < K, 1 \le Q \le N$).
 Żadna zasada nie wystąpi więcej niż raz.
 
 \section*{\outputsection}
-Wypisz pojedynczą liczbę całkowitą, długość najkrótszego spójnego podciągu DNA,
+Wypisz pojedynczą liczbę całkowitą równą długości najkrótszego spójnego podciągu DNA,
 który spełnia warunki naukowców. Jeżeli taki podciąg nie istnieje,
-wypisz ``\texttt{impossible}''.
+wypisz ,,\texttt{impossible}''.
 
 \section*{\constraints}
 \testgroups

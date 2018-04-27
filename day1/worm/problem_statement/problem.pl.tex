@@ -2,8 +2,9 @@
 \def\version{jury-1}
 \problemname{Problemy dżdżownicy}
 
-Szukasz miejsca w ziemi, aby umieścić tam swoją dżdżownicę, Maximusa. Swoje poszukiwania ograniczyłeś do obszaru w kształcie pudełka (prostopadłościanu)
-o wymiarach $N \times M \times K$ centymetrów, który podzieliłeś na trzywymiarową kratę jednocentymetrowych pól, oznaczonych $(x,y,z)$ poprzez ich pozycję w tej kracie ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Każde pole ma określoną wilgotność $H[x,y,z]$, która jest liczbą całkowitą
+Szukasz miejsca w ziemi aby umieścić tam swoją dżdżownicę, Maximusa. Poszukiwania ograniczyłeś do obszaru w kształcie pudełka (prostopadłościanu)
+o wymiarach $N \times M \times K$ centymetrów. Pudełko podzieliłeś na trójwymiarową kratę jednocentymetrowych pól, oznaczonych
+pozycją w tej kracie $(x,y,z)$ ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Każde pole ma określoną wilgotność $H[x,y,z]$, która jest liczbą całkowitą
 z zakresu $1 \dots 10^9$. Możesz zmierzyć wilgotność w danym polu używając specjalistycznego urządzenia.
 
 Maximus preferuje wilgotne miejsca, zatem musisz umieścić go w polu, które jest co najmniej tak wilgotne jak wszystkie sąsiadujące pola, w przeciwnym wypadku Maximus ucieknie i będziesz musiał go szukać.
@@ -12,9 +13,9 @@ Konkretniej, musisz znaleźć pole $(x,y,z)$, takie że
 $$
 H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1]),
 $$
-gdzie wartość pola poza obszarem poszukiwań to $0$ (ponieważ Maximus absolutnie chce zostać w tym obszarze).
+gdzie wartość pola poza pudełkiem to $0$ (ponieważ Maximus absolutnie chce zostać w tym pudełku).
 
-Jednakże, liczba pól może być bardzo duża, zatem nie chcesz mierzyć wilgotności każdego z pól. Z tego powodu, w tym zadaniu będziesz komunikował
+Jednakże, liczba pól może być bardzo duża, zatem nie chcesz mierzyć wilgotności każdego z nich. Z tego powodu, w tym zadaniu będziesz komunikował
 się z programem sprawdzającym, pytając o wilgotność pewnych punktów. Kiedy już znajdziesz odpowiednie miejsce dla Maximusa, podaj tę lokalizację
 programowi sprawdzającemu.
 
@@ -22,12 +23,12 @@ programowi sprawdzającemu.
 W pierwszym wierszu standardowego wejścia znajdują się cztery dodatnie liczby całkowite: $N$, $M$, $K$ i $Q$, gdzie $N$, $M$ oraz $K$ to rozmiary obszaru poszukiwań, a $Q$ jest maksymalną liczbą pomiarów, które możesz wykonać.
 
 Następnie możesz wypisać co najwyżej $Q$ wierszy postaci \texttt{?\ x y z} na standardowe wyjście.
-To jest zapytanie o wilgotność w polu $(x, y, z)$.
-Dla każdego takiego wiersza, program sprawdzający w odpowiedzi wypisze pojedynczy wiersz z liczbą całkowitą $H[x,y,z]$, która może zostać
-wczytana ze standardowego wejścia przez Twój program.
+Taki wiersz oznacza zapytanie o wilgotność w polu $(x, y, z)$.
+Dla każdego takiego wiersza program sprawdzający w odpowiedzi wypisze pojedynczy wiersz z liczbą całkowitą $H[x,y,z]$, 
+którą Twój program może wczytać ze standardowego wejścia.
 
-W końcu, Twój program musi wypisać dokładnie jeden wiersz postaci \texttt{!\ x y z}.
-Taki wiersz oznacza, że pole $(x, y, z)$ jest odpowiednią lokalizacją dla Maximus według powyższych kryteriów.
+Po zadaniu wszystkich zapytań Twój program musi wypisać dokładnie jeden wiersz postaci \texttt{!\ x y z}.
+Taki wiersz oznacza, że pole $(x, y, z)$ jest odpowiednią lokalizacją dla Maximusa według powyższych kryteriów.
 Program sprawdzający nie zwróci żadnej odpowiedzi dla takiego komunikatu.
 
 Wszystkie wartości $x, y, z$ muszą spełniać $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
@@ -48,7 +49,7 @@ Komendy opróżniające bufor we wspieranych językach:
 
 Aby pomóc z radzeniem sobie z komunikacją, zapewniamy opcjonalny dodatkowy kod, który możesz skopiować
 do swojego programu. Odnośnik do tego kodu dla wszystkich wspieranych języków (C++, Pascal, Java, Python)
-możesz znaleźć w menu bocznym na stronie z problemami. W szczególności polecamy użyć tego kodu, jeżeli
+możesz znaleźć w menu bocznym na stronie z problemami. W szczególności polecamy użyć tego kodu jeżeli
 korzystasz z Javy lub Pythona, dla których domyślne metody wczytywania/wypisywania (IO) \emph{mogą nie być
 wystarczająco szybkie dla ostatnich dwóch podzadań}. Pomocniczy kod używa zoptymalizowanych metod IO,
 które są wystarczająco szybkie.
