@@ -2,7 +2,7 @@
 \def\version{jury-1}
 \problemname{Ussimured}
 
-Otsid kohta mullas, kuhu panna oma vihmaussist lemmikloom Maximus. 
+Sa otsid mullas kohta, kuhu panna oma vihmaussist lemmikloom Maximus. 
 Võimalikud kohad asuvad risttahuka kujulises kastis mõõtmetega $N \times M \times K$ sentimeetrit, 
 mis on jaotatud sentimeetrise küljepikkusega kuupideks. Igal kuubil on koordinaadid $(x,y,z)$, 
 mis viitavad kuubi asukohale risttahuka sees ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). 
@@ -49,9 +49,9 @@ Kui programm seda ei tee, on hindamise tulemuseks ``Time Limit Exceeded''. Välj
 
 Selleks, et vastava suhtlusega aidata, on antud abistav kood, mille sa võid oma programmi kopeerida.
 Link sellele koodile kõigis toetatud keeltes on Kattises ülesande lehel külgribal.
-Soovitame seda koodi kasutada eriti Java või Pythoni puhul, mille tavalised
-sisend- ja väljundlaused \emph{ei pruugi olla piisavalt kiired viimase kahe testgrupi jaoks}.
-Abikood kasutab optimiseeritud sisend- ja väljundlauseid, mis on piisavalt kiired.
+% Soovitame seda koodi kasutada eriti Java või Pythoni puhul, mille tavalised
+% sisend- ja väljundlaused \emph{ei pruugi olla piisavalt kiired viimase kahe testgrupi jaoks}.
+% Abikood kasutab optimiseeritud sisend- ja väljundlauseid, mis on piisavalt kiired.
 
 Testprogramm \emph{ei ole adaptiivne}. See tähendab, et igas testis on muutumatud niiskustasemed, mis ei olene programmi poolt tehtud mõõtmistest.
 
@@ -69,3 +69,21 @@ Testprogramm \emph{ei ole adaptiivne}. See tähendab, et igas testis on muutumat
 5      & 14     & $N = M = K = 100$,              $Q = 100\,000$ \\ \hline
 6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
 \end{tabular}
+
+\section*{Näidisdialoog}
+Kattises on üks näidistest. Näites on kasti mõõtmed $3\times 1\times 1$ ja niiskus kolmes kuubikus on {10, 14, 13}. 
+Järgnevalt on toodud näidisdialoog, kus read algusega HINDAJA on Kattise väljund (s.t\ sinu programmi sisend) ning read algusega SINA on sinu programmi väljund.
+
+Kuna $14$ on võrreldes naaberväärtustega ($10$ and $13$) suurem või võrdne, on asukoht $(2,1,1)$ Maximuse jaoks optimaalne ning sa kasutasid ära kolm päringut, 
+mis oli ülesandes lubatud ($Q=3$). Seega on antud dialoogi tulemuseks Accepted.
+
+\begin{verbatim}
+HINDAJA:  3 1 1 3
+SINA:     ? 3 1 1
+HINDAJA:  13
+SINA:     ? 2 1 1
+HINDAJA:  14
+SINA:     ? 1 1 1
+HINDAJA:  10
+SINA:     ! 2 1 1
+\end{verbatim}

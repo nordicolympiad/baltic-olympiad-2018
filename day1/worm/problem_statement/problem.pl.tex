@@ -27,7 +27,7 @@ Taki wiersz oznacza zapytanie o wilgotność w polu $(x, y, z)$.
 Dla każdego takiego wiersza program sprawdzający w odpowiedzi wypisze pojedynczy wiersz z liczbą całkowitą $H[x,y,z]$, 
 którą Twój program może wczytać ze standardowego wejścia.
 
-Po zadaniu wszystkich zapytań Twój program musi wypisać dokładnie jeden wiersz postaci \texttt{!\ x y z}.
+Po zadaniu wszystkich zapytań Twój program musi wypisać dokładnie jeden wiersz postaci \texttt{!\ x y z} i się zakończyć.
 Taki wiersz oznacza, że pole $(x, y, z)$ jest odpowiednią lokalizacją dla Maximusa według powyższych kryteriów.
 Program sprawdzający nie zwróci żadnej odpowiedzi dla takiego komunikatu.
 
@@ -49,10 +49,9 @@ Komendy opróżniające bufor we wspieranych językach:
 
 Aby pomóc z radzeniem sobie z komunikacją, zapewniamy opcjonalny dodatkowy kod, który możesz skopiować
 do swojego programu. Odnośnik do tego kodu dla wszystkich wspieranych języków (C++, Pascal, Java, Python)
-możesz znaleźć w menu bocznym na stronie z problemami. W szczególności polecamy użyć tego kodu jeżeli
-korzystasz z Javy lub Pythona, dla których domyślne metody wczytywania/wypisywania (IO) \emph{mogą nie być
-wystarczająco szybkie dla ostatnich dwóch podzadań}. Pomocniczy kod używa zoptymalizowanych metod IO,
-które są wystarczająco szybkie.
+możesz znaleźć w menu bocznym na stronie z problemami. 
+Pomocniczy kod używa zoptymalizowanych metod wczytywania i wypisywania, co może być przydatne
+dla Javy i Pythona w dwóch ostatnich przypadkach testowych.
 
 Program sprawdzający \emph{nie będzie adaptacyjny}, tj. dla każdego testu będą ustalone wartości wilgotności,
 które nie będą zależeć od pomiarów wykonanych przez Twój program.
@@ -71,3 +70,24 @@ które nie będą zależeć od pomiarów wykonanych przez Twój program.
 5      & 14     & $N = M = K = 100$,              $Q = 100\,000$ \\ \hline
 6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
 \end{tabular}
+
+\section*{Sample dialogue}
+Na Kattisie znajduje się jeden test przykładowy.
+W tym teście pudełko ma wymiary $3\times 1\times 1$, wilgotność kolejnych pól wynosi odpowiednio \{10, 14, 13\}.
+Poniżej znajduje się przykład interakcji dla tego testu. Linie oznaczone YOU zostały wypisane przez Twój program,
+a linie oznaczone JUDGE przez Kattis (wczytane przez Twój program).
+
+$14$ jest większe bądź równe sąsiednim wartościom ($10$ i $13$), pozycja $(2,1,1)$ jest doskonałym miejscem dla Maximusa.
+Twój program użył łącznie trzech zapytań, co było maksymalną możliwą liczbą zapytań w tym teście.
+Program otrzyma wynik Accepted.
+
+\begin{verbatim}
+JUDGE:   3 1 1 3
+YOU:     ? 3 1 1
+JUDGE:   13
+YOU:     ? 2 1 1
+JUDGE:   14
+YOU:     ? 1 1 1
+JUDGE:   10
+YOU:     ! 2 1 1
+\end{verbatim}

@@ -53,9 +53,8 @@ saņemsiet vērtējumu \emph{Time Limit Exceeded}. Atbalstītajās valodās to v
 Lai palīdzētu komunicēt ar vērtēšanas programmu, mēs nodrošinam programmas kodu, kuru jūs pēc savas izvēles varat iekopēt programmā.
 Saiti uz programmu kodiem visām atbalstītajām valodām (C++, Pascal, Java, Python) varat
 atrast kattis problēmu lapas sānjoslā.
-Mēs īpaši rekomendējam lietot šo programmu kodu, ja lietojat Java vai Python, kuru noklusētās
-ievada/izvada (IO) operācijas \emph{var būt pārāk lēnas priekš pēdējām divām testu grupām}.
-Nodrošinātais programmu kods satur optimizētas IO operācijas, kuras ir pietiekami ātras.
+Nodrošinātais programmas kods lieto ātras ievada, izvada operācijas,
+kas var būt noderīgas Python un Java risinājumos (it īpaši pēdējās divās testu grupās).
 
 Vērtēšanas programma \emph{neadaptēsies}, t.i., katrā testā būs fiksētas mitruma daudzuma vērtības,
 kuras nav atkarīgas no programmas veiktajiem mērījumiem.
@@ -74,3 +73,22 @@ kuras nav atkarīgas no programmas veiktajiem mērījumiem.
 5      & 14     & $N = M = K = 100$,              $Q = 100\,000$ \\ \hline
 6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
 \end{tabular}
+
+\section*{Parauga protokols}
+Kattis testēšanas sistēmā ir viens parauga tests.
+Šajā parauga testā kastes reģiona dimensijas ir $3\times 1\times 1$ un mitruma daudzums tā trīs šūnās ir {10, 14, 13}.
+Zemāk ir parauga dialogs, kur rindas ar sākumu JUDGE ir izvads no vērtēšanas programmas (t.i.\ ievads jūsu programmā), un rindas ar sākumu YOU ir jūsu programmas izvads.
+
+Tā kā $14$ tiešām ir lielāks vai vienāds ar kaimiņu šūnu vērtībām ($10$ un $13$), tad šūna $(2,1,1)$ ir piemērota sliekai Maximus,
+un tu izmantoji trīs mērījumus, kas bija maksimāli atļautais mērījumu skaits ($Q=3$). Tādēļ šāds dialogs saņems vērtējumu Accepted parauga testā.
+
+\begin{verbatim}
+JUDGE:   3 1 1 3
+YOU:     ? 3 1 1
+JUDGE:   13
+YOU:     ? 2 1 1
+JUDGE:   14
+YOU:     ? 1 1 1
+JUDGE:   10
+YOU:     ! 2 1 1
+\end{verbatim}
