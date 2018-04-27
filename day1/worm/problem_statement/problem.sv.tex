@@ -11,43 +11,35 @@ H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[
 $$
 där ett värde anses som $0$ om det är utanför rätblocket (eftersom Maximum absolut vill stanna inom detta).
 
-Antalet celler kan dock vara väldigt stort, så du vill inte mäta fuktigheten på alla celler. Därför kan du i den här uppgiften interagera med Kattis och fråga efter fuktigheten i givna punkter. När du har hittat en lämplig placering åt Maximus, ange denna plats till Kattis.
+Antalet celler kan dock vara väldigt stort, så du vill inte mäta fuktigheten i alla celler. Därför kan du i den här uppgiften interagera med Kattis och fråga efter fuktigheten i givna celler. När du har hittat en lämplig placering åt Maximus, ange denna plats till Kattis.
 
 \section*{\interactivity}
-The first line of the input contains four positive integers: $N$, $M$, $K$ and $Q$, where $N$, $M$ and $K$ are the box dimensions and $Q$ is the maximum number of measurements you may perform.
+Den första raden av indata innehåller fyra positiva heltal: $N$, $M$, $K$ och $Q$, där $N$, $M$ och $K$ är rätblockets dimensioner och $Q$ är det maximala antalet mätningar du får göra.
 
-After that, you can write at most $Q$ lines of the form \texttt{?\ x y z} to standard output.
-This asks for the value of the humidity at point $(x, y, z)$.
-For each such line, the grader will in response write a single line with the integer $H[x,y,z]$, which can be read from standard input by your program.
+Efter detta kan du skriva högst $Q$ rader på formen \texttt{?\ x y z} till standard output.
+Detta frågar efter värdet på fuktigheten i cellen  $(x, y, z)$.
+För varje sådan rad, skriver Kattis som svar en enda rad med heltalet $H[x,y,z]$, vilket kan läsas från standard input av ditt program.
 
-After all these lines, your program must write out exactly one line of the form \texttt{!\ x y z}.
-This claims that the point $(x, y, z)$ is a suitable location for Maximus according to the criterion above.
-The grader will provide no response to this output.
+Efter alla dessa rader, måste ditt program skriva ut exakt en rad på formen \texttt{!\ x y z}.
+Detta påstår att celllen $(x, y, z)$ är en lämplig plats för Maximus enligt kriteriet ovan. Kattis ger inget svar på den här raden.
 
-All values of $x, y, z$ must obey $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
-If they do not, or some line has an invalid format, or you ask for more than $Q$ values,
-the grader will respond with \texttt{-1} and exit.
-If this happens your program should also exit. If it continues, it may incorrectly get
-a verdict of Runtime Error or Time Limit Exceeded.
+Alla värden på $x, y, z$ måste uppfylla $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
+Om de inte gör det, eller om någon rad har ogiltigt format, eller om du frågar efter mer än $Q$ värden,
+så svarar Kattis med \texttt{-1} och avslutas. 
+Om detta händer ska ditt program också avsluta. Om det fortsätter köra, kan det få bedömningen Runtime Error eller Time Limit Exceeded.
 
-You \emph{must} make sure to flush standard output before reading the grader's response, or else your program
-will get judged as Time Limit Exceeded. This works as follows in the supported languages:
+Du \emph{måste} se till att flusha standard output innan du läser Kattis svar, annars kommer körningen bedömas som Time Limit Exceeded. Så här fungerar detta i de olika språken:
 \begin{itemize}
-  \item Java: \texttt{System.out.println()} flushes automatically.
-  \item Python: \texttt{print()} flushes automatically.
-  \item C++: \texttt{cout << endl;} flushes, in addition to writing a newline. If using printf, \texttt{fflush(stdout)}.
+  \item Java: \texttt{System.out.println()} flushar automatiskt.
+  \item Python: \texttt{print()} flushar automatically.
+  \item C++: \texttt{cout << endl;} flushar, utöver att skriva ny rad. Om du använder printf,  \texttt{fflush(stdout)}.
   \item Pascal: \texttt{Flush(Output)}.
 \end{itemize}
 
-To help deal with this interaction, we provide optional helper code which you may copy into your program.
-A link to this code for all supported languages (C++, Pascal, Java, Python) can
-be found in the sidebar of the kattis problem page.
-We especially recommend using this code if using Java or Python, whose default
-input/output (IO) routines \emph{may not be fast enough for the last two test groups}.
-The helper code uses optimized IO routines which are sufficiently fast.
+För att hjälpa till att hantera den här interaktionen, tillhandahåller vi hjälpkod som du kan kopiera in i ditt program. Länk till den koden för alla supportade språk (C++, Pascal, Java, Python) finns i sidebaren till Kattis problemsida. Vi rekommenderar särskilt att använda denna kod om du skriver i Java eller Python, vars default input/output (IO) rutiner \emph{kan vara för långsamma för de två sista testgrupperna}.
+Hjälpkoden använder optimerade IO-rutiner som är tillräckligt snabba.
 
-The grader will be \emph{non-adaptive}; that is, each test case will have a fixed set of humidity values
-that do not depend on what measurements are performed by the program.
+Kattis kommer att vara \emph{icke-adaptiv}; d.v.s. varje testfall kommer att ha en fix uppsättning fuktighetsvärden som inte beror på vilka mätningar programmet efterfrågar.
 
 \section*{\constraints}
 \testgroups
@@ -63,3 +55,4 @@ that do not depend on what measurements are performed by the program.
 5      & 14     & $N = M = K = 100$,              $Q = 100\,000$ \\ \hline
 6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
 \end{tabular}
+
