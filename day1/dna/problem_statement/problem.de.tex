@@ -1,18 +1,18 @@
 \ifx\boi\undefined\input{../templates/words-de.tex}\fi
 \def\version{jury-1}
 \problemname{Mars-DNA}
-Wie du sicherlich weißt, kann menschliche DNA als ein langer String über einem Alphabet mit vier Elementen ({A, C, G, T}) dargestellt werden, wobei jedes Symbol eine bestimmte Nukleinbase darstellt (Adenin, Cytosin, Guanin und Thymin).
+Wie du sicherlich weißt, kann menschliche DNA durch einen langen String über einem Alphabet mit vier Elementen (A, C, G, T) dargestellt werden, wobei jedes Symbol eine bestimmte Nukleinbase darstellt (Adenin, Cytosin, Guanin und Thymin).
 
-Für Marsianer ist das allerdings anders; Studien an dem letzten von NASA gefangenen Marsianer zeigten, dass Mars-DNA aus $K$ verschiedenen Nukleinbasen besteht! Mars-DNA kann also als String über einem Alphabet mit $K$ Elementen dargestellt werden.
+Für Marsianer ist das allerdings anders; Studien an dem letzten von der NASA gefangenen Marsianer zeigten, dass Mars-DNA aus $K$ verschiedenen Nukleinbasen besteht! Mars-DNA kann also als String über einem Alphabet mit $K$ Elementen dargestellt werden.
 
 Eine gewisse Forschungsgruppe, die sich für die Anwendungsmöglichkeiten der Mars-DNA im Bereich der Künstlichen Intelligenz interessiert, hat ein Stück eines Mars-DNA-Strings zur Untersuchung beantragt. Für $R$ der Nukleinbasen haben sie spezifiziert, wie oft diese mindestens in dem DNA-String vorkommen sollen.
 
 Du möchtest den kürzesten Teilstring finden, der diese Bedingungen erfüllt.
 
 \section*{\inputsection}
-Die erste Zeile enthält drei ganze Zahlen $N$, $K$, and $R$, die die Gesamtlänge der Mars-DNA, die Alphabet-Größe, und die Anzahl der Nukleinbasen, für die die Forscher eine Mindesthäufigkeit angegeben haben, angeben. Es gilt $1 \le R \le K \le N$.
+Die erste Zeile enthält drei ganze Zahlen $N$, $K$ und $R$, die die Gesamtlänge der Mars-DNA, die Alphabet-Größe und die Anzahl der Nukleinbasen, für die die Forscher eine Mindesthäufigkeit angegeben haben, angeben. Es gilt $1 \le R \le K \le N$.
 
-Die zweite Zeile enthält $N$ durch Leerzeichen getrennte ganze Zahlen: Den vollständige Mars-DNA-String.
+Die zweite Zeile enthält $N$ durch Leerzeichen getrennte ganze Zahlen: Den vollständigen Mars-DNA-String.
 Die $i$-te dieser ganzen Zahlen, $D_i$, gibt an, welche Nukleinbase sich an der $i$-ten Position des DNA-Strings befindet.
 Die Nukleinbasen sind $0$-indiziert, also gilt $0 \leq D_i < K$. Jede Nukleinbase wird mindestens einmal vorkommen.
 
@@ -20,8 +20,8 @@ Jede der folgenden $R$ Zeilen enthält zwei ganze Zahlen $B$ und $Q$, die jeweil
 Keine Nukleinbase wird mehr als einmal aufgeführt.
 
 \section*{\outputsection}
-Gebe eine einzelne ganze Zahl aus: die Länge des kürzesten zusammenhängenden Teilstrings der DNA, die die Anforderungen der Forscher erfüllt.
-Falls ein solcher Teilstring nicht existiert, gebe ``\texttt{impossible}'' aus.
+Gib eine einzelne ganze Zahl aus: die Länge des kürzesten zusammenhängenden Teilstrings der DNA, die die Anforderungen der Forscher erfüllt.
+Falls ein solcher Teilstring nicht existiert, gib ``\texttt{impossible}'' aus.
 
 \section*{\constraints}
 \testgroups
@@ -37,7 +37,7 @@ Falls ein solcher Teilstring nicht existiert, gebe ``\texttt{impossible}'' aus.
 \end{tabular}
 
 \section*{\sampleexplanations}
-Im ersten Beispiel gibt es drei Teilstring der Länge $2$, die die Nukleinbasen 0 und 1 jeweils einmal enthalten (nämlich ``\texttt{0 1}'', ``\texttt{1 0}'' und ``\texttt{0 1}''),
+Im ersten Beispiel gibt es drei Teilstrings der Länge $2$, die die Nukleinbasen 0 und 1 jeweils einmal enthalten (nämlich ``\texttt{0 1}'', ``\texttt{1 0}'' und ``\texttt{0 1}''),
 aber es gibt keinen solchen Teilstring der Länge $1$. Die kürzeste Länge ist also $2$.
 
 Im zweiten Beispiel ist der (einzige) optimale Teilstring ``\texttt{1 3 2 0 1 2 0}''.

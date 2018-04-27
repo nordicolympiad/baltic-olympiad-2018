@@ -1,18 +1,16 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
 \def\version{jury-1}
 \problemname{Armastuse hulknurk}
-Nagu me kõik teame, on seebiooperite tegelased omavahel tõsiselt keerulistes suhetes. Igas seebiooperis on $N$ 
-tegelast, kellest igaüks armastab täpselt üht isikut. On ka võimalik, et tegelane armastab (alguses) ainult iseennast.
-
-Ütleme, et kaks tegelast on suhtes, kui esimene armastab teist ja teine esimest. Nüüd on meil võimalik lasta kedagi
-armunoolega, mille tagajärjel hakkab ta armastama kedagi teist.
+Nagu me kõik teame, on seebiooperite tegelased omavahel tõsiselt keerulistes suhetes. Ühes seebiooperis on $N$ 
+tegelast, kellest igaüks armastab täpselt üht isikut. On ka võimalik, et tegelane armastab (alguses) ainult iseennast. Ütleme, et kaks tegelast on paarisuhtes, kui esimene armastab teist ja teine esimest.
 
 Vahel tekib eriti keeruline suhe, mida nimetatakse ``armastuse hulknurgaks''.
 Ütleme, et 3 või enam inimest on ``armastuse hulknurgas'', kui esimene armastab teist, teine kolmandat jne,
 kuni viimane isik armastab esimest.
 
 Vaatajaküsitlused näitavad, et televaatajad on sellisest draamast väsinud nig eelistaks midagi romantilisemat.
-Seega otsustati tulistada osasid tegelasi armunooltega, nii et lõpptulemusena oleksid kõik osalised suhtes.
+Meil on võimalik muuta, keda inimene armastab, tulistades teda armunoolega. Eesmärgiks on, et kõik isikud oleksid paarisuhetes.
+
 Mis on minimaalne arv armunooli, mis selleks tuleb kulutada?
 
 \section*{\inputsection}
@@ -22,7 +20,7 @@ armastab alguses tegelast $t$. Nimed on ülimalt $10$ tähe pikkused ja koosneva
 
 \section*{\outputsection}
 Väljundisse kirjutada üks täisarv -- minimaalne armunoolte arv, mis kindlustaks, et kõik tegelased on suhtes.
-Kui see ei ole võimalik, väljastada $-1$.
+Kui see ei ole võimalik, väljastada \texttt{-1}.
 
 \section*{\constraints}
 \testgroups
@@ -32,8 +30,8 @@ Kui see ei ole võimalik, väljastada $-1$.
 \hline
 \group & \points & \limitsname & \additionalconstraints \\ \hline
 1     & 21     & $2 \le N \le 20$ & \\ \hline
-2     & 25     & $2 \le N \le 100\,000$ & Iga isiku puhul leidub keegi, kes teda armastab. \\ \hline
-3     & 29     & $2 \le N \le 100\,000$ & Alguses pole ühtki suhet ega ``armastuse hulknurka''. \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Iga isiku puhul leidub keegi, kes teda armastab (võimalik, et ta ise). \\ \hline
+3     & 29     & $2 \le N \le 100\,000$ & Alguses pole ühtki paarisuhet ega ``armastuse hulknurka''. \\ \hline
 4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
 \end{tabular}
 
@@ -43,13 +41,13 @@ Kui see ei ole võimalik, väljastada $-1$.
 \includegraphics[width=0.5\textwidth]{polygonfig.pdf}
 \end{center}
 
-Esimene näide on toodud joonisel. Ülemine osa illustreerib algset olukorda, kus nool näitab isikult $s$ isikule $t$, 
-näidates, et isik $s$ armastab alguses isikut $t$, ning roosa värv tähistab kolme isikut, keda tuleb optimaalse olukorra 
+Esimene näide on toodud joonisel. Ülemine osa illustreerib algset olukorda, kus nool, mis näitab isikult $s$ isikule $t$, 
+tähendab, et isik $s$ armastab alguses isikut $t$, ning roosa värv tähistab kolme isikut, keda tuleb optimaalse olukorra 
 saavutamiseks tulistada. Alumine osa näitab lõppseisu.
 %Esimeses näites on ainsaks lahendiks: tulistada
 %isikuid \texttt{b}, \texttt{d} ja \texttt{f} armunooltega, mis tähendab, et nad hakkavad armastama vastavalt isikkuid \texttt{h}, \texttt{c} ja \texttt{e}.
 
-Teises näites (mis rahuldab alamülesande 3 tingimusi), on mitu võimalikku lahendust.
+Teises näites (mis rahuldab alamülesande 3 tingimusi) on mitu võimalikku lahendust.
 Üks võimalus on tulistada iskuid \texttt{a}, \texttt{b} and \texttt{d}, nii et nad hakkavad armastama isikuid \texttt{b}, \texttt{a} ja \texttt{c}.
 
 Kolmandas näites on meil armastuse kolmnurk ja ükskõik, kuidas nooli lasta, jääb keegi alati välja.
