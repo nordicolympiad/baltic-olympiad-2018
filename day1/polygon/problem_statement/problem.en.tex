@@ -1,21 +1,19 @@
 \ifx\boi\undefined\input{../templates/words-en.tex}\fi
 \def\version{jury-1}
 \problemname{Love polygon}
-As we all know, TV soap operas with many characters can lead to seriously complicated relationships.
-In one TV show, there are $N$ characters. Each character loves exactly one character.
+As we all know, TV soap operas with many characters can lead to seriously complicated love dramas.
+In one TV show, there are $N$ characters. Each character loves exactly one character (which could actually be him- or herself).
+We say that two characters are in a relationship if and only if they love each other.
 
-It is possible for a character to initially love themselves. We say that two characters are in a
-relationship if and only if they love each other. By shooting someone with a love arrow, it is
-possible to change whom that person loves.
+One particular type of complication is called a ``love polygon''.
+We say that 3 or more characters are in a ``love polygon'' if the first character loves the second, the
+second loves the third and so on, also the last character loves the first.
 
-Of course, this allows for a particularly nasty type of complication called a ``love polygon''.
-We say that 3 or more people are in a ``love polygon'' if the first person loves the second, the
-second loves the third and so on, also the last person loves the first.
+Recent polling has shown that viewers have grown tired of this drama and would prefer something more romantic.
+Therefore, it was decided to shoot some characters with love arrows so that everyone is in a relationship.
+By shooting someone with a love arrow, you can change whom that character loves (to any character of your choice).
 
-Recent polling has shown that viewers have grown tired of this drama and would prefer
-something more romantic. Therefore, it was decided to shoot some characters with love arrows
-so that everyone is in a relationship. What is the least number of love arrows needed to accomplish
-that?
+What is the least number of love arrows needed to get everyone into a relationship?
 
 \section*{\inputsection}
 The first line of the input contains the integer $N$, the number of characters involved.
@@ -25,7 +23,7 @@ letters long and consist of lowercase English letters.
 
 \section*{\outputsection}
 Output one integer -- the minimum number of love arrows needed to get everyone into a
-relationship. If this is not possible, output $-1$.
+relationship. If this is not possible, output \texttt{-1}.
 
 \section*{\constraints}
 \testgroups
@@ -35,7 +33,7 @@ relationship. If this is not possible, output $-1$.
 \hline
 \group & \points & \limitsname & \additionalconstraints \\ \hline
 1     & 21     & $2 \le N \le 20$ & \\ \hline
-2     & 25     & $2 \le N \le 100\,000$ & Each person is loved by someone. \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Each character is loved by someone (possibly themselves). \\ \hline
 3     & 29     & $2 \le N \le 100\,000$ & There are no relationships or ``love polygons''. \\ \hline
 4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
 \end{tabular}
