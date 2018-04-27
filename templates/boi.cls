@@ -44,7 +44,7 @@
 \RequirePackage{babel}            % 
 \RequirePackage[parfill]{parskip} % 
 \RequirePackage{listingsutf8}     % For samples
-\RequirePackage[left=1.2in,right=1.2in,top=1in,bottom=1in]{geometry}
+\RequirePackage[left=0.9in,right=1.2in,top=1in,bottom=0in]{geometry}
 %\RequirePackage{fullpage}         % Set up margins for full page
 \RequirePackage{url}              % Urls
 \RequirePackage[normalem]{ulem}   % \sout
@@ -52,6 +52,9 @@
 \ifplastex\else
 \RequirePackage{pgffor}
 \fi
+
+\setlength\paperheight {297mm}
+\setlength\paperwidth  {210mm}
 
 \DisableLigatures{encoding = *, family = tt* }
 
