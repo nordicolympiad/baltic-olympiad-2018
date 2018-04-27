@@ -2,24 +2,30 @@
 \def\version{jury-1}
 \problemname{Ussimured}
 
-Otsid kohta mullas, kuhu panna oma ussist lemmikloom, Maximus. Võimalikud kohad asuvad risttahukakujulises kastis mõõtmetega $N \times M \times K$ sentimeetrit, mis on jaotatud sentimeetrise küljepikkusega kuupideks. Igal kuubil on koordinaadid $(x,y,z)$, mis viitavad kuubi asukohale risttahuka sees ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Iga kuup on teatud mullaniiskusega $H[x,y,z]$, mis on täisarv vahemikus $1 \dots 10^9$. Erilise sensoriga saab mõõta ükskõik millise kuubi niiskust.
+Otsid kohta mullas, kuhu panna oma vihmaussist lemmikloom Maximus. 
+Võimalikud kohad asuvad risttahuka kujulises kastis mõõtmetega $N \times M \times K$ sentimeetrit, 
+mis on jaotatud sentimeetrise küljepikkusega kuupideks. Igal kuubil on koordinaadid $(x,y,z)$, 
+mis viitavad kuubi asukohale risttahuka sees ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). 
+Iga kuup on teatud mullaniiskusega $H[x,y,z]$, mis on täisarv vahemikus $1 \dots 10^9$. 
+Erilise sensoriga saab mõõta ükskõik millise kuubi niiskust.
 
-Maximusele meeldivad niisked kohad, seega pead ta panema kuupi, mis on vähemalt sama niiske nagu naaberkuubid, muidu roomab ta minema ja sul on raske teda uuesti üles leida.
+Maximusele meeldivad niisked kohad, seega pead ta panema kuupi, mis on vähemalt sama niiske kui naaberkuubid, 
+muidu roomab ta minema ja sul on raske teda uuesti üles leida.
 Teiste sõnadega pead panema Maximuse lokaalsesse maksimumi.
 Täpsemini pead leidma kuubi $(x,y,z)$, mille puhul
 $$
-H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1]),
+H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1]).
 $$
-kus niiskus kastist väljaspool on alati $0$ (sest Maximus tahab kindlasti jääda kasti sisse).
+Niiskus kastist väljaspool on alati $0$ (sest Maximus tahab kindlasti kasti sisse jääda).
 
-Kuna aga kuupide arv võib olla väga suur, siis ei taha sa mõõta kõikide kuupide niiskust. Seega saad siin ülesandes suhelda testimisprogrammiga ja küsida, kui niiske on muld teatud kuupides.
+Kuna aga kuupide arv võib olla väga suur, siis ei viitsi sa kõikide kuupide niiskust mõõta. Seega saad siin ülesandes suhelda testimisprogrammiga ja küsida, kui niiske on muld teatud kuupides.
 Kui oled Maximusele leidnud sobiva asukoha, anna see asukoht testimisprogrammile.
 
 \section*{\interactivity}
-Esimesel sisendi real on neli positiivset täisarvu: $N$, $M$, $K$ ja $Q$, kus $N$, $M$ ja $K$ on kasti mõõtmed ja $Q$ maksimaalne arv mõõtmiseid, mida saad sooritada.
+Sisendi esimesel real on neli positiivset täisarvu: $N$, $M$, $K$ ja $Q$, kus $N$, $M$ ja $K$ on kasti mõõtmed ja $Q$ maksimaalne arv mõõtmisi, mida sa saad sooritada.
 
 Pärast seda võid standardväljundisse kirjutada ülimalt $Q$ rida kujul \texttt{?\ x y z}.
-See küsib niiskustaset kuubis $(x, y, z)$.
+Päring küsib niiskustaset kuubis $(x, y, z)$.
 Iga sellise rea jaoks vastab testimisprogramm reaga, millel on täisarv $H[x,y,z]$. Seda saab su programm lugeda standardsisendist.
 
 Pärast kõiki neid ridu peab su programm kirjutama väljundisse täpselt ühe rea kujul \texttt{!\ x y z}.
@@ -27,13 +33,13 @@ See väidab, et kuup $(x, y, z)$ on eelnevale kirjeldusele vastav Maximusele sob
 Sellele väljundile testimisprogramm ei vasta.
 
 Kõik väärtused $x, y, z$ peavad olema vahemikes $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
-Kui nad ei ole, kui mõni rida on vales formaadis või kui esitad rohkem kui $Q$ kuubi niiskuse kohta,
-siis vastab testimisprogramm väärtusega \texttt{-1} ja väljub.
-Kui see juhtub, peaks ka sinu programm väljuma. Kui programm jätkab tegevust, võib ta ebakorrektselt
+Kui nad seda ei ole või kui mõni rida on vales formaadis või kui esitad rohkem kui $Q$ kuubi niiskuse kohta,
+siis vastab testimisprogramm väärtusega \texttt{-1} ja lõpetab töö.
+Kui see juhtub, peaks ka sinu programm töö lõpetama. Kui programm jätkab tegevust, võib ta 
 saada hindamise tulemuseks ``Runtime Error'' või ``Time Limit Exceeded''.
 
 Sinu programm \emph{peab} pärast oma päringute väljastamist ja enne niiskustasemete lugemist väljundpuhvri tühjendama.
-Kui Sinu programm seda ei tee, on hindamise tulemuseks ``Time Limit Exceeded''. Väljundpuhvri tühendamine käib järgmiselt:
+Kui programm seda ei tee, on hindamise tulemuseks ``Time Limit Exceeded''. Väljundpuhvri tühendamine käib järgmiselt:
 \begin{itemize}
   \item Java: \texttt{System.out.println()} tühjendab puhvri automaatselt.
   \item Python: \texttt{print()} tühjendab puhvri automaatselt.
@@ -41,9 +47,9 @@ Kui Sinu programm seda ei tee, on hindamise tulemuseks ``Time Limit Exceeded''. 
   \item Pascal: \texttt{Flush(Output)}.
 \end{itemize}
 
-Selleks, et vastava suhtlusega aidata, pakume me vabatahtlikku abikoodi, mida võid oma programmi kopeerida.
-Link sellele koodile kõigis toetatud keeltes on kattises ülesande lehel külgribal.
-Me soovitame seda koodi kasutada eriti just Java või Pythoni puhul, mille tavalised
+Selleks, et vastava suhtlusega aidata, on antud abistav kood, mille sa võid oma programmi kopeerida.
+Link sellele koodile kõigis toetatud keeltes on Kattises ülesande lehel külgribal.
+Soovitame seda koodi kasutada eriti Java või Pythoni puhul, mille tavalised
 sisend- ja väljundlaused \emph{ei pruugi olla piisavalt kiired viimase kahe testgrupi jaoks}.
 Abikood kasutab optimiseeritud sisend- ja väljundlauseid, mis on piisavalt kiired.
 

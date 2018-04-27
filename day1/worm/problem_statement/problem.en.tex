@@ -43,10 +43,11 @@ will get judged as Time Limit Exceeded. This works as follows in the supported l
 
 To help deal with this interaction, we provide optional helper code which you may copy into your program.
 A link to this code for all supported languages (C++, Pascal, Java, Python) can
-be found in the sidebar of the kattis problem page.
-We especially recommend using this code if using Java or Python, whose default
-input/output (IO) routines \emph{may not be fast enough for the last two test groups}.
-The helper code uses optimized IO routines which are sufficiently fast.
+be found in the sidebar of the Kattis problem page. The helper code also uses fast input/output routines, which may be useful for Python and Java (only relevant for the last two test groups).
+
+%We especially recommend using this code if using Java or Python, whose default
+%input/output (IO) routines \emph{may not be fast enough for the last two test groups}.
+%The helper code uses optimized IO routines which are sufficiently fast.
 
 The grader will be \emph{non-adaptive}; that is, each test case will have a fixed set of humidity values
 that do not depend on what measurements are performed by the program.
@@ -65,3 +66,19 @@ that do not depend on what measurements are performed by the program.
 5      & 14     & $N = M = K = 100$,              $Q = 100\,000$ \\ \hline
 6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
 \end{tabular}
+
+\section*{Sample dialogue}
+In sample 1, the box has dimensions $3\times 1\times 1$ and the humidity in the three cells is {10, 14, 13}. Below is an example dialogue, with the lines preceded by JUDGE being the output of Kattis (i.e.\ the input to your program), and the lines preceded by YOU being your program's output.
+
+As $14$ is indeed greater than or equal to the neighboring values ($10$ and $13$), the location $(2,1,1)$ is a suitable location for Maximus, and you used three queries, which was the maximum allowed number ($Q=3$). Thus, this dialogue gives Accepted on the sample.
+
+\begin{verbatim}
+JUDGE:   3 1 1 3
+YOU:     ? 3 1 1
+JUDGE:   13
+YOU:     ? 2 1 1
+JUDGE:   14
+YOU:     ? 1 1 1
+JUDGE:   10
+YOU:     ! 2 1 1
+\end{verbatim}
