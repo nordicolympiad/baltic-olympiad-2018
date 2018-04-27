@@ -2,17 +2,15 @@
 \def\version{jury-1}
 \problemname{Armastuse hulknurk}
 Nagu me kõik teame, on seebiooperite tegelased omavahel tõsiselt keerulistes suhetes. Ühes seebiooperis on $N$ 
-tegelast, kellest igaüks armastab täpselt üht isikut. On ka võimalik, et tegelane armastab (alguses) ainult iseennast.
-
-Ütleme, et kaks tegelast on suhtes, kui esimene armastab teist ja teine esimest. Meil on võimalik lasta kedagi
-armunoolega, mille tagajärjel hakkab ta armastama kedagi teist.
+tegelast, kellest igaüks armastab täpselt üht isikut. On ka võimalik, et tegelane armastab (alguses) ainult iseennast. Ütleme, et kaks tegelast on paarisuhtes, kui esimene armastab teist ja teine esimest.
 
 Vahel tekib eriti keeruline suhe, mida nimetatakse ``armastuse hulknurgaks''.
 Ütleme, et 3 või enam inimest on ``armastuse hulknurgas'', kui esimene armastab teist, teine kolmandat jne,
 kuni viimane isik armastab esimest.
 
 Vaatajaküsitlused näitavad, et televaatajad on sellisest draamast väsinud nig eelistaks midagi romantilisemat.
-Seega otsustati tulistada osasid tegelasi armunooltega, nii et lõpptulemusena oleksid kõik osalised suhtes.
+Meil on võimalik muuta, keda inimene armastab, tulistades teda armunoolega. Eesmärgiks on, et kõik isikud oleksid paarisuhetes.
+
 Mis on minimaalne arv armunooli, mis selleks tuleb kulutada?
 
 \section*{\inputsection}
@@ -22,7 +20,7 @@ armastab alguses tegelast $t$. Nimed on ülimalt $10$ tähe pikkused ja koosneva
 
 \section*{\outputsection}
 Väljundisse kirjutada üks täisarv -- minimaalne armunoolte arv, mis kindlustaks, et kõik tegelased on suhtes.
-Kui see ei ole võimalik, väljastada $-1$.
+Kui see ei ole võimalik, väljastada \texttt{-1}.
 
 \section*{\constraints}
 \testgroups
@@ -32,8 +30,8 @@ Kui see ei ole võimalik, väljastada $-1$.
 \hline
 \group & \points & \limitsname & \additionalconstraints \\ \hline
 1     & 21     & $2 \le N \le 20$ & \\ \hline
-2     & 25     & $2 \le N \le 100\,000$ & Iga isiku puhul leidub keegi, kes teda armastab. \\ \hline
-3     & 29     & $2 \le N \le 100\,000$ & Alguses pole ühtki suhet ega ``armastuse hulknurka''. \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Iga isiku puhul leidub keegi, kes teda armastab (võimalik, et ta ise). \\ \hline
+3     & 29     & $2 \le N \le 100\,000$ & Alguses pole ühtki paarisuhet ega ``armastuse hulknurka''. \\ \hline
 4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
 \end{tabular}
 
