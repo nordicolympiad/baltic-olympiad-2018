@@ -1,0 +1,58 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Miłosny wielokąt}
+
+Jak wszyscy wiemy, serialowe tasiemce z dużą obsadą często prowadzą do bardzo skomplikowanych związków.
+W jednym z takich seriali mamy $N$ postaci. Każda z tych postaci kocha dokładnie jedną postać.
+
+Jest możliwe dla bohatera (albo bohaterki), aby początkowo kochał on (lub ona) samego (bądź samą) siebie. Powiemy,
+że dwie postacie są w związku wtedy i tylko wtedy, kiedy kochają się wzajemnie. Używając magicznej strzały Amora,
+możemy zmienić kogo kocha dana osoba.
+
+Oczywiście może to doprowadzić do pewnych skomplikowanych sytuacji, które nazywamy ,,miłosnymi wielokątami''.
+Powiemy, że 3 lub więcej osób jest w ,,miłosnym wielokącie'', kiedy pierwsza osoba kocha drugą, druga kocha trzecią,
+i tak dalej, aż wreszcie ostatnia osoba kocha pierwszą.
+
+Ostatnie badania ankietowe pokazały, że widowni powoli nudzą się takie dramaty i pragną
+czegoś bardziej romantycznego. Dlatego zostało zdecydowane, aby wystrzelić kilka strzał amora w taki sposób,
+aby każdy był w związku. Jaka jest minimalna liczba trafień strzałą Amora, aby tak się stało?
+
+\section*{\inputsection}
+Pierwszy wiersz wejścia zawiera pojedynczą liczbę całkowitą $N$, liczbę postaci w serialu.
+Następne $N$ wierszy zawiera po dwa imiona $s$ i $t$, oddzielone spacją, oznaczające
+że postać o imieniu $s$ początkowo kocha postać o imieniu $t$. Imiona bohaterów zawierają
+nie więcej niż 10 znaków i składają się wyłącznie z małych liter alfabetu łacińskiego. % nie jestem pewien, czy ludzie zrozumieją "łacińskiego" :P
+
+\section*{\outputsection}
+Wypisz jedną liczbę całkowitą -- minimalną liczbę strzał, które trzeba użyć, aby wszyscy
+znaleźli się w związku. Jeżeli nie jest to możliwe, wypisz $-1$.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+\group & \points & \limitsname & \additionalconstraints \\ \hline
+1     & 21     & $2 \le N \le 20$ & \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Każdy jest przez kogoś kochany <3. \\ \hline
+3     & 29     & $2 \le N \le 100\,000$ & Nie ma żadnych związków, ani ``miłosnych wielokątów'' </3. \\ \hline
+4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanations}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{polygonfig.pdf}
+\end{center}
+
+Pierwszy przykład jest zilustrowany na obrazku powyżej. Górna część pokazuje początkową sytuację miłosną,
+gdzie strzałka z $s$ do $t$ oznacza, że $s$ początkowo kocha $t$, a różowym kolorem zaznaczone są
+trzy postacie, które muszą zostać trafione strzałą amora w optymalnym (i unikatowym) rozwiązaniu.
+Dolna część obrazka pokazuje sytuację po tych strzałach.
+
+W drugim przykładzie (który spełnia ograniczenia trzeciego podzadania) jest kilka optymalnych rozwiązań.
+Jednym z nich jest trafienie strzałą amora bohaterów \texttt{a}, \texttt{b} oraz \texttt{d} i spowodowanie, aby
+zakochali się odpowiednio w \texttt{b}, \texttt{a} oraz \texttt{c}.
+
+W trzecim przykładzie mamy miłosny trójkąt, dla którego niezależnie od tego, ile razy strzelimy strzałą Amora, zawsze ktoś zostanie samotny.

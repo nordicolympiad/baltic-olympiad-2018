@@ -1,0 +1,72 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Problemy dżdżownicy}
+
+Szukasz miejsca w ziemi, aby umieścić tam swoją dżdżownicę, Maximusa. Swoje poszukiwania ograniczyłeś do obszaru w kształcie pudełka (prostopadłościanu)
+o wymiarach $N \times M \times K$ centymetrów, który podzieliłeś na trzywymiarową kratę jednocentymetrowych pól, oznaczonych $(x,y,z)$ poprzez ich pozycję w tej kracie ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Każde pole ma określoną wilgotność $H[x,y,z]$, która jest liczbą całkowitą
+z zakresu $1 \dots 10^9$. Możesz zmierzyć wilgotność w danym polu używając specjalistycznego urządzenia.
+
+Maximus preferuje wilgotne miejsca, zatem musisz umieścić go w polu, które jest co najmniej tak wilgotne jak wszystkie sąsiadujące pola, w przeciwnym wypadku Maximus ucieknie i będziesz musiał go szukać.
+Innymi słowy, musisz umieścić Maximusa w lokalnym maksimum.
+Konkretniej, musisz znaleźć pole $(x,y,z)$, takie że
+$$
+H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1]),
+$$
+gdzie wartość pola poza obszarem poszukiwań to $0$ (ponieważ Maximus absolutnie chce zostać w tym obszarze).
+
+Jednakże, liczba pól może być bardzo duża, zatem nie chcesz mierzyć wilgotności każdego z pól. Z tego powodu, w tym zadaniu będziesz komunikował
+się z programem sprawdzającym, pytając o wilgotność pewnych punktów. Kiedy już znajdziesz odpowiednie miejsce dla Maximusa, podaj tę lokalizację
+programowi sprawdzającemu.
+
+\section*{\interactivity}
+W pierwszym wierszu standardowego wejścia znajdują się cztery dodatnie liczby całkowite: $N$, $M$, $K$ i $Q$, gdzie $N$, $M$ oraz $K$ to rozmiary obszaru poszukiwań, a $Q$ jest maksymalną liczbą pomiarów, które możesz wykonać.
+
+Następnie możesz wypisać co najwyżej $Q$ wierszy postaci \texttt{?\ x y z} na standardowe wyjście.
+To jest zapytanie o wilgotność w polu $(x, y, z)$.
+Dla każdego takiego wiersza, program sprawdzający w odpowiedzi wypisze pojedynczy wiersz z liczbą całkowitą $H[x,y,z]$, która może zostać
+wczytana ze standardowego wejścia przez Twój program.
+
+W końcu, Twój program musi wypisać dokładnie jeden wiersz postaci \texttt{!\ x y z}.
+Taki wiersz oznacza, że pole $(x, y, z)$ jest odpowiednią lokalizacją dla Maximus według powyższych kryteriów.
+Program sprawdzający nie zwróci żadnej odpowiedzi dla takiego komunikatu.
+
+Wszystkie wartości $x, y, z$ muszą spełniać $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
+Jeżeli tak nie będzie, albo pewien wiersz będzie miał niewłaściwy format, bądź zadasz więcej niż $Q$ zapytań,
+program sprawdzający wypisze \texttt{-1} oraz zakończy interakcję.
+W takim przypadku Twój program też powinien się zakończyć. W przeciwnym wypadku możesz niepoprawnie otrzymać werdykt
+Runtime Error albo Time Limit Exceeded.
+
+Pamiętaj, żeby opróżniać bufor wyjściowy \emph{po każdym wierszu}, przed wczytaniem odpowiedzi
+sprawdzarki, inaczej twój program otrzyma wynik Time Limit Exceeded.
+Komendy opróżniające bufor we wspieranych językach:
+\begin{itemize}
+  \item Java: \texttt{System.out.println()} robi to automatycznie.
+  \item Python: \texttt{print()} również robi to sam.
+  \item C++: \texttt{cout << endl;} opróżnia bufor, dodatkowo wypisując znak nowej linii. Jeżeli używasz printf: \texttt{fflush(stdout)}.
+  \item Pascal: \texttt{Flush(Output)}.
+\end{itemize}
+
+Aby pomóc z radzeniem sobie z komunikacją, zapewniamy opcjonalny dodatkowy kod, który możesz skopiować
+do swojego programu. Odnośnik do tego kodu dla wszystkich wspieranych języków (C++, Pascal, Java, Python)
+możesz znaleźć w menu bocznym na stronie z problemami. W szczególności polecamy użyć tego kodu, jeżeli
+korzystasz z Javy lub Pythona, dla których domyślne metody wczytywania/wypisywania (IO) \emph{mogą nie być
+wystarczająco szybkie dla ostatnich dwóch podzadań}. Pomocniczy kod używa zoptymalizowanych metod IO,
+które są wystarczająco szybkie.
+
+Program sprawdzający \emph{nie będzie adaptacyjny}, tj. dla każdego testu będą ustalone wartości wilgotności,
+które nie będą zależeć od pomiarów wykonanych przez Twój program.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1      & 10     & $M = K = 1$, $N = 1\,000\,000$, $Q = 10\,000$  \\ \hline
+2      & 22     & $M = K = 1$, $N = 1\,000\,000$, $Q = 35$       \\ \hline
+3      & 12     & $K = 1$, $N = M = 200$,         $Q = 4\,000$   \\ \hline
+4      & 19     & $K = 1$, $N = M = 1\,000$,      $Q = 3\,500$   \\ \hline
+5      & 14     & $N = M = K = 100$,              $Q = 100\,000$ \\ \hline
+6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
+\end{tabular}
