@@ -3,8 +3,8 @@
 \problemname{Maiņstrāva}
 Frederiks tagad ir mājās un spēlējas ar paštaisītu rotaļu dzelzceļu, par kuru viņš ir ļoti lepns.
 Dzelzceļš sastāv no $N$~segmentiem, kas ir savienoti riņķī un sanumurēti kā $1, 2, \dots, N$ pulksteņa rādītāja virzienā.
-Elektrisko strāvu dzelzceļam nodrošina $M$~vadu loki, kas iet līdzi dzelzceļam.
-Katram segmentam līdzi iet vismaz viens loks.
+Elektrisko strāvu dzelzceļam nodrošina $M$~izliekti vadi, kas iet līdzi dzelzceļam.
+Katram segmentam līdzi iet vismaz viens vads.
 
 Tiesa gan, Frederikam kļūst garlaicīgi skatīties uz riņķojošo vilcienu, tāpēc viņš nolemj pievienot \emph{dzelzceļa pārmiju}
 katram segmentam, ko viņš varētu izmantot, lai virzītu vilcienu grāvī un citām aizraujošām lietām.
@@ -12,11 +12,11 @@ Pārmijas arī prasa elektrisko strāvu. Un ne jebkādu strāvu~--- tās prasa t
 \footnote{Tas ir ļoti loģiski, jo dzelzceļš ir zviedru dzelzceļš~--- un Zviedrijā visas dzelzceļa pārmijas
 (``\emph{växlar}'') izmanto maiņstrāvu (``\emph{växelström}'').}
 
-Lai iegūtu maiņstrāvu, Frederiks spriež, ir jābūt elektriskajai strāvai, kas plūst abos
-virzienos. Katrs vadu loks dod strāvu tikai vienā virzienā (vai nu pulksteņa rādītāja virzienā,
+Lai iegūtu maiņstrāvu, Frederiks spriež, ir jābūt strāvai, kas plūst abos
+virzienos. Katrs vads dod strāvu tikai vienā virzienā (vai nu pulksteņa rādītāja virzienā,
 vai nu otrādi), bet Frederiks var brīvi izlemt, kurā. Secīgi, viņam ir jāizvēlas,
-kāds strāvas virziens būs katram lokam, tā, lai katru dzelzceļa segmentu noklāj gan pulksteņa
-rādītāja virziena, gan pretējs loks.
+kāds strāvas virziens būs katram vadam, tā, lai katru dzelzceļa segmentu noklāj gan vads ar pulksteņa
+rādītāja virziena strāvu, gan vads ar pretēju strāvu.
 
 Vai jūs varat palīdzēt Frederikam ar šo uzdevumu?
 
@@ -26,22 +26,22 @@ Vai jūs varat palīdzēt Frederikam ar šo uzdevumu?
 \includegraphics[width=0.5\textwidth]{alternatingfig.pdf}
 \end{center}
 \vspace{1mm}
-{\em Atrisinājums pirmajam piemēram. Izliektas bultiņas ārpus dzelzceļa apzīmē vadu lokus, kas pievada elektrību. Katras bultiņas virziens ir Frederika izvēlētais elektriskās strāvas virziens (zila un sarkana krāsa apzīmē dažādus virzienus). Ievērojiet, ka visas bultiņas var apvērst pretējā virzienā un iegūt citu pareizu atrisinājumu: \texttt{11010}.}
+{\em Atrisinājums pirmajam piemēram. Izliektas bultiņas ārpus dzelzceļa apzīmē vadus, kas pievada elektrību. Katras bultiņas virziens ir Frederika izvēlētais strāvas virziens (zila un sarkana krāsa apzīmē dažādus virzienus). Ievērojiet, ka visas bultiņas var apvērst pretējā virzienā un iegūt citu pareizu atrisinājumu: \texttt{11010}.}
 
 \section*{\inputsection}
-Pirmā rinda satur divus veselus skaitļus~$N$ un~$M$, dzelzceļa segmentu skaitu un loku skaitu, attiecīgi.
+Pirmā rinda satur divus veselus skaitļus~$N$ un~$M$, dzelzceļa segmentu skaitu un vadu skaitu, attiecīgi.
 
-Nākamās $M$~rindas katra satur divus skaitļus $1 \le a, b \le N$, kas nozīmē, ka ir vadu loks, kas
+Nākamās $M$~rindas katra satur divus skaitļus $1 \le a, b \le N$, kas nozīmē, ka ir vads, kas
 noklāj segmentus $a, a+1, \dots, b$. Ja~$b$ ir mazāks par~$a$, tas nozīmē, ka numuri iet pa riņķi,
-t.\,i., loks noklāj segmentus $a, \dots, N, 1, \dots, b$. Ievērojiet, ka, ja $a=b$, tad loks noklāj
+t.\,i., vads noklāj segmentus $a, \dots, N, 1, \dots, b$. Ievērojiet, ka, ja $a=b$, tad vads noklāj
 tikai vienu segmentu.
 
 \section*{\outputsection}
 Izvadiet vienu rindu ar $M$~simboliem, katru vai nu~\texttt{0}, vai nu~\texttt{1}. $i$-jam simbolam rindā
-ir jābūt~\texttt{0}, ja $i$-tais loks ir orientēts pulksteņa rādītāja virzienā, vai~\texttt{1}, ja tas ir orientēts
+ir jābūt~\texttt{0}, ja strāva $i$-jā vadā ir jāvirza pulksteņa rādītāja virzienā, vai~\texttt{1}, ja tā ir jāvirza
 pretējā virzienā. Ja pastāv vairāki atrisinājumi, izvadiet jebkuru no tiem.
 
-Ja orientēt lokus atbilstoši prasībām nav iespējams, izvadiet ``\texttt{impossible}''.
+ Ja pareiza atrisinājuma nav, izvadiet ``\texttt{impossible}''.
 
 \section*{\constraints}
 \testgroups
@@ -53,7 +53,7 @@ Ja orientēt lokus atbilstoši prasībām nav iespējams, izvadiet ``\texttt{imp
   1     & 13     & $2 \le N, M \le 15$ & \\ \hline
   2     & 20     & $2 \le N, M \le 100$ & \\ \hline
   3     & 22     & $2 \le N, M \le 1000$ & \\ \hline
-  4     & 19     & $2 \le N, M \le 100\,000$ & Nav loku ar $b < a$. \\ \hline
+  4     & 19     & $2 \le N, M \le 100\,000$ & Nav vadu ar $b < a$. \\ \hline
   5     & 26     & $2 \le N, M \le 100\,000$ & \\ \hline
 \end{tabular}
 
