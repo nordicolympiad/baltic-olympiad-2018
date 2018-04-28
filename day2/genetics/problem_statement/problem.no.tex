@@ -1,0 +1,38 @@
+\ifx\boi\undefined\input{../templates/words-no.tex}\fi
+\def\version{jury-1}
+\problemname{Genetikk}
+En vanlig teknikk som superskurker bruker for å unngå å bli fanget er å klone seg selv.
+Du har klart å fange en ond superskurk og hennes $N-1$ kloner, men du ønsker å finne ut hvem
+av de som er den ekte superskurken.
+
+Til hjelp har du hver persons DNA-sekvens, som hver består av $M$ tegn, hvor hvert tegn er enten
+\texttt{A}, \texttt{C}, \texttt{G} eller \texttt{T}. Du vet også at klonene aldri er helt perfekte kopier,
+men at de har DNA-sekvenser som skiller seg fra den ekte superskurken på nøyaktig $K$ posisjoner.
+
+Kan du identifisere den ekte superskurken?
+
+\section*{\inputsection}
+Første linje inneholder tre heltall $N$, $M$, og $K$, hvor $1 \le K \le M$.
+De neste $N$ linjene representerer DNA sekvenser.
+Hver av disse linjene inneholder $M$ tegn, hvor hvert tegn er enten \texttt{A}, \texttt{C}, \texttt{G} eller \texttt{T}.
+
+I input vil det være nøyaktig én sekvens som skiller seg fra alle de andre sekvensene i nøyaktig $K$ posisjoner.
+
+Advarsel: dette problemet har ganske mye input og vil kreve at du bruker raske IO-rutiner om du bruker Java.
+
+\section*{\outputsection}
+Skriv ut et heltall -- indeksen av DNA-sekvensen som tilhører superskurken.
+Sekvensene er numerert begynnende med $1$.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+  \group & \points & \limitsname & \additionalconstraints \\ \hline
+  1      & 27      & $3 \le N, M \le 100$ & \\ \hline
+  2      & 19      & $3 \le N, M \le 1800$ & Hvert tegn er enten \texttt{A} eller \texttt{C}. \\ \hline
+  3      & 28      & $3 \le N, M \le 4100$ & Hvert tegn er enten \texttt{A} eller \texttt{C}. \\ \hline
+  4      & 26      & $3 \le N, M \le 4100$ & \\ \hline
+\end{tabular}
