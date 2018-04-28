@@ -1,0 +1,36 @@
+\ifx\boi\undefined\input{../templates/words-is.tex}\fi
+\def\version{jury-1}
+\problemname{Gen}
+Fyrir illmenni sem ætla sér heimsyfirráð er algeng leið til að forðast handtöku að klóna sig.
+Þú hefur handsamað illmenni og $N-1$ klóna þess og ert nú að reyna finna hver er alvöru illmennið.
+
+Þér til hjálpar hefurðu DNA röð hverrar persónu, hver þeirra samanstendur af $M$ táknum, 
+hver stafur er \texttt{A}, \texttt{C}, \texttt{G} eða \texttt{T}. Þú veist einnig að
+klónarnir eru ekki skapaðir fullkomlega, heldur eru raðir þeirra frábrugðnar röð upprunalega
+illmennisins á nákvæmlega $K$ stöðum.
+
+Getur þú auðkennt illmennið?
+
+\section*{\inputsection}
+Fyrsta línan inniheldur þrjár heiltölur $N$, $M$ og $K$ þar sem $1 \le K \le M$.
+Næstu $N$ línur tákna DNA raðirnar.
+Hver þessarra lína samanstendur af $M$ táknum, hvert þeirra er \texttt{A}, \texttt{C}, \texttt{G} eða \texttt{T}.
+
+Í inntakinu er nákvæmlega ein röð sem er frábrugðin öllum hinum rununum á nákvæmlega $K$ stöðum.
+
+\section*{\outputsection}
+Skrifaðu út eina heiltölu -- vísi DNA raðarinnar sem tilheyrir illmenninu.
+Fyrsta röðin er númer $1$.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+  \group & \points & \limitsname & \additionalconstraints \\ \hline
+  1      & 27      & $2 \le N, M \le 100$ & \\ \hline
+  2      & 19      & $2 \le N, M \le 1600$ & Hver stafur er annað hvort \texttt{A} eða \texttt{C}. \\ \hline
+  3      & 28      & $2 \le N, M \le 4100$ & Hver stafur er annað hvort \texttt{A} eða \texttt{C}. \\ \hline
+  4      & 26      & $2 \le N, M \le 4100$ & \\ \hline
+\end{tabular}
