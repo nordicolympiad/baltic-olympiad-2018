@@ -1,28 +1,22 @@
 \ifx\boi\undefined\input{../templates/words-de.tex}\fi
 \def\version{jury-1}
 \problemname{Liebespolygon}
-Wie wir alle wissen, können Seifenopern mit vielen Charakteren zu ernsthaft komplizierten Beziehungen führen.
-In einer TV-Serie mit $N$ Charakteren liebt jeder Protagonist genau einen anderen.
+Wie wir alle wissen, können Seifenopern mit vielen Protagonisten zu ernsthaft komplizierten Liebesdramen führen. In einer TV-Serie gibt es $N$ Protagonisten. Jeder Protagonist liebt exakt einen anderen Protagonisten (möglicherweise auch sich selbst). Zwei Protagonisten sind in einer Liebesbeziehung genau dann, wenn sie sich gegenseitig lieben.
 
-Es ist möglich, dass ein Charakter zu Beginn in sich selbst verliebt ist. Wir sagen, dass zwei Charaktere in einer Beziehung sind, genau dann, wenn sie sich gegenseitig lieben.
-Durch einen Liebespfeil ist es möglich zu ändern, wen jemand liebt.
+Ein besonders komplizierter Beziehungstyp ist ein ``Liebespolygon''. 3 oder mehr Protagonisten sind in einem ``Liebespolygon'', wenn der erste Protagonist den zweiten liebt, der zweite Protagonist den dritten und so weiter, und der letzte Protagonist auch den ersten liebt.
 
-Natürlich erlaubt dies einen besonders problematischen Beziehungstyp, den wir Liebespolygon nennen.
-3 oder mehr Personen sind in einem ``Liebespolygon'', wenn die erste Person die zweite liebt, die zweite Person die dritte und so weiter, und die letzte Person auch die erste liebt.
+Neue Umfragen haben gezeigt, dass Fernsehzuschauer von diesem Drama gelangweilt sind und etwas romantischeres bevorzugen würden. Daher wurde entschieden, einige Protagonisten mit Liebespfeilen zu beschießen, sodass jeder in einer Liebesbeziehung ist. Jemanden mit einem Liebespfeil zu beschießen, ermöglicht dir, zu bestimmen, wen der Protagonist liebt.
 
-Neue Umfragen haben gezeigt, dass Fernsehzuschauer von diesem Drama gelangweilt sind und etwas romantischeres bevorzugen würden.
-
-Daher wurde entschieden, einige Charaktere mit Liebespfeilen zu beschießen, sodass jeder in einer Beziehung ist.
-Wie viele Liebespfeile werden mindestens benötigt, um das zu erreichen?
+Wie viele Liebespfeile werden mindestens benötigt, bis jeder in einer Liebesbeziehung ist?
 
 \section*{\inputsection}
-Die erste Zeile der Eingabe enthält eine ganze Zahl $N$, die Anzahl der involvierten Charaktere.
-Die nächsten $N$ Zeilen enthalten jeweils zwei durch Leerzeichen getrennte Namen $s$ und $t$, die dafür stehen, dass der Charakter mit Namen $s$ zu Beginn den mit Namen $t$ liebt.
-Die Namen der Charaktere sind nicht länger als $10$ Zeichen und bestehen nur aus englischen Kleinbuchstaben.
+Die erste Zeile der Eingabe enthält eine ganze Zahl $N$, die Anzahl der involvierten Protagonisten.
+Die nächsten $N$ Zeilen enthalten jeweils zwei durch Leerzeichen getrennte Namen $s$ und $t$, die bedeuten, dass der Protagonist mit Namen $s$ zu Beginn den mit Namen $t$ liebt.
+Die Namen der Protagonisten sind nicht länger als $10$ Zeichen und bestehen nur aus englischen Kleinbuchstaben.
 
 \section*{\outputsection}
-Gebe eine ganze Zahl aus: Die minimale Anzahl von Liebespfeilen, die benötigt werden, um jede Person in eine Beziehung zu bekommen.
-Falls das nicht möglich ist, gebe $-1$ aus.
+Gib eine ganze Zahl aus: Die minimale Anzahl von Liebespfeilen, die benötigt werden, bis jeder in einer Liebesbeziehung ist.
+Falls das nicht möglich ist, gib $-1$ aus.
 
 \section*{\constraints}
 \testgroups
@@ -32,8 +26,8 @@ Falls das nicht möglich ist, gebe $-1$ aus.
 \hline
 \group & \points & \limitsname & \additionalconstraints \\ \hline
 1     & 21     & $2 \le N \le 20$ & \\ \hline
-2     & 25     & $2 \le N \le 100\,000$ & Jede Person wird von jemandem geliebt. \\ \hline
-3     & 29     & $2 \le N \le 100\,000$ & Es gibt keine Beziehungen oder ``Liebespolygone''. \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Jeder Protagonist wird von jemandem (möglicherweise sich selbst) geliebt. \\ \hline
+3     & 29     & $2 \le N \le 100\,000$ & Es gibt initial keine Liebesbeziehungen oder ``Liebespolygone''. \\ \hline
 4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
 \end{tabular}
 
@@ -44,10 +38,10 @@ Falls das nicht möglich ist, gebe $-1$ aus.
 \end{center}
 
 Das erste Beispiel ist in der Abbildung oben dargestellt.
-Der obere Teil zeigt die Situation zu Beginn, wobei ein Pfeil von $s$ nach $t$ angibt, dass $s$ zu Beginn $t$ liebt. Die rosa Farbe gibt an, welche Charaktere in der eindeutigen optimalen Lösung mit Liebespfeilen beschossen werden müssen.
+Der obere Teil zeigt die Situation zu Beginn, wobei ein Pfeil von $s$ nach $t$ angibt, dass $s$ zu Beginn $t$ liebt. Die rosa Farbe gibt an, welche Protagonisten in der eindeutigen optimalen Lösung mit Liebespfeilen beschossen werden müssen.
 Der untere Teil zeigt die Situation nachher.
 
 Im zweiten Beispiel (welches die Beschränkungen der Gruppe 3 erfüllt), gibt es mehrere optimale Lösungen.
-Eine davon ist es, Personen \texttt{a}, \texttt{b} und \texttt{d} mit Liebespfeilen zu beschießen, und in \texttt{b}, \texttt{a} bzw. \texttt{c} zu verlieben.
+Eine davon ist es, die Protagonisten \texttt{a}, \texttt{b} und \texttt{d} mit Liebespfeilen zu beschießen, und in \texttt{b}, \texttt{a} und \texttt{c} zu verlieben.
 
 Im dritten Beispiel gibt es ein Liebesdreieck. Unabhängig davon, wie viele Liebespfeile wir verschießen, wird immer jemand alleine bleiben.

@@ -707,6 +707,20 @@ struct ConstStrat : Strat {
 	long long maxval() const override { return 4; }
 };
 
+// Fixed by input.
+struct FixedStrat : Strat {
+	vector<int> v;
+	FixedStrat(P dims, istream& cin) : Strat(dims) {
+		assert(dims.dimension() == 1);
+		v.resize(dims[0]);
+		for (int& x : v) cin >> x;
+	}
+	int do_query(P x) override {
+		return v[x[0]];
+	}
+	long long maxval() const override { return *max_element(v.begin(), v.end()); }
+};
+
 // Increases monotonically towards one corner.
 struct CornerStrat : Strat {
 	string plusminus;
@@ -765,6 +779,7 @@ Strat* readStrat(P dims, istream& cin) {
 	string str;
 	cin >> str;
 	if (str == "const") return new ConstStrat(dims);
+	if (str == "fixed") return new FixedStrat(dims, cin);
 	if (str == "random") return new RandomStrat(dims);
 	if (str == "print") return new PrintStrat(dims, cin);
 	if (str == "spacefill") return new SpaceFillStrat(dims, cin);

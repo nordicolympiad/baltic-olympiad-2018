@@ -1,0 +1,94 @@
+\ifx\boi\undefined\input{../templates/words-is.tex}\fi
+\def\version{jury-1}
+\problemname{Ormaáhyggjur}
+
+Þú ert að leita að stað í jarðveginum til að setja niður orminn þinn, Maximus. Þú takmarkar leit þína
+í $N \times M \times K$ sentímetra réttstrending sem þú hefur skipt upp í þrívítt fylki af 
+tenings-sentímetra staðsetningum, merktar $(x,y,z)$ eftir því hvar þær eru í fylkinu 
+($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Hver staðsetning hefur sérstakt rakastig 
+$H[x,y,z]$ sem er heiltala á bilinu $1 \dots 10^9$. Þú getur mælt rakastig hverrar staðsetningar
+með sértökum skynjara.
+
+Maximum elskar rakamikla staði, þannig þú þarft að setja hann á staðsetningu sem er í minnsta
+lagi jafn rakamikil og nágrannar hennar, annars fer hann þaðan og þá verður erfitt fyrir þig
+að finna hann. Í öðrum orðum þarftu að setja Maximus í staðbundið hágildi.
+Í raun og veru þarftu að finna staðsetningu $(x,y,z)$ þannig að
+$$
+H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1]),
+$$
+þar sem að gildi er talið vera $0$ ef það er fyrir utan réttstrendinginn (því Maximus vill 
+alls ekki fara fyrir utan réttstrendinginn).
+
+Fjöldi staðsetninga getur verið frekar mikill og því viltu ekki mæla rakastig allra staðsetninga.
+Þess vegna máttu tala við stiggjafarforritið og biðja um rakastigið á staðsetningum.
+Þegar þú hefur fundið hæfilega staðsetningu fyrir Maximum þá gefuru stiggjafarforritinu staðsetninguna.
+
+\section*{\interactivity}
+Fyrsta línan af inntakinu inniheldur fjórar jákvæðra heiltölur: $N$, $M$, $K$ og $Q$, þar sem $N$, $M$ og $K$ eru stærðirnar á réttstrendingnum og $Q$ er mesti fjöldi mælinga semþú mátt framkvæma.
+
+Eftir það máttu skrifa út mesta lagi $Q$ línur á forminu ``\texttt{?\ x y z}''.
+Þessi skipun biður um rakastigið á staðsetningu $(x, y, z)$.
+Fyrir hverja svona línu mun stiggjafarforritið svara með einni línu sem inniheldur heiltöluna $H[x,y,z]$ sem forritið þitt getur lesið inn.
+
+Eftir allar þessar línur skal forritið þitt skrifa út nákvæmlega eina lína á forminu ``\texttt{!\ x y z}'' og hætta keyrslu.
+Þetta segir að staðsetningin $(x, y, z)$ sé hæfileg staðsetning fyrir Maximus samkvæmt skilyrðinu sem var lýst að ofan.
+Stigagjafarforritið svarar ekki þessarri skipun.
+
+Öll gildi af $x, y, z$ þurfa að uppfylla $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
+Ef þau gera það ekki, eða ef einhver lína fylgir ekki réttu formi eða ef þú biður um meira en $Q$ rakastig
+þá mun stiggjafarforritið svara með \texttt{-1} og hætta keyrslu.
+Ef þetta gerist skal forritið þitt einnig hætta keyrslu. Ef forritið heldur 
+áfram keyrslu gæti það fengið Runtime Error eða Time Limit Exceeded niðurstöðu.
+
+Þú \emph{þarft} að passa að sturta úttakinu út áður en þú lest svarið frá yfirferðarforritinu,
+annars mun forritið þitt fá niðurstöðuna Time Limit Exceeded. Þetta virkar í studdum málum á eftirfarandi hátt:
+\begin{itemize}
+  \item Java: \texttt{System.out.println()} sturtar sjálfkrafa.
+  \item Python: \texttt{print()} sturtar sjálfkrafa.
+  \item C++: \texttt{cout << endl;} sturtar, og fer einnig í næstu línu. Ef printf er notað, \texttt{fflush(stdout)}.
+  \item Pascal: \texttt{Flush(Output)}.
+\end{itemize}
+
+
+Til að hjálpa til við þessi samskipti bjóðum við uppá kóða sem þú mátt afrita í forritið þitt.
+Hlekkur á þennan kóða fyrir öll studd mál má finna á hliðinni á síðunni fyrir verkefnalýsinguna. Hjálparkóðinn notar einnig hratt inntak og úttak, sem getur verið gagnlegt fyrir Python og Java (skiptir bara máli í síðustu tveim prófunarhópunum).
+
+%We especially recommend using this code if using Java or Python, whose default
+%input/output (IO) routines \emph{may not be fast enough for the last two test groups}.
+%The helper code uses optimized IO routines which are sufficiently fast.
+
+Stiggjafarforritið er \emph{ekki með aðlögunarhæfni}, þ.e.a.s. hvert prófunartilvik er með fyrirfram ákveðin rakastig
+og breytast þau ekki eftir því hvaða mælingar eru framkvæmdar.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1      & 10     & $M = K = 1$, $N = 1\,000\,000$, $Q = 10\,000$  \\ \hline
+2      & 22     & $M = K = 1$, $N = 1\,000\,000$, $Q = 35$       \\ \hline
+3      & 12     & $K = 1$, $N = M = 200$,         $Q = 4\,000$   \\ \hline
+4      & 19     & $K = 1$, $N = M = 1\,000$,      $Q = 3\,500$   \\ \hline
+5      & 14     & $N = M = K = 100$,              $Q = 100\,000$ \\ \hline
+6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
+\end{tabular}
+
+\section*{Sample dialogue}
+Á Kattis er aðeins eitt sýnidæmi.
+Í þessu sýnidæmi er réttstrendingurinn með stærðina $3 \times 1 \times 1$ og rakastigin á staðsetningunum eru \{10, 14, 13\}.
+Að neðan má sjá sýnidæmi um samskipti lausnarforrits og stiggjafarforrits þar sem línurnar sem byrja á DÓMARI eru úttakið frá Kattis (þ.e.\ inntakið í forritið þitt), og línurnar sem byrja á ÞÚ er úttakið á þínu forriti.
+
+Þar sem $14$ er stærri eða jafnt og nágranna gildin ($10$ og $13$), því er staðsetningin $(2,1,1)$ hæfileg staðsetning fyrir Maximus og notaðir þú þrjár mælingar sem var mesti leyfði fjöldi ($Q=3$). Þess vegna fá þessi samskipti Accepted á þessu sýnidæmi.
+
+\begin{verbatim}
+DÓMARI:   3 1 1 3
+ÞÚ:       ? 3 1 1
+DÓMARI:   13
+ÞÚ:       ? 2 1 1
+DÓMARI:   14
+ÞÚ:       ? 1 1 1
+DÓMARI:   10
+ÞÚ:       ! 2 1 1
+\end{verbatim}

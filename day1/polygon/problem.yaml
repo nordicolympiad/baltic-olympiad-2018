@@ -6,4 +6,4 @@ type: scoring
 grading:
     objective: max
 limits:
-    time_multiplier: 8
+    time_multiplier: 3

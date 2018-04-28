@@ -3,31 +3,31 @@
 \problemname{Sliekas raizes}
 
 Jūs meklējat vietu augsnē, kur novietot savu mājdzīvnieku, slieku Maximus.
-Jūs ierobežojāt meklēšanas platību uz kastes formas reģionu, kura izmērs ir $N \times M \times K$ centimetri,
+Jūs ierobežojāt meklēšanas platību uz paralēlskaldni, kura izmērs ir $N \times M \times K$ centimetri,
 ko jūs esat sadalījis trīs dimensionālā režģī ar viena kubikcentimetra šūnām,
 šūnas ir marķētas ar $(x, y, z)$ pēc to pozīcijas iekš režģa ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$).
 Katrai šūnai ir noteikts mitruma daudzums $H[x,y,z]$, kas ir vesels skaitlis $1 \dots 10^9$ diapazonā.
 Jūs varat nomērīt mitruma daudzumu jebkurā šūnā ar speciālu sensoru.
 
-Maximus mīl mitras vietas, tādēļ jums viņš jānovieto šūnā, kurā mitruma daudzums ir vismaz tik pat liels kā tās kaimiņu šūnās,
+Maximus mīl mitras vietas, tādēļ jums viņš jānovieto šūnā, kurā mitruma daudzums ir vismaz tikpat liels kā tās kaimiņu šūnās,
 citādi viņš dodas prom, un jums būs problēmas viņu atrast.
 Citiem vārdiem sakot, jums jānovieto Maximus lokālajā maksimumā.
 Precīzāk, jums jāatrod tāda šūna $(x,y,z)$, ka
 $$
 H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1]),
 $$
-kur šūnas mitruma daudzums ir $0$, ja tā atrodas ārpus kastes formas reģiona, jo Maximus ļoti vēlas palikt iekš kastes formas reģiona.
+kur šūnas mitruma daudzums ir $0$, ja tā atrodas ārpus paralēlskaldņa, jo Maximus ļoti vēlas palikt tājā iekšā.
 
-Tomēr šūnu ir ļoti daudz, jūs nevēlaties nomērīt mitruma daudzumu visās šūnās.
+Tomēr šūnu ir ļoti daudz, tāpēc jūs nevēlaties mērīt mitruma daudzumu visās šūnās.
 Tādēļ šajā uzdevumā jums ir atļauts komunicēt ar vērtēšanas programmu un uzdot tai jautājumus par mitruma daudzumu noteiktā šūnā.
 Kad jūs atrodat piemērotu šūnu sliekai Maximus, iesniedziet šūnas pozīciju vērtēšanas programmai.
 
 \section*{\interactivity}
 Pirmā ievaddatu rinda satur četrus pozitīvus veselus skaitļus: $N$, $M$, $K$ un $Q$,
-kur $N$, $M$ un $K$ ir kastes reģiona dimensijas un $Q$ ir maksimālais mērījumu skaits, ko jūs varat veikt.
+kur $N$, $M$ un $K$ ir paralēlskaldņa dimensijas un $Q$ ir maksimālais mērījumu skaits, ko jūs varat veikt.
 
 Pēc tam varat izvadīt ne vairāk kā $Q$ rindas formā ``\texttt{?\ x y z}`` uz standarta izvadu.
-Izvadītā rinda apraksta mitruma daudzuma mērījumu šūnā $(x, y, z)$.
+Tādas formas rinda apraksta mitruma mērīšanas pieprasījumu šūnā $(x, y, z)$.
 Katrai šādai rindai vērtēšanas programma atbildē izvadīs vienu rindu ar veselu skaitli $H[x,y,z]$,
 ko jūsu programma var nolasīt no standarta ievada.
 
@@ -36,7 +36,7 @@ Tas apgalvos, ka šūna $(x, y, z)$ ir piemērota sliekai Maximus pēc augstāk 
 Vērtēšanas programma neatbildēs uz šo izvadu.
 
 Visām $x, y, z$ vērtībām jāievēro nosacījums $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
-Ja nosacījumu neievēro vai ja kāda rinda izvadīta nekorektā formā, vai ja tiek prasīts mitruma daudzums vairāk kā $Q$ šūnām,
+Ja nosacījumu neievēro, vai ja kāda rinda izvadīta nekorektā formā, vai ja tiek prasīts mitruma daudzums vairāk kā $Q$ šūnām,
 vērtēšanas programma atbildēs ar \texttt{-1} un pabeigs darbu.
 Ja tas tā notiek, tad jūsu programmai arī jāpabeidz darbība. Ja tā turpina darboties, tā var saņemt nepareizu
 vērtējumu \emph{Runtime Error} vai \emph{Time Limit Exceeded}.
@@ -50,10 +50,10 @@ saņemsiet vērtējumu \emph{Time Limit Exceeded}. Atbalstītajās valodās to v
   \item Pascal: \texttt{Flush(Output)}.
 \end{itemize}
 
-Lai palīdzētu komunicēt ar vērtēšanas programmu, mēs nodrošinam programmas kodu, kuru jūs pēc savas izvēles varat iekopēt programmā.
+Lai palīdzētu komunicēt ar vērtēšanas programmu, mēs nodrošinam programmas kodu, kuru jūs pēc savas izvēles varat iekopēt savā programmā.
 Saiti uz programmu kodiem visām atbalstītajām valodām (C++, Pascal, Java, Python) varat
-atrast kattis problēmu lapas sānjoslā.
-Nodrošinātais programmas kods lieto ātras ievada, izvada operācijas,
+atrast testēšanas sistēmas uzdevumu lapas sānjoslā.
+Nodrošinātais programmas kods arī lieto ātras ievada/izvada operācijas,
 kas var būt noderīgas Python un Java risinājumos (it īpaši pēdējās divās testu grupās).
 
 Vērtēšanas programma \emph{neadaptēsies}, t.i., katrā testā būs fiksētas mitruma daudzuma vērtības,
@@ -74,13 +74,13 @@ kuras nav atkarīgas no programmas veiktajiem mērījumiem.
 6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
 \end{tabular}
 
-\section*{Parauga protokols}
+\section*{Parauga dialoga protokols}
 Kattis testēšanas sistēmā ir viens parauga tests.
-Šajā parauga testā kastes reģiona dimensijas ir $3\times 1\times 1$ un mitruma daudzums tā trīs šūnās ir \{10, 14, 13\}.
+Šajā parauga testā paralēlskaldņa izmēri ir $3\times 1\times 1$ un mitruma daudzums tā trīs šūnās ir \{10, 14, 13\}.
 Zemāk ir parauga dialogs, kur rindas ar sākumu JUDGE ir izvads no vērtēšanas programmas (t.i.\ ievads jūsu programmā), un rindas ar sākumu YOU ir jūsu programmas izvads.
 
 Tā kā $14$ tiešām ir lielāks vai vienāds ar kaimiņu šūnu vērtībām ($10$ un $13$), tad šūna $(2,1,1)$ ir piemērota sliekai Maximus,
-un tu izmantoji trīs mērījumus, kas bija maksimāli atļautais mērījumu skaits ($Q=3$). Tādēļ šāds dialogs saņems vērtējumu Accepted parauga testā.
+un jūs izmantojāt trīs mērījumus, kas bija maksimāli atļautais mērījumu skaits ($Q=3$). Tādēļ šāds dialogs saņems vērtējumu Accepted parauga testā.
 
 \begin{verbatim}
 JUDGE:   3 1 1 3

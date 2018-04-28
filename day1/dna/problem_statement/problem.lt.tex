@@ -1,0 +1,45 @@
+\ifx\boi\undefined\input{../templates/words-lt.tex}\fi
+\def\version{jury-1}
+\problemname{Marsiečių DNR}
+
+Kaip tikriausiai jau žinote, žmonių DNR gali būti vaizduojami ilga eilute, kurioje galimos tik keturios raidės 
+ ({A, C, G, T}). Kiekviena šių raidžių vaizduoja atitinkamą skirtingą nukleotidą (atitinkamai, adeniną, citoziną, guaniną ir timiną).
+
+Tuo tarpu su marsiečiais yra kiek kitaip -- ištyrus paskutinį NASA pagautą marsietį paaiškėjo, kad marsiečių DNR susideda iš $K$ skirtingų nukleotidų. Todėl marsiečių DNR kodas gali būt aprašytas kaip simbolių eilutė, kurioje galimi $K$ skirtingų simbolių.
+
+Viena tyrėjų grupė, besidominti marsiečių DNR naudojimu dirbtiniam intelektui, paprašė vientiso marsiečio DNR posekio. Be to, kiekvienam iš pasirinktų $R$ nukleotidų jie nurodė, kiek mažiausiai to nukleotido turi būti šiame posekyje.
+
+Jus domina trumpiausias vientisas DNR posekis, tenkinantis šias sąlygas.
+
+\section*{\inputsection}
+Pirmoje eilutėje pateikti trys sveikieji skaičiai $N$, $K$ ir $R$, atitinkamai nurodantys marsiečio DNR ilgį, skirtingų nukleotidų skaičių ir skaičių nukleotidų, kuriems mokslininkai turi minimalaus kiekio reikalavimus. Šie skaičiai tenkina sąlygas $1 \le R \le K \le N$.
+
+Antroje eilutėje yra $N$ tarpais atskirtų skaičių -- pilna marsiečio DNR seka. $i$-asis šių skaičių, $D_i$, nurodo, koks nukleotidas yra $i$-ojoje DNR sekos pozicijoje. Nukleotidai numeruojami nuo nulio, t.y., $0
+\leq D_i < K$. Visi nukleotidai DNR sekoje pasitaikys bent po vieną kartą.
+
+Kiekvienoje tolesnių $R$ eilučių pateikta po du skaičius $B$ ir $Q$, nurodančius nukleotidą ir minimalų jo kiekį ($0 \le B < K, 1 \le Q \le N$).
+Šiose $R$ eilučių pasikartojančių nukleotidų nebus.
+
+\section*{\outputsection}
+Išveskite vieną sveikąjį skaičių -- trumpiausio vientiso DNR posekio, tenkinančio mokslininkų reikalavimus, ilgį. Jei tokio posekio nėra, išveskite ``\texttt{impossible}''.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1     & 16     & $1 \le N \le 100, R \le 10$ \\ \hline
+2     & 24     & $1 \le N \le 4\,000, R \le 10$ \\ \hline
+3     & 28     & $1 \le N \le 200\,000, R \le 10$ \\ \hline
+4     & 32     & $1 \le N \le 200\,000$ \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanations}
+Pirmajame pavyzdyje yra trys tinkami vientisi posekiai, kurių ilgis $2$. Jie visi turi po vieną nukleotidą $0$ ir $1$ ( ``\texttt{0 1}'', ``\texttt{1 0}'' ir ``\texttt{0 1}''),
+bet nėra jokių tinkamų vientisų posekių, kurių ilgis $1$. Todėl trumpiausias ilgis yra $2$.
+
+Antrajame pavyzdyje vienintelis optimalus posekis yra ``\texttt{1 3 2 0 1 2 0}''.
+
+Trečiajame pavyzdyje neužtenka nulinio tipo nukleotidų.

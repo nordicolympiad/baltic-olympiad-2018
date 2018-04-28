@@ -2,7 +2,7 @@
 \def\version{jury-1}
 \problemname{Mask-omsorg}
 
-Du letar efter en plats i jorden att lägga din tama mask, Maximus. Du begränsar ditt letande till ett rätblock med dimensionerna $N \times M \times K$ centimeter, vilket du har delat in i ett tredimensionellt rutnät av kubikcentimeter-celler, benämnda $(x,y,z)$ enligt deras position i rutnätet ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Varje cell har en viss fuktighet $H[x,y,z]$ som är ett heltal mellan $1$ och $10^9$. Du kan mäta fuktigheten av valfri cell med en speciell sensor.
+Du letar efter en plats i jorden att lägga din tama mask, Maximus. Du begränsar ditt letande till ett rätblock med dimensionerna $N \times M \times K$ centimeter, vilket du har delat in i ett tredimensionellt rutnät av kubikcentimeter-celler, benämnda $(x,y,z)$ enligt deras position i rutnätet ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Varje cell har en viss fuktighet $H[x,y,z]$ som är ett heltal mellan $1$ och $10^9$. Du kan mäta fuktigheten i valfri cell med en speciell sensor.
 
 Maximus älskar fuktiga platser, så du måste placera honom i en cell som är minst lika fuktig som dess angränsande celler, annars kravlar han iväg och du får problem att hitta honom. Med andra ord ska du placera Maximus i ett lokalt maximum.
 Mer preciserat: du ska finna en cell $(x,y,z)$, sådan att
@@ -11,7 +11,7 @@ H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[
 $$
 där ett värde anses som $0$ om det är utanför rätblocket (eftersom Maximum absolut vill stanna inom detta).
 
-Antalet celler kan dock vara väldigt stort, så du vill inte mäta fuktigheten i alla celler. Därför kan du i den här uppgiften interagera med Kattis och fråga efter fuktigheten i givna celler. När du har hittat en lämplig placering åt Maximus, ange denna plats till Kattis.
+Antalet celler kan dock vara väldigt stort, så du vill inte mäta fuktigheten i alla celler. Därför kan du i den här uppgiften interagera med Kattis och fråga efter fuktigheten i vissa celler. När du har hittat en lämplig placering åt Maximus, ange denna plats till Kattis.
 
 \section*{\interactivity}
 Den första raden av indata innehåller fyra positiva heltal: $N$, $M$, $K$ och $Q$, där $N$, $M$ och $K$ är rätblockets dimensioner och $Q$ är det maximala antalet mätningar du får göra.
@@ -36,8 +36,7 @@ Du \emph{måste} se till att flusha standard output innan du läser Kattis svar,
   \item Pascal: \texttt{Flush(Output)}.
 \end{itemize}
 
-För att hjälpa till att hantera den här interaktionen, tillhandahåller vi hjälpkod som du kan kopiera in i ditt program. Länk till den koden för alla supportade språk (C++, Pascal, Java, Python) finns i sidebaren till Kattis problemsida. Vi rekommenderar särskilt att använda denna kod om du skriver i Java eller Python, vars default input/output (IO) rutiner \emph{kan vara för långsamma för de två sista testgrupperna}.
-Hjälpkoden använder optimerade IO-rutiner som är tillräckligt snabba.
+För att hjälpa till att hantera den här interaktionen, tillhandahåller vi hjälpkod som du kan kopiera in i ditt program. Länk till den koden för alla supportade språk (C++, Pascal, Java, Python) finns i sidebaren till Kattis problemsida. Denna hjälpkod använder också snabba input/output-rutiner, vilket kan vara viktigt om du skriver i Java eller Python (endast relevant för de två sista testgrupperna).
 
 Kattis kommer att vara \emph{icke-adaptiv}; d.v.s. varje testfall kommer att ha en fix uppsättning fuktighetsvärden som inte beror på vilka mätningar programmet efterfrågar.
 
@@ -59,9 +58,9 @@ Kattis kommer att vara \emph{icke-adaptiv}; d.v.s. varje testfall kommer att ha 
 \section*{Exempel dialog}
 På Kattis finns det ett sample testfall. I detta testfall har rätblocket dimensionerna $3\times 1\times 1$ och luftfuktigheten i dessa tre celler är \{10, 14, 13\}.
 
-Nedan är ett exempel av dialogen, där raderna som börjar med JUDGE är utskriften från Kattis, dvs indatan till ditt program, och raderna som börjar med YOU är ditt programs utskrift.
+Nedan är ett exempel på dialog, där raderna som föregås av JUDGE är utskriften från Kattis, dvs indatan till ditt program, och raderna som föregås av YOU är ditt programs utskrift.
 
-Eftersom $14$ är minst lika stor som de närliggande cellernas värden ($10$ och $13$), är positionen $(2, 1, 1)$ en lämplig plats för Maximus, och du använde 3 mätningar, vilket var det maximala antalet mätningar ($Q=3$). Därför blir följande dialog accepterad på sample.
+Eftersom $14$ är minst lika stort som de närliggande cellernas värden ($10$ och $13$), är positionen $(2, 1, 1)$ en lämplig plats för Maximus, och du använde 3 mätningar, vilket var det maximala antalet mätningar ($Q=3$). Därför blir följande dialog accepterad på sample.
 
 \begin{verbatim}
 JUDGE:   3 1 1 3
