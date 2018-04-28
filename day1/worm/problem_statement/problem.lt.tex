@@ -1,0 +1,81 @@
+\ifx\boi\undefined\input{../templates/words-lt.tex}\fi
+\def\version{jury-1}
+\problemname{Kirmino rūpesčiai}
+
+Jūsų augintinis -- kirminas Maximus. Dirvoje ieškote vietos, kur galėtumėte jį apgyvendinti.
+Dirva yra dėžutės formos ir jos išmatavimai yra $N \times M \times K$ centimetrų.
+Ji sudalinta į trimačius kubelius, kurie žymimi $(x,y,z)$ pagal jų poziciją dirvoje ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). 
+Yra žinomas kiekvieno kubelio drėgnumas $H[x,y,z]$. Tai sveikasis skaičius iš intervalo $1 \dots 10^9$. Kiekvieno kubelio drėgnumą galima išmatuoti specialiu sensoriumi.
+
+Maximus mėgsta drėgmę, taigi reikia jį apgyvendinti tokiame kubelyje, kuris yra ne sausesnis už gretimus kubelius. Priešingu atveju jis pabėgs į drėgnesnį kubelį ir bus sunku jį surasti.
+Kitaip sakant, Maximus reikia apgyvendinti lokaliame maksimume.
+T.y. reikia rasti tokį kubelį $(x,y,z)$, kad galiotų:
+$$
+H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1])
+$$
+
+Jei kubelis yra už dirvos ribų, tuomet jo drėgnumą laikykite lygiu $0$ (nes Maximus jokiu būdu nenori išlįsti iš dėžutės formos dirvos).
+
+Dirvoje yra labai daug kubelių, taigi jūs nenorite matuoti kiekvieno kubelio drėgnumo. Šiame uždavinyje jums leidžiama kreiptis į vertintoją (angl. \emph{grader}) ir užklausti, koks nurodytų kubelių drėgnumas.
+Kai rasite tinkamą kubelį, kuriame galės apsigyventi Maximus, pateikite to kubelio koordinates vertintojui.
+
+\section*{\interactivity}
+Pirmoje eilutėje pateikti keturi teigiami sveikieji skaičiai: $N$, $M$, $K$ ir $Q$, kur $N$, $M$ ir $K$ yra dėžutės išmatavimai, o $Q$ -- didžiausias galimas drėgnumo matavimų, kuriuos galite atlikti, skaičius.
+
+Po to į standartinį išvedimą galite parašyti daugiausia $Q$ eilučių tokiu formatu: \texttt{"?\ x y z"}.
+Tai yra drėgnumo laukelyje $(x, y, z)$ užklausa.
+Kiekvienai tokiai užklausai vertintojas pateiks atsakymą -- vieną sveikąjį skaičių  $H[x,y,z]$. Atsakymas bus pateiktas vienoje eilutėje ir jį galima perskaityti iš standartinio įvedimo.
+
+Po užklausų Jūsų programa turi išvesti lygiai vieną eilutę formatu \texttt{"!\ x y z"} ir baigti darbą.
+Tai reiškia, kad kubelis $(x, y, z)$ yra tinkamas apgyvendinti Maximus. 
+Į šią eilutę vertintojas nepateiks jokio atsakymo.
+
+Visos $x, y, z$ reikšmės turi priklausyti intervalams $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$.
+Jeigu pateiktos reikšmės nepriklauso šiems intervalams, arba eilutės (užklausos ar atsakymo) formatas neatitinka nurodyto, arba pateiksite daugiau nei $Q$ užklausų, vertintojas pateiks atsakymą \texttt{-1} ir baigs darbą.
+Jei taip nutiks, jūsų programa taip pat turi baigti darbą. Kitu atveju, gali būti klaidingai pažymėta, kad viršytas laiko limitas arba įvyko vykdymo klaida.
+
+Jūs \emph{privalote} ištuštinti standartinio išvedimo buferį (angl. \emph{flush standard output}) prieš skaitydami vertintojo atsakymą. Kitu atveju Jūsų programa bus pažymėta kaip viršijusi leidžiamą vykdymo laiką.
+\begin{itemize}
+  \item Java: \texttt{System.out.println()} ištuština automatiškai.
+  \item Python: \texttt{print()} ištuština automatiškai.
+  \item C++: \texttt{cout << endl;} ištuština ir papildomai išveda naujos eilutės simbolį. Jei naudojate printf: \texttt{fflush(stdout)}.
+  \item Pascal: \texttt{Flush(Output)}.
+\end{itemize}
+
+Suprogramuoti interaktyvų bendravimą padės užduoties rengėjų parengtas kodas, kurį, jei norite, galite įkopijuoti į savo programą.
+Nuorodą į šį kodą kiekvienai palaikomai programavimo kalbai (C++, Pascal, Java, Python) galite rasti kattis sistemos užduočių puslapio šoninėje juostoje.
+Pateiktas kodas naudoja optimizuotas ir pakankamai greitas įvedimo/išvedimo paprogrames, kurios gali būti naudingos programuojant Python ir Java kalbomis, ir aktualios tik dviems paskutinėms testų grupėms.
+
+Vertintojas \emph{nėra adaptyvus}: tai yra, kiekvienam testui kiekvieno kubelio drėgnumo vertės yra fiksuotos ir jos nepriklausys nuo jūsų programos užklausų. 
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1      & 10     & $M = K = 1$, $N = 1\,000\,000$, $Q = 10\,000$  \\ \hline
+2      & 22     & $M = K = 1$, $N = 1\,000\,000$, $Q = 35$       \\ \hline
+3      & 12     & $K = 1$, $N = M = 200$,         $Q = 4\,000$   \\ \hline
+4      & 19     & $K = 1$, $N = M = 1\,000$,      $Q = 3\,500$   \\ \hline
+5      & 14     & $N = M = K = 100$,              $Q = 100\,000$ \\ \hline
+6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
+\end{tabular}
+
+\section*{Dialogo pavyzdys}
+Kattis sistemoje yra vienas pavyzdinis testas.
+Šiame pavyzdyje dėžutės išmatavimai yra $3\times 1\times 1$ ir drėgnumas kubeliuose yra \{10, 14, 13\}.
+Žemiau pateiktas dialogo pavyzdys. Eilutės, prasidedančios žodžiu JUDGE, yra pateiktos Kattis sistemos (jos yra perskaitomos jūsų programos). Eilutės, prasidedančios YOU, yra išspausdinamos jūsų programos.
+
+Kadangi $14$ yra didesnis arba lygus gretimoms reikšmėms ($10$ ir $13$), kubelis $(2,1,1)$ yra tinkama vieta apgyvendinti Maximus ir, kadangi jūs neviršijote maksimalaus užklausų skaičiaus($Q=3$), testas yra įveiktas.
+
+\begin{verbatim}
+JUDGE:   3 1 1 3
+YOU:     ? 3 1 1
+JUDGE:   13
+YOU:     ? 2 1 1
+JUDGE:   14
+YOU:     ? 1 1 1
+JUDGE:   10
+YOU:     ! 2 1 1
+\end{verbatim}

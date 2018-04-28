@@ -8,6 +8,8 @@ use_solution ../../data/empty.sh # empty .ans files
 compile echo.sh
 
 samplegroup
+limits 3 1 1 3
+#sample 1
 
 LIMS=''
 params() {

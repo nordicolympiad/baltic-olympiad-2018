@@ -1,0 +1,57 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Kjærlighetspolygon}
+Som vi alle vet så kan såpeoperaer på TV med mange karakterer ha ufattelig kompliserte kjærlighetsdramer.
+I en TV-serie så er det $N$ karakterer. Hver karakter elsker nøyaktig én karakter (som kan være han- eller hun selv).
+Vi sier at to karakterer er i et forhold hvis og bare hvis de elsker hverandre.
+
+En spesiell type komplikasjon kalles et ``kjærlighetspolygon''.
+Vi sier at 3 eller flere karakterer er i et ``kjærlighetspolygon'' hvis den første karakteren elsker den andre,
+den andre elsker den tredje, osv. - og også den siste karakteren elsker den første.
+
+Nylige seerundersøkelser har avslørt at seerene har blitt lei av så mye drama og vil heller ha noe mer romantisk.
+Derfor har det blitt besluttet å skyte noen av karakterene med kjærlighetspiler slik at alle ender opp i forhold.
+Ved å skyte noen med en kjærlighetspil så kan du endre hvem den karakteren elsker (til en karakter av ditt valg).
+
+Hva er det minste antall kjærlighetspiler som trengs for å få alle i et forhold?
+
+\section*{\inputsection}
+Første linje av input inneholder et heltall $N$, antall karakterer involvert.
+De neste $N$ linjene alle inneholder to navn skilt ved mellomrom, $s$ og $t$, som betyr at karakteren med navn $s$
+til å begynne med elsker karakteren ved navn $t$. Navnene på karakterene er på ikke mer enn $10$ bokstaver og består kun av
+små bokstaver fra det engelske alfabetet (a til z).
+
+\section*{\outputsection}
+Skriv ut ett heltall -- det minste antall kjærlighetspiler som trengs for å få alle inn i et forhold.
+Dersom dette ikke er mulig, skriv ut \texttt{-1}.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+\group & \points & \limitsname & \additionalconstraints \\ \hline
+1     & 21     & $2 \le N \le 20$ & \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Hver karakter er elsket av noen (muligens dem selv). \\ \hline
+3     & 29     & $2 \le N \le 100\,000$ & Det er ingen forhold eller ``kjærlighetspolygoner''. \\ \hline
+4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanations}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{polygonfig.pdf}
+\end{center}
+
+Det første eksempelet er vist i illustrasjonen over. Den øvre seksjonen viser den opprinnelige situasjonen, med en pil pekende fra $s$ til $t$ 
+for å indikere at $s$ opprinnelig elsker $t$, og den rosa fargen markerer de tre karakterene som må bli skutt med
+kjærlighetspiler i den unike optimale løsningen. Den nedre seksjonen viser situasjonen etterpå.
+
+%In the first example, there is a unique optimal solution: shoot 
+%which consists of shooting \texttt{b}, \texttt{d} and \texttt{f} with love arrows, having them fall in love with \texttt{h}, \texttt{c} and \texttt{e}, respectively.
+
+I det andre eksemplet (som tilfredsstiller begrensningene i gruppe 3) så er det flere forskjellige optimale løsninger.
+En av de er å skyte \texttt{a}, \texttt{b} og \texttt{d} med kjærlighetspiler, og å få de til å forelske seg i henholdsvis \texttt{b}, \texttt{a} og \texttt{c}.
+
+I det tredje eksempelet har vi et kjærlighetstriangel, hvor uansett hvor mange piler vi skyter så vil alltid noen være utelatt.

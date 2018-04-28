@@ -6,12 +6,14 @@ int main(int argc, char** argv) {
 	int N = Arg("n");
 	int M = Arg("m", -1);
 	int A = Arg("a");
+	int realn = Arg("realn", N);
 	int gena = Arg("gena", A);
 	string type = Arg("type");
 	string adjoin = Arg("adjoin", "");
 
 	assert(N % 2 == 1);
-	int N2 = (N+1)/2;
+	assert(realn % 2 == 1);
+	int N2 = (realn+1)/2;
 
 	int K;
 	matdig mat, mat2;
@@ -28,6 +30,7 @@ int main(int argc, char** argv) {
 		}
 		mat2.push_back(mat[i]);
 	}
+	mat2.resize(N+1);
 	mat2.pop_back();
 	randomize(mat2, A);
 	adjoinMat(mat2, adjoin, &K, gena);

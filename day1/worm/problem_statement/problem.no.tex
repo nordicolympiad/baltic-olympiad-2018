@@ -1,0 +1,72 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Worm Worries}
+Du leter etter en posisjon i jorden hvor du kan plassere kjæle-marken din, Maximus. Du avgrenser søket ditt til en boks-formet region med dimensioner $N \times M \times K$ centimeter som du har delt opp i ett tre-dimensionalt koordinatsystem av kubikk-centimeter store blokker, hvor vi skriver koordinatene til en slik celle $(x,y,z)$ ($1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$). Hver celle $(x,y,z)$ har en viss fuktighet $H[x,y,z]$ som er et heltall i intervallet $1 \dots 10^9$. Du kan måle fuktigheten til celler ved hjelp av en spesiell sensor.
+
+Maximus elsker fuktige områder, så du må plassere ham i en celle som er minst like fuktig som alle nabo-cellene, ellers vil han gå vekk og du vil neppe finne ham igjen. Med andre ord må du plassere Maximus i et lokalt maximum. Mer presist trenger du å finne en celle $(x,y,z)$ hvor
+
+$$
+H[x,y,z] \ge \max(H[x+1,y,z], H[x-1,y,z], H[x,y+1,z], H[x,y-1,z], H[x,y,z+1], H[x,y,z-1]),
+$$
+
+Her tolker vi en verdi til å være 0 om punktet man spør om fuktigheten til ligger utenfor boksen (fordi Maximus absolutt vil holde seg inni boksen).
+
+Antallet celler kan være veldig stort, så du ønsker ikke å måle fuktigheten i alle cellene. Derfor kan du i denne oppgaven interagere med graderen (English: ``the grader'') og spørre om fuktigheten i ett gitt punkt.
+Når du har funnet en passende posisjon for Maximus, gi den posisjonen til graderen.
+
+\section*{\interactivity}
+Den første linjen i inputtet inneholder fire positive heltall: $N$, $M$, $K$ og $Q$ hvor $N$, $M$ og $K$ er dimensionene til boksen og $Q$ er det største antallet målinger du kan gjøre.
+
+Etter dette kan du skrive maks $Q$ linjer på formen ``\texttt{?\ x y z}'' til standard output. Dette spør om verdien til fuktigheten i punktet $(x,y,z)$. For hver slik linje vil graderen svare med en enkelt linje med heltallet $H[x,y,z]$ som kan leses fra standard input av ditt program.
+
+Etter alle disse linjene må programmet ditt skrive ut nøyaktig en linje på formen ``\texttt{!\ x y z}'' og terminere. Med dette påstås det at punktet $(x,y,z)$ er en passende posisjon for Maximus. Dommeren gir ingen respons til dette.
+
+Alle verdier av $x,y,z$ må oppfylle ulikhetene $1 \le x \le N$, $1 \le y \le M$, $1 \le z \le K$. Om ikke, eller om en linje har et ugyldig format eller om du spør om mer enn $Q$ verdier vil graderen svare med \texttt{-1} og avslutte.
+Hvis dette skjer skal ditt program også avslutte. Om det fortsette, kan det få en tilbakemelding på formen ``Runtime Error'' eller ``Time Limit Exceeded''.
+
+Du \emph{må} forsikre deg om å flushe (engelsk: flush) standard output før du leser graderens respons. Ellers vil ditt program få tilbakemeldingen ``Time Limit Exceeded''. Dette virker som følger i språkene som støttes:
+
+\begin{itemize}
+	\item Java: \texttt{System.out.println()} flusher automatisk.
+	\item Python: \texttt{print()} flusher automatisk.
+	\item C++: \texttt{cout << endl;} flusher, og legger til en newline/ny linje. Hvis du benytter printf, \texttt{fflush(stdout)}.
+	\item Pascal: \texttt{Flush(Output)}.
+\end{itemize}
+
+For å hjelpe til med denne interageringen tilbyr vi en kode-snutt som du kan kopiere inn i programmet ditt.
+En link til denne kode-snutten for alle støttede språk (C++, Pascal, Java, Python) kan finnes i sidebaren på Kattis problem-siden. Denne kode-snutten benytter også raske input/output rutiner, som kan være nyttig for Python og Java (kun relevant for de to siste test-gruppene).
+
+Graderen vil være \emph{ikke-adaptiv} i den forstand at hver test-case har en fikset mengde fuktighetsverdier. Disse avhenger ikke av hvilke målinger programmet utfører.
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1      & 10     & $M = K = 1$, $N = 1\,000\,000$, $Q = 10\,000$  \\ \hline
+2      & 22     & $M = K = 1$, $N = 1\,000\,000$, $Q = 35$       \\ \hline
+3      & 12     & $K = 1$, $N = M = 200$,         $Q = 4\,000$   \\ \hline
+4      & 19     & $K = 1$, $N = M = 1\,000$,      $Q = 3\,500$   \\ \hline
+5      & 14     & $N = M = K = 100$,              $Q = 100\,000$ \\ \hline
+6      & 23     & $N = M = K = 500$,              $Q = 150\,000$ \\ \hline
+\end{tabular}
+
+\section*{Sample dialogue}
+I Kattis finnes det ett eksempel test case.
+I dette eksempelet har boksen dimensjoner $3\times 1\times 1$ og fuktigheten i de tre cellene er \{10, 14, 13\}
+
+Under er en eksempel-dialog, hvor linjene som starter med ``JUDGE'' er output av Kattis (altså i praksis input til ditt program), og linjene som starter med YOU er ditt program sitt output.
+
+Siden $14$ jo er større eller lik naboenes verdier ($10$ og $13$) er posisjonen $(2,1,1)$ en passelig posisjon for Maximus og siden du brukte tre forespørspørsler som faktisk er det maksimale antallet tillatt i dette eksempelet ($Q = 3$) vil denne dialogen gi ``Accepted'' på eksempel test caset.
+
+\begin{verbatim}
+JUDGE:   3 1 1 3
+YOU:     ? 3 1 1
+JUDGE:   13
+YOU:     ? 2 1 1
+JUDGE:   14
+YOU:     ? 1 1 1
+JUDGE:   10
+YOU:     ! 2 1 1
+\end{verbatim}

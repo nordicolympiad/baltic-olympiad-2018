@@ -1,0 +1,57 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Polygondrama}
+Som vi alla vet kan TV-serier med många personer innebära komplicerade kärleksdraman. 
+I en viss TV-serie finns det $N$ personer. Varje person älskar exakt en person, 
+vilket faktiskt kan vara den själv.
+Två personer är i ett {\em parförhållande} om och endast om de båda älskar varandra. 
+
+
+En specifik typ av komplicerat kärleksdrama kallas för ``polygondrama''.
+Vi säger att $3$ eller fler personer är i ett ``polygondrama'' om den första personen älskar den andra, 
+den andra älskar den tredje, och så vidare, samt att den sista personen älskar den första personen.
+
+Undersökningar har visat att tittarna har blivit trötta på komplicerade kärleksdraman
+och skulle föredra något mer romantiskt. Därför bestämdes det att vissa personer ska 
+skjutas med kärlekspilar så att alla hamnar i ett parförhållande.
+Genom att skjuta en person med en kärlekspil kan du välja att ändra vem den personen 
+älskar till vem du vill.
+
+Vad är det minsta antalet kärlekspilar som behövs för att alla ska hamna i ett parförhållande?
+
+\section*{\inputsection}
+Den första raden innehåller ett heltal $N$, antalet personer.
+Nästkommande $N$ rader innehåller två mellanslagsseparerade namn $s$ och $t$, vilket betyder att
+personen med namn $s$ älskar personen med namn $t$. Personernas namn kommer inte att innehålla
+fler än $10$ bokstäver, och alla bokstäver kommer vara små och ingå i det engelska alfabetet.
+
+\section*{\outputsection}
+Skriv ut ett heltal -- det minsta antalet kärlekspilar som krävs för att alla ska vara i ett
+parförhållande. Om det inte är möjligt, skriv ut $-1$.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+\group & \points & \limitsname & \additionalconstraints \\ \hline
+1     & 21     & $2 \le N \le 20$ & \\ \hline
+2     & 25     & $2 \le N \le 100\,000$ & Varje person är älskad av någon (möjligen av sig själv). \\ \hline
+3     & 29     & $2 \le N \le 100\,000$ & Det finns inga parförhållanden och inga ``polygondraman''. \\ \hline
+4     & 25     & $2 \le N \le 100\,000$ & \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanations}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{polygonfig.pdf}
+\end{center}
+Det första exemplet illustreras i figuren ovan. Den övre delen visar vem som älskar varandra från början, där en pil från $s$ till $t$ indikerar att $s$ älskar $t$,
+och den rosa färgen förtydligar de tre personerna som behöver skjutas med en kärlekspil i den unika optimala lösningen. Den undre delen visar situationen efter att kärlekspilarna har skjutits.
+
+I det andra exemplet (som uppfyller kriterierna för testgrupp 3) finns det flera optimala lösningar.
+En av dessa är att skjuta \texttt{a}, \texttt{b} and \texttt{d} med kärlekspilar, och låta dem älska \texttt{b}, \texttt{a} respektive \texttt{c}.
+
+I det tredje exemplet har vi ett ``polygondrama'', och oavsett hur många kärlekspilar som 
+skjuts kommer någon hamna utanför.

@@ -23,8 +23,8 @@ int main() {
 			}
 		}
 		cout << i + 1 << endl;
-		return 0;
+		// return 0;
 fail:;
 	}
-	return 1;
+	// return 1;
 }

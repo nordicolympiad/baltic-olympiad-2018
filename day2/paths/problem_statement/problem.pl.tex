@@ -1,0 +1,51 @@
+\ifx\boi\undefined\input{../templates/words-pl.tex}\fi
+\def\version{jury-1}
+\problemname{Ścieżki}
+{\em Graf} to struktura matematyczna złożona ze zbioru {\em wierzchołków} i zbioru {\em krawędzi}, każda krawędź
+łączy dwa wierzchołki. Przykładowy graf o $4$ wierzchołkach i $3$ krawędziach jest pokazany w wyjaśnieniu pierwszego testu przykładowego.
+
+{\em Ścieżka} to ciąg $2$ lub więcej wierzchołków taki, że każde dwa kolejne wierzchołki w ciągu są połączone krawędzią. W tym zadaniu będziemy rozważali {\em prote ścieżki}, to jest takie, w których żaden wierzchołek nie występuje więcej niż raz.
+Kolejność wierzchołków ma znaczenie; przykładowo ,,\texttt{5-6-7}'', ,,\texttt{5-7-6}'' and ,,\texttt{7-6-5}'' to różne ścieżki.
+
+
+Każdy wierzchołek ma jeden z $K$ kolorów. Twoim zadaniem jest znalezienie liczby różnych (prostych) ścieżek,
+na~których wszystkie wierzchołki mają różne kolory.
+
+
+\section*{\inputsection}
+Pierwszy wiersz wejścia zawiera trzy liczby całkowite: $N$ (liczbę wierzchołków), $M$ (liczbę krawędzi) i $K$ (liczbę kolorów).
+
+%($1 \le N, M \le 3 \cdot 10^5, 1 \le K \le 5$).
+
+Drugi wiersz wejścia zawiera $N$ liczb całkowitych pomiędzy $1$ a $K$ -- kolory wierzchołków (kolejno dla wierzchołków od $1$ do $N$).
+
+Każdy z kolejnych $M$ wierszy opisuje krawędź i zawiera dwie liczby całkowite $a, b$ ($1 \le a, b \le N, a \neq b$) -- numery
+wierzchołków połączonych krawędzią. Między każdą parą wierzchołków będzie co najwyżej jedna krawędź.
+
+\section*{\outputsection}
+Na wyjście wypisz pojedynczą liczbę całkowitą -- liczbę ścieżek, na których wszystkie wierzchołki mają parami różne kolory.
+Wynik nie przekroczy $10^{18}$.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l |}
+\hline
+\group & \points & \limitsname \\ \hline
+1      & 23      & $1 \le N, M \le 100, 1 \le K \le 4$ \\ \hline
+2      & 20      & $1 \le N, M \le 300\,000, 1 \le K \le 3$ \\ \hline
+3      & 27      & $1 \le N, M \le 300\,000, 1 \le K \le 4$ \\ \hline
+4      & 30      & $1 \le N, M \le 100\,000, 1 \le K \le 5$ \\ \hline
+\end{tabular}
+
+\section*{\sampleexplanation{1}}
+
+\includegraphics[width=5cm]{pathsfig.pdf}
+
+Rysunek przedstawia graf z pierwszego testu przykładowego, każdy wierzchołek ma kolor biały (kolor 1), szary (kolor 2) lub czarny (kolor 3).
+Jest 10 ścieżek, na których wszystkie wierzchołki mają różne kolory:
+,,\texttt{1-2}'', ,,\texttt{2-1}'', ,,\texttt{2-3}'', ,,\texttt{3-2}'', ,,\texttt{2-4}'', ,,\texttt{4-2}'', ,,\texttt{1-2-4}'', ,,\texttt{4-2-1}'', ,,\texttt{3-2-4}'' oraz ,,\texttt{4-2-3}''.
+
+,,\texttt{1}'' nie jest poprawną ścieżką, ponieważ zawiera tylko jeden wierzchołek, jak również
+,,\texttt{1-2-3}'', ponieważ zawiera dwa wierzchołki o kolorze $1$.

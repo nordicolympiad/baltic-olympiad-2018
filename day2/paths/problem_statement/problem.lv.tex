@@ -3,15 +3,15 @@
 \problemname{Ceļi}
 {\em Grafs} ir matemātisks objekts, kas sastāv no {\em virsotnēm} un {\em šķautnēm}, kas katra savieno divas virsotnes. Piemērs grafam ar $4$~virsotnēm un $3$~šķautnēm ir parādīts zemāk.
 
-Šajā uzdevumā katra grafa virsotne ir vienā no $K$~krāsām. Uzdevums ir atrast {\em ceļu} skaitu, kas nesatur virsotnes vienādās krāsās.
-
 {\em Ceļš} tiek definēts kā secīga virkne no~$2$ vai vairāk virsotnēm, tāda, ka
-starp blakus virsotnēm virknē pastāv šķautne. Ievērojiet, ka secība ir svarīga;
-piemēram, ``\texttt{1-2-3}'', ``\texttt{1-3-2}'' un ``\texttt{3-2-1}'' tiek
-uzskatīti par dažādiem ceļiem.
+starp blakus virsotnēm virknē pastāv šķautne. Šajā uzdevumā mūs interesē tikai
+{\em vienkāršie ceļi}, kuros neviena virsotne neparādās vairāk kā vienu reizi.
+Ievērojiet, ka secība ir svarīga; piemēram, ``\texttt{5-6-7}'', ``\texttt{5-7-6}'' un ``\texttt{7-6-5}'' tiek visi uzskatīti par dažādiem ceļiem.
+
+Šajā uzdevumā katra grafa virsotne ir vienā no $K$~krāsām. Uzdevums ir atrast (vienkāršo) ceļu skaitu, kas nesatur virsotnes vienādās krāsās.
 
 \section*{\inputsection}
-Pirmā ievada rinda satur trīs veselus skaitļus: $N$ (virsotņu skaits), $M$ (šķautņu skaits) un $K$(dažādu krāsu skaits).
+Pirmā ievada rinda satur trīs veselus skaitļus: $N$ (virsotņu skaits), $M$ (šķautņu skaits) un $K$ (dažādu krāsu skaits).
 
 %($1 \le N, M \le 3 \cdot 10^5, 1 \le K \le 5$).
 
@@ -22,7 +22,7 @@ Katra no sekojošajām $M$~rindām apraksta šķautni un satur divus veselus ska
 
 \section*{\outputsection}
 Izvadiet vienu veselu skaitli~--- ceļu skaitu, kuros visas virsotnes ir dažādās krāsās.
-Šis skaitlis vienmēr būs mazāks par $10^{18}$.
+Šis skaitlis vienmēr būs mazāks par~$10^{18}$.
 
 \section*{\constraints}
 \testgroups
@@ -40,7 +40,8 @@ Izvadiet vienu veselu skaitli~--- ceļu skaitu, kuros visas virsotnes ir dažād
 \section*{\sampleexplanation{1}}
 
 \includegraphics[width=5cm]{pathsfig.pdf}
+\nopagebreak
 
-Attēlā parādīts 1.~piemēra grafs, kur katra virsotne ir iezīmēta balta (krāsa~1), pelēka (krāsa~2) vai melna (krāsa~3). Pastāv 10~ceļi, kuros visas virsotnes ir dažādās krāsās: ``\texttt{1-2}'', ``\texttt{2-1}'', ``\texttt{2-3}'', ``\texttt{3-2}'', ``\texttt{2-4}'', ``\texttt{4-2}'', ``\texttt{1-2-4}'', ``\texttt{4-2-1}'', ``\texttt{3-2-4}'' un ``\texttt{4-2-3}''.
+Attēlā parādīts pirmā piemēra grafs, kur katra virsotne ir iezīmēta balta (krāsa~1), pelēka (krāsa~2) vai melna (krāsa~3). Pastāv 10~ceļi, kuros visas virsotnes ir dažādās krāsās: ``\texttt{1-2}'', ``\texttt{2-1}'', ``\texttt{2-3}'', ``\texttt{3-2}'', ``\texttt{2-4}'', ``\texttt{4-2}'', ``\texttt{1-2-4}'', ``\texttt{4-2-1}'', ``\texttt{3-2-4}'' un ``\texttt{4-2-3}''.
 
-Ievērojiet, ka ``\texttt{1}'' neskaitās kā ceļš, jo tā ir viena virsotne, kā arī neskaitās ``\texttt{1-2-3}'', jo tas satur divas virsotnes krāsā~1.
+Ievērojiet, ka ``\texttt{1}'' neskaitās kā ceļš, jo tā ir viena virsotne, kā arī neskaitās ``\texttt{1-2-3}'', jo tas satur divas virsotnes krāsā~$1$.

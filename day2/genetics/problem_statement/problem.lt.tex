@@ -1,0 +1,37 @@
+\ifx\boi\undefined\input{../templates/words-lt.tex}\fi
+\def\version{jury-1}
+\problemname{Genetika}
+Piktadariai, norintys užvaldyti pasaulį, klonuoja save -- taip sunkiau pagauti tikrąjį piktadarį. Jums pavyko pagauti tokią piktadarę ir jos $N-1$ klonų,
+ir dabar bandote nustatyti, kuri iš jų yra tikroji piktadarė.
+
+Žinoma kiekvienos jų DNR seka, kurią sudaro $M$ raidžių, kiekviena kurių yra
+\texttt{A}, \texttt{C}, \texttt{G} arba \texttt{T}.
+Kadangi klonavimo procesas netobulas, kiekvieno klono DNR seka nuo tikrosios piktadarės DNR sekos skiriasi lygiai $K$ pozicijų.
+
+Ar galite rasti tikrąją piktadarę?
+
+\section*{\inputsection}
+Pirmoje eilutėje pateikti trys sveikieji skaičiai $N$, $M$ ir $K$, $1 \le K \le M$.
+Tolesnės $N$ eilučių nusako DNR sekas.
+Kiekvienoje jų bus po $M$ simbolių, kiekvienas jų bus \texttt{A}, \texttt{C}, \texttt{G} arba \texttt{T}.
+
+Tarp pateiktų yra lygiai viena seka, kuri nuo visų kitų skiriasi lygiai $K$ pozicijų.
+
+
+Pastaba: šiame uždavinyje didelis kiekis pradinių duomenų gali reikalauti greito įvedimo/išvedimo programuojant Java kalba. 
+
+\section*{\outputsection}
+Išveskite vieną skaičių -- DNR sekos, priklausančios tikrajai piktadarei, numerį. Sekos numeruojamos pradedant nuo $1$.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+  \group & \points & \limitsname & \additionalconstraints \\ \hline
+  1      & 27      & $3 \le N, M \le 100$ & \\ \hline
+  2      & 19      & $3 \le N, M \le 1800$ & Visi simboliai yra \texttt{A} arba \texttt{C}. \\ \hline
+  3      & 28      & $3 \le N, M \le 4100$ & Visi simboliai yra \texttt{A} arba \texttt{C}. \\ \hline
+  4      & 26      & $3 \le N, M \le 4100$ & \\ \hline
+\end{tabular}

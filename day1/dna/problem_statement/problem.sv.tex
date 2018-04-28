@@ -13,11 +13,11 @@ Du är intresserad av att hitta den kortaste delsträngen av DNAt som uppfyller 
 \section*{\inputsection}
 Första raden innehåller tre heltal $N$, $K$ och $R$: den totala längden på marsvarelsens DNA, alfabetets storlek respektive antalet nukleobaser för vilka forskarna har ett minimumkriterium. Talen uppfyller $1 \le R \le K \le N$.
 
-Den andra raden innehåller $N$ blankstegsseparerade heltal, den kompletta DNA-strängen för marsvarelsen. Det $i$-te av dessa heltal, $D_i$, talar om vilken nukleobas som finns på den $i$-te positionen i DNA-strängen. Nukleobaserna är $0$-indexerade, d.v.s.\ de uppfyller $0 \leq D_i < K$. Varje nukleobas förekommer åtminstone en gång.
+Den andra raden innehåller $N$ blankstegsseparerade heltal, den kompletta DNA-strängen för marsvarelsen. Det $i$-te av dessa heltal, $D_i$, talar om vilken nukleobas som finns på den $i$-te positionen i DNA-strängen. Nukleobaserna är $0$-indexerade, d.v.s.\ de uppfyller $0 \leq D_i < K$. Varje nukleobas förekommer åtminstone en gång i DNA-strängen.
 
 Var och en av de följande $R$ raderna innehåller två heltal  $B$ and $Q$,  vilka anger en nukleobas och dess minimalt krävda antal.
 ($0 \le B < K, 1 \le Q \le N$).
-Ingen nukleobas kommer att listas mer än en gång.
+Ingen nukleobas kommer att listas mer än en gång på dessa $R$ rader.
 
 \section*{\outputsection}
 Skriv ut ett enda heltal, längden på den kortaste sammanhängande delsträngen av DNAt som uppfyller forskarnas krav. Om ingen sådan delsträng finns så skriv ut  ``\texttt{impossible}''.
