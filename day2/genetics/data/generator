@@ -37,33 +37,35 @@ tc small-one-1 gen-hadamard-oneimportantrow n=96 a=2
 tc small-one-2 gen-hadamard-oneimportantrow n=96 late=1 a=4 gena=2
 
 group group2 19
-limits n=1600 a=2
-# hadamard sizes: 1152, 1536, 1024 (a=2)
+limits n=1800 a=2
+# hadamard sizes: 1728, 1152, 1536, 1024 (a=2)
 tc small-c
 tc small-rand-1
 tc small-rand-5
-tc medium-a gen-hadamard-flips n=1536 its=3 late=1 a=2
-tc medium-b gen-doubled n=1599 m=1600 type=id a=2
-tc medium-c gen-hadamard-oneimportantrow n=1536 m=1600 late=1 a=2
-tc medium-rand-1 gen-random n=1600 m=1600 k=1 a=2
-tc medium-rand-2 gen-random n=1600 m=1600 k=10 a=2
-tc medium-rand-3 gen-random n=1600 m=1600 k=1000 a=2
-tc medium-flips-1 gen-hadamard-flips n=1536 a=2
-tc medium-flips-2 gen-hadamard-flips n=1536 late=1 a=2
-tc medium-flips-3 gen-hadamard-flips n=1536 its=3 a=2
-tc medium-flips-4 gen-hadamard-flips n=1536 its=3 a=2
-tc medium-flips-5 gen-hadamard-flips n=1536 its=3 a=2
-tc medium-flips-6 gen-hadamard-flips n=1536 its=2 a=2
-tc medium-flips-7 gen-hadamard-flips n=1536 its=2 late=1 a=2
+tc medium-a gen-hadamard-flips n=1728 its=3 late=1 a=2
+tc medium-b gen-doubled n=1799 m=1800 type=id a=2
+tc medium-c gen-hadamard-oneimportantrow n=1728 m=1800 late=1 a=2
+tc medium-rand-1 gen-random n=1800 m=1800 k=1 a=2
+tc medium-rand-2 gen-random n=1800 m=1799 k=10 a=2
+tc medium-rand-3 gen-random n=1799 m=1800 k=1000 a=2
+tc medium-flips-1 gen-hadamard-flips n=1728 a=2
+tc medium-flips-2 gen-hadamard-flips n=1728 late=1 a=2
+tc medium-flips-3 gen-hadamard-flips n=1728 its=3 a=2
+tc medium-flips-4 gen-hadamard-flips n=1728 its=3 a=2
+tc medium-flips-5 gen-hadamard-flips n=1728 its=3 a=2
+tc medium-flips-6 gen-hadamard-flips n=1728 its=2 a=2
+tc medium-flips-7 gen-hadamard-flips n=1728 its=2 late=1 a=2
 tc medium-doubled-1 gen-doubled n=1151 type=hadamard a=2
-tc medium-doubled-2 gen-doubled n=1535 m=1600 type=hadamard a=2
-tc medium-doubled-3 gen-doubled n=767 m=1600 type=hadamard adjoin=hadamard a=2
-tc medium-doubled-4 gen-doubled n=767 m=1600 type=hadamard adjoin=id a=2
-tc medium-one-1 gen-hadamard-oneimportantrow n=1024 a=2
-tc medium-one-2 gen-hadamard-oneimportantrow n=1536 m=1598 a=2
-tc medium-one-3 gen-hadamard-oneimportantrow n=1536 m=1600 a=2
-tc medium-one-4 gen-hadamard-oneimportantrow n=1536 m=1600 a=2
-tc medium-one-5 gen-hadamard-oneimportantrow n=1536 m=1600 a=2
+tc medium-doubled-2 gen-doubled n=1799 realn=2047 m=1800 type=hadamard a=2
+tc medium-doubled-3 gen-doubled n=1799 realn=2047 m=1800 type=hadamard a=2
+tc medium-doubled-4 gen-doubled n=767 m=1800 type=hadamard adjoin=hadamard a=2
+tc medium-doubled-5 gen-doubled n=767 m=1800 type=hadamard adjoin=id a=2
+tc medium-one-1 gen-hadamard-oneimportantrow n=1536 a=2
+tc medium-one-2 gen-hadamard-oneimportantrow n=1728 m=1798 a=2
+for A in {3..14}; do
+	# Try to kill random-order naive.
+	tc medium-one-$A gen-hadamard-oneimportantrow n=1728 m=1800 a=2
+done
 
 group group3 28
 limits n=4100 a=2
