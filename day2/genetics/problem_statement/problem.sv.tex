@@ -3,11 +3,11 @@
 \problemname{Genetik}
 Vissa förbrytare vill ta över världen. Ett vanligt sätt för förbrytare 
 att undvika att bli straffade är att klona sig själva. Du har nu fångat en förbrytare och
-hennes $N-1$ kloner. Du ska ta reda på vem som är den riktiga förbrytaren.
+hennes $N-1$ kloner. Du ska ta reda på vem av dem som är den riktiga förbrytaren.
 
-Du har tillgång till varje infångad persons DNA, som alla består av $M$ bokstäver där varje bokstav är antingen \texttt{A}, \texttt{C}, \texttt{G} eller \texttt{T}.
-Du vet också att klonerna inte är perfekta kloner, utan istället skiljer sig 
-DNA-sekvensen för varje klon på exakt $K$ ställen jämfört med den riktiga förbrytaren.
+Du har tillgång till varje infångad persons DNA, som består av $M$ bokstäver där varje bokstav är antingen \texttt{A}, \texttt{C}, \texttt{G} eller \texttt{T}.
+Du vet också att klonerna inte är perfekta kopior, utan
+DNA-sekvensen för varje klon skiljer sig på exakt $K$ ställen jämfört med den riktiga förbrytaren.
 
 Kan du identifiera den riktiga förbrytaren?
 
@@ -18,11 +18,11 @@ Varje av dessa innehåller $M$ bokstäver, där varje bokstav är någon av \tex
 
 Det finns, i inputen, exakt en sekvens som skiljer sig från alla andra på exakt $K$ ställen.
 
+Varning: Det här problemet har stora mängder indata, och kräver snabb IO om man använder Java.
+
 \section*{\outputsection}
 
-Skriv ut ett heltal -- indexet av DNA-sekvensen som tillhör förbrytaren.
-
-Sekvensernas index börjar med $1$.
+Skriv ut ett heltal -- indexet av DNA-sekvensen som tillhör förbrytaren. Sekvensernas index börjar med $1$.
 
 \section*{\constraints}
 \testgroups
@@ -32,7 +32,7 @@ Sekvensernas index börjar med $1$.
 \hline
   \group & \points & \limitsname & \additionalconstraints \\ \hline
   1      & 27      & $3 \le N, M \le 100$ & \\ \hline
-  2      & 19      & $3 \le N, M \le 1600$ & Alla bokstäver är antingen \texttt{A} eller \texttt{C}. \\ \hline
+  2      & 19      & $3 \le N, M \le 1800$ & Alla bokstäver är antingen \texttt{A} eller \texttt{C}. \\ \hline
   3      & 28      & $3 \le N, M \le 4100$ & Alla bokstäver är antingen \texttt{A} eller \texttt{C}. \\ \hline
   4      & 26      & $3 \le N, M \le 4100$ & \\ \hline
 \end{tabular}
