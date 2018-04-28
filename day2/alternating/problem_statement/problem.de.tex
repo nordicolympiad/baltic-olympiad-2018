@@ -44,20 +44,23 @@ Kannst du Fredrik hierbei helfen?
 %{\em A solution to the first sample. The curved arrows outside the railway represent the wires that provide electricity. The direction of each arrow represents Fredrik's choice of direction of the current (with the blue and red colors emphasizing the different directions). Note that all arrows could have been reversed to get the other valid solution: \texttt{11010}.}
 
 \section*{\inputsection}
-The first line contains two integers $N$ and $M$, the number of railway segments and the number of wires, respectively.
+Die erste Zeile der Eingabe enthält zwei Zahlen $N$ und $M$, die Anzahl der Schienen und die Anzahl der Drähte.
 
-The next $M$ lines each contains two numbers $1 \le a, b \le N$, indicating that
-there is a wire that covers segments $a, a+1, \dots, b$. If $b$ is smaller
-than $a$, it means that the sequence wraps around, i.e. segments
-$a, \dots, N, 1, \dots, b$ are covered. Note that if $a=b$, the wire covers only one segment.
+Die nächsten $M$ Zeilen enthalten jeweils zwei Zahlen $1 \le a, b \le N$, die bedeuten, dass es einen Draht gibt, der die Schienen $a, a+1, \dots, b$ verbindet. Wenn $b$ kleiner als $a$ ist, bedeutet das, dass sich der Draht über den Ursprung hinweg spannt, also $a, \dots, N, 1, \dots, b$. Falls $a=b$, versorgt der Draht nur eine Schiene mit Strom.
+
+
+%The first line contains two integers $N$ and $M$, the number of railway segments and the number of wires, respectively.
+
+%The next $M$ lines each contains two numbers $1 \le a, b \le N$, indicating that there is a wire that covers segments $a, a+1, \dots, b$. If $b$ is smaller than $a$, it means that the sequence wraps around, i.e. segments $a, \dots, N, 1, \dots, b$ are covered. Note that if $a=b$, the wire covers only one segment.
 
 \section*{\outputsection}
-Output a single line with $M$ characters, each being either \texttt{0} or \texttt{1}. The $i$th character of the
-line should be \texttt{0} if the current in the $i$th wire given in the input should be 
-directed clockwise, or \texttt{1} if it should be directed counter-clockwise.
-If there are multiple solutions you may output any of them.
+Gib eine einzelne Zeile mit $M$ Zeichen aus, die jeweils \texttt{0} oder \texttt{1} sein können. Das $i$-te Zeichen soll \texttt{0} sein, wenn der Strom im $i$-ten Draht der Eingabe im Uhrzeigersinn ausgerichtet sein soll und \texttt{1}, wenn der Strom gegen den Uhrzeigersinn ausgerichtet sein soll. Wenn es mehrere Lösungen gibt, gib eine davon aus.
 
-If there is no valid solution, output ``\texttt{impossible}''.
+Wenn es keine Lösung gibt, gib ``\texttt{impossible}'' aus.
+
+%Output a single line with $M$ characters, each being either \texttt{0} or \texttt{1}. The $i$th character of the line should be \texttt{0} if the current in the $i$th wire given in the input should be  directed clockwise, or \texttt{1} if it should be directed counter-clockwise. If there are multiple solutions you may output any of them.
+
+%If there is no valid solution, output ``\texttt{impossible}''.
 
 \section*{\constraints}
 \testgroups
@@ -69,7 +72,7 @@ If there is no valid solution, output ``\texttt{impossible}''.
   1     & 13     & $2 \le N, M \le 15$ & \\ \hline
   2     & 20     & $2 \le N, M \le 100$ & \\ \hline
   3     & 22     & $2 \le N, M \le 1000$ & \\ \hline
-  4     & 19     & $2 \le N, M \le 100\,000$ & No wire has $b < a$. \\ \hline
+  4     & 19     & $2 \le N, M \le 100\,000$ & Für keinen Draht gilt $b < a$. \\ \hline
   5     & 26     & $2 \le N, M \le 100\,000$ & \\ \hline
 \end{tabular}
 
