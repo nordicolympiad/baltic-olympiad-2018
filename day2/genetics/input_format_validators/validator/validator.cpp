@@ -4,9 +4,9 @@ void run() {
 	int nlim = Arg("n");
 	int a = Arg("a");
 	assert(a == 2 || a == 4);
-	int n = Int(2, nlim);
+	int n = Int(3, nlim);
 	Space();
-	int m = Int(2, nlim);
+	int m = Int(3, nlim);
 	Space();
 	Int(1, m);
 	Endl();
