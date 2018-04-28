@@ -2,24 +2,23 @@
 \def\version{jury-1}
 \problemname{Alternating Current}
 
-Fredrik ist zu Hause und spielt mit seiner selbstgebauten Eisenbahn, auf die er sehr stolz ist. Die Eisenbahn besteht aus $N$ im Kreis angeordneten Schienen, die von $1$ bis $N$ im Uhrzeigersinn durchnummeriert sind. Der Zug erhält seinen Strom von $M$ an dem Kreis angebrachten Drähten. Jede Schiene hat mindestens einen solchen Draht.
-
+Fredrik ist zu Hause und spielt mit seiner selbstgebauten Eisenbahn, auf die er sehr stolz ist. Die Eisenbahn besteht aus $N$ im Kreis angeordneten Schienen, die von $1$ bis $N$ im Uhrzeigersinn durchnummeriert sind. Der Zug erhält seinen Strom von $M$ an dem Kreis angebrachten Drähten. An jeder Schiene läuft mindestens eine solchen Draht entlang.
 
 %Fredrik is at home, playing with a custom-built model railway which he is very proud of.
 %The railway consists of $N$ segments connected in a circle, numbered $1, 2, \dots, N$ in clockwise order.
 %Electricity to the train is provided through $M$ curved wires that pass along the circle. Each segment has at least one wire that goes along it.
 
-Leider wird Fredrik recht langweilig mit seiner Eisenbahn, die nur im Kreis fährt, worauf er entscheidet, eine \emph{Weiche} zu jeder Schiene hinzuzufügen, um diverse Zugunglücke und andere aufregende Szenarios zu verursachen. Aber die Weichen brauchen ebenfalls Elektrizität. Und zwar nicht irgendeinen Strom; Sie brauchen \emph{Wechselstrom}. \footnote{Das macht Sinn, denn die Eisenbahn ist eine schwedische -- in Schweden verwenden alle Weichen (``växlar'') Wechselstrom (``växelström'').}
 
-
-
+Leider wird Fredrik recht langweilig mit seiner Eisenbahn, die nur im Kreis fährt, woraufhin er entscheidet, eine \emph{Weiche} zu jeder Schiene hinzuzufügen, um Zugentgleisungen und andere aufregende Szenarios zu verursachen. Aber die Weichen brauchen ebenfalls Elektrizität. Und zwar nicht irgendeinen Strom; Sie brauchen \emph{Wechselstrom}. \footnote{Das macht Sinn, denn die Eisenbahn ist eine schwedische -- in Schweden verwenden alle Weichen (``växlar'') Wechselstrom (``växelström'').}
 
 %However, Fredrik is becoming bored with his circling train and decides to add a \emph{train switch} to every segment, which he could use to cause derailing accidents and other exciting scenarios. But the switches also need electricity.
 %And not just any kind of electricity; they specifically need \emph{alternating current}.\footnote{This makes sense because the railway is a Swedish one -- in Sweden, all train switches (``växlar'') use alternating current (``växelström'').}
 % Sorry about the terrible pun. If it translates into your language you can remove the footnote.
 
 
-Um Wechselstrom zu bekommen, wird Strom benötigt, der in beide Richtungen fließt. Jeder Draht kann nur Strom in eine Richtung (Entweder im Uhrzeigersinn oder gegen den Uhrzeigersinn) liefern aber Fredrik darf entscheiden, in welche. Er muss also eine Entscheidung für die Richtung jedes Drahtes treffen, um zu erreichen, dass jede Weiche mit einem Uhrzeigersinn-Strom-Draht und einem gegen-den-Uhrzeigersinn-Strom-Draht verbunden ist.
+Um Wechselstrom zu bekommen, wird Strom benötigt, der in beide Richtungen fließt.
+Jeder Draht kann nur Strom in eine Richtung (entweder im Uhrzeigersinn oder gegen den Uhrzeigersinn) liefern, aber Fredrik darf entscheiden, in welche.
+Er muss also eine Entscheidung für die Stromrichtung jedes Drahtes treffen, um zu erreichen, dass jede Weiche mindestens mit je einem Draht für jede Stromrichtung verbunden ist.
 
 Kannst du Fredrik hierbei helfen?
 
@@ -39,14 +38,14 @@ Kannst du Fredrik hierbei helfen?
 \end{center}
 \vspace{1mm}
 
-{\em Eine Lösung des ersten Beispiels. Die gebogenen Pfeile um die Schienen representieren die Drähte, die den Strom liefern. Die Richtung jedes Pfeiles repräsentiert Fredriks Wahl der Richtung des Stromes (wobei die blauen und roten Farben die unterschiedliche Richtungen lediglich betonen). Beachte, dass alle Pfeile invertiert hätten werden können, um eine weitere mögliche Lösung zu erzielen: \texttt{11010}.}
+{\em Eine Lösung des ersten Beispiels. Die gebogenen Pfeile um die Schienen representieren die Drähte, die den Strom liefern. Die Richtung jedes Pfeiles repräsentiert Fredriks Wahl der Richtung des Stromes (wobei die blauen und roten Farben die unterschiedliche Richtungen betonen). Beachte, dass alle Pfeile invertiert werden können, um eine weitere mögliche Lösung zu erzielen: \texttt{11010}.}
 
 %{\em A solution to the first sample. The curved arrows outside the railway represent the wires that provide electricity. The direction of each arrow represents Fredrik's choice of direction of the current (with the blue and red colors emphasizing the different directions). Note that all arrows could have been reversed to get the other valid solution: \texttt{11010}.}
 
 \section*{\inputsection}
 Die erste Zeile der Eingabe enthält zwei Zahlen $N$ und $M$, die Anzahl der Schienen und die Anzahl der Drähte.
 
-Die nächsten $M$ Zeilen enthalten jeweils zwei Zahlen $1 \le a, b \le N$, die bedeuten, dass es einen Draht gibt, der die Schienen $a, a+1, \dots, b$ verbindet. Wenn $b$ kleiner als $a$ ist, bedeutet das, dass sich der Draht über den Ursprung hinweg spannt, also $a, \dots, N, 1, \dots, b$. Falls $a=b$, versorgt der Draht nur eine Schiene mit Strom.
+Die nächsten $M$ Zeilen enthalten jeweils zwei Zahlen $1 \le a, b \le N$, die bedeuten, dass es einen Draht gibt, der die Schienen $a, a+1, \dots, b$ verbindet. Wenn $b$ kleiner als $a$ ist, bedeutet das, dass sich der Draht über den Ursprung hinweg spannt, also über die Schienen $a, \dots, N, 1, \dots, b$. Falls $a=b$, versorgt der Draht nur eine Schiene mit Strom.
 
 
 %The first line contains two integers $N$ and $M$, the number of railway segments and the number of wires, respectively.
@@ -54,7 +53,7 @@ Die nächsten $M$ Zeilen enthalten jeweils zwei Zahlen $1 \le a, b \le N$, die b
 %The next $M$ lines each contains two numbers $1 \le a, b \le N$, indicating that there is a wire that covers segments $a, a+1, \dots, b$. If $b$ is smaller than $a$, it means that the sequence wraps around, i.e. segments $a, \dots, N, 1, \dots, b$ are covered. Note that if $a=b$, the wire covers only one segment.
 
 \section*{\outputsection}
-Gib eine einzelne Zeile mit $M$ Zeichen aus, die jeweils \texttt{0} oder \texttt{1} sein können. Das $i$-te Zeichen soll \texttt{0} sein, wenn der Strom im $i$-ten Draht der Eingabe im Uhrzeigersinn ausgerichtet sein soll und \texttt{1}, wenn der Strom gegen den Uhrzeigersinn ausgerichtet sein soll. Wenn es mehrere Lösungen gibt, gib eine davon aus.
+Gib eine einzelne Zeile mit $M$ Zeichen aus, die jeweils \texttt{0} oder \texttt{1} sein dürfen. Das $i$-te Zeichen soll \texttt{0} sein, wenn der Strom im $i$-ten Draht der Eingabe im Uhrzeigersinn ausgerichtet sein soll, und \texttt{1}, wenn der Strom gegen den Uhrzeigersinn ausgerichtet sein soll. Wenn es mehrere Lösungen gibt, gib eine beliebige davon aus.
 
 Wenn es keine Lösung gibt, gib ``\texttt{impossible}'' aus.
 
