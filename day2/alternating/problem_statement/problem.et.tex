@@ -1,0 +1,54 @@
+\ifx\boi\undefined\input{../templates/words-en.tex}\fi
+\def\version{jury-1}
+\problemname{Vahelduvvool}
+Fredrik mängib kodus iseehitatud mudelraudteega, mille üle ta on väga uhke.
+Raudtee koosneb $N$ lõigust, mis on ühendatud ringiks ja nummerdatud päripäeva $1, 2, \dots, N$.
+Rong saab elektrivoolu $M$ juhtmekaare kaudu, mis on paigutatud piki raudteed. Iga raudteelõik on kaetud vähemalt ühe juhtmekaarega.
+
+Fredrik on aga ringiratast sõitvast rongist tüdinud ja otsustab iga lõigu juurde lisada \emph{raudteepöörme}, mida ta saaks kasutada rongide raudteelt maha juhtimiseks. Pöörmed nõuavad samuti elektrivoolu, täpsemalt vahelduvvoolu. \footnote{Seda sellepärast, et rootsi keeles on raudteepööre (``växlar'') ja vahelduvvool (``växelström'').}
+
+Fredrik arvab, et vahelduvvoolu saab, kui elektrivool saab minna mõlemas suunas.
+Igas juhtmes saab vool minna ainult ühes Fredriku valitud suunas (päripäeva või vastupäeva).
+Seega tahab ta määrata iga juhtme elektrivoolu suuna nii, et iga raudteelõik
+oleks kaetud nii päripäeva liikuva elektrivooluga juhtmega kui ka vastupäeva vooluga juhtmega.
+
+Kas saad Fredrikut aidata?
+
+\vspace{2mm}
+%\hspace*{2mm}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{alternatingfig.pdf}
+\end{center}
+\vspace{1mm}
+{\em Esimese näite lahendus. Nooled raudteest väljaspool tähistavad elektrivooluga juhtmekaari. Iga noole suund näitab voolu suunda (sinised ja punased nooled näitavad eri suundasid). Paneme tähele, et kõigi noolte ümberpööramisel saame teise õige lahenduse: \texttt{11010}.}
+
+\section*{\inputsection}
+
+Esimesel real on kaks täisarvu $N$ ja $M$, vastavalt raudteelõikude arv ja juhtmekaarte arv.
+
+Järgmisel $M$ real on igaühel kaks arvu $1 \le a, b \le N$, mis näitavad, et lõike $a, a+1, \dots, b$ katab üks juhe.
+Kui $b$ on väiksem kui $a$, tähendab see, et kaar läheb üle $N$ ja $1$ ühenduskoha, st lõigud $a, \dots, N, 1, \dots, b$ on juhtme poolt kaetud.
+Paneme tähele, et kui $a=b$, siis katab kaar ainult üht lõiku.
+
+\section*{\outputsection}
+Väljundisse kirjutada üks rida $M$ tähemärgiga, millest igaüks on \texttt{0} või \texttt{1}.
+Tähemärk number $i$ peaks olema \texttt{0}, kui sisendi kaar number $i$ peaks olema päripäeva elektrivooluga
+ja \texttt{1}, kui kaar peaks olema vastupäeva vooluga.
+Kui leidub mitu lahendust, väljastada ükskõik milline neist.
+
+Kui kaartele pole võimalik vajalikul viisil suundasid anda, väljastada ``\texttt{impossible}''.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+\textbf{\group} & \textbf{\points} & \textbf{\limitsname} & \textbf{\additionalconstraints} \\ \hline
+  1     & 13     & $2 \le N, M \le 15$ & \\ \hline
+  2     & 20     & $2 \le N, M \le 100$ & \\ \hline
+  3     & 22     & $2 \le N, M \le 1000$ & \\ \hline
+  4     & 19     & $2 \le N, M \le 100\,000$ & Ühegi kaare puhul ei ole $b < a$. \\ \hline
+  5     & 26     & $2 \le N, M \le 100\,000$ & \\ \hline
+\end{tabular}
+
