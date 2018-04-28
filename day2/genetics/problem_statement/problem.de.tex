@@ -1,0 +1,36 @@
+\ifx\boi\undefined\input{../templates/words-de.tex}\fi
+\def\version{jury-1}
+\problemname{Genetik}
+Schurken, die die Weltherrschaft übernehmen wollen, lassen sich gerne klonen, um der Gefangennahme zu entgehen.
+Du hast es geschafft, eine böse Schurkin zusammen mit ihren $N-1$ Klonen zu fassen, und möchtest nun herausfinden, welche von ihnen das Original ist.
+
+Hilfreicherweise hast du die DNA-Sequenzen aller Personen, die jeweils aus $M$ Zeichen bestehen, jedes entweder \texttt{A}, \texttt{C}, \texttt{G} oder \texttt{T}.
+Außerdem weißt du, dass die Klone nicht perfekt sind; stattdessen unterscheiden sich die DNA-Sequenzen eines Klons an genau $K$ Stellen vom Original.
+
+Kannst du das Original identifizieren?
+
+\section*{\inputsection}
+Die erste Zeile enthält drei ganze Zahlen $N$, $M$, und $K$, wobei $1 \le K \le M$ gilt.
+Die folgenden $N$ Zeilen beschreiben die DNA-Sequenzen.
+Jede dieser Zeilen besteht aus $M$ Zeichen, von denen jede entweder \texttt{A}, \texttt{C}, \texttt{G} oder \texttt{T} ist.
+
+In der Eingabe gibt es genau eine Sequenz, die sich von allen anderen in genau $K$ Stellen unterscheidet.
+
+Warnung: Diese Aufgabe hat eine große Eingabe, und wird in Java schnelle Ein- und Ausgaberoutinen erfordern.
+
+\section*{\outputsection}
+Gib eine ganze Zahl aus: Den Index der DNA-Sequenz, die zu der Original-Schurkin gehört.
+Die Sequenzen sind von $1$ beginnend nummeriert.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+  \group & \points & \limitsname & \additionalconstraints \\ \hline
+  1      & 27      & $3 \le N, M \le 100$ & \\ \hline
+  2      & 19      & $3 \le N, M \le 1800$ & Alle Zeichen sind entweder \texttt{A} oder \texttt{C}. \\ \hline
+  3      & 28      & $3 \le N, M \le 4100$ & Alle Zeichen sind entweder \texttt{A} oder \texttt{C}. \\ \hline
+  4      & 26      & $3 \le N, M \le 4100$ & \\ \hline
+\end{tabular}

@@ -1,0 +1,50 @@
+\ifx\boi\undefined\input{../templates/words-lt.tex}\fi
+\def\version{jury-1}
+\problemname{Kintamoji srovė}
+Fredrikas namuose žaidžia savo suprojektuotu geležinkelio modeliu, kuriuo jis labai didžiuojasi.
+Geležinkelį sudaro $N$ segmentų, sujungtų į apskritimą, ir sunumeruotų $1, 2, \dots, N$ pagal laikrodžio rodyklę.
+Elektra traukiniui tiekiama $M$ kabelių, nutiestų virš apskritimo, kuriuo eina geležinkelio bėgiai. 
+Kiekvienam segmentui yra bent vienas kabelis, nutiestas virš to segmento.
+
+Fredrikui pabodo ratu važinėjantis traukinys ir jis nutarė prie kiekvieno segmento pridėti po \emph{jungiklį}, kuriais naudodamasis jis galėtų nuversti traukinį nuo bėgių ar sukelti kitus įdomius įvykius. Tačiau jungikliams irgi reikia tiekti elektrą.
+Ir ne bet kokią, o \emph{kintamos srovės}.\footnote{Tai logiška, nes šis geležinkelio modelis yra švediškas, o Švedijoje visi traukinių jungikliai (``växlar'') naudoja kintamą srovę (``växelström'').}
+
+
+Fredrikas gaus kintamą srovę, jei turės abiem kryptimis tekančią srovę. Kiekvienu kabeliu srovė teka tik viena kryptimi (prieš ar pagal laikrodžio rodyklę), tačiau Fredrikas gali parinkti kryptį, kuria tekės srovė. Taigi, jis nori parinkti srovės tekėjimo kryptį kiekviename kabelyje taip, kad kiekvienas bėgių segmentas būtų uždengtas ir pagal, ir prieš laikrodžio rodyklę einančią srovę duodančiais kabeliais.
+
+Padėkite Fredrikui išspręsti šį uždavinį.
+
+\vspace{2mm}
+%\hspace*{2mm}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{alternatingfig.pdf}
+\end{center}
+\vspace{1mm} 
+{\em Pirmojo pavyzdžio sprendimas. Išlenktos rodyklės reiškia elektrą tiekiančius kabelius. 
+Rodyklės kryptis nurodo Fredriko pasirinktą elektros srovės kryptį (mėlyna ir raudona spalvos paryškina priešingas kryptis). Atkreipkite dėmesį, kad apsukę visas rodykles, gautume kitą galimą sprendimą: \texttt{11010}.}
+
+\section*{\inputsection}
+Pirmoje eilutėje pateikti du sveikieji skaičiai $N$ ir $M$ -- segmentų ir kabelių skaičius.
+
+Kiekvienoje tolesnių $M$ eilučių yra po du skaičius $1 \le a, b \le N$, nurodančius, kad yra kabelis, dengiantis segmentus $a, a+1, \dots, b$. Jei $b$ mažesnis nei $a$, tai reiškia, kad dengiami segmentai $a, \dots, N, 1, \dots, b$. Tačiau jei $a=b$, kabelis dengia tik vieną segmentą.
+
+\section*{\outputsection}
+Išveskite vieną eilutę su $M$ simbolių, kurie būtų \texttt{0} arba \texttt{1}. $i$-asis eilutės simbolis turi būti \texttt{0}, jei $i$-uoju kabeliu srovė teka pagal laikrodžio rodyklę, arba \texttt{1}, jei ji teka prieš laikrodžio rodyklę.
+Jei yra daugiau nei vienas galimas sprendinys, išveskite bet kurį.
+
+Jei sprendinys neegzistuoja, išveskite ``\texttt{impossible}''.
+
+\section*{\constraints}
+\testgroups
+
+\noindent
+\begin{tabular}{| l | l | l | l |}
+\hline
+\textbf{\group} & \textbf{\points} & \textbf{\limitsname} & \textbf{\additionalconstraints} \\ \hline
+  1     & 13     & $2 \le N, M \le 15$ & \\ \hline
+  2     & 20     & $2 \le N, M \le 100$ & \\ \hline
+  3     & 22     & $2 \le N, M \le 1000$ & \\ \hline
+  4     & 19     & $2 \le N, M \le 100\,000$ & Jokiam kabeliui negalioja $b < a$. \\ \hline
+  5     & 26     & $2 \le N, M \le 100\,000$ & \\ \hline
+\end{tabular}
+
