@@ -3,19 +3,19 @@
 \problemname{Växelström}
 Fredrik är hemma och leker med sin hemmabyggda modelljärnväg, som han är mycket stolt över.
 Järnvägen består av $N$ segment som sitter ihop i en cirkel, numrerade $1, 2, \dots, N$ i medurs ordning.
-Tåget får elektricitet från vajrar som leder längs cirkeln. Varje segment har minst en vajer som leder förbi det. 
+Tåget får elektricitet från vajrar som leder längs cirkeln. Varje segment har minst en vajer längsmed sig. 
 
-Fredrik tycker att sitt cirkulära tåg börjar bli tråkigt, och istället för bestämmer sig för att lägga till en \emph{järnvägsväxel} till varje segment, vilket han kan använda för att skapa avspårningsolyckor och andra spännande scenarier.
-Växlarna behöver dock elektricitet, och inte vilken elektricitet som hellst. 
+Fredrik tycker att hans cirkulära tåg börjar bli tråkigt, och bestämmer sig för att lägga till en \emph{järnvägsväxel} till varje segment, som han kan använda för att skapa urspårningsolyckor och andra spännande scenarier.
+Växlarna behöver dock elektricitet, och inte vilken elektricitet som helst. 
 De behöver växelström, strömmen som driver växlar.
 
 Fredrik inser att sättet man får växelström på är att ha ström i båda riktningarna.
-Varje varjer kan endast leda ström i en riktning, antingen medurs eller moturs, 
-men Fredrik får bestämma riktningen. Han vill alltså bestämma strömriktning på vajrarna
+Varje vajer kan endast leda ström i en riktning, antingen medurs eller moturs, 
+men Fredrik kan bestämma riktningen. Han vill alltså bestämma strömriktning på vajrarna
 så att varje segment är täckt av både en vajer med medurs strömriktning och en med moturs
 strömrikting.
 
-Kan du hjälpa Fredrik bestämma riktningarna?
+Kan du hjälpa Fredrik att bestämma riktningarna?
 
 \vspace{2mm}
 %\hspace*{2mm}
@@ -23,13 +23,13 @@ Kan du hjälpa Fredrik bestämma riktningarna?
 \includegraphics[width=0.5\textwidth]{alternatingfig.pdf}
 \end{center}
 \vspace{1mm}
-{\em En lösning till det första testallet. De krökta pilarna utanför järnvägen representerar 
-vajrar som leder ström. Rikningen på pilarna representerar Fredriks val av strömriktning (vilket förtydligas av blå och röda färger på pilarna). Notera att alla strömriktningar för kunde ha bytts för att få den andra giltiga lösningen: \texttt{11010}.}
+{\em En lösning till det första testfallet. De krökta pilarna utanför järnvägen representerar 
+vajrar som leder ström. Rikningen på pilarna representerar Fredriks val av strömriktning (vilket förtydligas av blå och röda färger på pilarna). Notera att alla strömriktningar kunde ha bytts för att få den andra giltiga lösningen: \texttt{11010}.}
 
 \section*{\inputsection}
 Den första raden innehåller två heltal $N$ och $M$, antalet järnvägssegment och antalet vajrar.
 
-Nästa $M$ rader innehåller två heltal $1 \le a, b \le N$, vilket indikerar att det går en vajer förbi alla segment $a, a+1, \dots, b$. Om $b$ är mindre än $a$ går vajern förbi segmenten $a, a+1, \dots, N, 1, \dots, b$. Notera att om $a=b$ går vajern bara förbi ett segment.
+Följande $M$ rader innehåller två heltal $1 \le a, b \le N$, vilket indikerar att en vajer går längs segmenten\\ $a, a+1, \dots, b$. Om $b$ är mindre än $a$, så ''wrappas det runt'' så att vajern går längs segmenten\\ $a, a+1, \dots, N, 1, \dots, b$. Notera att om $a=b$ täcker vajern bara ett segment.
 
 \section*{\outputsection}
 Skriv ut en enda rad med $M$ tecken, vilka är antingen \texttt{0} or \texttt{1}. Det $i$:te tecknet ska vara \texttt{0}
