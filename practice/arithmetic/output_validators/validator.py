@@ -32,7 +32,7 @@ try:
 except:
     die('unable to convert answer to decimal')
 
-if abs(given_answer - correct_answer) <= Decimal(10) ** -6:
+if given_answer.is_normal() and abs(given_answer - correct_answer) <= Decimal(10) ** -6:
     accept()
 else:
     die('wrong!')
